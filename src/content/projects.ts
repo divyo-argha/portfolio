@@ -20,6 +20,7 @@ export const projects: Project[] = [
       { label: "npm", href: "https://www.npmjs.com/package/git-userhub" },
       { label: "pkg.go.dev", href: "https://pkg.go.dev/github.com/divyo-argha/git-user" },
     ],
+    logo: { src: "/media/gu_logo.png", alt: "git-user logo", width: 120, height: 120 },
   },
   {
     slug: "autoscriber",

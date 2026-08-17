@@ -55,6 +55,7 @@ export type Project = {
   stats?: { label: string; value: string }[];
   links: Link[];
   installCommand?: string;
+  logo?: VenueMark;
 };
 
 /** Discriminated union rendered by BlockRenderer on detail pages. Every

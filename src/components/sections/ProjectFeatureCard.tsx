@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { StatPair } from "@/components/primitives/StatPair";
 import { ExternalLink } from "@/components/primitives/ExternalLink";
@@ -20,9 +21,23 @@ export function ProjectFeatureCard({ project }: { project: Project }) {
         </div>
 
         {project.installCommand ? (
-          <div className={styles.installBlock}>
-            <span className={styles.installLabel}>Install</span>
-            <code className={styles.install}>{project.installCommand}</code>
+          <div className={styles.rightSide}>
+            <div className={styles.installBlock}>
+              <span className={styles.installLabel}>Install</span>
+              <code className={styles.install}>{project.installCommand}</code>
+            </div>
+
+            {project.logo ? (
+              <div className={styles.logoWrapper}>
+                <Image
+                  src={project.logo.src}
+                  alt={project.logo.alt}
+                  width={project.logo.width}
+                  height={project.logo.height}
+                  className={styles.logoImg}
+                />
+              </div>
+            ) : null}
           </div>
         ) : null}
       </div>
