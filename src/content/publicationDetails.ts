@@ -123,6 +123,7 @@ export const publicationTabs: Record<string, DetailTab[]> = {
         {
           kind: "gallery",
           columns: 2,
+          compact: true,
           items: [
             {
               src: "/media/publications/arsenic-classification-efficientnet-b1/affected-skin.png",

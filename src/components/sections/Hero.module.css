@@ -1,6 +1,6 @@
 .hero {
-  padding-top: var(--space-7);
-  padding-bottom: var(--space-7);
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
 }
 
 .grid {
@@ -48,15 +48,6 @@
   margin-top: var(--space-1);
 }
 
-.glance {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-5);
-  margin-top: var(--space-7);
-  padding-top: var(--space-5);
-  border-top: var(--border-hairline);
-}
-
 @media (min-width: 640px) {
   .portraitCol {
     max-width: 260px;
@@ -67,11 +58,5 @@
   .grid {
     grid-template-columns: minmax(200px, 300px) 1fr;
     gap: var(--space-8);
-  }
-
-  .glance {
-    grid-template-columns: repeat(4, auto);
-    justify-content: start;
-    column-gap: var(--space-8);
   }
 }

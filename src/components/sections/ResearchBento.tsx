@@ -11,7 +11,12 @@ export function ResearchBento() {
   const [cyqured, iccit, naacl] = publications;
 
   return (
-    <Section id="publications" label="Research & publications" title="Publications and work in progress.">
+    <Section
+      id="publications"
+      label="Research & publications"
+      title="Publications and research in progress."
+      lede="Focus: Usable security & privacy, mental models, and empirical mixed-methods evaluation."
+    >
       <BentoGrid
         feature={
           <Reveal>

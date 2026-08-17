@@ -1,9 +1,8 @@
 import { Container } from "@/components/primitives/Container";
 import { Portrait } from "@/components/primitives/Portrait";
 import { IconLink } from "@/components/primitives/IconLink";
-import { StatPair } from "@/components/primitives/StatPair";
 import { IconMail, IconScholar, IconGithub, IconLinkedin } from "@/components/primitives/Icons";
-import { profile, atAGlance } from "@/content/profile";
+import { profile } from "@/content/profile";
 import styles from "./Hero.module.css";
 
 export function Hero() {
@@ -41,12 +40,6 @@ export function Hero() {
               </IconLink>
             </div>
           </div>
-        </div>
-
-        <div className={styles.glance}>
-          {atAGlance.map((item) => (
-            <StatPair key={item.label} label={item.label} value={item.value} />
-          ))}
         </div>
       </Container>
     </section>

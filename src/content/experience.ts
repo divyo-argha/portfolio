@@ -1,23 +1,10 @@
 import type { Position } from "./types";
 
-const bracuLogo = { src: "/media/institutions/bracu.png", alt: "BRAC University logo", width: 32, height: 29 };
-const sustLogo = { src: "/media/institutions/sust.png", alt: "SUST logo", width: 32, height: 32 };
-const shellbeehakenLogo = { src: "/media/institutions/shellbeehaken.jpeg", alt: "ShellBeeHaken logo", width: 32, height: 32 };
+const bracuLogo = { src: "/media/institutions/bracu.png", alt: "BRAC University logo", width: 56, height: 52 };
+const shellbeehakenLogo = { src: "/media/institutions/shellbeehaken.jpeg", alt: "ShellBeeHaken logo", width: 56, height: 56 };
+const hccsLogo = { src: "/media/institutions/hccs.jpeg", alt: "Human-Centered Computing Society (HCCS) logo", width: 56, height: 56 };
 
 export const positions: Position[] = [
-  {
-    kind: "education",
-    title: "BSc in Computer Science and Engineering",
-    org: "Shahjalal University of Science and Technology (SUST), Sylhet",
-    dates: "Feb 2020 – Jul 2025",
-    detail: "CGPA 3.71 / 4.00 · Supervisors: Md Masum, Dr. Farida Chowdhury, Dr. Md Sadek Ferdous",
-    bullets: [
-      "Thesis: designed a tabletop game mapping the STRIDE threat framework onto smart-home scenarios, so people without a security background can reason about concrete threats.",
-      "Ran a calibration study for the knowledge test, then a mixed-methods evaluation with 50 undergraduate participants.",
-      "Analysed pre/post-test results with linear mixed-effects models, finding significant gains in threat identification alongside high usability scores.",
-    ],
-    logo: sustLogo,
-  },
   {
     kind: "industry",
     title: "Associate Software Engineer",
@@ -25,8 +12,8 @@ export const positions: Position[] = [
     dates: "Oct 2025 – Present",
     bullets: [
       "Built front-end modules for KriyaKarak, including expert profiles and the reservation flow, with end-to-end testing across the stack.",
-      "Designed a Bengali–English code-switching framework for a real-time conversational voice agent, backed by a retrieval-augmented pipeline to keep responses grounded.",
-      "Built the WebSocket layer for low-latency two-way voice streaming between users and the agent.",
+      "Designed a Bengali–English code-switching framework for a real-time conversational voice agent, backed by a retrieval-augmented generation (RAG) pipeline to keep responses grounded.",
+      "Engineered the WebSocket layer for low-latency, two-way audio streaming between clients and the conversational agent.",
     ],
     logo: shellbeehakenLogo,
   },
@@ -37,9 +24,9 @@ export const positions: Position[] = [
     dates: "Jan 2026 – Present",
     detail: "Supervisor: Dr. Farida Chowdhury",
     bullets: [
-      "Studying how young adults in Bangladesh understand and respond to phishing and smishing, designing interventions that don't assume prior security knowledge.",
-      "Extending the evaluation methods from CyQured to home network threat scenarios.",
-      "Mentoring undergraduate thesis groups on problem formulation, literature review, study design, and writing.",
+      "Studying how young adults in Bangladesh understand and respond to phishing and smishing, designing usable interventions that don't assume prior cybersecurity knowledge.",
+      "Extending evaluation frameworks and threat scenario design from CyQured to broader home and mobile network contexts.",
+      "Mentoring undergraduate thesis groups on problem formulation, experimental study design, qualitative coding, and scholarly writing.",
     ],
     logo: bracuLogo,
   },
@@ -48,8 +35,11 @@ export const positions: Position[] = [
     title: "Member, Human-Centered Computing Society (HCCS)",
     org: "BRAC University, Dhaka",
     dates: "Jan 2026 – Present",
-    bullets: ["Participate in digital accessibility workshops and cross-institutional HCI activities."],
+    bullets: [
+      "Participating in digital accessibility research, usable technology workshops, and cross-institutional HCI & privacy initiatives.",
+      "Collaborating on community outreach and empirical usability testing for emerging software tools.",
+    ],
     link: { label: "HCCS website", href: "https://sites.google.com/bracu.ac.bd/hccs" },
-    logo: bracuLogo,
+    logo: hccsLogo,
   },
 ];

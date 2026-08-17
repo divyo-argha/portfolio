@@ -63,7 +63,7 @@ export type Project = {
 type BlockVariant =
   | { kind: "prose"; body: string[] }
   | { kind: "figure"; src: string; alt: string; caption?: string; href?: string }
-  | { kind: "gallery"; items: { src: string; alt: string; caption?: string }[]; columns?: 2 | 3 }
+  | { kind: "gallery"; items: { src: string; alt: string; caption?: string }[]; columns?: 2 | 3; compact?: boolean }
   | { kind: "findings"; items: { label: string; value: string }[] }
   | { kind: "quote"; text: string; attribution?: string }
   | { kind: "code"; language: string; body: string }

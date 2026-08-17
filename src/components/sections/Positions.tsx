@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Section } from "@/components/primitives/Section";
 import { Reveal } from "@/components/primitives/Reveal";
+import { IconArrowUpRight } from "@/components/primitives/Icons";
 import { positions } from "@/content/experience";
 import styles from "./Positions.module.css";
 
@@ -8,42 +9,61 @@ const KIND_LABEL: Record<(typeof positions)[number]["kind"], string> = {
   education: "Education",
   research: "Research",
   industry: "Industry",
-  service: "Service",
+  service: "Academic Service",
 };
 
 export function Positions() {
   return (
-    <Section id="positions" label="Positions" title="Education, research, and industry experience.">
+    <Section id="positions" label="Positions" title="Research, engineering, and academic service.">
       <div className={styles.grid}>
         {positions.map((position, i) => (
-          <Reveal key={position.title} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>
+          <Reveal key={position.title + position.org} delay={Math.min(i, 2) as 0 | 1 | 2}>
             <article className={[styles.card, styles[position.kind]].join(" ")}>
-              <div className={styles.head}>
-                <span className={styles.kind}>{KIND_LABEL[position.kind]}</span>
+              <div className={styles.topRow}>
                 {position.logo ? (
-                  <span className={styles.logo}>
+                  <div className={styles.logoWrapper}>
                     <Image
                       src={position.logo.src}
                       alt={position.logo.alt}
-                      width={position.logo.width}
-                      height={position.logo.height}
+                      width={56}
+                      height={56}
+                      className={styles.logoImg}
                     />
-                  </span>
+                  </div>
                 ) : null}
+
+                <div className={styles.badges}>
+                  <span className={[styles.kindBadge, styles[`badge_${position.kind}`]].join(" ")}>
+                    {KIND_LABEL[position.kind]}
+                  </span>
+                  <span className={styles.datesBadge}>{position.dates}</span>
+                </div>
               </div>
-              <h3 className={styles.title}>{position.title}</h3>
-              <p className={styles.org}>{position.org}</p>
-              <p className={styles.dates}>{position.dates}</p>
-              {position.detail ? <p className={styles.detail}>{position.detail}</p> : null}
+
+              <div className={styles.headerBlock}>
+                <h3 className={styles.title}>{position.title}</h3>
+                <p className={styles.org}>{position.org}</p>
+                {position.detail ? <p className={styles.detail}>{position.detail}</p> : null}
+              </div>
+
               <ul className={styles.bullets}>
                 {position.bullets.map((bullet) => (
                   <li key={bullet}>{bullet}</li>
                 ))}
               </ul>
+
               {position.link ? (
-                <a href={position.link.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                  {position.link.label}
-                </a>
+                <div className={styles.linkWrapper}>
+                  <a
+                    href={position.link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    <span>{position.link.label}</span>
+                    <IconArrowUpRight size={14} />
+                  </a>
+                </div>
               ) : null}
             </article>
           </Reveal>

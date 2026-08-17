@@ -19,7 +19,7 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
       <span className={styles.citationText}>
         {" · "}
         {hasCitations ? (
-          `${publication.citations} ${publication.citations === 1 ? "citation" : "citations"} (Google Scholar)`
+          `${publication.citations} ${publication.citations === 1 ? "citation" : "citations"}`
         ) : (
           "Citations: N/A"
         )}

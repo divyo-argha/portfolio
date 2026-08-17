@@ -1,5 +1,5 @@
 .section {
-  padding-block: var(--space-8);
+  padding-block: var(--space-5) var(--space-6);
   border-top: var(--border-hairline);
 }
 
@@ -8,24 +8,25 @@
 }
 
 .head {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 
 .title {
   font-size: var(--text-2xl);
-  max-width: 20ch;
+  max-width: 28ch;
 }
 
 .lede {
-  margin-top: var(--space-3);
+  margin-top: var(--space-2);
   font-family: var(--font-serif);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--muted);
   max-width: var(--measure);
 }
 
 @media (max-width: 640px) {
   .section {
-    padding-block: var(--space-7);
+    padding-block: var(--space-4) var(--space-5);
   }
 }
+

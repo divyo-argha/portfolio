@@ -3,9 +3,18 @@ import styles from "./Gallery.module.css";
 
 type GalleryItem = { src: string; alt: string; caption?: string };
 
-export function Gallery({ items, columns = 2 }: { items: GalleryItem[]; columns?: 2 | 3 }) {
+export function Gallery({
+  items,
+  columns = 2,
+  compact = false,
+}: {
+  items: GalleryItem[];
+  columns?: 2 | 3;
+  compact?: boolean;
+}) {
+  const classNames = [styles.gallery, columns === 3 ? styles.three : styles.two, compact ? styles.compact : ""];
   return (
-    <div className={[styles.gallery, columns === 3 ? styles.three : styles.two].join(" ")}>
+    <div className={classNames.join(" ")}>
       {items.map((item) => (
         <Figure key={item.src} {...item} />
       ))}

@@ -4,6 +4,10 @@
   grid-template-columns: 1fr;
 }
 
+.compact {
+  max-width: 28rem;
+}
+
 @media (min-width: 640px) {
   .two {
     grid-template-columns: repeat(2, 1fr);

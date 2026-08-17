@@ -31,7 +31,7 @@ function renderBlock(block: Block) {
     case "figure":
       return <Figure src={block.src} alt={block.alt} caption={block.caption} href={block.href} />;
     case "gallery":
-      return <Gallery items={block.items} columns={block.columns} />;
+      return <Gallery items={block.items} columns={block.columns} compact={block.compact} />;
     case "cardGrid":
       return <CardGrid items={block.items} columns={block.columns} />;
     case "statGrid":

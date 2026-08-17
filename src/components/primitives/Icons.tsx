@@ -120,3 +120,12 @@ export function IconDownload({ size = 16, className }: IconProps) {
     </svg>
   );
 }
+
+export function IconChevronDown({ size = 16, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+

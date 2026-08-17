@@ -35,9 +35,3 @@ export const pillars = [
   },
 ] as const;
 
-export const atAGlance = [
-  { label: "SOUPS 2026", value: "Accepted" },
-  { label: "Publications", value: "3" },
-  { label: "RA", value: "BRAC University" },
-  { label: "CGPA", value: profile.cgpa },
-] as const;
