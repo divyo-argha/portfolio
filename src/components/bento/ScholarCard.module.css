@@ -4,9 +4,15 @@
   gap: var(--space-2);
 }
 
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
 .icon {
   color: var(--accent);
-  margin-bottom: var(--space-1);
 }
 
 .link {
@@ -17,7 +23,17 @@
   gap: var(--space-2);
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
+  color: var(--ink);
+}
+
+.arrow {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.card:hover .arrow {
+  transform: translate(2px, -2px);
+  color: var(--accent);
 }
 
 .note {

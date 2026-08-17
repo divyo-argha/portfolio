@@ -17,8 +17,19 @@ export const publications: Publication[] = [
       { name: "Farida Chowdhury" },
     ],
     summary:
-      "A tabletop game mapping the STRIDE threat framework onto smart-home scenarios, evaluated with 50 participants using pre/post knowledge testing and linear mixed-effects models.",
-    tags: ["STRIDE", "Tabletop game", "N=50", "Mixed-effects models", "SUS"],
+      "Originated from our undergraduate thesis at SUST, where we substantially extended the game design, calibration study, and mixed-methods empirical evaluation with 50 participants to evaluate STRIDE-based smart-home threat learning — now accepted at USENIX SOUPS 2026.",
+    tags: [
+      "STRIDE",
+      "Tabletop game",
+      "Security awareness",
+      "Constructivist learning",
+      "Usability",
+      "TAM",
+      "NASA-TLX",
+      "SUS",
+      "N=50",
+      "Mixed-effects models",
+    ],
     links: [
       { label: "USENIX SOUPS 2026", href: "https://www.usenix.org/conference/soups2026" },
     ],

@@ -35,7 +35,7 @@ export type Publication = {
 };
 
 export type Position = {
-  kind: "education" | "research" | "industry" | "service";
+  kind: "education" | "research" | "industry" | "service" | "leadership";
   title: string;
   org: string;
   dates: string;

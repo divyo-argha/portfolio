@@ -9,12 +9,13 @@ const KIND_LABEL: Record<(typeof positions)[number]["kind"], string> = {
   education: "Education",
   research: "Research",
   industry: "Industry",
-  service: "Academic Service",
+  service: "Service",
+  leadership: "Leadership",
 };
 
 export function Positions() {
   return (
-    <Section id="positions" label="Positions" title="Research, engineering, and academic service.">
+    <Section id="positions" label="Positions" title="Experience & roles.">
       <div className={styles.grid}>
         {positions.map((position, i) => (
           <Reveal key={position.title + position.org} delay={Math.min(i, 2) as 0 | 1 | 2}>
@@ -25,8 +26,8 @@ export function Positions() {
                     <Image
                       src={position.logo.src}
                       alt={position.logo.alt}
-                      width={56}
-                      height={56}
+                      width={72}
+                      height={72}
                       className={styles.logoImg}
                     />
                   </div>
@@ -34,6 +35,7 @@ export function Positions() {
 
                 <div className={styles.badges}>
                   <span className={[styles.kindBadge, styles[`badge_${position.kind}`]].join(" ")}>
+                    <span className={styles.kindDot} />
                     {KIND_LABEL[position.kind]}
                   </span>
                   <span className={styles.datesBadge}>{position.dates}</span>
@@ -43,7 +45,22 @@ export function Positions() {
               <div className={styles.headerBlock}>
                 <h3 className={styles.title}>{position.title}</h3>
                 <p className={styles.org}>{position.org}</p>
-                {position.detail ? <p className={styles.detail}>{position.detail}</p> : null}
+                {position.detail || position.link ? (
+                  <div className={styles.detailRow}>
+                    {position.detail ? <span className={styles.detail}>{position.detail}</span> : <span />}
+                    {position.link ? (
+                      <a
+                        href={position.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.inlineLink}
+                      >
+                        <span>{position.link.label}</span>
+                        <IconArrowUpRight size={12} />
+                      </a>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
 
               <ul className={styles.bullets}>
@@ -51,20 +68,6 @@ export function Positions() {
                   <li key={bullet}>{bullet}</li>
                 ))}
               </ul>
-
-              {position.link ? (
-                <div className={styles.linkWrapper}>
-                  <a
-                    href={position.link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.link}
-                  >
-                    <span>{position.link.label}</span>
-                    <IconArrowUpRight size={14} />
-                  </a>
-                </div>
-              ) : null}
             </article>
           </Reveal>
         ))}

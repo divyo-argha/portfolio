@@ -2,7 +2,7 @@ import type { Position } from "./types";
 
 const bracuLogo = { src: "/media/institutions/bracu.png", alt: "BRAC University logo", width: 56, height: 52 };
 const shellbeehakenLogo = { src: "/media/institutions/shellbeehaken.jpeg", alt: "ShellBeeHaken logo", width: 56, height: 56 };
-const hccsLogo = { src: "/media/institutions/hccs.jpeg", alt: "Human-Centered Computing Society (HCCS) logo", width: 56, height: 56 };
+const hccsLogo = { src: "/media/institutions/hccs.jpeg", alt: "Human-Centered Computing and Society (HCCS) logo", width: 56, height: 56 };
 
 export const positions: Position[] = [
   {
@@ -31,15 +31,17 @@ export const positions: Position[] = [
     logo: bracuLogo,
   },
   {
-    kind: "service",
-    title: "Member, Human-Centered Computing Society (HCCS)",
-    org: "BRAC University, Dhaka",
+    kind: "leadership",
+    title: "Student Executive Co-Coordinator & Founding Member",
+    org: "Human-Centered Computing and Society (HCCS)",
     dates: "Jan 2026 – Present",
+    detail: "BRAC University",
     bullets: [
-      "Participating in digital accessibility research, usable technology workshops, and cross-institutional HCI & privacy initiatives.",
-      "Collaborating on community outreach and empirical usability testing for emerging software tools.",
+      "Founding member and Student Executive Co-Coordinator of the Human-Centered Computing and Society (HCCS) research group, driving executive operations and student leadership.",
+      "Leading and coordinating student research initiatives, reading groups, and workshops on digital accessibility and usable privacy.",
+      "Directing cross-institutional HCI outreach, collaborative research seminars, and peer mentorship programs for student researchers.",
     ],
-    link: { label: "HCCS website", href: "https://sites.google.com/bracu.ac.bd/hccs" },
+    link: { label: "website", href: "https://sites.google.com/bracu.ac.bd/hccs" },
     logo: hccsLogo,
   },
 ];
