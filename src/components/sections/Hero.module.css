@@ -1,0 +1,77 @@
+.hero {
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-7);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.portraitCol {
+  max-width: 220px;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.positioning {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.name {
+  font-size: var(--text-3xl);
+  letter-spacing: -0.03em;
+}
+
+.statement {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+.linkRow {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-5);
+  row-gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.glance {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: var(--border-hairline);
+}
+
+@media (min-width: 640px) {
+  .portraitCol {
+    max-width: 260px;
+  }
+}
+
+@media (min-width: 860px) {
+  .grid {
+    grid-template-columns: minmax(200px, 300px) 1fr;
+    gap: var(--space-8);
+  }
+
+  .glance {
+    grid-template-columns: repeat(4, auto);
+    justify-content: start;
+    column-gap: var(--space-8);
+  }
+}

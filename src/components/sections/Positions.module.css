@@ -1,0 +1,140 @@
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.card {
+  height: 100%;
+  padding: var(--space-5);
+  border: var(--border-hairline);
+  border-left-width: 3px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.education {
+  border-left-color: var(--muted);
+}
+
+.research {
+  border-left-color: var(--accent);
+}
+
+.industry {
+  border-left-color: var(--ink);
+}
+
+.service {
+  border-left-color: var(--muted);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.kind {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 3px 5px;
+  background: #ffffff;
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+}
+
+.logo img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+}
+
+.title {
+  font-size: var(--text-lg);
+  margin-top: var(--space-1);
+}
+
+.org {
+  font-family: var(--font-serif);
+  color: var(--muted);
+}
+
+.dates {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.detail {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  margin-top: -4px;
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.bullets li {
+  padding-left: var(--space-3);
+  position: relative;
+}
+
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.link {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  align-self: flex-start;
+  border-bottom: 1px solid transparent;
+}
+
+.link:hover {
+  border-color: var(--accent);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

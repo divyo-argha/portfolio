@@ -1,0 +1,31 @@
+.reveal {
+  height: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay1 {
+  transition-delay: 60ms;
+}
+
+.delay2 {
+  transition-delay: 120ms;
+}
+
+.delay3 {
+  transition-delay: 180ms;
+}
+
+.delay4 {
+  transition-delay: 240ms;
+}
+
+.delay5 {
+  transition-delay: 300ms;
+}

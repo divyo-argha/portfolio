@@ -1,0 +1,28 @@
+.pillars {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.pillar {
+  padding: var(--space-5);
+  border: var(--border-hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.pillarTitle {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-3);
+}
+
+.pillarBody {
+  font-family: var(--font-serif);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (min-width: 760px) {
+  .pillars {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

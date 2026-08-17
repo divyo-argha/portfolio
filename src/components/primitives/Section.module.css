@@ -1,0 +1,31 @@
+.section {
+  padding-block: var(--space-8);
+  border-top: var(--border-hairline);
+}
+
+.section.raised {
+  background: var(--surface);
+}
+
+.head {
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  font-size: var(--text-2xl);
+  max-width: 20ch;
+}
+
+.lede {
+  margin-top: var(--space-3);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-block: var(--space-7);
+  }
+}

@@ -1,0 +1,11 @@
+.grid {
+  margin-top: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

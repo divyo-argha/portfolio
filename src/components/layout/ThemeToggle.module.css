@@ -1,0 +1,17 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-sm);
+  border: var(--border-hairline);
+  background: var(--surface);
+  color: var(--ink);
+  transition: border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}

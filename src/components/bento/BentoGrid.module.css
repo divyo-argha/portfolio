@@ -1,0 +1,62 @@
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "feature"
+    "iccit"
+    "naacl"
+    "inProgress"
+    "scholar";
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background-image: radial-gradient(circle, var(--line) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.feature {
+  grid-area: feature;
+}
+
+.iccit {
+  grid-area: iccit;
+}
+
+.naacl {
+  grid-area: naacl;
+}
+
+.inProgress {
+  grid-area: inProgress;
+}
+
+.scholar {
+  grid-area: scholar;
+}
+
+.grid > * {
+  min-height: 0;
+}
+
+@media (min-width: 620px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, minmax(150px, auto)) auto;
+    grid-template-areas:
+      "feature feature"
+      "feature feature"
+      "iccit naacl"
+      "inProgress scholar";
+  }
+}
+
+@media (min-width: 980px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, minmax(160px, auto)) auto;
+    grid-template-areas:
+      "feature feature iccit iccit"
+      "feature feature naacl naacl"
+      "inProgress inProgress inProgress scholar";
+  }
+}

@@ -1,0 +1,117 @@
+/**
+ * Design tokens — the single source of truth for colour, spacing, radius,
+ * shadow, and type-scale values across the site.
+ *
+ * Nothing outside this file should contain a raw colour or pixel value.
+ * Every component reads these as `var(--token-name)`. Changing the theme
+ * means editing values here, once.
+ */
+
+:root {
+  /* ---- Light palette (default) ---- */
+  --ground: #f4f5f3;
+  --surface: #ffffff;
+  --raised: #fafbfa;
+  --ink: #111413;
+  --muted: #5b615e;
+  --line: #dfe2dd;
+  --accent: #0f5c4a;
+  --accent-ink: #ffffff;
+  --accent-soft: #e1ede8;
+
+  /* ---- Type ----
+     --font-sans / --font-serif come from next/font (see app/layout.tsx).
+     --font-mono aliases sans deliberately — the site doesn't use a
+     monospace face anywhere; components that predate this still reference
+     var(--font-mono) for compact/uppercase labels, so this keeps them
+     working without a real coding font. */
+  --font-mono: var(--font-sans);
+
+  /* ---- Type scale (fluid) ---- */
+  --text-xs: clamp(0.72rem, 0.69rem + 0.15vw, 0.8rem);
+  --text-sm: clamp(0.85rem, 0.82rem + 0.15vw, 0.95rem);
+  --text-base: clamp(1rem, 0.97rem + 0.15vw, 1.1rem);
+  --text-lg: clamp(1.15rem, 1.1rem + 0.25vw, 1.35rem);
+  --text-xl: clamp(1.4rem, 1.3rem + 0.5vw, 1.8rem);
+  --text-2xl: clamp(1.9rem, 1.7rem + 1vw, 2.6rem);
+  --text-3xl: clamp(2.4rem, 2rem + 2vw, 3.8rem);
+
+  /* ---- Spacing scale ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6.5rem;
+
+  /* ---- Shape ---- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --border-hairline: 1px solid var(--line);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+
+  /* ---- Layout ---- */
+  --content-max: 1180px;
+  --measure: 62ch;
+  --header-height: 4.25rem;
+  --z-header: 40;
+  --z-overlay: 50;
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 1px 2px rgba(15, 20, 18, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 20, 18, 0.08);
+  --shadow-card-hover: 0 14px 34px rgba(15, 20, 18, 0.12);
+  --shadow-drop: 0 14px 28px rgba(15, 20, 18, 0.16);
+
+  color-scheme: light;
+}
+
+/* Explicit dark theme (manual toggle, once ThemeToggle exists) */
+:root[data-theme="dark"] {
+  --ground: #0d0f0e;
+  --surface: #171a19;
+  --raised: #1f2321;
+  --ink: #e9ebe8;
+  --muted: #9aa29e;
+  --line: #2a2f2c;
+  --accent: #55d6b0;
+  --accent-ink: #0d0f0e;
+  --accent-soft: #12312a;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 14px 34px rgba(0, 0, 0, 0.45);
+  --shadow-drop: 0 14px 28px rgba(0, 0, 0, 0.5);
+
+  color-scheme: dark;
+}
+
+/* System preference, unless the user has explicitly chosen light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0d0f0e;
+    --surface: #171a19;
+    --raised: #1f2321;
+    --ink: #e9ebe8;
+    --muted: #9aa29e;
+    --line: #2a2f2c;
+    --accent: #55d6b0;
+    --accent-ink: #0d0f0e;
+    --accent-soft: #12312a;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-card-hover: 0 14px 34px rgba(0, 0, 0, 0.45);
+    --shadow-drop: 0 14px 28px rgba(0, 0, 0, 0.5);
+
+    color-scheme: dark;
+  }
+}

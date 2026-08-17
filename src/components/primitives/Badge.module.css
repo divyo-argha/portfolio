@@ -1,0 +1,36 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.3em 0.7em;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.accepted {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.published {
+  color: var(--muted);
+  background: var(--raised);
+  border: var(--border-hairline);
+}
+
+.in-progress {
+  color: var(--muted);
+  background: transparent;
+  border: 1px dashed var(--line);
+}
