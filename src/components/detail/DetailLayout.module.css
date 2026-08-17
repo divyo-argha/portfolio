@@ -4,6 +4,9 @@
 
 .header {
   margin-block: var(--space-5) var(--space-7);
+}
+
+.headerText {
   max-width: 44ch;
 }
 
@@ -32,6 +35,13 @@
   gap: var(--space-6);
 }
 
+.body {
+  /* Grid items default to min-width: auto, which lets a long unbreakable
+     line (e.g. inside a <pre>) stretch this column — and the whole page —
+     instead of scrolling within its own box. */
+  min-width: 0;
+}
+
 .pending {
   font-family: var(--font-serif);
   font-size: var(--text-lg);
@@ -39,6 +49,42 @@
   padding: var(--space-6);
   border: 1px dashed var(--line);
   border-radius: var(--radius-md);
+}
+
+/* The huge-logo hero — a one-off treatment (see Publication.heroMark) for a
+   page whose venue identity deserves more presence than the compact badge
+   every other publication uses. */
+.headerWithMark {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.heroMark {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroMarkImage {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 700px) {
+  .headerWithMark {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .heroMark {
+    max-width: 280px;
+  }
 }
 
 @media (min-width: 860px) {

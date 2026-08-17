@@ -19,14 +19,41 @@ export function PublicationCard({ publication }: { publication: Publication }) {
       </div>
 
       <div className={styles.head}>
-        <Badge status={publication.status} />
-        <span className={styles.venue}>{publication.venueShort}</span>
+        <div className={styles.headLeft}>
+          <Badge status={publication.status} />
+          <span className={styles.venue}>{publication.venueShort}</span>
+        </div>
+        {publication.status === "accepted" ? (
+          <span className={styles.citations}>N/A</span>
+        ) : typeof publication.citations === "number" && publication.citations > 0 ? (
+          <span className={styles.citations}>
+            {publication.citations} {publication.citations === 1 ? "cit." : "cits."}
+          </span>
+        ) : null}
       </div>
       <h3 className={styles.title}>
         <Link href={`/publications/${publication.slug}`} className={styles.titleLink}>
           {publication.title}
         </Link>
       </h3>
+      <p className={styles.authors}>
+        {publication.authors.map((author, i) => {
+          const isYou = author.you || author.name === "Argha Pratim Saha";
+          return (
+            <span key={author.name} className={isYou ? styles.you : undefined}>
+              {isYou ? (
+                <strong>
+                  <u>{author.name}</u>
+                </strong>
+              ) : (
+                author.name
+              )}
+              {author.equalContribution ? "*" : ""}
+              {i < publication.authors.length - 1 ? ", " : ""}
+            </span>
+          );
+        })}
+      </p>
       <p className={styles.summary}>{publication.summary}</p>
     </article>
   );

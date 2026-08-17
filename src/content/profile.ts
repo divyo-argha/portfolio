@@ -8,7 +8,7 @@ export const profile = {
   location: "Dhaka, Bangladesh",
   email: "arghastm@gmail.com",
   phone: "+880 1521 200978",
-  applyingFor: "Applying for PhD positions — Fall 2027 intake",
+  applyingFor: "Applying for PhD positions, Fall 2027 intake",
   cgpa: "3.71 / 4.00",
   university: "Shahjalal University of Science and Technology (SUST)",
 } as const;

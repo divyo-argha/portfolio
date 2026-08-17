@@ -12,7 +12,7 @@ export function ScholarCard() {
         Google Scholar
         <IconArrowUpRight size={13} />
       </a>
-      <p className={styles.note}>Full publication record</p>
+      <p className={styles.note}>4 citations · Full publication record</p>
     </article>
   );
 }

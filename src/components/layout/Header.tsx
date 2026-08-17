@@ -25,7 +25,7 @@ export function Header() {
       <Container>
         <div className={styles.bar}>
           <a href="#top" className={styles.mark} onClick={(e) => handleAnchorClick(e, "#top")}>
-            <Image src="/media/portrait.jpg" alt="" width={32} height={32} className={styles.markPhoto} />
+            <Image src="/media/people/portrait.jpg" alt="" width={32} height={32} className={styles.markPhoto} />
             Argha
           </a>
 

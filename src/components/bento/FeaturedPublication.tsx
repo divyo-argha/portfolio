@@ -13,6 +13,13 @@ export function FeaturedPublication({ publication }: { publication: Publication 
         <div className={styles.head}>
           <Badge status={publication.status} />
           <span className={styles.venue}>{publication.venueShort}</span>
+          {publication.status === "accepted" ? (
+            <span className={styles.citations}>· Citations: N/A</span>
+          ) : typeof publication.citations === "number" && publication.citations > 0 ? (
+            <span className={styles.citations}>
+              · {publication.citations} {publication.citations === 1 ? "citation" : "citations"}
+            </span>
+          ) : null}
         </div>
 
         <h3 className={styles.title}>
@@ -22,13 +29,22 @@ export function FeaturedPublication({ publication }: { publication: Publication 
         </h3>
 
         <p className={styles.authors}>
-          {publication.authors.map((author, i) => (
-            <span key={author.name} className={author.you ? styles.you : undefined}>
-              {author.name}
-              {author.equalContribution ? "*" : ""}
-              {i < publication.authors.length - 1 ? ", " : ""}
-            </span>
-          ))}
+          {publication.authors.map((author, i) => {
+            const isYou = author.you || author.name === "Argha Pratim Saha";
+            return (
+              <span key={author.name} className={isYou ? styles.you : undefined}>
+                {isYou ? (
+                  <strong>
+                    <u>{author.name}</u>
+                  </strong>
+                ) : (
+                  author.name
+                )}
+                {author.equalContribution ? "*" : ""}
+                {i < publication.authors.length - 1 ? ", " : ""}
+              </span>
+            );
+          })}
         </p>
 
         <p className={styles.summary}>{publication.summary}</p>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/primitives/Container";
 import { VenueMark } from "@/components/primitives/VenueMark";
 import type { DetailMeta } from "@/content/types";
@@ -9,18 +10,34 @@ import styles from "./DetailLayout.module.css";
 export function DetailLayout({ detail }: { detail: DetailMeta }) {
   const backHref = detail.kind === "publication" ? "/#publications" : "/#engineering";
   const backLabel = detail.kind === "publication" ? "Back to publications" : "Back to engineering";
+  const showHeroMark = detail.heroMark && detail.venueMark;
 
   return (
     <article className={styles.page}>
       <Container>
         <BackLink href={backHref} label={backLabel} />
 
-        <header className={styles.header}>
-          <div className={styles.eyebrowRow}>
-            {detail.venueMark ? <VenueMark mark={detail.venueMark} size="lg" /> : null}
-            <p className={styles.eyebrow}>{detail.eyebrow}</p>
+        <header className={[styles.header, showHeroMark ? styles.headerWithMark : ""].join(" ")}>
+          <div className={styles.headerText}>
+            <div className={styles.eyebrowRow}>
+              {detail.venueMark && !showHeroMark ? <VenueMark mark={detail.venueMark} size="lg" /> : null}
+              <p className={styles.eyebrow}>{detail.eyebrow}</p>
+            </div>
+            <h1 className={styles.title}>{detail.title}</h1>
           </div>
-          <h1 className={styles.title}>{detail.title}</h1>
+
+          {showHeroMark && detail.venueMark ? (
+            <div className={styles.heroMark}>
+              <Image
+                src={detail.venueMark.src}
+                alt={detail.venueMark.alt}
+                width={320}
+                height={320}
+                className={styles.heroMarkImage}
+                priority
+              />
+            </div>
+          ) : null}
         </header>
 
         <div className={styles.grid}>
@@ -32,7 +49,13 @@ export function DetailLayout({ detail }: { detail: DetailMeta }) {
             )}
           </div>
           <aside className={styles.rail}>
-            <MetaRail meta={detail.meta} links={detail.links} />
+            <MetaRail
+              meta={detail.meta}
+              links={detail.links}
+              kind={detail.kind}
+              scholarUrl={detail.scholarUrl}
+              publicationStatus={detail.publicationStatus}
+            />
           </aside>
         </div>
       </Container>

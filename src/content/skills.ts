@@ -17,4 +17,4 @@ export const skillGroups = [
 ];
 
 export const competitiveProgramming =
-  "Also: 1,000+ problems solved across LeetCode, Codeforces, and other judges — Codeforces Specialist (max rating 1419), ICPC Bangladesh Preliminary 2021.";
+  "Also: 1,000+ problems solved across LeetCode, Codeforces, and other judges. Codeforces Specialist, max rating 1419. ICPC Bangladesh Preliminary 2021.";

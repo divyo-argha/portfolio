@@ -8,9 +8,11 @@ the highest-leverage additions before applying.
 
 | What | Where it goes | Used by |
 |---|---|---|
-| Portrait photo | `public/media/portrait.jpg` | `src/components/primitives/PortraitPlaceholder.tsx` → swap for `next/image` |
 | CyQured board / gameplay photos | `public/media/cyqured/*.jpg` | Append `figure`/`gallery` blocks to `cyqured` in `src/content/publicationDetails.ts` |
 | CV PDF | `public/cv.pdf` | Linked from the contact section (`src/components/sections/ContactBand.tsx`) |
+
+PRIMUS's two diagrams are in place at `public/media/naacl/naacl-1.webp` and
+`naacl-2.png`, referenced directly in `publicationDetails.ts`.
 
 ## Adding the CyQured gallery later
 

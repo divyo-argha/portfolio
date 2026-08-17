@@ -44,7 +44,7 @@ export function ContactBand() {
 
           <Reveal delay={1}>
             <div className={styles.photoCol}>
-              <Portrait src="/media/portrait-alt.jpg" alt="Argha Pratim Saha, outdoors" mirrored />
+              <Portrait src="/media/people/portrait-alt.jpg" alt="Argha Pratim Saha, outdoors" mirrored />
             </div>
           </Reveal>
         </div>

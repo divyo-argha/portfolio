@@ -19,6 +19,9 @@ export const publications: Publication[] = [
     summary:
       "A tabletop game mapping the STRIDE threat framework onto smart-home scenarios, evaluated with 50 participants using pre/post knowledge testing and linear mixed-effects models.",
     tags: ["STRIDE", "Tabletop game", "N=50", "Mixed-effects models", "SUS"],
+    links: [
+      { label: "USENIX SOUPS 2026", href: "https://www.usenix.org/conference/soups2026" },
+    ],
     bentoSpan: "feature",
     venueMark: { src: "/media/venues/soups.png", alt: "SOUPS 2026 logo", width: 30, height: 32 },
   },
@@ -37,6 +40,15 @@ export const publications: Publication[] = [
     summary:
       "An EfficientNet-B1 classifier for automating detection of arsenic-affected skin lesions from clinical photographs.",
     tags: ["Deep learning", "EfficientNet-B1", "Medical imaging"],
+    citations: 3,
+    scholarUrl:
+      "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=EKrGm9UAAAAJ&citation_for_view=EKrGm9UAAAAJ:9yKSN-GCB0IC",
+    links: [
+      {
+        label: "ICCIT 2024 Proceedings",
+        href: "https://doi.org/10.1109/ICCIT64618.2024.10878546",
+      },
+    ],
     bentoSpan: "normal",
     venueMark: { src: "/media/venues/iccit.jpeg", alt: "ICCIT 2024 logo", width: 88, height: 32 },
   },
@@ -58,7 +70,17 @@ export const publications: Publication[] = [
     summary:
       "A text-to-SQL pipeline built on large language models for querying electronic health records, presented in Mexico City.",
     tags: ["LLMs", "Text-to-SQL", "Clinical NLP"],
+    citations: 1,
+    scholarUrl:
+      "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=EKrGm9UAAAAJ&citation_for_view=EKrGm9UAAAAJ:u-x6o8ySG0sC",
+    links: [
+      {
+        label: "ACL Anthology",
+        href: "https://aclanthology.org/2024.clinicalnlp-1.46/",
+      },
+    ],
     bentoSpan: "normal",
     venueMark: { src: "/media/venues/naacl.webp", alt: "NAACL 2024 logo", width: 32, height: 32 },
+    heroMark: true,
   },
 ];

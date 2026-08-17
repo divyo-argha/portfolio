@@ -1,8 +1,8 @@
 import type { Position } from "./types";
 
-const bracuLogo = { src: "/media/venues/bracu.png", alt: "BRAC University logo", width: 32, height: 29 };
-const sustLogo = { src: "/media/venues/sust.png", alt: "SUST logo", width: 32, height: 32 };
-const shellbeehakenLogo = { src: "/media/venues/shellbeehaken.jpeg", alt: "ShellBeeHaken logo", width: 32, height: 32 };
+const bracuLogo = { src: "/media/institutions/bracu.png", alt: "BRAC University logo", width: 32, height: 29 };
+const sustLogo = { src: "/media/institutions/sust.png", alt: "SUST logo", width: 32, height: 32 };
+const shellbeehakenLogo = { src: "/media/institutions/shellbeehaken.jpeg", alt: "ShellBeeHaken logo", width: 32, height: 32 };
 
 export const positions: Position[] = [
   {

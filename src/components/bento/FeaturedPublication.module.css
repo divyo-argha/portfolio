@@ -46,7 +46,25 @@
 
 .you {
   color: var(--ink);
-  font-weight: 500;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+}
+
+.you strong {
+  font-weight: 700;
+}
+
+.you u {
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+}
+
+.citations {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--muted);
 }
 
 .summary {

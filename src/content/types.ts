@@ -1,4 +1,4 @@
-/** Shared content types. Every section reads typed data from `src/content` — no markup here. */
+import type { ReactNode } from "react";
 
 export type Link = {
   label: string;
@@ -25,8 +25,13 @@ export type Publication = {
   summary: string;
   tags: string[];
   links?: Link[];
+  citations?: number;
+  scholarUrl?: string;
+  scholarCitationsUrl?: string;
   bentoSpan: "feature" | "wide" | "normal";
   venueMark: VenueMark;
+  /** Show the venue mark huge on the detail page's hero, right-aligned. */
+  heroMark?: boolean;
 };
 
 export type Position = {
@@ -52,22 +57,30 @@ export type Project = {
   installCommand?: string;
 };
 
-/** Discriminated union rendered by BlockRenderer on detail pages. */
-export type Block =
+/** Discriminated union rendered by BlockRenderer on detail pages. Every
+ * variant may carry an optional `heading`, rendered above it as a small
+ * section title (e.g. "What was the problem?"). */
+type BlockVariant =
   | { kind: "prose"; body: string[] }
   | { kind: "figure"; src: string; alt: string; caption?: string }
   | { kind: "gallery"; items: { src: string; alt: string; caption?: string }[]; columns?: 2 | 3 }
   | { kind: "findings"; items: { label: string; value: string }[] }
   | { kind: "quote"; text: string; attribution?: string }
-  | { kind: "code"; language: string; body: string };
+  | { kind: "code"; language: string; body: string }
+  | { kind: "cardGrid"; items: { title: string; body: string }[]; columns?: 2 | 3 | 4 };
+
+export type Block = BlockVariant & { heading?: string };
 
 export type DetailMeta = {
   slug: string;
   kind: "publication" | "project";
   eyebrow: string;
   title: string;
-  meta: { label: string; value: string }[];
+  meta: { label: string; value: ReactNode }[];
   links: Link[];
   blocks: Block[];
   venueMark?: VenueMark;
+  heroMark?: boolean;
+  scholarUrl?: string;
+  publicationStatus?: PublicationStatus;
 };

@@ -2,13 +2,17 @@ import { Prose } from "@/components/primitives/Prose";
 import type { Block } from "@/content/types";
 import { Figure } from "./Figure";
 import { Gallery } from "./Gallery";
+import { CardGrid } from "./CardGrid";
 import styles from "./BlockRenderer.module.css";
 
 export function BlockRenderer({ blocks }: { blocks: Block[] }) {
   return (
     <div className={styles.stack}>
       {blocks.map((block, i) => (
-        <div key={`${block.kind}-${i}`}>{renderBlock(block)}</div>
+        <div key={`${block.kind}-${i}`}>
+          {block.heading ? <h3 className={styles.blockHeading}>{block.heading}</h3> : null}
+          {renderBlock(block)}
+        </div>
       ))}
     </div>
   );
@@ -22,6 +26,8 @@ function renderBlock(block: Block) {
       return <Figure src={block.src} alt={block.alt} caption={block.caption} />;
     case "gallery":
       return <Gallery items={block.items} columns={block.columns} />;
+    case "cardGrid":
+      return <CardGrid items={block.items} columns={block.columns} />;
     case "findings":
       return (
         <dl className={styles.findings}>

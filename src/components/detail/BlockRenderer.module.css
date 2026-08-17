@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  min-width: 0;
+}
+
+.blockHeading {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-3);
 }
 
 .findings {

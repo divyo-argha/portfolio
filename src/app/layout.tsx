@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { themeInitScript } from "@/lib/theme";
 import { siteConfig } from "@/lib/site";
 import { personJsonLd } from "@/lib/jsonld";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 // A plain, institutional pairing rather than a trendy grotesk/mono system —
@@ -52,6 +53,14 @@ export const metadata: Metadata = {
     title: "Argha Pratim Saha",
     description: "Research in usable security & privacy, security education, and qualitative HCI.",
   },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -70,6 +79,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

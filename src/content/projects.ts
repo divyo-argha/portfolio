@@ -39,7 +39,7 @@ export const projects: Project[] = [
     name: "polaris-vpn",
     tagline: "Zero-config, self-hosted VPN CLI over an encrypted SSH tunnel.",
     description:
-      "A lightweight, zero-config, self-hosted VPN CLI built in Node.js. It instantly establishes an encrypted SSH SOCKS5 tunnel through any Linux VPS to secure web traffic — bring any standard server with SSH access, no extra server configuration required.",
+      "A lightweight, zero-config, self-hosted VPN CLI built in Node.js. It instantly establishes an encrypted SSH SOCKS5 tunnel through any Linux VPS to secure web traffic, using any standard server you already have SSH access to, with no extra configuration.",
     stack: ["Node.js", "JavaScript", "SSH / SOCKS5"],
     links: [{ label: "GitHub", href: "https://github.com/divyo-argha/polaris-vpn" }],
   },

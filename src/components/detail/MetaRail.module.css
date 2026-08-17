@@ -26,6 +26,77 @@
   font-family: var(--font-serif);
   font-size: var(--text-sm);
   color: var(--ink);
+  line-height: 1.5;
+}
+
+.authorList {
+  display: inline;
+}
+
+.youAuthor {
+  color: var(--ink);
+}
+
+.youName {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.youName u {
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+}
+
+.citationText {
+  color: var(--muted);
+}
+
+.scholarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: calc(var(--space-2) + 2px) var(--space-3);
+  background: var(--ink);
+  color: var(--surface);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+  margin-bottom: var(--space-1);
+}
+
+.scholarButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.scholarArrow {
+  opacity: 0.8;
+  margin-left: 1px;
+}
+
+.scholarButtonDisabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: calc(var(--space-2) + 2px) var(--space-3);
+  background: var(--raised);
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+  margin-bottom: var(--space-1);
 }
 
 .links {

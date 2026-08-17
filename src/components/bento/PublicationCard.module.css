@@ -26,11 +26,24 @@
   margin-bottom: var(--space-2);
 }
 
+.headLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
 .venue {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: var(--muted);
+}
+
+.citations {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
   color: var(--muted);
 }
 
@@ -46,6 +59,30 @@
 
 .titleLink:hover {
   color: var(--accent);
+}
+
+.authors {
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.you {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+}
+
+.you strong {
+  font-weight: 700;
+}
+
+.you u {
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
 }
 
 .summary {
