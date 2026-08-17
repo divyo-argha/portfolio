@@ -5,6 +5,7 @@ import type { DetailMeta } from "@/content/types";
 import { BackLink } from "./BackLink";
 import { MetaRail } from "./MetaRail";
 import { BlockRenderer } from "./BlockRenderer";
+import { Tabs } from "./Tabs";
 import styles from "./DetailLayout.module.css";
 
 export function DetailLayout({ detail }: { detail: DetailMeta }) {
@@ -42,7 +43,15 @@ export function DetailLayout({ detail }: { detail: DetailMeta }) {
 
         <div className={styles.grid}>
           <div className={styles.body}>
-            {detail.blocks.length > 0 ? (
+            {detail.tabs && detail.tabs.length > 0 ? (
+              <Tabs
+                panels={detail.tabs.map((tab) => ({
+                  id: tab.id,
+                  label: tab.label,
+                  content: <BlockRenderer blocks={tab.blocks} />,
+                }))}
+              />
+            ) : detail.blocks.length > 0 ? (
               <BlockRenderer blocks={detail.blocks} />
             ) : (
               <p className={styles.pending}>Full write-up and photography coming soon.</p>
@@ -54,7 +63,6 @@ export function DetailLayout({ detail }: { detail: DetailMeta }) {
               links={detail.links}
               kind={detail.kind}
               scholarUrl={detail.scholarUrl}
-              publicationStatus={detail.publicationStatus}
             />
           </aside>
         </div>

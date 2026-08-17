@@ -11,6 +11,10 @@
   border: var(--border-hairline);
 }
 
+.link {
+  display: block;
+}
+
 .caption {
   font-family: var(--font-mono);
   font-size: var(--text-xs);

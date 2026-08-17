@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { publications } from "@/content/publications";
-import { publicationDetails } from "@/content/publicationDetails";
+import { publicationDetails, publicationTabs } from "@/content/publicationDetails";
 import { projects } from "@/content/projects";
 import { projectDetails } from "@/content/projectDetails";
 import type { DetailMeta } from "@/content/types";
@@ -60,6 +60,7 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
     ],
     links: publication.links ?? [],
     blocks: publicationDetails[slug] ?? [],
+    tabs: publicationTabs[slug],
     venueMark: publication.venueMark,
     heroMark: publication.heroMark,
     scholarUrl: publication.scholarUrl,

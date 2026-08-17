@@ -62,14 +62,33 @@ export type Project = {
  * section title (e.g. "What was the problem?"). */
 type BlockVariant =
   | { kind: "prose"; body: string[] }
-  | { kind: "figure"; src: string; alt: string; caption?: string }
+  | { kind: "figure"; src: string; alt: string; caption?: string; href?: string }
   | { kind: "gallery"; items: { src: string; alt: string; caption?: string }[]; columns?: 2 | 3 }
   | { kind: "findings"; items: { label: string; value: string }[] }
   | { kind: "quote"; text: string; attribution?: string }
   | { kind: "code"; language: string; body: string }
-  | { kind: "cardGrid"; items: { title: string; body: string }[]; columns?: 2 | 3 | 4 };
+  | { kind: "cardGrid"; items: { title: string; body: string }[]; columns?: 2 | 3 | 4 }
+  | { kind: "statGrid"; items: { value: string; label: string }[]; columns?: 2 | 3 | 4 }
+  | { kind: "heroStat"; value: string; label: string }
+  | { kind: "barChart"; unit?: string; items: { label: string; value: number; highlight?: boolean }[] }
+  | {
+      kind: "confusionMatrix";
+      truePositive: number;
+      trueNegative: number;
+      falsePositive: number;
+      falseNegative: number;
+      positiveLabel: string;
+      negativeLabel: string;
+    }
+  | { kind: "pipeline"; steps: { label: string; highlight?: boolean }[] }
+  | { kind: "carousel"; items: { src: string; alt: string; caption?: string }[] };
 
 export type Block = BlockVariant & { heading?: string };
+
+/** A tab groups a subsection of a detail page's body under its own label,
+ * e.g. separating a full write-up from a poster and a photo gallery.
+ * Optional — most publications render `blocks` flat with no tabs. */
+export type DetailTab = { id: string; label: string; blocks: Block[] };
 
 export type DetailMeta = {
   slug: string;
@@ -79,6 +98,7 @@ export type DetailMeta = {
   meta: { label: string; value: ReactNode }[];
   links: Link[];
   blocks: Block[];
+  tabs?: DetailTab[];
   venueMark?: VenueMark;
   heroMark?: boolean;
   scholarUrl?: string;

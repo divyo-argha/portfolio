@@ -3,6 +3,12 @@ import type { Block } from "@/content/types";
 import { Figure } from "./Figure";
 import { Gallery } from "./Gallery";
 import { CardGrid } from "./CardGrid";
+import { StatGrid } from "./StatGrid";
+import { HeroStat } from "./HeroStat";
+import { BarChart } from "./BarChart";
+import { ConfusionMatrix } from "./ConfusionMatrix";
+import { Pipeline } from "./Pipeline";
+import { Carousel } from "./Carousel";
 import styles from "./BlockRenderer.module.css";
 
 export function BlockRenderer({ blocks }: { blocks: Block[] }) {
@@ -23,11 +29,32 @@ function renderBlock(block: Block) {
     case "prose":
       return <Prose paragraphs={block.body} />;
     case "figure":
-      return <Figure src={block.src} alt={block.alt} caption={block.caption} />;
+      return <Figure src={block.src} alt={block.alt} caption={block.caption} href={block.href} />;
     case "gallery":
       return <Gallery items={block.items} columns={block.columns} />;
     case "cardGrid":
       return <CardGrid items={block.items} columns={block.columns} />;
+    case "statGrid":
+      return <StatGrid items={block.items} columns={block.columns} />;
+    case "heroStat":
+      return <HeroStat value={block.value} label={block.label} />;
+    case "barChart":
+      return <BarChart items={block.items} unit={block.unit} />;
+    case "confusionMatrix":
+      return (
+        <ConfusionMatrix
+          truePositive={block.truePositive}
+          trueNegative={block.trueNegative}
+          falsePositive={block.falsePositive}
+          falseNegative={block.falseNegative}
+          positiveLabel={block.positiveLabel}
+          negativeLabel={block.negativeLabel}
+        />
+      );
+    case "pipeline":
+      return <Pipeline steps={block.steps} />;
+    case "carousel":
+      return <Carousel items={block.items} />;
     case "findings":
       return (
         <dl className={styles.findings}>

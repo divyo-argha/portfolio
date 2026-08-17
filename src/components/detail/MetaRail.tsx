@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { ExternalLink } from "@/components/primitives/ExternalLink";
 import { IconArrowUpRight, IconScholar } from "@/components/primitives/Icons";
-import type { Link as LinkType, PublicationStatus } from "@/content/types";
+import type { Link as LinkType } from "@/content/types";
 import styles from "./MetaRail.module.css";
 
 export function MetaRail({
@@ -9,13 +9,11 @@ export function MetaRail({
   links,
   kind,
   scholarUrl,
-  publicationStatus,
 }: {
   meta: { label: string; value: ReactNode }[];
   links: LinkType[];
   kind?: "publication" | "project";
   scholarUrl?: string;
-  publicationStatus?: PublicationStatus;
 }) {
   const isPublication = kind === "publication";
 

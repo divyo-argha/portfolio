@@ -45,12 +45,13 @@ export const publications: Publication[] = [
       "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=EKrGm9UAAAAJ&citation_for_view=EKrGm9UAAAAJ:9yKSN-GCB0IC",
     links: [
       {
-        label: "ICCIT 2024 Proceedings",
+        label: "Read the paper",
         href: "https://doi.org/10.1109/ICCIT64618.2024.10878546",
       },
     ],
     bentoSpan: "normal",
     venueMark: { src: "/media/venues/iccit.jpeg", alt: "ICCIT 2024 logo", width: 88, height: 32 },
+    heroMark: true,
   },
   {
     slug: "ehrsql-primus-text-to-sql",

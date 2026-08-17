@@ -1,0 +1,47 @@
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-5) var(--space-4);
+  border: var(--border-hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.value {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@media (min-width: 620px) {
+  .cols3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cols4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .cols4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
