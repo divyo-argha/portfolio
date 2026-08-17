@@ -7,7 +7,7 @@
 }
 
 .headerText {
-  max-width: 44ch;
+  max-width: 52ch;
 }
 
 .eyebrowRow {
@@ -51,39 +51,67 @@
   border-radius: var(--radius-md);
 }
 
-/* The huge-logo hero — a one-off treatment (see Publication.heroMark) for a
-   page whose venue identity deserves more presence than the compact badge
-   every other publication uses. */
+/* The hero mark layout — prominent conference identity badge paired with title */
 .headerWithMark {
   display: flex;
   flex-direction: column-reverse;
-  align-items: center;
-  gap: var(--space-6);
+  align-items: flex-start;
+  gap: var(--space-5);
 }
 
 .heroMark {
   flex-shrink: 0;
   width: 100%;
-  max-width: 220px;
+  max-width: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 .heroMarkImage {
   width: 100%;
+  max-height: 140px;
   height: auto;
+  object-fit: contain;
+  display: block;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 768px) {
   .headerWithMark {
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+    gap: var(--space-6);
     align-items: center;
   }
 
+  .headerWithMark .headerText {
+    max-width: none;
+  }
+
   .heroMark {
-    max-width: 280px;
+    max-width: 380px;
+    padding: var(--space-3) var(--space-5);
+  }
+
+  .heroMarkImage {
+    max-height: 150px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .headerWithMark {
+    grid-template-columns: minmax(0, 1fr) 400px;
+    gap: var(--space-7);
+  }
+
+  .heroMark {
+    max-width: 400px;
   }
 }
 

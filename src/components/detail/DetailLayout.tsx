@@ -32,8 +32,8 @@ export function DetailLayout({ detail }: { detail: DetailMeta }) {
               <Image
                 src={detail.venueMark.src}
                 alt={detail.venueMark.alt}
-                width={320}
-                height={320}
+                width={500}
+                height={220}
                 className={styles.heroMarkImage}
                 priority
               />
