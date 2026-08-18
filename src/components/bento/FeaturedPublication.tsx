@@ -9,16 +9,19 @@ import styles from "./FeaturedPublication.module.css";
 
 export function FeaturedPublication({ publication }: { publication: Publication }) {
   return (
-    <article className={[cardStyles.card, cardStyles.interactive, cardStyles.stretchedLink, styles.card].join(" ")}>
+    <article className={[cardStyles.card, cardStyles.interactive, styles.card].join(" ")}>
       <div className={styles.topBar}>
         <div className={styles.metaRow}>
           <Badge status={publication.status} />
           <span className={styles.venue}>{publication.venueShort}</span>
-          <span className={styles.citations}>· Citations: N/A (Accepted)</span>
         </div>
-        <div className={styles.arrowBadge}>
+        <Link
+          href={`/publications/${publication.slug}`}
+          className={styles.arrowBadge}
+          aria-label={`View ${publication.title}`}
+        >
           <IconArrowUpRight size={16} className={styles.arrowIcon} />
-        </div>
+        </Link>
       </div>
 
       <div className={styles.headerRow}>
@@ -61,6 +64,10 @@ export function FeaturedPublication({ publication }: { publication: Publication 
           );
         })}
       </p>
+
+      {publication.authors.some((a) => a.equalContribution) ? (
+        <p className={styles.equalNote}>* Equal contribution</p>
+      ) : null}
 
       <p className={styles.summary}>{publication.summary}</p>
 

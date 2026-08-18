@@ -16,5 +16,3 @@ export const skillGroups = [
   { label: "Tools", items: ["Git", "LaTeX", "R", "Python statistical libraries"] },
 ];
 
-export const competitiveProgramming =
-  "Algorithmic foundations: ICPC Bangladesh Preliminary 2021 contestant with extensive problem-solving background in data structures, graph algorithms, and competitive programming.";

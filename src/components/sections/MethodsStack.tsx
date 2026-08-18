@@ -1,7 +1,7 @@
 import { Section } from "@/components/primitives/Section";
 import { Chip } from "@/components/primitives/Chip";
 import { Reveal } from "@/components/primitives/Reveal";
-import { researchMethods, skillGroups, competitiveProgramming } from "@/content/skills";
+import { researchMethods, skillGroups } from "@/content/skills";
 import styles from "./MethodsStack.module.css";
 
 export function MethodsStack() {
@@ -34,7 +34,6 @@ export function MethodsStack() {
                 </div>
               ))}
             </div>
-            <p className={styles.aside}>{competitiveProgramming}</p>
           </div>
         </Reveal>
       </div>

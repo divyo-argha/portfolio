@@ -174,3 +174,12 @@
     width: 100%;
   }
 }
+
+/* Legend for the equal-contribution asterisk. Pulled up against the author
+   chips so it reads as a footnote rather than a separate byline row. */
+.equalNote {
+  margin-top: calc(-1 * var(--space-3) + 6px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}

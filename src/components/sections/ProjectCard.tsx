@@ -9,7 +9,7 @@ export function ProjectCard({ project }: { project: Project }) {
   const primaryLink = project.links[0];
 
   return (
-    <article className={[cardStyles.card, cardStyles.interactive, cardStyles.stretchedLink].join(" ")}>
+    <article className={[cardStyles.card, cardStyles.interactive].join(" ")}>
       <h3 className={styles.name}>
         <Link href={`/work/${project.slug}`} className={styles.nameLink}>
           {project.name}

@@ -61,11 +61,11 @@ export const metadata: Metadata = {
     description: "Research in usable security & privacy, security education, and qualitative HCI.",
   },
   robots: {
-    index: false,
-    follow: false,
+    index: siteConfig.indexable,
+    follow: siteConfig.indexable,
     googleBot: {
-      index: false,
-      follow: false,
+      index: siteConfig.indexable,
+      follow: siteConfig.indexable,
     },
   },
 };

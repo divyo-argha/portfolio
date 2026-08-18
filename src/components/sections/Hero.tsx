@@ -15,9 +15,16 @@ export function Hero() {
           </div>
 
           <div className={styles.identity}>
-            <p className={styles.positioning}>{profile.positioning}</p>
-            <h1 className={styles.name}>{profile.name}</h1>
-            <p className={styles.statement}>{profile.researchStatement}</p>
+            <div className={styles.nameBlock}>
+              <h1 className={styles.name}>{profile.name}</h1>
+              <p className={styles.subtitle}>{profile.subtitle}</p>
+              <div className={styles.statusBadge}>
+                <span className={styles.statusDot} />
+                <span className={styles.statusText}>{profile.status}</span>
+              </div>
+            </div>
+
+            <p className={styles.statement}>{profile.bio}</p>
 
             <div className={styles.linkRow}>
               <IconLink href={`mailto:${profile.email}`} icon={<IconMail size={16} />}>

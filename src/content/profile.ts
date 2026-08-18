@@ -2,15 +2,20 @@ import type { Link } from "./types";
 
 export const profile = {
   name: "Argha Pratim Saha",
-  positioning: "Prospective PhD Student · Usable Security & Privacy",
-  researchStatement:
-    "I study the intersection of usable security and privacy, mental models, and empirical HCI — investigating how people perceive security risks and designing usable interventions that support informed decision-making.",
+  subtitle: "Computer Science · Research · SUST",
+  status: "Open to PhD opportunities for Fall 2027",
+  positioning: "Computer Science · Research · SUST",
+  bio: "I’m a Computer Science graduate from Shahjalal University of Science and Technology (SUST). I enjoy working on problems where computing systems meet people and the environments in which they are used. My work so far has taken me across security, human-centered computing, and machine learning.",
   location: "Dhaka, Bangladesh",
   email: "arghastm@gmail.com",
   phone: "+880 1521 200978",
   applyingFor: "Applying for PhD positions, Fall 2027 intake",
   cgpa: "3.71 / 4.00",
   university: "Shahjalal University of Science and Technology (SUST)",
+  researchIntro:
+    "My research interests have developed across security, human-centered computing, and applied machine learning. I am particularly interested in problems where the design of a technical system cannot be separated from the people, environments, and constraints surrounding it.",
+  openDirections:
+    "My interests are not limited to a single application area. I am open to exploring related questions in areas such as IoT and network security, trustworthy AI, intelligent systems, computer vision, and interactive technologies, particularly where they connect with my existing background in computing and security.",
 } as const;
 
 export const socialLinks: Link[] = [
@@ -22,16 +27,15 @@ export const socialLinks: Link[] = [
 
 export const pillars = [
   {
-    title: "Usable security & privacy",
-    body: "Closing the gap between how security mechanisms are designed to work and how people actually understand and use them.",
+    title: "Security, Privacy & Human-Centered Security",
+    body: "My primary research experience is in usable security, security education, and empirical HCI. I am interested in how people understand security and privacy mechanisms, how their expectations and prior knowledge shape their decisions, and how security interventions can be designed and evaluated for real-world use.",
   },
   {
-    title: "Security education & mental models",
-    body: "Building interventions and evaluation methods that don't assume prior security knowledge.",
+    title: "Applied Machine Learning & Intelligent Systems",
+    body: "I have also worked with machine learning and computational approaches to practical problems, including medical image classification. These experiences have given me a foundation in data-driven systems and an interest in applying intelligent methods to new research problems.",
   },
   {
-    title: "Qualitative & mixed-methods HCI",
-    body: "Semi-structured interviews, thematic analysis, and pre/post knowledge testing analysed with mixed-effects models.",
+    title: "Human-Centered Computing & Empirical Research",
+    body: "I am interested in understanding how people interact with and make sense of computing systems. My research experience includes qualitative user studies, interviews, thematic analysis, and quantitative evaluation of user knowledge, usability, workload, and learning.",
   },
 ] as const;
-

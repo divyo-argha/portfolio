@@ -16,9 +16,8 @@ export const publicationDetails: Record<string, Block[]> = {
       kind: "prose",
       body: [
         "My first research project in NLP and text-to-SQL.",
-        "This was one of my first experiences with research. I worked on the EHRSQL 2024 shared task, where the goal was to turn natural-language questions about electronic health records into SQL queries.",
-        "At the time I was still learning how research works, exploring NLP, language models, and how they could be used with structured medical data. Our work was later published at the Clinical NLP Workshop, co-located with NAACL 2024.",
-        "This project isn't where I ended up in research, but it's where I started. It taught me how to work on a research problem, run experiments, look at results, and write about what we found.",
+        "I worked on the EHRSQL 2024 shared task, where the goal was to turn natural-language questions about electronic health records into SQL queries \u2014 exploring how language models could be applied to structured medical data. Our work was published at the Clinical NLP Workshop, co-located with NAACL 2024.",
+        "It is where I learned how research actually works: formulating a problem, designing and running experiments, reading the results honestly, and writing up what we found.",
       ],
     },
     {
@@ -69,8 +68,8 @@ export const publicationDetails: Record<string, Block[]> = {
       kind: "prose",
       heading: "What did we find?",
       body: [
-        "The results weren't as strong as we'd hoped. The model could generate valid SQL for some questions, but struggled once questions got more complex or required a real understanding of the database structure.",
-        "That was a useful thing to learn from a first research project: getting a language model to produce an answer isn't the same as getting it to produce a correct one. Performance turned out to depend heavily on the data, the prompt, and how the task itself was set up.",
+        "The model generated valid SQL for many questions, but struggled once questions grew more complex or required a real understanding of the database structure.",
+        "That gap is the finding I took away: getting a language model to produce an answer is not the same as getting it to produce a correct one. Performance depended heavily on the data, the prompt, and how the task itself was set up.",
       ],
     },
     {
@@ -92,6 +91,23 @@ export const publicationDetails: Record<string, Block[]> = {
         },
       ],
     },
+    {
+      kind: "code",
+      heading: "Cite this paper",
+      language: "bibtex",
+      body: `@inproceedings{joy2024primus,
+  title     = {Project {PRIMUS} at {EHRSQL} 2024: Text-to-{SQL} Generation
+               using Large Language Models for {EHR} Analysis},
+  author    = {Bhowmik Joy, Sourav and Ahmed, Rohan and Saha, Argha Pratim and
+               Bhowmik, Partha Sarothi and Das, Utsho and Ahmed, Minhaj},
+  booktitle = {Proceedings of the 6th Clinical Natural Language Processing
+               Workshop},
+  year      = {2024},
+  address   = {Mexico City, Mexico},
+  publisher = {Association for Computational Linguistics},
+  url       = {https://aclanthology.org/2024.clinicalnlp-1.46/},
+}`,
+    },
   ],
 };
 
@@ -108,8 +124,8 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           kind: "prose",
           body: [
             "Arsenic contamination in groundwater is a major public health challenge in Bangladesh, often manifesting as visible skin keratosis, hyperpigmentation, and lesions.",
-            "Originated as a machine learning coursework project at Shahjalal University of Science and Technology (SUST), where we investigated whether deep convolutional transfer learning could reliably classify clinical skin photographs into arsenic-affected versus unaffected cases.",
-            "Using the ArsenicSkinImageBD dataset, we evaluated and compared five architectures. EfficientNet-B1 demonstrated the strongest performance, achieving 94.69% test accuracy and 0.98 AUC. The complete paper was subsequently accepted and published in IEEE ICCIT 2024.",
+            "We investigated whether deep convolutional transfer learning could reliably classify clinical skin photographs into arsenic-affected versus unaffected cases. Using the ArsenicSkinImageBD dataset, we evaluated and compared five architectures; EfficientNet-B1 performed strongest, reaching 94.69% test accuracy and 0.98 AUC.",
+            "The work began as a machine learning coursework project at Shahjalal University of Science and Technology (SUST) and was extended into a full paper, published at IEEE ICCIT 2024.",
           ],
         },
         {
@@ -284,6 +300,21 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           body: [
             "These limitations are why I see this work as an early research step rather than a finished clinical system.",
           ],
+        },
+        {
+          kind: "code",
+          heading: "Cite this paper",
+          language: "bibtex",
+          body: `@inproceedings{saha2024arsenic,
+  title     = {A Deep Learning Approach to Automate Classification of
+               Arsenic-Affected Skin using EfficientNet-B1},
+  author    = {Saha, Argha Pratim and Das, Utsho and Rahman, M. Shahidur},
+  booktitle = {2024 27th International Conference on Computer and
+               Information Technology (ICCIT)},
+  year      = {2024},
+  publisher = {IEEE},
+  doi       = {10.1109/ICCIT64618.2024.10878546},
+}`,
         },
       ],
     },

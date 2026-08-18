@@ -32,13 +32,6 @@
   font-weight: 600;
 }
 
-.citations {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.04em;
-  color: var(--muted);
-}
-
 .arrowBadge {
   display: inline-flex;
   align-items: center;
@@ -50,10 +43,15 @@
   border: 1px solid var(--line);
   color: var(--muted);
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  text-decoration: none;
   transition: all var(--duration-fast) var(--ease-out);
 }
 
-.card:hover .arrowBadge {
+.card:hover .arrowBadge,
+.arrowBadge:hover {
   background: var(--accent-soft);
   color: var(--accent);
   border-color: var(--accent);
@@ -86,6 +84,11 @@
   overflow-wrap: break-word;
   word-break: normal;
   margin: 0;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.card:hover .title {
+  color: var(--accent);
 }
 
 .titleLink {
@@ -95,6 +98,18 @@
   white-space: normal;
   overflow-wrap: break-word;
   word-break: normal;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.titleLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  cursor: pointer;
 }
 
 /* SOUPS Logo — 80% size: 108px on desktop, 92px on mobile */
@@ -110,6 +125,8 @@
   border-radius: var(--radius-md);
   padding: 6px;
   box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 2;
 }
 
 @media (min-width: 768px) {
@@ -135,6 +152,8 @@
   overflow-wrap: break-word;
   word-break: normal;
   min-width: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .you {
@@ -169,4 +188,14 @@
   margin-top: auto;
   padding-top: var(--space-2);
   min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Legend for the equal-contribution asterisk in the byline above. */
+.equalNote {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.01em;
 }

@@ -20,7 +20,6 @@ export function PublicationCard({
       className={[
         cardStyles.card,
         cardStyles.interactive,
-        cardStyles.stretchedLink,
         isBanner ? styles.bannerCard : styles.compactCard,
       ].join(" ")}
     >
@@ -52,9 +51,13 @@ export function PublicationCard({
             ) : null}
           </div>
 
-          <div className={styles.arrowBadge}>
+          <Link
+            href={`/publications/${publication.slug}`}
+            className={styles.arrowBadge}
+            aria-label={`View ${publication.title}`}
+          >
             <IconArrowUpRight size={15} className={styles.arrowIcon} />
-          </div>
+          </Link>
         </div>
 
         {/* Title area: For compact (NAACL), title on left + logo on right side */}
@@ -101,6 +104,10 @@ export function PublicationCard({
             );
           })}
         </p>
+
+        {publication.authors.some((a) => a.equalContribution) ? (
+          <p className={styles.equalNote}>* Equal contribution</p>
+        ) : null}
 
         <p className={styles.summary}>{publication.summary}</p>
       </div>

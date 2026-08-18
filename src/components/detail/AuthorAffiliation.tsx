@@ -73,6 +73,10 @@ export function AuthorAffiliation({
         </div>
       ) : null}
 
+      {authors?.some((a) => a.equalContribution) ? (
+        <p className={styles.equalNote}>* Equal contribution</p>
+      ) : null}
+
       {/* Prominent Institutional Affiliation Plate */}
       {affiliation ? (
         <div className={styles.affiliationPlate}>

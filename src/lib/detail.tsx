@@ -12,19 +12,20 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
   if (!publication) return undefined;
 
   const isAccepted = publication.status === "accepted";
-  const hasCitations = typeof publication.citations === "number" && !isAccepted;
+  // Only ever state a citation count that exists. An accepted-but-unindexed
+  // paper says nothing here rather than volunteering "N/A".
+  const hasCitations =
+    typeof publication.citations === "number" && publication.citations > 0 && !isAccepted;
 
   const yearValue: ReactNode = (
     <span>
       {publication.year}
-      <span className={styles.citationText}>
-        {" · "}
-        {hasCitations ? (
-          `${publication.citations} ${publication.citations === 1 ? "citation" : "citations"}`
-        ) : (
-          "Citations: N/A"
-        )}
-      </span>
+      {hasCitations ? (
+        <span className={styles.citationText}>
+          {" · "}
+          {`${publication.citations} ${publication.citations === 1 ? "citation" : "citations"}`}
+        </span>
+      ) : null}
     </span>
   );
 
@@ -46,6 +47,9 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
           </span>
         );
       })}
+      {publication.authors.some((a) => a.equalContribution) ? (
+        <span className={styles.equalNote}>* Equal contribution</span>
+      ) : null}
     </span>
   );
 
@@ -98,7 +102,10 @@ export function getProjectDetail(slug: string): DetailMeta | undefined {
     kind: "project",
     eyebrow: project.tagline,
     title: project.name,
-    meta: [{ label: "Stack", value: project.stack.join(", ") }],
+    meta: [
+      { label: "Stack", value: project.stack.join(", ") },
+      ...(project.stats ?? []).map((stat) => ({ label: stat.label, value: stat.value })),
+    ],
     links: project.links,
     blocks: projectDetails[slug] ?? [],
   };

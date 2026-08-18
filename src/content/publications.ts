@@ -43,6 +43,7 @@ export const publications: Publication[] = [
     links: [],
     bentoSpan: "feature",
     venueMark: { src: "/media/venues/soups.png", alt: "SOUPS 2026 logo", width: 30, height: 32 },
+    heroMark: true,
     affiliation: "Shahjalal University of Science and Technology (SUST)",
     affiliationInfo: {
       department: "Department of Computer Science and Engineering",

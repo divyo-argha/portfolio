@@ -10,20 +10,23 @@ export type UniversityEducation = {
     title: string;
     authors: { name: string; you?: boolean }[];
     supervisors: string[];
-    summary: string;
+    publicationSlug: string;
   };
-  highlights: string[];
-  coursework: string[];
 };
 
 export type SecondaryEducation = {
-  level: "college" | "school";
   institution: string;
-  exam: string;
-  group: string;
   location: string;
-  result: string;
   logo: { src: string; alt: string; width: number; height: number };
+  exams: {
+    /** Spelled-out stage name — the local abbreviation alone means nothing to
+     * a reader outside Bangladesh. */
+    stage: string;
+    /** Local certificate abbreviation, shown in parentheses after the stage. */
+    abbr: string;
+    group: string;
+    result: string;
+  }[];
 };
 
 export const education = {
@@ -40,64 +43,28 @@ export const education = {
       width: 120,
       height: 120,
     },
+    // Deliberately thin: the abstract, methods, and results live on the
+    // publication page. This block carries only what that page does not —
+    // the thesis author order and who supervised it.
     thesis: {
       title: "CyQured: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education",
-      authors: [
-        { name: "Argha Pratim Saha", you: true },
-        { name: "Utsho Das" },
-      ],
+      authors: [{ name: "Argha Pratim Saha", you: true }, { name: "Utsho Das" }],
       supervisors: ["Dr. Md Sadek Ferdous", "Dr. Farida Chowdhury", "Md Masum"],
-      summary:
-        "Designed and evaluated a tabletop serious game mapping the STRIDE threat framework onto smart-home scenarios. Conducted pre/post knowledge testing with 50 participants, analysed using linear mixed-effects models (Accepted at USENIX SOUPS 2026).",
+      publicationSlug: "cyqured",
     },
-    highlights: [
-      "Published and accepted research during undergraduate studies at USENIX SOUPS 2026, ICCIT 2024, and NAACL 2024 (CLNLP).",
-      "Completed 160+ credits in core computing systems, mathematical foundations, and intelligent systems.",
-    ],
-    coursework: [
-      "Data Structures & Algorithms",
-      "Operating Systems",
-      "Database Management Systems",
-      "Computer Networks",
-      "Software Engineering",
-      "Machine Learning",
-      "Deep Learning",
-      "Natural Language Processing",
-      "Artificial Intelligence",
-      "Cryptography & Network Security",
-      "Distributed Systems",
-      "Theory of Computation",
-      "Discrete Mathematics",
-    ],
   } as UniversityEducation,
-  secondary: [
-    {
-      level: "college",
-      institution: "BCIC College",
-      exam: "Higher Secondary Certificate (HSC)",
-      group: "Science",
-      location: "Dhaka, Bangladesh",
-      result: "GPA 5.00 / 5.00",
-      logo: {
-        src: "/media/institutions/bcic.jpeg",
-        alt: "BCIC College logo",
-        width: 80,
-        height: 80,
-      },
+  secondary: {
+    institution: "BCIC School & College",
+    location: "Dhaka, Bangladesh",
+    logo: {
+      src: "/media/institutions/bcic.jpeg",
+      alt: "BCIC School & College logo",
+      width: 80,
+      height: 80,
     },
-    {
-      level: "school",
-      institution: "BCIC School",
-      exam: "Secondary School Certificate (SSC)",
-      group: "Science",
-      location: "Dhaka, Bangladesh",
-      result: "GPA 5.00 / 5.00",
-      logo: {
-        src: "/media/institutions/bcic.jpeg",
-        alt: "BCIC School logo",
-        width: 80,
-        height: 80,
-      },
-    },
-  ] as SecondaryEducation[],
+    exams: [
+      { stage: "Higher Secondary", abbr: "HSC", group: "Science", result: "GPA 5.00 / 5.00" },
+      { stage: "Secondary", abbr: "SSC", group: "Science", result: "GPA 5.00 / 5.00" },
+    ],
+  } as SecondaryEducation,
 };

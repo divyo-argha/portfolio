@@ -120,3 +120,11 @@
   padding-top: var(--space-2);
   border-top: var(--border-hairline);
 }
+
+/* Legend for the equal-contribution asterisk in the authors row. */
+.equalNote {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.7rem;
+  color: var(--muted);
+}

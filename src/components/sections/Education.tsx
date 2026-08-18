@@ -1,16 +1,13 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Section } from "@/components/primitives/Section";
 import { Reveal } from "@/components/primitives/Reveal";
-import { IconChevronDown } from "@/components/primitives/Icons";
+import { IconArrowUpRight } from "@/components/primitives/Icons";
 import { education } from "@/content/education";
 import styles from "./Education.module.css";
 
 export function Education() {
   const { university, secondary } = education;
-  const [expanded, setExpanded] = useState(false);
 
   return (
     <Section id="education" label="Education" title="Academic background">
@@ -44,19 +41,27 @@ export function Education() {
               </div>
             </div>
 
-            {/* Thesis Callout */}
+            {/* Thesis Callout — a pointer to the paper, not a retelling of it */}
             <div className={styles.thesisBlock}>
               <div className={styles.thesisHeader}>
                 <span className={styles.thesisPill}>Undergraduate Thesis</span>
                 <span className={styles.thesisAcceptedBadge}>Accepted at USENIX SOUPS 2026</span>
               </div>
 
-              <h4 className={styles.thesisTitle}>&ldquo;{university.thesis.title}&rdquo;</h4>
+              <h4 className={styles.thesisTitle}>
+                <Link
+                  href={`/publications/${university.thesis.publicationSlug}`}
+                  className={styles.thesisLink}
+                >
+                  <span>&ldquo;{university.thesis.title}&rdquo;</span>
+                  <IconArrowUpRight size={13} className={styles.thesisArrow} />
+                </Link>
+              </h4>
 
-              <div className={styles.thesisMetaGrid}>
-                <div className={styles.thesisMetaItem}>
-                  <span className={styles.thesisMetaLabel}>Authors:</span>
-                  <span className={styles.thesisMetaValue}>
+              <div className={styles.thesisMeta}>
+                <p className={styles.thesisMetaRow}>
+                  <span className={styles.thesisMetaLabel}>Authors</span>
+                  <span>
                     {university.thesis.authors.map((author, idx) => (
                       <span key={author.name}>
                         {author.you ? (
@@ -70,92 +75,49 @@ export function Education() {
                       </span>
                     ))}
                   </span>
-                </div>
+                </p>
 
-                <div className={styles.thesisMetaItem}>
-                  <span className={styles.thesisMetaLabel}>Supervisors:</span>
-                  <span className={styles.thesisMetaValue}>
-                    {university.thesis.supervisors.join(", ")}
-                  </span>
-                </div>
+                <p className={styles.thesisMetaRow}>
+                  <span className={styles.thesisMetaLabel}>Supervisors</span>
+                  <span>{university.thesis.supervisors.join(", ")}</span>
+                </p>
               </div>
-
-              <p className={styles.thesisSummary}>{university.thesis.summary}</p>
             </div>
-
-            {/* Accordion Toggle for Coursework & Highlights */}
-            <button
-              type="button"
-              className={styles.accordionToggle}
-              onClick={() => setExpanded(!expanded)}
-              aria-expanded={expanded}
-            >
-              <span>{expanded ? "Hide Coursework & Highlights" : "View Relevant Coursework & Highlights (13 Courses)"}</span>
-              <IconChevronDown
-                size={15}
-                className={[styles.chevron, expanded ? styles.chevronExpanded : ""].join(" ")}
-              />
-            </button>
-
-            {/* Collapsible Drawer */}
-            {expanded ? (
-              <div className={styles.accordionDrawer}>
-                <div className={styles.courseworkSection}>
-                  <h4 className={styles.subHeading}>Relevant Coursework</h4>
-                  <div className={styles.courseworkGrid}>
-                    {university.coursework.map((course) => (
-                      <span key={course} className={styles.courseTag}>
-                        {course}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={styles.highlightsSection}>
-                  <h4 className={styles.subHeading}>Highlights</h4>
-                  <ul className={styles.highlightList}>
-                    {university.highlights.map((highlight) => (
-                      <li key={highlight}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ) : null}
           </article>
         </Reveal>
 
-        {/* School & College Secondary Grid */}
-        <div className={styles.secondaryGrid}>
-          {secondary.map((item, idx) => (
-            <Reveal key={item.institution + item.exam} delay={(idx + 1) as 1 | 2}>
-              <article className={styles.secondaryCard}>
-                <div className={styles.secLogoWrapper}>
-                  <Image
-                    src={item.logo.src}
-                    alt={item.logo.alt}
-                    width={46}
-                    height={46}
-                    className={styles.secLogoImg}
-                  />
-                </div>
+        {/* Secondary education — one institution, both exams, one row */}
+        <Reveal delay={1}>
+          <article className={styles.secondaryRow}>
+            <div className={styles.secLogoWrapper}>
+              <Image
+                src={secondary.logo.src}
+                alt={secondary.logo.alt}
+                width={44}
+                height={44}
+                className={styles.secLogoImg}
+              />
+            </div>
 
-                <div className={styles.secContent}>
-                  <div className={styles.secBadgeRow}>
-                    <span className={styles.secExamBadge}>{item.exam}</span>
-                    <span className={styles.secGroup}>{item.group}</span>
-                  </div>
-                  <h4 className={styles.secInstitution}>{item.institution}</h4>
-                  <p className={styles.secLocation}>{item.location}</p>
-                </div>
+            <div className={styles.secContent}>
+              <h4 className={styles.secInstitution}>{secondary.institution}</h4>
+              <p className={styles.secLocation}>{secondary.location}</p>
+            </div>
 
-                <div className={styles.secResult}>
-                  <span className={styles.secResultLabel}>Result</span>
-                  <span className={styles.secResultValue}>{item.result}</span>
+            <div className={styles.secExams}>
+              {secondary.exams.map((exam) => (
+                <div key={exam.abbr} className={styles.secExam}>
+                  <span className={styles.secExamStage}>
+                    {exam.stage} <span className={styles.secExamAbbr}>({exam.abbr})</span>
+                  </span>
+                  <span className={styles.secExamResult}>
+                    {exam.group} · {exam.result}
+                  </span>
                 </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+              ))}
+            </div>
+          </article>
+        </Reveal>
       </div>
     </Section>
   );
