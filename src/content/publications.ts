@@ -21,9 +21,24 @@ export const publications: Publication[] = [
         equalContribution: true,
         avatar: "/media/people/portrait-alt.jpg",
       },
-      { name: "Md Masum" },
-      { name: "Farida Chowdhury" },
-      { name: "Md Sadek Ferdous" },
+      {
+        name: "Md Masum",
+        avatar: "/media/people/masum-sir.jpg",
+        url: "https://www.sust.edu/departments/cse/faculty/masum@sust.edu",
+        email: "masum-cse@sust.edu",
+      },
+      {
+        name: "Farida Chowdhury",
+        avatar: "/media/people/fdc-maam.jpeg",
+        url: "https://cse.bracu.ac.bd/faculty_profile/211/dr_farida_chowdhury",
+        email: "farida.chowdhury@bracu.ac.bd",
+      },
+      {
+        name: "Md Sadek Ferdous",
+        avatar: "/media/people/sadek-sir.jpg",
+        url: "https://www.bracu.ac.bd/about/people/md-sadek-ferdous-phd",
+        email: "sadek.ferdous@bracu.ac.bd",
+      },
     ],
     summary:
       "Originated from our undergraduate thesis at SUST, where we substantially extended the game design, calibration study, and mixed-methods empirical evaluation with 50 participants to evaluate STRIDE-based smart-home threat learning — now accepted at USENIX SOUPS 2026.",

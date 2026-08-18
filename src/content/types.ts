@@ -20,6 +20,7 @@ export type Author = {
   equalContribution?: boolean;
   avatar?: string;
   url?: string;
+  email?: string;
   role?: string;
 };
 
