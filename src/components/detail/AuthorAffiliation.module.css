@@ -31,7 +31,8 @@
   transition: all var(--duration-fast) var(--ease-out);
 }
 
-.authorLink:hover .authorChip {
+.authorLink:hover .authorChip,
+.authorLink:focus-visible .authorChip {
   border-color: var(--accent);
   background: var(--accent-soft);
   transform: translateY(-1px);
@@ -40,7 +41,21 @@
 
 .youChip {
   background: var(--surface);
-  border-color: var(--line);
+  border-color: var(--line-strong);
+}
+
+.youLink:hover .youChip,
+.youLink:focus-visible .youChip {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.youLink:hover .name u,
+.youLink:focus-visible .name u {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
 .avatar {

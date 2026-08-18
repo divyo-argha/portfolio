@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { publications } from "@/content/publications";
 import { publicationDetails, publicationTabs } from "@/content/publicationDetails";
 import { projects } from "@/content/projects";
@@ -36,9 +37,11 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
         return (
           <span key={author.name} className={isYou ? styles.youAuthor : undefined}>
             {isYou ? (
-              <strong className={styles.youName}>
-                <u>{author.name}</u>
-              </strong>
+              <Link href="/" className={styles.youLink} title="Argha Pratim Saha — Back to Home">
+                <strong className={styles.youName}>
+                  <u>{author.name}</u>
+                </strong>
+              </Link>
             ) : (
               author.name
             )}

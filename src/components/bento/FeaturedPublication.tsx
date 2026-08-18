@@ -52,9 +52,11 @@ export function FeaturedPublication({ publication }: { publication: Publication 
           return (
             <span key={author.name} className={isYou ? styles.you : undefined}>
               {isYou ? (
-                <strong>
-                  <u>{author.name}</u>
-                </strong>
+                <Link href="/" className={styles.youLink} title="Argha Pratim Saha — Back to Home">
+                  <strong>
+                    <u>{author.name}</u>
+                  </strong>
+                </Link>
               ) : (
                 author.name
               )}

@@ -65,9 +65,11 @@ export function Education() {
                     {university.thesis.authors.map((author, idx) => (
                       <span key={author.name}>
                         {author.you ? (
-                          <strong className={styles.youAuthor}>
-                            <u>{author.name}</u>
-                          </strong>
+                          <Link href="/" className={styles.youLink} title="Argha Pratim Saha — Back to Home">
+                            <strong className={styles.youAuthor}>
+                              <u>{author.name}</u>
+                            </strong>
+                          </Link>
                         ) : (
                           author.name
                         )}

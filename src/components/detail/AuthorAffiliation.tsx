@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { IconArrowUpRight } from "@/components/primitives/Icons";
 import type { Author, AffiliationInfo } from "@/content/types";
 import styles from "./AuthorAffiliation.module.css";
@@ -19,7 +20,7 @@ export function AuthorAffiliation({
         <div className={styles.authorsRow}>
           {authors.map((author) => {
             const isYou = author.you;
-            const hasLink = Boolean(author.url);
+            const hasExternalLink = Boolean(author.url && !isYou);
 
             const chip = (
               <div className={[styles.authorChip, isYou ? styles.youChip : ""].join(" ")}>
@@ -43,13 +44,26 @@ export function AuthorAffiliation({
                 <span className={styles.name}>
                   {isYou ? <u>{author.name}</u> : author.name}
                   {author.equalContribution ? <sup className={styles.sup}>*</sup> : null}
-                  {hasLink ? <IconArrowUpRight size={11} className={styles.arrow} /> : null}
+                  {hasExternalLink ? <IconArrowUpRight size={11} className={styles.arrow} /> : null}
                 </span>
                 {author.role ? <span className={styles.role}>{author.role}</span> : null}
               </div>
             );
 
-            if (hasLink && author.url) {
+            if (isYou) {
+              return (
+                <Link
+                  key={author.name}
+                  href="/"
+                  className={[styles.authorLink, styles.youLink].join(" ")}
+                  title="Argha Pratim Saha — Back to Home"
+                >
+                  {chip}
+                </Link>
+              );
+            }
+
+            if (hasExternalLink && author.url) {
               return (
                 <a
                   key={author.name}

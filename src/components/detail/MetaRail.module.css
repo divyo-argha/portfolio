@@ -61,6 +61,32 @@
   text-underline-offset: 2.5px;
 }
 
+.youLink {
+  color: var(--ink);
+  text-decoration: none;
+  display: inline;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.youLink u {
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+  text-decoration-color: var(--line-strong);
+  transition: text-decoration-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.youLink:hover,
+.youLink:focus-visible {
+  color: var(--accent);
+}
+
+.youLink:hover u,
+.youLink:focus-visible u {
+  text-decoration-color: var(--accent);
+  color: var(--accent);
+}
+
 .citationText {
   color: var(--muted);
 }

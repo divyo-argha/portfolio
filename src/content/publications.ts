@@ -14,7 +14,6 @@ export const publications: Publication[] = [
         name: "Utsho Das",
         equalContribution: true,
         avatar: "/media/people/utsho.jpeg",
-        url: "https://scholar.google.com/citations?user=_xyCDVQAAAAJ&hl=en",
       },
       {
         name: "Argha Pratim Saha",
@@ -68,7 +67,6 @@ export const publications: Publication[] = [
       {
         name: "Utsho Das",
         avatar: "/media/people/utsho.jpeg",
-        url: "https://scholar.google.com/citations?user=_xyCDVQAAAAJ&hl=en",
       },
       {
         name: "M. Shahidur Rahman",
@@ -119,7 +117,6 @@ export const publications: Publication[] = [
       {
         name: "Utsho Das",
         avatar: "/media/people/utsho.jpeg",
-        url: "https://scholar.google.com/citations?user=_xyCDVQAAAAJ&hl=en",
       },
       { name: "Minhaj Ahmed" },
     ],
