@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { MouseEvent } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import { useSectionNav } from "@/hooks/useSectionNav";
@@ -14,6 +15,8 @@ import styles from "./Header.module.css";
 export function Header() {
   const [open, setOpen] = useState(false);
   const navigateToSection = useSectionNav();
+  const pathname = usePathname();
+  const dark = pathname === "/publications/cyqured/game";
 
   function handleAnchorClick(event: MouseEvent<HTMLAnchorElement>, href: string) {
     event.preventDefault();
@@ -21,7 +24,7 @@ export function Header() {
   }
 
   return (
-    <header className={styles.header}>
+    <header className={dark ? `${styles.header} ${styles.headerDark}` : styles.header}>
       <Container>
         <div className={styles.bar}>
           <a href="#top" className={styles.mark} onClick={(e) => handleAnchorClick(e, "#top")}>

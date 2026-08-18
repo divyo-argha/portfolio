@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Chakra_Petch } from "next/font/google";
 import { DetailLayout } from "@/components/detail/DetailLayout";
 import { BlockRenderer } from "@/components/detail/BlockRenderer";
@@ -6,7 +7,7 @@ import { Tabs } from "@/components/detail/Tabs";
 import { getPublicationDetail } from "@/lib/detail";
 import { publications } from "@/content/publications";
 import { scholarlyArticleJsonLd } from "@/lib/jsonld";
-import { CardCatalogue } from "@/components/cyqured/CardCatalogue";
+import { IconArrowUpRight } from "@/components/primitives/Icons";
 import { overviewBlocks, howToPlayBlocks, studyBlocks } from "./content";
 import styles from "./cyqured.module.css";
 
@@ -61,11 +62,24 @@ export default function CyQuredPage() {
               </div>
             </div>
 
+            <Link href="/publications/cyqured/game" className={styles.playBanner}>
+              <div>
+                <span className={styles.playEyebrow}>Interactive</span>
+                <h2 className={styles.playTitle}>Play every card</h2>
+                <p className={styles.playBody}>
+                  All 84 cards, flip animations, and live attack-to-defense mappings — the full catalogue,
+                  in its own space.
+                </p>
+              </div>
+              <span className={styles.playCta}>
+                Enter the game <IconArrowUpRight size={16} />
+              </span>
+            </Link>
+
             <Tabs
               panels={[
                 { id: "overview", label: "Overview", content: <BlockRenderer blocks={overviewBlocks} /> },
                 { id: "how-to-play", label: "How to Play", content: <BlockRenderer blocks={howToPlayBlocks} /> },
-                { id: "cards-board", label: "Cards & Board", content: <CardCatalogue /> },
                 { id: "study", label: "Study & Results", content: <BlockRenderer blocks={studyBlocks} /> },
               ]}
             />

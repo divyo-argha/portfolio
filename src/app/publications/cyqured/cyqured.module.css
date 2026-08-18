@@ -117,3 +117,68 @@
     padding: var(--space-8) var(--space-7);
   }
 }
+
+/* ---- Play banner: CTA into the standalone /game experience ---- */
+
+.playBanner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  justify-content: space-between;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 20%, rgba(94, 225, 242, 0.28), transparent 65%),
+    linear-gradient(135deg, #0c1a33 0%, #05070d 75%);
+  border: 1px solid rgba(94, 225, 242, 0.3);
+  text-decoration: none;
+  transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+}
+
+.playBanner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(94, 225, 242, 0.18);
+}
+
+.playEyebrow {
+  font-family: var(--font-cyq-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5ee1f2;
+}
+
+.playTitle {
+  font-family: var(--font-cyq-display);
+  font-size: var(--text-2xl);
+  color: #eaf7fb;
+  margin-top: var(--space-1);
+}
+
+.playBody {
+  font-family: var(--font-serif);
+  color: #9fc3cc;
+  max-width: 52ch;
+  margin-top: var(--space-2);
+}
+
+.playCta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  align-self: flex-start;
+  font-family: var(--font-cyq-display);
+  font-size: var(--text-sm);
+  letter-spacing: 0.03em;
+  color: #05070d;
+  background: #5ee1f2;
+  padding: var(--space-3) var(--space-5);
+  border-radius: 999px;
+}
+
+@media (min-width: 700px) {
+  .playBanner {
+    flex-direction: row;
+    align-items: center;
+  }
+}

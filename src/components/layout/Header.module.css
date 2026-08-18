@@ -5,6 +5,17 @@
   background: color-mix(in srgb, var(--ground) 88%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: var(--border-hairline);
+  transition: background var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
+}
+
+.headerDark {
+  --ink: #eaf7fb;
+  --muted: #8fb4bd;
+  --surface: rgba(255, 255, 255, 0.06);
+  --line: rgba(94, 225, 242, 0.25);
+  --accent: #5ee1f2;
+  background: rgba(5, 7, 13, 0.82);
+  border-bottom-color: rgba(94, 225, 242, 0.25);
 }
 
 .bar {
