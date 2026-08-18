@@ -25,6 +25,26 @@ const DECKS: { id: CardDeck; label: string }[] = [
   { id: "scenario", label: "Scenario" },
 ];
 
+// Board device values: color group + point value, read directly off the board art.
+const DEVICE_INFO: Record<string, { points: number; color: string }> = {
+  "Smart Utility Meter": { points: 8, color: "#e5493c" },
+  "Smart Thermostat": { points: 6, color: "#e5493c" },
+  "Smart Door-lock": { points: 10, color: "#2f6fe0" },
+  "IP Camera": { points: 10, color: "#2f6fe0" },
+  "Smart Speaker": { points: 10, color: "#e14fa0" },
+  "Smart TV": { points: 10, color: "#e14fa0" },
+  "Smart Printer": { points: 8, color: "#3fa65a" },
+  "Smart Fridge": { points: 6, color: "#3fa65a" },
+  Laptop: { points: 16, color: "#9b5fd1" },
+  Desktop: { points: 14, color: "#9b5fd1" },
+  "Gaming Console": { points: 10, color: "#c67a35" },
+  Smartphone: { points: 16, color: "#c67a35" },
+  "Smart Wearables": { points: 10, color: "#c67a35" },
+  Tablet: { points: 12, color: "#c67a35" },
+  "Wireless Router": { points: 18, color: "#7c8a93" },
+  "Home Server": { points: 20, color: "#7c8a93" },
+};
+
 const FILTERS: { id: CardCategory | "all"; label: string; Icon?: typeof IconAttack }[] = [
   { id: "all", label: "All" },
   { id: "attack", label: "Attack", Icon: IconAttack },
@@ -66,12 +86,17 @@ export function GameExperience() {
   return (
     <div className={styles.wrap}>
       <div ref={stageRef} className={styles.stageAnchor}>
-        <div key={selected?.id ?? "idle"} className={reducedMotion ? undefined : styles.stageSwap}>
-          {selected ? (
-            <SelectedStage card={selected} onJump={openCard} reducedMotion={reducedMotion} />
-          ) : (
-            <IdleStage onPick={openCard} />
-          )}
+        <div
+          className={styles.stageFrame}
+          style={{ "--c": selected ? CATEGORY_COLOR[selected.category] : "#5ee1f2" } as React.CSSProperties}
+        >
+          <div key={selected?.id ?? "idle"} className={reducedMotion ? undefined : styles.stageSwap}>
+            {selected ? (
+              <SelectedStage card={selected} onJump={openCard} reducedMotion={reducedMotion} />
+            ) : (
+              <IdleStage onPick={openCard} />
+            )}
+          </div>
         </div>
       </div>
 
@@ -101,7 +126,12 @@ export function GameExperience() {
               key={card.id}
               type="button"
               className={isActive ? styles.thumbActive : styles.thumb}
-              style={{ "--c": CATEGORY_COLOR[card.category], animationDelay: `${Math.min(i, 24) * 18}ms` } as React.CSSProperties}
+              style={
+                {
+                  "--c": CATEGORY_COLOR[card.category],
+                  animationDelay: `${Math.min(i, 24) * 18}ms`,
+                } as React.CSSProperties
+              }
               onClick={() => openCard(card.id)}
             >
               <span className={[styles.thumbFlipper, isActive ? styles.thumbFlipped : ""].join(" ")}>
@@ -179,11 +209,20 @@ function SelectedStage({
           <div className={styles.solutions}>
             <span className={styles.solutionsLabel}>Targets</span>
             <div className={styles.solutionChips}>
-              {card.targets.map((t) => (
-                <span key={t} className={styles.targetChip}>
-                  {t}
-                </span>
-              ))}
+              {card.targets.map((t) => {
+                const info = DEVICE_INFO[t];
+                return (
+                  <span
+                    key={t}
+                    className={styles.targetChip}
+                    style={info ? ({ "--dot": info.color } as React.CSSProperties) : undefined}
+                  >
+                    {info ? <span className={styles.targetDot} /> : null}
+                    {t}
+                    {info ? <span className={styles.targetPoints}>{info.points}</span> : null}
+                  </span>
+                );
+              })}
             </div>
           </div>
         ) : null}

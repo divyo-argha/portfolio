@@ -8,6 +8,22 @@
   scroll-margin-top: calc(var(--header-height) + 1.5rem);
 }
 
+.stageFrame {
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #1c2b32);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.03), transparent);
+  box-shadow: 0 30px 60px -20px color-mix(in srgb, var(--c) 45%, transparent);
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+@media (min-width: 720px) {
+  .stageFrame {
+    padding: 2rem;
+  }
+}
+
 .stageSwap {
   animation: stageIn 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) both;
 }
@@ -24,22 +40,15 @@
 }
 
 .stagePanel {
-  --glow: color-mix(in srgb, var(--c) 45%, transparent);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 1.5rem;
-  border-radius: 22px;
-  border: 1px solid color-mix(in srgb, var(--c) 35%, #1c2b32);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.03), transparent);
-  box-shadow: 0 30px 60px -20px var(--glow);
 }
 
 @media (min-width: 720px) {
   .stagePanel {
     flex-direction: row;
     align-items: flex-start;
-    padding: 2rem;
   }
 }
 
@@ -50,7 +59,6 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  padding: 2rem 1.5rem;
 }
 
 .idleHint {
@@ -71,6 +79,9 @@
 .idleCard {
   display: block;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .idleCard img {
@@ -78,11 +89,10 @@
   aspect-ratio: 782 / 1110;
   object-fit: cover;
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4);
   transform: perspective(1200px) rotateY(28deg);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+} 
 
 .idleCard:hover img {
   transform: perspective(1200px) rotateY(0deg) scale(1.04);
@@ -250,6 +260,7 @@
 .targetChip {
   display: inline-flex;
   align-items: center;
+  gap: 0.4rem;
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
   border: 1px solid #2a4650;
@@ -257,6 +268,21 @@
   color: #b9d4dc;
   font-family: var(--font-cyq-display);
   font-size: 0.7rem;
+}
+
+.targetDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--dot);
+  flex-shrink: 0;
+}
+
+.targetPoints {
+  font-family: var(--font-cyq-display);
+  font-size: 0.65rem;
+  color: var(--dot, #5ee1f2);
+  opacity: 0.9;
 }
 
 /* ---- filter bar ---- */
@@ -328,19 +354,22 @@
 .thumbActive {
   position: relative;
   aspect-ratio: 782 / 1110;
-  margin: -3px;
+  margin: -7px;
   border-radius: 10px;
   cursor: pointer;
   perspective: 900px;
+  background: none;
+  border: none;
+  padding: 0;
   animation: rise 0.5s ease-out both;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .thumb:hover,
 .thumbActive:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 30px color-mix(in srgb, var(--c) 40%, transparent);
-  z-index: 1;
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--c) 40%, transparent);
+  z-index: 2;
 }
 
 .thumbActive {
