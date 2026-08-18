@@ -9,7 +9,7 @@ export const publicationDetails: Record<string, Block[]> = {
 
   // Content for this publication lives in `publicationTabs` below (Write-up /
   // Poster / Photos tabs) instead of a flat block list.
-  "arsenic-classification-efficientnet-b1": [],
+  arsenic: [],
 
   "ehrsql-primus-text-to-sql": [
     {
@@ -99,7 +99,7 @@ export const publicationDetails: Record<string, Block[]> = {
  * Keyed by slug; a publication with no entry here just renders `blocks`
  * from `publicationDetails` above as usual. */
 export const publicationTabs: Record<string, DetailTab[]> = {
-  "arsenic-classification-efficientnet-b1": [
+  arsenic: [
     {
       id: "write-up",
       label: "Write-up",
@@ -107,10 +107,9 @@ export const publicationTabs: Record<string, DetailTab[]> = {
         {
           kind: "prose",
           body: [
-            "Arsenic contamination is a serious public health problem in Bangladesh. One of its visible effects is the development of skin lesions and other changes in the skin.",
-            "In this project, we explored whether deep learning could help classify skin images as arsenic-affected or not affected.",
-            "I worked with the ArsenicSkinImageBD dataset and compared several pretrained deep learning models. EfficientNet-B1 gave the best results on our test set.",
-            "This was one of my earlier projects in applied machine learning. It gave me experience with medical image data, transfer learning, model comparison, and evaluation.",
+            "Arsenic contamination in groundwater is a major public health challenge in Bangladesh, often manifesting as visible skin keratosis, hyperpigmentation, and lesions.",
+            "Originated as a machine learning coursework project at Shahjalal University of Science and Technology (SUST), where we investigated whether deep convolutional transfer learning could reliably classify clinical skin photographs into arsenic-affected versus unaffected cases.",
+            "Using the ArsenicSkinImageBD dataset, we evaluated and compared five architectures. EfficientNet-B1 demonstrated the strongest performance, achieving 94.69% test accuracy and 0.98 AUC. The complete paper was subsequently accepted and published in IEEE ICCIT 2024.",
           ],
         },
         {
@@ -126,12 +125,12 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           compact: true,
           items: [
             {
-              src: "/media/publications/arsenic-classification-efficientnet-b1/affected-skin.png",
+              src: "/media/publications/arsenic/affected-skin.png",
               alt: "A palm showing arsenic-affected skin, with visible keratosis and dark spots",
               caption: "Arsenic-affected",
             },
             {
-              src: "/media/publications/arsenic-classification-efficientnet-b1/not-affected-skin.png",
+              src: "/media/publications/arsenic/not-affected-skin.png",
               alt: "A palm showing skin that is not affected by arsenic",
               caption: "Not affected",
             },
@@ -215,35 +214,40 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           body: ["EfficientNet-B1 gave the best performance among the models we tested."],
         },
         {
-          kind: "heroStat",
-          heading: "Results",
-          value: "94.69%",
-          label: "Test accuracy",
-        },
-        {
           kind: "statGrid",
-          columns: 4,
+          heading: "Results",
+          columns: 5,
           items: [
+            { value: "94.69%", label: "Test Accuracy", highlight: true },
             { value: "94.30%", label: "Precision" },
             { value: "95.45%", label: "Recall" },
-            { value: "94.80%", label: "F1 score" },
+            { value: "94.80%", label: "F1 Score" },
             { value: "0.98", label: "AUC" },
           ],
         },
         {
-          kind: "confusionMatrix",
-          heading: "Confusion matrix",
-          truePositive: 1507,
-          trueNegative: 1385,
-          falsePositive: 91,
-          falseNegative: 71,
-          positiveLabel: "affected",
-          negativeLabel: "not affected",
+          kind: "gallery",
+          heading: "Evaluation: Confusion Matrix & ROC Curves",
+          columns: 2,
+          items: [
+            {
+              src: "/media/publications/arsenic/confusion-matrix.png",
+              alt: "Confusion Matrix for EfficientNet-B1 showing 1507 True Positives, 1385 True Negatives, 91 False Positives, and 71 False Negatives",
+              caption: "Fig. 5: Confusion matrix on test set (1507 TP, 1385 TN, 91 FP, 71 FN).",
+              href: "/media/publications/arsenic/confusion-matrix.png",
+            },
+            {
+              src: "/media/publications/arsenic/roc-curve-comparison.png",
+              alt: "ROC Curve comparison across EfficientNet-B1, EfficientNet-B0, ResNet-50, MobileNetV2, and VGG-19",
+              caption: "Fig. 6: Multi-model ROC comparison (EfficientNet-B1 AUC = 0.98).",
+              href: "/media/publications/arsenic/roc-curve-comparison.png",
+            },
+          ],
         },
         {
           kind: "prose",
           body: [
-            "The model correctly classified most of the test images, but it still made both false positive and false negative predictions.",
+            "Empirical evaluation figures generated from the test set. The confusion matrix breaks down the 1,507 true positive and 1,385 true negative predictions against misclassifications, while the multi-model ROC curves highlight EfficientNet-B1's superior sensitivity (95.45% TPR at 6.17% FPR, AUC = 0.98) across operating thresholds.",
           ],
         },
         {
@@ -290,13 +294,13 @@ export const publicationTabs: Record<string, DetailTab[]> = {
         {
           kind: "prose",
           body: [
-            "This is the poster I prepared on the entire work. It gives a quick visual summary of the project, the data, the models we compared, and the results.",
+            `Academic poster designed to visually summarize the dataset, transfer learning pipeline, comparative metrics, and clinical evaluation process. This was presented during our coursework presentation at Shahjalal University of Science and Technology (SUST).`,
           ],
         },
         {
           kind: "figure",
           src: "/papers/iccit-poster.png",
-          alt: "Conference poster for 'A Deep Learning Approach to Automate Classification of Arsenic-Affected Skin using EfficientNet-B1', presented at ICCIT 2024",
+          alt: "Academic poster for 'A Deep Learning Approach to Automate Classification of Arsenic-Affected Skin using EfficientNet-B1', presented at SUST",
           caption: "Click the poster to open it at full size.",
           href: "/papers/iccit-poster.png",
         },
@@ -309,7 +313,7 @@ export const publicationTabs: Record<string, DetailTab[]> = {
         {
           kind: "prose",
           body: [
-            "These are placeholder photos for now. I'll swap them for real photos from the conference soon.",
+            "Photographs from our project presentation and academic sessions at Shahjalal University of Science and Technology (SUST), demonstrating the EfficientNet-B1 arsenic lesion classifier and evaluation findings.",
           ],
         },
         {
@@ -317,13 +321,13 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           items: [
             {
               src: "/media/people/portrait.jpg",
-              alt: "Placeholder photo, to be replaced with a photo from ICCIT 2024",
-              caption: "Placeholder — real conference photo coming soon",
+              alt: "Project presentation session at SUST",
+              caption: "Project presentation at SUST",
             },
             {
               src: "/media/people/portrait-alt.jpg",
-              alt: "Placeholder photo, to be replaced with a photo from ICCIT 2024",
-              caption: "Placeholder — real conference photo coming soon",
+              alt: "Department presentation and discussion at SUST",
+              caption: "Department presentation & discussion at SUST",
             },
           ],
         },

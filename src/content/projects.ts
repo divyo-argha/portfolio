@@ -4,9 +4,9 @@ export const projects: Project[] = [
   {
     slug: "git-user",
     name: "git-user",
-    tagline: "One command to rule all your Git identities.",
+    tagline: "Scoped Git configuration and encrypted SSH credential management for multi-identity workflows.",
     description:
-      "A cross-platform Go tool for switching between multiple Git identities and encrypted SSH keys. Handles gitconfig overrides, passphrase-protected SSH keys, commit signing, and ships a pre-commit verification hook so you never push as the wrong person again. Published on npm as git-userhub.",
+      "A cross-platform CLI tool built in Go for managing isolated Git identities, passphrase-encrypted SSH keys, and commit signing across academic, work, and personal repositories. Includes a pre-commit verification hook to prevent identity leakage before pushing. Published on npm as git-userhub.",
     stack: ["Go 1.25+", "JavaScript", "npm"],
     featured: true,
     installCommand: "npm install -g git-userhub",
@@ -25,9 +25,9 @@ export const projects: Project[] = [
   {
     slug: "autoscriber",
     name: "AutoScriber",
-    tagline: "AI-powered Bangla audio transcription for qualitative researchers.",
+    tagline: "Automated transcription and speaker diarization for Bengali qualitative HCI research.",
     description:
-      "A transcription pipeline built for qualitative HCI researchers working with Bengali interviews. Handles audio preprocessing, silence trimming, speaker diarization, and word-level sync, exporting to six formats through both local open-source models and cloud APIs. Two live deployments: a landing page and a full transcription studio.",
+      "A specialized transcription pipeline built for qualitative HCI researchers working with Bengali interviews. Handles audio preprocessing, silence trimming, speaker diarization, and word-level sync, exporting to six formats through both local open-source models and cloud APIs. Two live deployments: a landing page and a full transcription studio.",
     stack: ["Next.js 16", "TypeScript", "Prisma", "Gemini 2.5 Flash", "Bun"],
     links: [
       { label: "GitHub", href: "https://github.com/divyo-argha/AutoScriber" },
@@ -47,9 +47,9 @@ export const projects: Project[] = [
   {
     slug: "claude-user",
     name: "claude-user",
-    tagline: "One command to switch Claude Code accounts.",
+    tagline: "Session isolation and terminal switching CLI for multiple AI agent accounts.",
     description:
-      "A Rust CLI and interactive TUI for running and switching between multiple isolated Claude Code / agent accounts in different terminals, without repeated logins and logouts.",
+      "A Rust CLI and interactive TUI for running and switching between multiple isolated Claude Code and developer accounts across terminals without credential collision.",
     stack: ["Rust", "TUI"],
     links: [{ label: "GitHub", href: "https://github.com/divyo-argha/claude-user" }],
   },

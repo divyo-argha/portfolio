@@ -10,11 +10,21 @@ export const publications: Publication[] = [
     title:
       "CyQured: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education",
     authors: [
-      { name: "Utsho Das", equalContribution: true },
-      { name: "Argha Pratim Saha", you: true, equalContribution: true },
-      { name: "Md Sadek Ferdous" },
+      {
+        name: "Utsho Das",
+        equalContribution: true,
+        avatar: "/media/people/utsho.jpeg",
+        url: "https://scholar.google.com/citations?user=_xyCDVQAAAAJ&hl=en",
+      },
+      {
+        name: "Argha Pratim Saha",
+        you: true,
+        equalContribution: true,
+        avatar: "/media/people/portrait-alt.jpg",
+      },
       { name: "Md Masum" },
       { name: "Farida Chowdhury" },
+      { name: "Md Sadek Ferdous" },
     ],
     summary:
       "Originated from our undergraduate thesis at SUST, where we substantially extended the game design, calibration study, and mixed-methods empirical evaluation with 50 participants to evaluate STRIDE-based smart-home threat learning — now accepted at USENIX SOUPS 2026.",
@@ -30,23 +40,41 @@ export const publications: Publication[] = [
       "N=50",
       "Mixed-effects models",
     ],
-    links: [
-      { label: "USENIX SOUPS 2026", href: "https://www.usenix.org/conference/soups2026" },
-    ],
+    links: [],
     bentoSpan: "feature",
     venueMark: { src: "/media/venues/soups.png", alt: "SOUPS 2026 logo", width: 30, height: 32 },
+    affiliation: "Shahjalal University of Science and Technology (SUST)",
+    affiliationInfo: {
+      department: "Department of Computer Science and Engineering",
+      institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
+      location: "Sylhet, Bangladesh",
+      logo: "/media/institutions/sust.png",
+    },
   },
   {
-    slug: "arsenic-classification-efficientnet-b1",
+    slug: "arsenic",
     venue: "27th International Conference on Computer and Information Technology",
     venueShort: "ICCIT 2024",
     year: 2024,
     status: "published",
     title: "A Deep Learning Approach to Automate Classification of Arsenic-Affected Skin using EfficientNet-B1",
     authors: [
-      { name: "Argha Pratim Saha", you: true },
-      { name: "Utsho Das" },
-      { name: "Shahidur Rahman" },
+      {
+        name: "Argha Pratim Saha",
+        you: true,
+        avatar: "/media/people/portrait-alt.jpg",
+      },
+      {
+        name: "Utsho Das",
+        avatar: "/media/people/utsho.jpeg",
+        url: "https://scholar.google.com/citations?user=_xyCDVQAAAAJ&hl=en",
+      },
+      {
+        name: "M. Shahidur Rahman",
+        role: "Supervisor",
+        avatar: "/media/people/shahid-sir.jpg",
+        url: "https://www.sust.edu/departments/cse/faculty/rahmanms@sust.edu",
+      },
     ],
     summary:
       "An EfficientNet-B1 classifier for automating detection of arsenic-affected skin lesions from clinical photographs.",
@@ -63,6 +91,13 @@ export const publications: Publication[] = [
     bentoSpan: "normal",
     venueMark: { src: "/media/venues/iccit.jpeg", alt: "ICCIT 2024 logo", width: 88, height: 32 },
     heroMark: true,
+    affiliation: "Shahjalal University of Science and Technology (SUST)",
+    affiliationInfo: {
+      department: "Department of Computer Science and Engineering",
+      institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
+      location: "Sylhet, Bangladesh",
+      logo: "/media/institutions/sust.png",
+    },
   },
   {
     slug: "ehrsql-primus-text-to-sql",
@@ -74,9 +109,17 @@ export const publications: Publication[] = [
     authors: [
       { name: "Sourav Bhowmik Joy" },
       { name: "Rohan Ahmed" },
-      { name: "Argha Pratim Saha", you: true },
+      {
+        name: "Argha Pratim Saha",
+        you: true,
+        avatar: "/media/people/portrait-alt.jpg",
+      },
       { name: "Partha Sarothi Bhowmik" },
-      { name: "Utsho Das" },
+      {
+        name: "Utsho Das",
+        avatar: "/media/people/utsho.jpeg",
+        url: "https://scholar.google.com/citations?user=_xyCDVQAAAAJ&hl=en",
+      },
       { name: "Minhaj Ahmed" },
     ],
     summary:
@@ -94,5 +137,12 @@ export const publications: Publication[] = [
     bentoSpan: "normal",
     venueMark: { src: "/media/venues/naacl.webp", alt: "NAACL 2024 logo", width: 32, height: 32 },
     heroMark: true,
+    affiliation: "Shahjalal University of Science and Technology (SUST)",
+    affiliationInfo: {
+      department: "Department of Computer Science and Engineering",
+      institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
+      location: "Sylhet, Bangladesh",
+      logo: "/media/institutions/sust.png",
+    },
   },
 ];

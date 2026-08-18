@@ -6,6 +6,7 @@ import { BackLink } from "./BackLink";
 import { MetaRail } from "./MetaRail";
 import { BlockRenderer } from "./BlockRenderer";
 import { Tabs } from "./Tabs";
+import { AuthorAffiliation } from "./AuthorAffiliation";
 import styles from "./DetailLayout.module.css";
 
 export function DetailLayout({ detail }: { detail: DetailMeta }) {
@@ -25,6 +26,13 @@ export function DetailLayout({ detail }: { detail: DetailMeta }) {
               <p className={styles.eyebrow}>{detail.eyebrow}</p>
             </div>
             <h1 className={styles.title}>{detail.title}</h1>
+
+            {detail.kind === "publication" ? (
+              <AuthorAffiliation
+                authors={detail.authors}
+                affiliation={detail.affiliationInfo}
+              />
+            ) : null}
           </div>
 
           {showHeroMark && detail.venueMark ? (

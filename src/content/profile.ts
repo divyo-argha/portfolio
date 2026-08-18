@@ -2,9 +2,9 @@ import type { Link } from "./types";
 
 export const profile = {
   name: "Argha Pratim Saha",
-  positioning: "PhD applicant · Usable security & privacy",
+  positioning: "Prospective PhD Student · Usable Security & Privacy",
   researchStatement:
-    "Usable security and privacy; security education and mental models; qualitative and mixed-methods HCI. I study the gap between how security and privacy mechanisms are designed to work and how people actually understand and use them.",
+    "I study the intersection of usable security and privacy, mental models, and empirical HCI — investigating how people perceive security risks and designing usable interventions that support informed decision-making.",
   location: "Dhaka, Bangladesh",
   email: "arghastm@gmail.com",
   phone: "+880 1521 200978",

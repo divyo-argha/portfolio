@@ -1,0 +1,185 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  border: var(--border-hairline);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.container:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.header {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+
+.chartWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  max-height: 310px;
+  overflow: visible;
+}
+
+.plotBg {
+  fill: var(--surface);
+}
+
+.plotFrame {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.2;
+}
+
+.gridLine {
+  stroke: var(--line);
+  stroke-width: 0.8;
+  stroke-dasharray: 2 2;
+  stroke-opacity: 0.7;
+}
+
+.tickMark {
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.axisTickText {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  fill: var(--muted);
+}
+
+.axisLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  fill: var(--muted);
+}
+
+.diagonalLine {
+  stroke: var(--muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+  opacity: 0.6;
+}
+
+.modelCurve {
+  fill: none;
+  transition: stroke-width var(--duration-fast) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
+}
+
+.highlightCurve {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.6;
+  filter: drop-shadow(0 2px 5px rgba(200, 122, 84, 0.35));
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.operatingPointOuter {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.operatingPointInner {
+  fill: var(--accent);
+}
+
+.calloutBg {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.95;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+}
+
+.calloutText {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+/* Multi-Model Legend (Compact 40% reduced font sizes) */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2) var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--line);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  background: var(--raised);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.legendItem:hover,
+.legendActive {
+  background: var(--surface);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.legendHighlight {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.legendDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendDotChance {
+  width: 10px;
+  height: 2px;
+  background: var(--muted);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.legendName {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.legendAuc {
+  color: var(--muted);
+  font-size: 0.625rem;
+}
+
+.legendHighlight .legendName,
+.legendHighlight .legendAuc {
+  color: var(--accent);
+  font-weight: 600;
+}

@@ -9,6 +9,7 @@ import { BarChart } from "./BarChart";
 import { ConfusionMatrix } from "./ConfusionMatrix";
 import { Pipeline } from "./Pipeline";
 import { Carousel } from "./Carousel";
+import { RocCurve } from "./RocCurve";
 import styles from "./BlockRenderer.module.css";
 
 export function BlockRenderer({ blocks }: { blocks: Block[] }) {
@@ -55,6 +56,8 @@ function renderBlock(block: Block) {
       return <Pipeline steps={block.steps} />;
     case "carousel":
       return <Carousel items={block.items} />;
+    case "rocCurve":
+      return <RocCurve models={block.models} heading={block.heading} auc={block.auc} modelName={block.modelName} />;
     case "findings":
       return (
         <dl className={styles.findings}>

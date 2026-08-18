@@ -1,74 +1,166 @@
-.chart {
+.chartWrapper {
+  padding: var(--space-5) var(--space-4) var(--space-2);
+  border: var(--border-hairline);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+  transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.chartWrapper:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.chartArea {
+  position: relative;
+  height: 220px;
+  min-width: 320px;
+}
+
+/* Background Grid Lines */
+.gridLines {
+  position: absolute;
+  inset: 0;
+  bottom: 34px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-5);
-  border: var(--border-hairline);
-  border-radius: var(--radius-md);
-  background: var(--surface);
-  transition: box-shadow var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
+  justify-content: space-between;
+  pointer-events: none;
 }
 
-.chart:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
-}
-
-.row {
-  display: grid;
-  grid-template-columns: 6.5rem 1fr 3.5rem;
+.gridLineRow {
+  display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
-.label {
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  color: var(--ink);
-}
-
-.track {
-  height: 0.6rem;
-  border-radius: 999px;
-  background: var(--raised);
-  border: var(--border-hairline);
-  overflow: hidden;
-}
-
-.fill,
-.fillHighlight {
-  height: 100%;
-  border-radius: 999px;
-}
-
-.fill {
-  background: var(--line);
-}
-
-.fillHighlight {
-  background: var(--accent);
-}
-
-.value,
-.valueHighlight {
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  text-align: right;
-}
-
-.value {
+.yLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
   color: var(--muted);
+  width: 2.2rem;
+  text-align: right;
+  flex-shrink: 0;
 }
 
-.valueHighlight {
-  color: var(--accent);
+.line {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  opacity: 0.7;
+}
+
+/* Bars Container */
+.barsContainer {
+  position: absolute;
+  inset: 0;
+  left: 2.8rem;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: var(--space-2);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+  min-width: 48px;
+  max-width: 84px;
+}
+
+.barTrack {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 34px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bar,
+.barHighlight {
+  width: 36px;
+  max-width: 80%;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  transition: transform var(--duration-fast) var(--ease-out), filter var(--duration-fast) var(--ease-out);
+}
+
+.bar {
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-bottom: none;
+}
+
+.barHighlight {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-bottom: none;
+  box-shadow: 0 2px 10px rgba(200, 122, 84, 0.3);
+}
+
+.column:hover .bar,
+.column:hover .barHighlight {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+/* 40% smaller value badge */
+.valBadge {
+  position: absolute;
+  top: -22px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
   font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: var(--surface);
+  border: 1px solid var(--line);
 }
 
-@media (min-width: 560px) {
-  .row {
-    grid-template-columns: 9rem 1fr 4rem;
-  }
+.colHighlight .valBadge {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* X-Axis Model Label */
+.xLabelWrapper {
+  height: 34px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--line);
+  padding-top: 2px;
+}
+
+.xLabel {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.colHighlight .xLabel {
+  color: var(--ink);
+  font-weight: 700;
 }

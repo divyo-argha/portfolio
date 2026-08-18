@@ -14,6 +14,22 @@ export type VenueMark = {
   height: number;
 };
 
+export type Author = {
+  name: string;
+  you?: boolean;
+  equalContribution?: boolean;
+  avatar?: string;
+  url?: string;
+  role?: string;
+};
+
+export type AffiliationInfo = {
+  department: string;
+  institution: string;
+  location?: string;
+  logo: string;
+};
+
 export type Publication = {
   slug: string;
   venue: string;
@@ -21,7 +37,7 @@ export type Publication = {
   year: number;
   status: PublicationStatus;
   title: string;
-  authors: { name: string; you?: boolean; equalContribution?: boolean }[];
+  authors: Author[];
   summary: string;
   tags: string[];
   links?: Link[];
@@ -32,6 +48,8 @@ export type Publication = {
   venueMark: VenueMark;
   /** Show the venue mark huge on the detail page's hero, right-aligned. */
   heroMark?: boolean;
+  affiliation?: string;
+  affiliationInfo?: AffiliationInfo;
 };
 
 export type Position = {
@@ -64,12 +82,12 @@ export type Project = {
 type BlockVariant =
   | { kind: "prose"; body: string[] }
   | { kind: "figure"; src: string; alt: string; caption?: string; href?: string }
-  | { kind: "gallery"; items: { src: string; alt: string; caption?: string }[]; columns?: 2 | 3; compact?: boolean }
+  | { kind: "gallery"; items: { src: string; alt: string; caption?: string; href?: string }[]; columns?: 2 | 3; compact?: boolean }
   | { kind: "findings"; items: { label: string; value: string }[] }
   | { kind: "quote"; text: string; attribution?: string }
   | { kind: "code"; language: string; body: string }
   | { kind: "cardGrid"; items: { title: string; body: string }[]; columns?: 2 | 3 | 4 }
-  | { kind: "statGrid"; items: { value: string; label: string }[]; columns?: 2 | 3 | 4 }
+  | { kind: "statGrid"; items: { value: string; label: string; highlight?: boolean }[]; columns?: 2 | 3 | 4 | 5 }
   | { kind: "heroStat"; value: string; label: string }
   | { kind: "barChart"; unit?: string; items: { label: string; value: number; highlight?: boolean }[] }
   | {
@@ -82,7 +100,13 @@ type BlockVariant =
       negativeLabel: string;
     }
   | { kind: "pipeline"; steps: { label: string; highlight?: boolean }[] }
-  | { kind: "carousel"; items: { src: string; alt: string; caption?: string }[] };
+  | { kind: "carousel"; items: { src: string; alt: string; caption?: string }[] }
+  | {
+      kind: "rocCurve";
+      auc?: number;
+      modelName?: string;
+      models?: { name: string; auc: number; color?: string; points: [number, number][]; highlight?: boolean }[];
+    };
 
 export type Block = BlockVariant & { heading?: string };
 
@@ -104,4 +128,6 @@ export type DetailMeta = {
   heroMark?: boolean;
   scholarUrl?: string;
   publicationStatus?: PublicationStatus;
+  authors?: Author[];
+  affiliationInfo?: AffiliationInfo;
 };

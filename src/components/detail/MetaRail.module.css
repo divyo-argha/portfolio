@@ -29,6 +29,20 @@
   line-height: 1.5;
 }
 
+.affiliationRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.instLogo {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .authorList {
   display: inline;
 }

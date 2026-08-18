@@ -1,7 +1,7 @@
 import { Figure } from "./Figure";
 import styles from "./Gallery.module.css";
 
-type GalleryItem = { src: string; alt: string; caption?: string };
+type GalleryItem = { src: string; alt: string; caption?: string; href?: string };
 
 export function Gallery({
   items,

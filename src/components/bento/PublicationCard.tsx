@@ -13,7 +13,7 @@ export function PublicationCard({
   publication: Publication;
   variant?: "banner" | "compact";
 }) {
-  const isBanner = variant === "banner" || publication.slug === "arsenic-classification-efficientnet-b1";
+  const isBanner = variant === "banner" || publication.slug === "arsenic";
 
   return (
     <article

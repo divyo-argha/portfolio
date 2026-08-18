@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { publications } from "@/content/publications";
 import { publicationDetails, publicationTabs } from "@/content/publicationDetails";
 import { projects } from "@/content/projects";
@@ -48,6 +49,19 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
     </span>
   );
 
+  const affiliationValue: ReactNode = publication.affiliation ? (
+    <span className={styles.affiliationRow}>
+      <Image
+        src="/media/institutions/sust.png"
+        alt="SUST logo"
+        width={18}
+        height={18}
+        className={styles.instLogo}
+      />
+      <span>{publication.affiliation}</span>
+    </span>
+  ) : null;
+
   return {
     slug: publication.slug,
     kind: "publication",
@@ -56,7 +70,12 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
     meta: [
       { label: "Venue", value: publication.venue },
       { label: "Year", value: yearValue },
-      { label: "Authors", value: authorsValue },
+      ...(!publication.affiliationInfo
+        ? [
+            { label: "Authors", value: authorsValue },
+            ...(affiliationValue ? [{ label: "Affiliation", value: affiliationValue }] : []),
+          ]
+        : []),
     ],
     links: publication.links ?? [],
     blocks: publicationDetails[slug] ?? [],
@@ -65,6 +84,8 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
     heroMark: publication.heroMark,
     scholarUrl: publication.scholarUrl,
     publicationStatus: publication.status,
+    authors: publication.authors,
+    affiliationInfo: publication.affiliationInfo,
   };
 }
 

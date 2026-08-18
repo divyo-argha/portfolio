@@ -1,5 +1,6 @@
 .prose {
-  max-width: var(--measure);
+  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -7,7 +8,7 @@
 
 .prose p {
   font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  line-height: 1.65;
+  font-size: var(--text-base);
+  line-height: 1.7;
   color: var(--ink);
 }

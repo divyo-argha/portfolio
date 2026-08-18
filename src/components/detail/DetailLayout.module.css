@@ -3,11 +3,12 @@
 }
 
 .header {
-  margin-block: var(--space-5) var(--space-7);
+  margin-block: var(--space-4) var(--space-5);
 }
 
 .headerText {
-  max-width: 52ch;
+  width: 100%;
+  max-width: 100%;
 }
 
 .eyebrowRow {
