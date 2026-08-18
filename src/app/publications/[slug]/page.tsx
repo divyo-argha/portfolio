@@ -6,7 +6,11 @@ import { publications } from "@/content/publications";
 import { scholarlyArticleJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
-  return publicationSlugs.map((slug) => ({ slug }));
+  // "cyqured" has its own literal route at app/publications/cyqured/page.tsx
+  // (a bespoke page, not this shared template) — excluded here so the static
+  // export doesn't try to generate the same path twice. It stays in
+  // publicationSlugs itself since sitemap.ts still needs to list it.
+  return publicationSlugs.filter((slug) => slug !== "cyqured").map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

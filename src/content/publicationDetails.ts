@@ -2,9 +2,9 @@ import type { Block, DetailTab } from "./types";
 
 /** Extra body content for each publication's detail page, keyed by slug. */
 export const publicationDetails: Record<string, Block[]> = {
-  // Titled shell only — Argha will add board/gameplay photography and card
-  // galleries here later. Adding them is a pure data edit: append `gallery`
-  // blocks below, drop images in public/media/publications/cyqured/.
+  // cyqured has its own bespoke static route at src/app/publications/cyqured/
+  // (a dedicated brand microsite, not the shared tab/block template) — its
+  // content lives in src/app/publications/cyqured/content.ts instead of here.
   cyqured: [],
 
   // Content for this publication lives in `publicationTabs` below (Write-up /

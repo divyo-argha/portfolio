@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { Container } from "@/components/primitives/Container";
 import { VenueMark } from "@/components/primitives/VenueMark";
@@ -9,7 +10,7 @@ import { Tabs } from "./Tabs";
 import { AuthorAffiliation } from "./AuthorAffiliation";
 import styles from "./DetailLayout.module.css";
 
-export function DetailLayout({ detail }: { detail: DetailMeta }) {
+export function DetailLayout({ detail, customBody }: { detail: DetailMeta; customBody?: ReactNode }) {
   const backHref = detail.kind === "publication" ? "/#publications" : "/#engineering";
   const backLabel = detail.kind === "publication" ? "Back to publications" : "Back to engineering";
   const showHeroMark = detail.heroMark && detail.venueMark;
@@ -51,7 +52,9 @@ export function DetailLayout({ detail }: { detail: DetailMeta }) {
 
         <div className={styles.grid}>
           <div className={styles.body}>
-            {detail.tabs && detail.tabs.length > 0 ? (
+            {customBody ? (
+              customBody
+            ) : detail.tabs && detail.tabs.length > 0 ? (
               <Tabs
                 panels={detail.tabs.map((tab) => ({
                   id: tab.id,

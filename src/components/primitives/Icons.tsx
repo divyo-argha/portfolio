@@ -129,3 +129,80 @@ export function IconChevronDown({ size = 16, className }: IconProps) {
   );
 }
 
+/** CyQured card-catalogue category marks — deliberately plain line icons,
+ * not emoji, echoing the game's own shield/die/document badge iconography. */
+
+export function IconAttack({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M12 3.5 4.5 6.5v5.2c0 4.5 3.1 7.4 7.5 9 4.4-1.6 7.5-4.5 7.5-9V6.5L12 3.5Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M12 8.2v4.6M12 15.4v.02" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function IconDefense({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M12 3.5 4.5 6.5v5.2c0 4.5 3.1 7.4 7.5 9 4.4-1.6 7.5-4.5 7.5-9V6.5L12 3.5Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M9 12.2l2.1 2.1L15.3 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function IconChance({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="8.3" cy="8.3" r="1.15" fill="currentColor" />
+      <circle cx="15.7" cy="8.3" r="1.15" fill="currentColor" />
+      <circle cx="12" cy="12" r="1.15" fill="currentColor" />
+      <circle cx="8.3" cy="15.7" r="1.15" fill="currentColor" />
+      <circle cx="15.7" cy="15.7" r="1.15" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function IconScenario({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path d="M6 3.5h9l3.5 3.5V20.5h-12.5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M15 3.5V7h3.5" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M8.5 12h6.5M8.5 15h6.5M8.5 18h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function IconBoard({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="2" stroke="currentColor" strokeWidth="1.6" />
+      <path
+        d="M3.5 8.8h17M3.5 15.2h17M8.8 3.5v17M15.2 3.5v17"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        opacity="0.55"
+      />
+    </svg>
+  );
+}
+
+export function IconAsset({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path d="M12 3.5 19.5 8v8L12 20.5 4.5 16V8L12 3.5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M4.5 8 12 12.3 19.5 8M12 12.3v8.2" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+    </svg>
+  );
+}
+

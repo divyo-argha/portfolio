@@ -2,10 +2,22 @@ import styles from "./BarChart.module.css";
 
 type BarItem = { label: string; value: number; highlight?: boolean };
 
+/** Round a max value up to a "nice" chart ceiling, scaled to its own magnitude
+ * (e.g. a 1-5 Likert max rounds to the nearest 1, a 0-100 SUS max to the
+ * nearest 25) rather than always assuming a 0-100 percentage scale. */
+function niceCeiling(value: number): number {
+  if (value <= 5) return Math.ceil(value);
+  if (value <= 10) return Math.ceil(value / 2) * 2;
+  if (value <= 50) return Math.ceil(value / 10) * 10;
+  return Math.ceil(value / 25) * 25;
+}
+
 export function BarChart({ items, unit = "%" }: { items: BarItem[]; unit?: string }) {
   const maxVal = Math.max(...items.map((i) => i.value));
-  const chartMax = Math.ceil(maxVal / 10) * 10;
-  const yTicks = [100, 75, 50, 25, 0];
+  const chartMax = niceCeiling(maxVal);
+  const yTicks = [chartMax, chartMax * 0.75, chartMax * 0.5, chartMax * 0.25, 0].map((tick) =>
+    Number(tick.toFixed(2)),
+  );
 
   return (
     <div className={styles.chartWrapper}>

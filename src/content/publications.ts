@@ -54,7 +54,7 @@ export const publications: Publication[] = [
       "N=50",
       "Mixed-effects models",
     ],
-    links: [],
+    links: [{ label: "Read the paper", href: "/papers/cyqured.pdf" }],
     bentoSpan: "feature",
     venueMark: { src: "/media/venues/soups.png", alt: "SOUPS 2026 logo", width: 30, height: 32 },
     heroMark: true,
