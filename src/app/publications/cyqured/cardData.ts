@@ -14,6 +14,7 @@ export type CardFace = {
   category: CardCategory;
   title: string;
   strideType?: string; // attack cards only
+  targets?: string[]; // attack cards only: devices it can be played against
   body: string;
   pairIds?: string[]; // action cards only: ids of cards it references as countering/countered-by
   src: string; // e.g. "/media/publications/cyqured/cards/action/action-02.png"
@@ -28,6 +29,7 @@ export const cardFaces: CardFace[] = [
     category: "attack",
     title: "Phishing",
     strideType: "Spoofing",
+    targets: ["Smartphone", "Tablet", "Laptop", "Desktop"],
     body: `An attacker sends deceptive emails or messages to trick the victim into revealing sensitive information, such as login credentials or financial details.
 
 Target the defender's **Smartphone**, **Tablet**, **Laptop**, or **Desktop**. This can be defended using **Multi Factor Authentication** and **Email Filtering** & **Anti-Phishing** defense cards.`,
@@ -40,6 +42,7 @@ Target the defender's **Smartphone**, **Tablet**, **Laptop**, or **Desktop**. Th
     category: "attack",
     title: "Caller ID Spoofing",
     strideType: "Spoofing",
+    targets: ["Smartphone"],
     body: `Your opponent received a call from a seemingly trusted source, but it was an attacker using a spoofed caller ID. Believing it to be legitimate, they shared sensitive information, compromising their security and got scammed.
 
 This attack can be played on **Smartphones** and can be mitigated by using **Call Authentication Protocol**.`,
@@ -52,6 +55,7 @@ This attack can be played on **Smartphones** and can be mitigated by using **Cal
     category: "attack",
     title: "Trojan Horse",
     strideType: "Tampering, Elevation of Privilege",
+    targets: ["Laptop", "Desktop", "Smartphone", "Tablet", "Home Server"],
     body: `Your opponent has downloaded a seemingly harmless program that secretly carries malicious code. Once executed, the Trojan grants the attacker unauthorized access or control over the system.
 
 This attack can be played on **laptops**, **desktops**, **smartphones**, **tablets**, and **home servers** when the victim downloads or installs unverified software and can be defended using the **Anti-virus** & **Anti-malware**.`,
@@ -64,6 +68,7 @@ This attack can be played on **laptops**, **desktops**, **smartphones**, **table
     category: "attack",
     title: "Shoulder Surfing",
     strideType: "Information Disclosure",
+    targets: ["Laptop", "Desktop", "Smartphone", "Tablet", "Smart Door-lock"],
     body: `An attacker spies on your opponent while they enter sensitive information, such as passwords or PINs, by looking over their shoulder or recording their keystrokes. This attack is especially effective in public or unsecured environments.
 
 This attack can be played on **Laptops**, **Desktops**, **Smartphones**, **Tablets**, **Smart Doorlocks** when the victim enters credentials or sensitive data in an exposed setting. It can be defended using **Multi-Factor Authentication** and **Strong Password Policy & Manager** cards.`,
@@ -76,6 +81,7 @@ This attack can be played on **Laptops**, **Desktops**, **Smartphones**, **Table
     category: "attack",
     title: "Ransomware",
     strideType: "Denial of Service",
+    targets: ["Laptop", "Desktop", "Smartphone", "Tablet", "Home Server"],
     body: `Your opponent's system has been infected with ransomware, a type of malware that encrypts files and locks them until a ransom is paid. The victim is unable to access critical data, disrupting operations and causing potential data loss.
 
 This attack can be played on **laptops**, **desktops**, **smartphones**, **tablets**, and **home servers**. This can be defended using the **Data Backup & Recovery** and **Anti-Virus** & **Anti-Malware**.`,
@@ -88,6 +94,7 @@ This attack can be played on **laptops**, **desktops**, **smartphones**, **table
     category: "attack",
     title: "Zero-Day Exploit",
     strideType: "Elevation of Privilege",
+    targets: ["All devices"],
     body: `An attacker exploits an unknown vulnerability in your opponent's system before a patch or fix is available. This allows the attacker to gain unauthorized access, execute malicious code, or disrupt system operations without detection.
 
 This attack can be played on **all devices** and can be defended using **Secure Firmware & Software Updates** and **Intrusion Detection & Prevention Systems (IPS/IDS)**.`,
@@ -100,6 +107,7 @@ This attack can be played on **all devices** and can be defended using **Secure 
     category: "attack",
     title: "Firmware Attack",
     strideType: "Tampering, Elevation of Privilege",
+    targets: ["All devices"],
     body: `An attacker injects malicious code into the firmware of a device to compromise its core functionality. Since firmware operates at a low level, this attack can persist even after reboots and reinstalls and gives the attacker long-term control over the device.
 
 This attack can be played on **all devices** when the device runs outdated or vulnerable firmware. This can be defended using the **Secure Firmware & Software Updates** and **Intrusion Detection & Prevention (IDS/IPS)** cards.`,
@@ -112,6 +120,7 @@ This attack can be played on **all devices** when the device runs outdated or vu
     category: "attack",
     title: "Activity Log Manipulation",
     strideType: "Repudiation",
+    targets: ["Laptop", "Desktop", "Home Server", "Smart Door-lock", "IP Camera"],
     body: `An attacker accesses sensitive files and then deletes activity logs to hide the unauthorized access and makes it difficult to prove the incident occurred and track down who has done this.
 
 This attack can be played on any device or system that maintains activity logs, such as **Laptops**, **Desktops**, **Home Servers**, **Smart Doorlocks**, and **IP Cameras**. It can be mitigated using **Immutable Logging** defense cards.`,
@@ -124,6 +133,7 @@ This attack can be played on any device or system that maintains activity logs, 
     category: "attack",
     title: "Session Hijacking",
     strideType: "Tampering, Spoofing",
+    targets: ["Laptop", "Desktop", "Smartphone", "Tablet"],
     body: `An attacker intercepts or steals an active session token from your opponent which allows them to take control of the victim's authenticated session without needing login credentials. This can lead to unauthorized access to sensitive accounts and data.
 
 This attack can be played on **laptops**, **desktops**, **smartphones**, and **tablets**. It can be defended using **Secure Session Management & Browser Security**.`,
@@ -136,6 +146,7 @@ This attack can be played on **laptops**, **desktops**, **smartphones**, and **t
     category: "attack",
     title: "Password Cracking",
     strideType: "Elevation of Privilege",
+    targets: ["All devices"],
     body: `An attacker repeatedly tries different password combinations to break into an account or system. Weak or commonly used passwords make this attack more effective and easier.
 
 This attack can be played on **all devices** that are secured with passwords. It can be defended using **Strong Password Policy & Manager**, **Account Lockout & Rate Limiting**, and **Multi-Factor Authentication**.`,
@@ -148,6 +159,7 @@ This attack can be played on **all devices** that are secured with passwords. It
     category: "attack",
     title: "Credential Stuffing",
     strideType: "Spoofing",
+    targets: ["All devices"],
     body: `An attacker uses previously leaked or stolen username-password pairs to gain unauthorized access to your opponent's accounts. Since many users reuse passwords across multiple sites, this automated attack can compromise multiple accounts.
 
 This attack can be played on **all devices** when the victim uses weak or reused credentials. It can be defended using **Multi-Factor Authentication** and **Strong Password Policy & Manager** cards.`,
@@ -160,6 +172,7 @@ This attack can be played on **all devices** when the victim uses weak or reused
     category: "attack",
     title: "Wireless Sniffing",
     strideType: "Information Disclosure",
+    targets: ["All devices"],
     body: `An attacker intercepts unencrypted wireless communications to capture sensitive data, such as login credentials, financial details, or private messages. This allows them to eavesdrop on network traffic and steal valuable information.
 
 This attack can be played on **all devices** when they transmit unencrypted data over Wi-Fi or Bluetooth. This can be defended using the **Bluetooth & Wireless Security (WPA3)** and **VPN & Network Encryption** cards.`,
@@ -175,6 +188,7 @@ This attack can be played on **all devices** when they transmit unencrypted data
     category: "attack",
     title: "DDoS Attack with Botnet",
     strideType: "Denial of Service",
+    targets: ["All devices"],
     body: `An attacker has compromised multiple devices, forming a botnet to launch a Distributed Denial-of-Service (DDoS) attack. The attacker floods the target system with overwhelming traffic, making it slow or completely unavailable.
 
 This attack can be played on **all devices** when they are exposed to high-volume malicious traffic. This can be defended using **Intrusion Detection & Prevention (IDS/IPS)** and **Firewall & Network Segmentation** cards.`,
@@ -187,6 +201,7 @@ This attack can be played on **all devices** when they are exposed to high-volum
     category: "attack",
     title: "Router Hijacking",
     strideType: "Tampering",
+    targets: ["Wireless Router"],
     body: `An attacker gains control of your opponent's router by exploiting weak credentials, outdated firmware, or misconfigurations. Once hijacked, the attacker can redirect traffic, intercept sensitive data, or deploy further attacks on connected devices.
 
 This attack can be played on **routers** when they are exposed to unauthorized access. This can be defended using **Strong Password Policy & Manager**, **Use Secure DNS & Disable Rogue DNS Changes**, and **Firewall & Network Segmentation**.`,
@@ -199,6 +214,7 @@ This attack can be played on **routers** when they are exposed to unauthorized a
     category: "attack",
     title: "ARP Spoofing",
     strideType: "Tampering, Information Disclosure",
+    targets: ["All devices"],
     body: `An attacker links their MAC address with the IP address of a target device and sends forged ARP messages on the local network. This man-in-the-middle attack allows the attacker to intercept, monitor, or alter communications between devices.
 
 This attack can be played on **all devices** that rely on ARP for network communication. It can be defended using **VPN & Network Encryption** and **Firewall & Network Segmentation** cards.`,
@@ -211,6 +227,7 @@ This attack can be played on **all devices** that rely on ARP for network commun
     category: "attack",
     title: "Network Jammer",
     strideType: "Denial of Service",
+    targets: ["All devices"],
     body: `An attacker disrupts wireless communications by overwhelming the network with interference, making it difficult or impossible for devices to connect. This prevents legitimate users from accessing Wi-Fi, Bluetooth, or other wireless networks.
 
 This attack can be played on **all the devices when they rely on wireless connectivity**. This can be defended using **Wired Connections for Critical Devices.**`,

@@ -14,7 +14,8 @@
   --surface: rgba(255, 255, 255, 0.06);
   --line: rgba(94, 225, 242, 0.25);
   --accent: #5ee1f2;
-  background: rgba(5, 7, 13, 0.82);
+  position: static;
+  background: rgba(5, 7, 13, 0.92);
   border-bottom-color: rgba(94, 225, 242, 0.25);
 }
 
