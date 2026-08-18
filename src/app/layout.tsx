@@ -36,11 +36,18 @@ const code = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Argha Pratim Saha — Usable Security & Privacy",
+    default: "Argha Pratim Saha",
     template: "%s — Argha Pratim Saha",
   },
   description:
     "Argha Pratim Saha — research in usable security & privacy, security education, and qualitative HCI. PhD applicant.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/apple-icon.png",
+  },
   openGraph: {
     title: "Argha Pratim Saha",
     description: "Research in usable security & privacy, security education, and qualitative HCI.",
