@@ -1,0 +1,402 @@
+/* CyQured hero: a tilted board with a fanned hand of deck-back cards on it,
+   and the wordmark + tagline overlapping them low in the frame. See
+   src/components/cyqured/Hero.tsx for the layer structure this backs.
+
+   Lighting model, since several rules below only make sense together: the key
+   light comes from the upper left (matching .heroBand's radial in
+   cyqured.module.css) and falls off toward the viewer, so the near edge of
+   the board is the darkest part of the scene — that's .tableLight, and it is
+   what gives the wordmark something to read against. Nothing here darkens the
+   scene in viewport space; every dark surface is dark because of where it sits
+   relative to the key light.
+
+   Rendering-cost rules for anything added here, all learned the hard way from
+   this section stuttering and dropping hovers:
+     - No mix-blend-mode. It forces the compositor to keep the backdrop around
+       and re-read it, and it defeats layer caching for everything underneath.
+     - No animation that runs forever. A permanently-animating layer keeps the
+       compositor awake for the life of the page for an effect nobody is
+       looking at after the first second.
+     - Transition transform and opacity only. They composite; box-shadow,
+       filter and friends repaint every frame of the transition.
+     - Keep filter chains short. Each drop-shadow() is a separate blur pass
+       over the element's whole bounding box. */
+
+.stage {
+  position: relative;
+  /* perspective reaches DIRECT children only, which is why .board,
+     .tableLight and .cardGroup are parented straight to this element rather
+     than to a wrapper. See the note in Hero.tsx. */
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  overflow: visible; /* the card fan and its hover-lift can exceed the board's own box */
+  /* Short, because the lockup sits ON the scene rather than above it — no
+     lockup band to leave headroom for. The board reclaims that height by
+     overflowing its own box upward instead (see .board's negative top inset),
+     which the tilt then compresses back into frame.
+
+     Shorter again at 640px+ than the numbers below might suggest at a glance:
+     the board's rendered size is set by .board's box height in absolute px
+     (see the comment there), not by this ratio, so trimming the stage's own
+     height here doesn't shrink the board — it just removes dead canvas above
+     it. .board's inset is tuned to match each of these three ratios; change
+     one without the other and either the board shrinks or the float comes
+     back. */
+  aspect-ratio: 1 / 1;
+}
+
+@media (min-width: 640px) {
+  .stage {
+    aspect-ratio: 8 / 5;
+  }
+}
+
+@media (min-width: 1024px) {
+  .stage {
+    aspect-ratio: 5 / 3;
+  }
+}
+
+/* The table the board is lying on: a pool of light under the scene, widest
+   and warmest right where the board meets it. Purely a background on the
+   untransformed stage, so it costs one gradient and nothing else. */
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 54% 30% at 50% 84%,
+    rgba(94, 225, 242, 0.1),
+    rgba(12, 26, 51, 0.05) 45%,
+    transparent 70%
+  );
+}
+
+/* ---- board ---- */
+
+.board {
+  position: absolute;
+  z-index: 0;
+  /* Deliberately far taller than the stage, hanging off the top. object-fit:
+     contain sizes the art to whichever constraint binds first, so a box this
+     tall is precisely what lets the board render big: at 181% the art is still
+     height-fitted (comfortably inside the 96% of stage width the side insets
+     leave), and rotateX(55deg) compresses that back down to a render height
+     of ~390px. Anchored at the bottom so all the overflow goes upward,
+     off-stage, where nothing clips it.
+
+     This tablet-tier value and the desktop override below were each tuned so
+     the board keeps rendering at roughly the size it did before .stage's
+     aspect-ratio got shorter (see the note there) — the percentage needed to
+     reproduce the same absolute box height depends on the stage height at
+     each breakpoint, so the two numbers necessarily differ and both would
+     need retuning together with any future change to those ratios. */
+  inset: -81% 2% 0 2%;
+  transform: rotateX(55deg) rotateZ(-1.5deg);
+  transform-origin: 50% 100%;
+  border-radius: var(--radius-md);
+  box-shadow: 0 40px 70px -20px rgba(0, 0, 0, 0.65);
+}
+
+@media (min-width: 1024px) {
+  .board {
+    /* Same reasoning as the base rule, retuned for the desktop stage's own
+       (shorter, wider) height: this reproduces the same absolute
+       pre-transform box height the original -58%/3:2-stage combination
+       produced, so the board's rendered size is unchanged from before — only
+       the dead canvas around it shrank. */
+    inset: -86% 2% 0 2%;
+  }
+}
+
+.board img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Source art is a white paper board scanned for print; left raw it reads as
+     a glaring slab against the near-black hero band. A light pull-down plus a
+     touch of extra contrast lets it sit in the scene without losing any of
+     the cell detail. The colour comes back via .tableLight's cool tint. */
+  filter: brightness(0.94) saturate(0.9) contrast(1.05);
+  /* contain, not cover — the board's box doesn't match the source image's
+     proportions, and cropping it lost recognizable parts of the actual board
+     art. contain always shows the whole board. */
+  object-fit: contain;
+  border-radius: inherit;
+}
+
+@media (max-width: 639.98px) {
+  .board {
+    /* Same trick, different number: the shallower tilt below only compresses
+       to ~0.70 (against desktop's ~0.51), and the narrow stage makes the art
+       width-limited rather than height-limited, so ~124% is where the box
+       stops buying size. */
+    inset: -24% 2% 0 2%;
+    transform: rotateX(42deg) rotateZ(-1.5deg);
+  }
+}
+
+/* ---- table light ----
+   Shares .board's box, tilt and transform-origin exactly, and paints directly
+   after it, so it lies in the board's own plane.
+
+   The gradient is a single continuous falloff from the far edge to the near
+   one — no onset edge anywhere — so the darkness reads as the table falling
+   out of the key light rather than as a band. Its rectangle extends past the
+   board art into the letterboxed space either side (object-fit: contain), but
+   that space is already the near-black hero band, so those edges are
+   invisible. Tinted deep blue rather than neutral black so the white board
+   cools into the scene's palette instead of just going grey. */
+
+.tableLight {
+  position: absolute;
+  z-index: 1;
+  inset: -81% 2% 0 2%;
+  transform: rotateX(55deg) rotateZ(-1.5deg);
+  /* Must stay identical to .board's at every breakpoint, or the two planes
+     rotate about different points and the light stops coinciding with the
+     surface it is lighting. */
+  transform-origin: 55% 100%;
+  border-radius: var(--radius-md);
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 14, 28, 0.05) 0%,
+    rgba(6, 14, 28, 0.12) 22%,
+    rgba(6, 14, 28, 0.34) 44%,
+    rgba(6, 13, 24, 0.62) 64%,
+    rgba(5, 9, 18, 0.82) 84%,
+    rgba(5, 7, 13, 0.9) 100%
+  );
+}
+
+@media (min-width: 1024px) {
+  .tableLight {
+    inset: -86% 2% 0 2%;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .tableLight {
+    inset: -24% 2% 0 2%;
+    transform: rotateX(42deg) rotateZ(-1.5deg);
+  }
+}
+
+/* ---- card fan ----
+   Two separate transform levels, kept apart on purpose: .cardGroup carries
+   only the tilt that matches the board's plane, each .card carries only its
+   own fan rotation + offset — so either can be retuned independently. The
+   group is projected by .stage's perspective but is not a 3D context itself,
+   so the cards flatten into one ordinary 2D composite: stacking is plain
+   z-index and hit-testing is plain rectangle math. */
+
+.cardGroup {
+  position: absolute;
+  z-index: 2;
+  inset: 14% 9% 8% 11%;
+  transform: rotateX(55deg) rotateZ(-1.5deg);
+  transform-origin: 50% 100%;
+  --lift: -5rem;
+  transform: translateY(var(--lift)) rotateX(55deg) rotateZ(-1.5deg);
+}
+
+@media (max-width: 639.98px) {
+  .cardGroup {
+    inset: 22% 6% 12% 6%;
+    transform: rotateX(42deg) rotateZ(-1.5deg);
+  }
+
+  /* Here the board is width-fitted rather than height-fitted, so it fills far
+     more of the stage — the fan has to grow with it or it reads as a handful
+     of chips dropped on a full-size board. */
+  .card {
+    width: min(48%, 240px);
+  }
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  width: min(50%, 280px);
+  /* inset: 0 plus a definite width is over-constrained, so without this the
+     cards resolved to left: 0 and the whole fan sat a quarter of the group's
+     width left of the board it is supposed to be lying on. Auto inline margins
+     make the over-constrained case centre instead. */
+  margin-inline: auto;
+  aspect-ratio: 782 / 1110;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.45);
+  transform: translateX(var(--dx)) rotateZ(var(--rot));
+  z-index: var(--z);
+  /* transform only. The hover also swaps box-shadow, but transitioning that
+     repaints the card (and its shadow's whole blur radius) every frame, which
+     is exactly the kind of cost that made this feel sticky; letting the colour
+     snap while the lift animates is not noticeable. */
+  transition: transform 0.18s cubic-bezier(0.2, 0.9, 0.25, 1);
+  will-change: transform;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardLeft {
+  --rot: -8deg;
+  --dx: -34%;
+  --z: 1;
+}
+
+.cardCenter {
+  --rot: 0deg;
+  --dx: 0%;
+  --z: 2;
+}
+
+.cardRight {
+  --rot: 8deg;
+  --dx: 34%;
+  --z: 3;
+}
+
+.card:hover {
+  transform: translateX(var(--dx)) translateY(-14px) rotateZ(0deg) scale(1.06);
+  box-shadow: 0 22px 46px color-mix(in srgb, var(--deck-c, #5ee1f2) 40%, transparent);
+  z-index: 10;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+/* ---- logo + tagline overlay ----
+   The lockup lies across the near half of the scene, over the fan and the
+   board's foreground. What makes that readable is .tableLight above: the
+   board is already falling out of the key light exactly where the mark lands,
+   so the mark takes its contrast from the scene's own lighting instead of
+   from a scrim drawn behind it.
+
+   Bottom-anchored and content-height, so the box covers only the strip it
+   actually paints in rather than the whole lower half.
+
+   Its own perspective context, separate from the board/cards', with a gentle
+   rotateX about its lower edge: enough lean to belong to the same space as
+   the table without costing legibility. The tagline stays flat under it. */
+
+.overlayBand {
+  position: absolute;
+  z-index: 3;
+  bottom: 6%;
+  inset-inline: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* Load-bearing, not hygiene, given this box lies over the fan: without it
+     the band's own invisible rectangle — not just the mark it paints — ate the
+     cards' hover events, which is what made them feel unresponsive.
+     pointer-events inherits, so the mark and tagline are covered too. */
+  pointer-events: none;
+  --lift: -2.5rem;
+  transform: translateY(var(--lift));
+}
+
+/* A soft pool of the mark's own colour, so the wordmark looks like it is
+   lighting the table rather than sitting on it. This used to be a blurred,
+   screen-blended, permanently-animating layer; over a scene this dark, plain
+   alpha compositing of the same cyan is visually indistinguishable and costs
+   the compositor nothing. */
+.overlayBand::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  translate: -50% -50%;
+  width: min(125%, 880px);
+  aspect-ratio: 2 / 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(94, 225, 242, 0.16) 0%,
+    rgba(94, 225, 242, 0.1) 34%,
+    rgba(20, 126, 150, 0.05) 58%,
+    transparent 76%
+  );
+}
+
+.overlayContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  perspective: 900px;
+}
+
+.logo {
+  display: block;
+  width: min(82%, 720px);
+  height: auto;
+  transform: rotateX(10deg);
+  transform-origin: 50% 100%;
+  /* Logo art is black-on-transparent, built for light surfaces; invert it to
+     read as white on this dark scene.
+
+     Separation comes from EMISSION, not shadow — except at the very bottom
+     edge of the letterforms, which gets an actual cast shadow (the 6px
+     downward pass below): with only glow, the mark reads as flat and pasted
+     on; a shadow specifically under the strokes gives the letters a hair of
+     lift off the board, like they're catching the same key light as
+     everything else in the scene. Kept soft and downward-only (not a
+     symmetric blur) so it reads as light falling on raised letters, not a
+     halo. Everything else is cyan at two radii.
+
+     Kept to four passes and no white pass at all. A near-white glow this
+     close to white line art just fattens the strokes into a haze instead of
+     reading as light, and every pass is another full-bounding-box blur. */
+  filter: invert(1) drop-shadow(0 1px 2px rgba(2, 10, 18, 0.7))
+    drop-shadow(0 6px 6px rgba(2, 10, 18, 0.55)) drop-shadow(0 0 7px rgba(94, 225, 242, 0.3))
+    drop-shadow(0 0 22px rgba(30, 140, 170, 0.28));
+}
+
+.tagline {
+  font-family: var(--font-cyq-display);
+  font-size: var(--text-base);
+  letter-spacing: 0.06em;
+  color: #a9e9f4;
+  white-space: nowrap;
+  margin-top: -2rem;
+  /* Quieter than the mark on purpose — enough separation from the board
+     underneath to stay legible, not a second glowing element competing with
+     the wordmark for the same attention. */
+  text-shadow: 0 1px 3px rgba(2, 10, 18, 0.9);
+}
+
+@media (max-width: 639.98px) {
+  /* The line is held on one line by design — wrapped, it reads as a paragraph
+     sitting on the board rather than as part of the lockup. On a narrow stage
+     that only fits if it gives back the size and most of the tracking, which
+     it can afford: at this width it is the only text in the frame. */
+  .tagline {
+    font-size: var(--text-xs);
+    letter-spacing: 0.03em;
+    margin-top: var(--space-3);
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo {
+    width: min(74%, 720px);
+  }
+}

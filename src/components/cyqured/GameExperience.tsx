@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
 import { cardFaces, type CardCategory, type CardDeck, type CardFace } from "@/app/publications/cyqured/cardData";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { IconAttack, IconDefense, IconChance, IconScenario, IconBoard } from "@/components/primitives/Icons";
@@ -68,6 +69,13 @@ function coverSrcFor(deck: CardDeck) {
 
 // Shimmers behind every card image until it finishes loading, then
 // crossfades in — the "skeleton" for individual card art.
+//
+// fill, not width/height: every caller places this inside a box that's
+// already sized by CSS (the flip faces, thumb faces, idle deck cards, board
+// frame all reach LazyImg through a position:relative/absolute ancestor with
+// a definite aspect-ratio), and card art comes from many source files of
+// varying exact pixel dimensions — fill sizes to that box directly instead of
+// needing each one's real intrinsic size.
 function LazyImg({ src, alt, eager }: { src: string; alt: string; eager?: boolean }) {
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -80,10 +88,12 @@ function LazyImg({ src, alt, eager }: { src: string; alt: string; eager?: boolea
 
   return (
     <span className={[styles.imgShell, loaded ? styles.imgShellLoaded : ""].join(" ")}>
-      <img
+      <Image
         ref={imgRef}
         src={src}
         alt={alt}
+        fill
+        sizes="(min-width: 960px) 210px, (min-width: 640px) 20vw, 30vw"
         loading={eager ? "eager" : "lazy"}
         decoding="async"
         onLoad={() => setLoaded(true)}
@@ -271,7 +281,11 @@ function SelectedStage({
                   style={{ "--c": CATEGORY_COLOR[p.category] } as React.CSSProperties}
                   onClick={() => onJump(p.id)}
                 >
-                  <img src={p.src} alt="" />
+                  {/* Fixed 22x30 chip icon, not fill — no positioned box to
+                      size to here, just a small inline decoration. 782x1110
+                      matches the source card art's own aspect ratio; the
+                      rendered size comes from .solutionChip img in CSS. */}
+                  <Image src={p.src} alt="" width={782} height={1110} />
                   {p.title}
                 </button>
               ))}
