@@ -31,12 +31,24 @@
 }
 
 .glowA,
-.glowB {
+.glowB,
+.glowWhite {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.35;
   pointer-events: none;
+}
+
+.glowWhite {
+  top: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65vw;
+  height: 40vw;
+  filter: blur(100px);
+  opacity: 0.22;
+  background: radial-gradient(circle, #ffffff 0%, rgba(94, 225, 242, 0.45) 45%, transparent 70%);
+  animation: floatWhite 20s ease-in-out infinite;
 }
 
 .glowA {
@@ -44,6 +56,7 @@
   left: -5%;
   width: 50vw;
   height: 50vw;
+  opacity: 0.35;
   background: radial-gradient(circle, #5ee1f2, transparent 70%);
   animation: floatA 18s ease-in-out infinite;
 }
@@ -53,8 +66,14 @@
   right: -10%;
   width: 45vw;
   height: 45vw;
+  opacity: 0.35;
   background: radial-gradient(circle, #b48fe0, transparent 70%);
   animation: floatB 22s ease-in-out infinite;
+}
+
+@keyframes floatWhite {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.08); }
 }
 
 @keyframes floatA {
@@ -172,7 +191,10 @@
 .wordmarkLogo {
   width: clamp(220px, 30vw, 420px);
   height: auto;
-  filter: invert(1) drop-shadow(0 0 40px rgba(94, 225, 242, 0.45));
+  filter: invert(1)
+    drop-shadow(0 0 20px rgba(255, 255, 255, 0.6))
+    drop-shadow(0 0 45px rgba(94, 225, 242, 0.5))
+    drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
 }
 
 .tagline {

@@ -77,8 +77,8 @@ export function CyquredNavbar() {
                 <Image
                   src="/media/publications/cyqured/cyqured-logo.png"
                   alt="CyQured"
-                  width={100}
-                  height={32}
+                  width={130}
+                  height={42}
                   className={styles.brandLogo}
                   priority
                 />
@@ -137,8 +137,8 @@ export function CyquredNavbar() {
                   <Image
                     src="/media/publications/cyqured/cyqured-logo.png"
                     alt="CyQured"
-                    width={96}
-                    height={30}
+                    width={120}
+                    height={38}
                     className={styles.brandLogo}
                   />
                 </Link>

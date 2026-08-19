@@ -1,7 +1,4 @@
-import Link from "next/link";
-import Image from "next/image";
 import { Chakra_Petch } from "next/font/google";
-import { IconArrowLeft } from "@/components/primitives/Icons";
 import styles from "./game.module.css";
 
 const display = Chakra_Petch({
@@ -11,55 +8,39 @@ const display = Chakra_Petch({
   display: "swap",
 });
 
-const SKELETON_FILTERS = 5;
-const SKELETON_CARDS = 21;
-
 export default function Loading() {
   return (
     <div className={`${display.variable} ${styles.page}`}>
       <div className={styles.grain} aria-hidden="true" />
+      <div className={styles.glowWhite} aria-hidden="true" />
       <div className={styles.glowA} aria-hidden="true" />
       <div className={styles.glowB} aria-hidden="true" />
 
       <div className={styles.inner}>
-        <Link href="/publications/cyqured" className={styles.backLink}>
-          <IconArrowLeft size={14} />
-          Overview
-        </Link>
+        {/* Shimmer Placeholder */}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "1.5rem" }}>
+          <div
+            className={styles.skeletonShimmer}
+            style={{ width: "240px", height: "28px", borderRadius: "9999px" }}
+          />
+        </div>
 
         <header className={styles.hero}>
-          <p className={styles.eyebrow}>Every card. Every counter.</p>
-          <h1 className={styles.wordmark}>
-            <Image
-              src="/media/publications/cyqured/cyqured-logo.png"
-              alt="cyQured"
-              width={632}
-              height={225}
-              priority
-              className={styles.wordmarkLogo}
-            />
-          </h1>
-          <p className={styles.tagline}>
-            34 attack and defense cards, 30 chance cards, 20 scenario cards: flip any card to see exactly
-            what stops it.
-          </p>
+          <div
+            className={styles.skeletonShimmer}
+            style={{ width: "160px", height: "16px", margin: "0 auto 1rem", borderRadius: "4px" }}
+          />
+          <div
+            className={styles.skeletonShimmer}
+            style={{ width: "300px", height: "60px", margin: "0 auto 1rem", borderRadius: "12px" }}
+          />
+          <div
+            className={styles.skeletonShimmer}
+            style={{ width: "420px", height: "20px", margin: "0 auto", borderRadius: "6px" }}
+          />
         </header>
 
         <div className={`${styles.skeletonStage} ${styles.skeletonShimmer}`} aria-hidden="true" />
-
-        <div className={styles.skeletonFilterBar} aria-hidden="true">
-          {Array.from({ length: SKELETON_FILTERS }).map((_, i) => (
-            <span key={i} className={`${styles.skeletonPill} ${styles.skeletonShimmer}`} />
-          ))}
-        </div>
-
-        <div className={styles.skeletonGrid} aria-hidden="true">
-          {Array.from({ length: SKELETON_CARDS }).map((_, i) => (
-            <span key={i} className={`${styles.skeletonCard} ${styles.skeletonShimmer}`} />
-          ))}
-        </div>
-
-        <div className={`${styles.skeletonBoard} ${styles.skeletonShimmer}`} aria-hidden="true" />
       </div>
     </div>
   );

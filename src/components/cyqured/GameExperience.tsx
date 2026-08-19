@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback, type ReactNode } from "react";
 import Image from "next/image";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { cardFaces, type CardCategory, type CardDeck, type CardFace } from "@/app/publications/cyqured/cardData";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { IconAttack, IconDefense, IconChance, IconScenario } from "@/components/primitives/Icons";
@@ -102,23 +103,71 @@ function LazyImg({ src, alt, eager }: { src: string; alt: string; eager?: boolea
 }
 
 export function GameExperience() {
-  const [filter, setFilter] = useState<CardCategory>("attack");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const stageRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+
+  const categoryParam = searchParams.get("category");
+  const cardParam = searchParams.get("card");
+
+  // Determine currently selected card from URL query param
+  const selected = useMemo(
+    () => (cardParam ? cardFaces.find((c) => c.id === cardParam) ?? null : null),
+    [cardParam],
+  );
+
+  // Active category: If card is selected, use card's category; otherwise read ?category or default to "attack"
+  const filter: CardCategory = useMemo(() => {
+    if (selected) return selected.category;
+    if (
+      categoryParam === "attack" ||
+      categoryParam === "defense" ||
+      categoryParam === "chance" ||
+      categoryParam === "scenario"
+    ) {
+      return categoryParam;
+    }
+    return "attack";
+  }, [selected, categoryParam]);
+
+  const updateUrl = useCallback(
+    (nextCategory: CardCategory, nextCardId: string | null) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("tab", "cards");
+      params.set("category", nextCategory);
+      if (nextCardId) {
+        params.set("card", nextCardId);
+      } else {
+        params.delete("card");
+      }
+      const qs = params.toString();
+      router.replace(`${pathname}?${qs}`, { scroll: false });
+    },
+    [searchParams, router, pathname],
+  );
 
   const visible = useMemo(
     () => cardFaces.filter((c) => c.category === filter),
     [filter],
   );
-  const selected = selectedId ? cardFaces.find((c) => c.id === selectedId) ?? null : null;
+
+  function handleCategoryChange(cat: CardCategory) {
+    updateUrl(cat, null);
+  }
 
   function openCard(id: string) {
-    if (id === selectedId) {
-      setSelectedId(null);
+    if (id === selected?.id) {
+      // Toggle off / close card
+      updateUrl(filter, null);
       return;
     }
-    setSelectedId(id);
+
+    const target = cardFaces.find((c) => c.id === id);
+    if (target) {
+      updateUrl(target.category, target.id);
+    }
 
     if (typeof window !== "undefined" && window.scrollY > 0) {
       window.scrollTo({
@@ -154,7 +203,7 @@ export function GameExperience() {
             aria-selected={filter === id}
             className={filter === id ? styles.filterActive : styles.filter}
             style={{ "--f": CATEGORY_COLOR[id] } as React.CSSProperties}
-            onClick={() => setFilter(id)}
+            onClick={() => handleCategoryChange(id)}
           >
             <Icon size={14} />
             {label}
@@ -165,7 +214,7 @@ export function GameExperience() {
 
       <div className={styles.grid}>
         {visible.map((card, i) => {
-          const isActive = card.id === selectedId;
+          const isActive = card.id === selected?.id;
           return (
             <button
               key={card.id}

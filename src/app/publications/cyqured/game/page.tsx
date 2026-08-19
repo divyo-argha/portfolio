@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Chakra_Petch } from "next/font/google";
-import { GameBoardSection } from "@/components/cyqured/GameBoardSection";
-import { GameExperience } from "@/components/cyqured/GameExperience";
+import { AssetsTabs } from "@/components/cyqured/AssetsTabs";
 import { IconArrowUpRight, IconScholar } from "@/components/primitives/Icons";
 import { profile, socialLinks } from "@/content/profile";
 import styles from "./game.module.css";
@@ -26,6 +25,7 @@ export default function CyQuredAssetsPage() {
   return (
     <div className={`${display.variable} ${styles.page}`}>
       <div className={styles.grain} aria-hidden="true" />
+      <div className={styles.glowWhite} aria-hidden="true" />
       <div className={styles.glowA} aria-hidden="true" />
       <div className={styles.glowB} aria-hidden="true" />
 
@@ -71,28 +71,12 @@ export default function CyQuredAssetsPage() {
             />
           </h1>
           <p className={styles.tagline}>
-            Explore all tangible components of CyQured: the 28-cell connected home board, 16 acquirable smart devices, and all 84 attack, defense, chance, and scenario cards.
+            Explore all tangible components of CyQured: switch between the 84 playable cards catalogue and the 28-cell connected home board.
           </p>
         </header>
 
-        {/* Asset Component 1: 28-Cell Board & 16 Devices */}
-        <GameBoardSection />
-
-        {/* Asset Component 2: 84-Card Interactive Deck Catalogue */}
-        <section id="cards" style={{ marginTop: "4rem", paddingTop: "3rem", borderTop: "1px solid rgba(94, 225, 242, 0.15)" }}>
-          <div style={{ textAlign: "center", maxWidth: "680px", margin: "0 auto 2.5rem" }}>
-            <span style={{ fontFamily: "var(--font-cyq-display, sans-serif)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#5ee1f2" }}>
-              Card Decks
-            </span>
-            <h2 style={{ fontFamily: "var(--font-cyq-display, sans-serif)", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 700, color: "#eaf7fb", margin: "0.35rem 0 0.75rem" }}>
-              Playable Cards Catalogue
-            </h2>
-            <p style={{ fontFamily: "var(--font-serif, serif)", fontSize: "1.05rem", lineHeight: 1.6, color: "#9fc3cc", margin: 0 }}>
-              Flip through all attack & defense mitigations, chance event triggers, and scenario challenges.
-            </p>
-          </div>
-          <GameExperience />
-        </section>
+        {/* Floating Tab Menu for Game Cards & Game Board (Managed by URL Query Param) */}
+        <AssetsTabs />
 
         {/* Bottom Bridge: Research Paper & Lead Researcher Attribution */}
         <footer className={styles.bottomBridge}>
