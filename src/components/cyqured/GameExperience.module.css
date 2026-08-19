@@ -70,31 +70,49 @@
 }
 
 .idleRow {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  /* minmax(...,1fr) so auto-fit's column count is driven by the 120px
+     minimum, not the cap — a fixed 160px max there would make auto-fit
+     size its fit-test off 160px and collapse to a single column on
+     narrow phones. .idleCard's own max-width applies the 160px cap. */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   justify-content: center;
+  justify-items: center;
   gap: 1.25rem;
+  width: 100%;
 }
 
 .idleCard {
   display: block;
+  position: relative;
+  width: 100%;
+  max-width: 160px;
+  aspect-ratio: 782 / 1110;
   cursor: pointer;
   background: none;
   border: none;
-  padding: 0;
-}
-
-.idleCard img {
-  width: min(38vw, 220px);
-  aspect-ratio: 782 / 1110;
-  object-fit: cover;
   border-radius: 16px;
+  padding: 0;
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4);
   transform: perspective(1200px) rotateY(28deg);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-} 
+}
 
-.idleCard:hover img {
+.idleCardClip {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.idleCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.idleCard:hover {
   transform: perspective(1200px) rotateY(0deg) scale(1.04);
   box-shadow: 0 20px 40px color-mix(in srgb, var(--c) 35%, transparent);
 }
@@ -152,6 +170,7 @@
 
 .flipOuterStatic {
   display: block;
+  position: relative;
   width: min(52vw, 210px);
   aspect-ratio: 782 / 1110;
   margin-inline: auto;
@@ -336,6 +355,11 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
+  /* Thumbs bleed -7px past their cell (see .thumb) for the overlapping fan
+     look; this padding gives that bleed somewhere to land so the outermost
+     cards stay flush with the filter bar and board above/below instead of
+     poking past the shared content edge. */
+  padding-inline: 7px;
 }
 
 @media (min-width: 640px) {
@@ -466,16 +490,80 @@
   color: #5ee1f2;
 }
 
-.boardImage {
+.boardFrame {
+  position: relative;
   max-width: 640px;
   width: 100%;
+  aspect-ratio: 1403 / 1800;
   border-radius: 16px;
+  overflow: hidden;
   border: 1px solid #1c2b32;
+}
+
+.boardFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---- lazy image shimmer ---- */
+
+.imgShell {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  /* Flat base tint so the placeholder reads as a card-shaped skeleton
+     against this page's near-black background, not empty space — the
+     shimmer sweep below is layered on top of it. */
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.imgShell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 8%, rgba(255, 255, 255, 0.16) 24%, transparent 40%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.imgShellLoaded {
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.imgShellLoaded::before {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.imgShell img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.imgShellLoaded img {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -50% 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .thumb,
   .thumbActive {
+    animation: none;
+  }
+
+  .imgShell::before {
     animation: none;
   }
 }

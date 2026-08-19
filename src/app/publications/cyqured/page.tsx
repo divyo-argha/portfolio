@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Chakra_Petch } from "next/font/google";
 import { DetailLayout } from "@/components/detail/DetailLayout";
 import { BlockRenderer } from "@/components/detail/BlockRenderer";
@@ -17,6 +18,13 @@ const display = Chakra_Petch({
   weight: ["500", "600", "700"],
   display: "swap",
 });
+
+const HERO_CARDS = [
+  { src: "/media/publications/cyqured/example-attack.png", alt: "Attack card: DDoS Attack with Botnet" },
+  { src: "/media/publications/cyqured/example-defense.png", alt: "Defense card: Firewall & Network Segmentation" },
+  { src: "/media/publications/cyqured/example-chance.png", alt: "Chance card: Honeypot Deployed" },
+  { src: "/media/publications/cyqured/example-scenario.png", alt: "Scenario card: a phishing email impersonating an ISP" },
+];
 
 export function generateMetadata(): Metadata {
   const detail = getPublicationDetail("cyqured");
@@ -44,7 +52,13 @@ export default function CyQuredPage() {
           <div className={`${display.variable} ${styles.brandScope}`}>
             <div className={styles.heroBand}>
               <div>
-                <p className={styles.heroWordmark}>cyQured</p>
+                <Image
+                  src="/media/publications/cyqured/cyqured-logo.png"
+                  alt="cyQured"
+                  width={632}
+                  height={225}
+                  className={styles.heroWordmark}
+                />
                 <p className={styles.heroTagline}>
                   A tabletop model of a 16-device smart home — players attack and defend it, one STRIDE
                   threat at a time.
@@ -52,13 +66,21 @@ export default function CyQuredPage() {
               </div>
               <div>
                 <div className={styles.heroPhotoFrame}>
-                  <img
-                    src="/media/publications/cyqured/hero.jpg"
-                    alt="Four players around a printed CyQured board mid-session: the board, all three card decks, and player tokens on the table."
-                    loading="eager"
-                  />
+                  <div className={styles.heroCollage}>
+                    {HERO_CARDS.map((card) => (
+                      <Image
+                        key={card.src}
+                        src={card.src}
+                        alt={card.alt}
+                        width={782}
+                        height={1110}
+                        priority
+                        className={styles.heroCollageCard}
+                      />
+                    ))}
+                  </div>
                 </div>
-                <p className={styles.heroCaption}>From an actual study session — the printed board, in play.</p>
+                <p className={styles.heroCaption}>One card from each deck — attack, defense, chance, and scenario.</p>
               </div>
             </div>
 

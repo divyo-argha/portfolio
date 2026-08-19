@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { cardFaces, type CardCategory, type CardDeck, type CardFace } from "@/app/publications/cyqured/cardData";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { IconAttack, IconDefense, IconChance, IconScenario, IconBoard } from "@/components/primitives/Icons";
@@ -59,7 +59,37 @@ function renderInline(text: string): ReactNode[] {
 }
 
 function coverSrcFor(deck: CardDeck) {
-  return `/media/publications/cyqured/covers/${deck}.png`;
+  // .webp — the source .png covers are ~650KB each (busy gradient art
+  // compresses poorly as PNG) and this face loads eagerly for every
+  // card back plus the idle deck picker; re-encoding cut that by ~90%
+  // with no visible loss.
+  return `/media/publications/cyqured/covers/${deck}.webp`;
+}
+
+// Shimmers behind every card image until it finishes loading, then
+// crossfades in — the "skeleton" for individual card art.
+function LazyImg({ src, alt, eager }: { src: string; alt: string; eager?: boolean }) {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // A cached/instant image can finish loading before hydration attaches
+  // onLoad below, so the event never fires — catch that case explicitly.
+  useEffect(() => {
+    if (imgRef.current?.complete) setLoaded(true);
+  }, [src]);
+
+  return (
+    <span className={[styles.imgShell, loaded ? styles.imgShellLoaded : ""].join(" ")}>
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+      />
+    </span>
+  );
 }
 
 export function GameExperience() {
@@ -136,10 +166,10 @@ export function GameExperience() {
             >
               <span className={[styles.thumbFlipper, isActive ? styles.thumbFlipped : ""].join(" ")}>
                 <span className={styles.thumbFace}>
-                  <img src={card.src} alt={card.title} loading="lazy" />
+                  <LazyImg src={card.src} alt={card.title} />
                 </span>
                 <span className={[styles.thumbFace, styles.thumbFaceBack].join(" ")}>
-                  <img src={coverSrcFor(card.deck)} alt="" loading="lazy" />
+                  <LazyImg src={coverSrcFor(card.deck)} alt="" />
                 </span>
               </span>
               <span className={styles.thumbLabel}>{card.title}</span>
@@ -169,7 +199,9 @@ function IdleStage({ onPick }: { onPick: (id: string) => void }) {
               style={{ "--c": DECK_COLOR[deck.id] } as React.CSSProperties}
               onClick={() => onPick(first.id)}
             >
-              <img src={coverSrcFor(deck.id)} alt={`${deck.label} deck back`} />
+              <span className={styles.idleCardClip}>
+                <LazyImg src={coverSrcFor(deck.id)} alt={`${deck.label} deck back`} eager />
+              </span>
             </button>
           );
         })}
@@ -263,7 +295,7 @@ function FlipCard({ card, reducedMotion }: { card: CardFace; reducedMotion: bool
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
       >
-        <img src={showBack ? coverSrc : card.src} alt={showBack ? `${card.title} card back` : card.title} />
+        <LazyImg src={showBack ? coverSrc : card.src} alt={showBack ? `${card.title} card back` : card.title} eager />
       </div>
     );
   }
@@ -272,10 +304,10 @@ function FlipCard({ card, reducedMotion }: { card: CardFace; reducedMotion: bool
     <div className={styles.flipOuter} onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
       <div className={[styles.flipInner, showBack ? styles.flipped : ""].join(" ")}>
         <div className={styles.face}>
-          <img src={card.src} alt={card.title} />
+          <LazyImg src={card.src} alt={card.title} eager />
         </div>
         <div className={[styles.face, styles.faceBack].join(" ")}>
-          <img src={coverSrc} alt="" />
+          <LazyImg src={coverSrc} alt="" eager />
         </div>
       </div>
     </div>
@@ -289,11 +321,12 @@ function BoardPanel() {
         <IconBoard size={20} />
         <span>The board</span>
       </div>
-      <img
-        className={styles.boardImage}
-        src="/media/publications/cyqured/board.png"
-        alt="The CyQured board: a 28-cell track of 16 devices, special cells, and three card decks at the center."
-      />
+      <div className={styles.boardFrame}>
+        <LazyImg
+          src="/media/publications/cyqured/board.webp"
+          alt="The CyQured board: a 28-cell track of 16 devices, special cells, and three card decks at the center."
+        />
+      </div>
     </div>
   );
 }

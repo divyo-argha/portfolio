@@ -73,12 +73,12 @@
 }
 
 .heroWordmark {
-  font-family: var(--font-cyq-display);
-  font-weight: 600;
-  font-size: clamp(1.6rem, 1.3rem + 1.5vw, 2.4rem);
-  letter-spacing: 0.01em;
-  color: #eaf7fb;
-  text-shadow: 0 0 24px rgba(94, 225, 242, 0.45);
+  display: block;
+  width: clamp(150px, 20vw, 220px);
+  height: auto;
+  /* Logo art is black-on-transparent, built for light surfaces; invert it
+     to read on this dark hero band and echo the old text wordmark's glow. */
+  filter: invert(1) drop-shadow(0 0 24px rgba(94, 225, 242, 0.45));
 }
 
 .heroTagline {
@@ -91,15 +91,56 @@
 .heroPhotoFrame {
   position: relative;
   border-radius: var(--radius-md);
-  overflow: hidden;
   border: 1px solid rgba(94, 225, 242, 0.35);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  background: #0a0f1c;
+  padding: var(--space-5);
 }
 
-.heroPhotoFrame img {
+.heroCollage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.heroCollageCard {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 782 / 1110;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.heroCollageCard:nth-child(1) {
+  transform: rotate(-3deg);
+}
+
+.heroCollageCard:nth-child(2) {
+  transform: rotate(2.5deg);
+}
+
+.heroCollageCard:nth-child(3) {
+  transform: rotate(2deg);
+}
+
+.heroCollageCard:nth-child(4) {
+  transform: rotate(-2.5deg);
+}
+
+.heroCollageCard:hover {
+  transform: scale(1.05) rotate(0deg);
+  box-shadow: 0 16px 34px rgba(94, 225, 242, 0.3);
+  z-index: 1;
+  position: relative;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCollageCard {
+    transition: none;
+  }
 }
 
 .heroCaption {

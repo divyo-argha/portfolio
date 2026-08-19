@@ -1,8 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Chakra_Petch } from "next/font/google";
-import { GameExperience } from "@/components/cyqured/GameExperience";
 import { IconArrowLeft } from "@/components/primitives/Icons";
 import styles from "./game.module.css";
 
@@ -13,12 +11,10 @@ const display = Chakra_Petch({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "CyQured — Play the Cards",
-  description: "The full CyQured card catalogue: every attack, defense, chance, and scenario card, with live threat-to-defense mappings.",
-};
+const SKELETON_FILTERS = 5;
+const SKELETON_CARDS = 21;
 
-export default function CyQuredGamePage() {
+export default function Loading() {
   return (
     <div className={`${display.variable} ${styles.page}`}>
       <div className={styles.grain} aria-hidden="true" />
@@ -49,7 +45,21 @@ export default function CyQuredGamePage() {
           </p>
         </header>
 
-        <GameExperience />
+        <div className={`${styles.skeletonStage} ${styles.skeletonShimmer}`} aria-hidden="true" />
+
+        <div className={styles.skeletonFilterBar} aria-hidden="true">
+          {Array.from({ length: SKELETON_FILTERS }).map((_, i) => (
+            <span key={i} className={`${styles.skeletonPill} ${styles.skeletonShimmer}`} />
+          ))}
+        </div>
+
+        <div className={styles.skeletonGrid} aria-hidden="true">
+          {Array.from({ length: SKELETON_CARDS }).map((_, i) => (
+            <span key={i} className={`${styles.skeletonCard} ${styles.skeletonShimmer}`} />
+          ))}
+        </div>
+
+        <div className={`${styles.skeletonBoard} ${styles.skeletonShimmer}`} aria-hidden="true" />
       </div>
     </div>
   );

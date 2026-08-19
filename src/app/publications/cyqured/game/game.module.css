@@ -71,7 +71,7 @@
   position: relative;
   max-width: 1180px;
   margin-inline: auto;
-  padding: 16rem 1.25rem 0;
+  padding: clamp(2.5rem, 6vw, 4.5rem) 1.25rem 0;
 }
 
 .backLink {
@@ -105,12 +105,17 @@
 }
 
 .wordmark {
-  font-family: var(--font-cyq-display);
-  font-weight: 700;
-  font-size: clamp(2.75rem, 2rem + 4vw, 5rem);
-  color: #eaf7fb;
-  text-shadow: 0 0 50px rgba(94, 225, 242, 0.5);
-  letter-spacing: 0.01em;
+  display: flex;
+  justify-content: center;
+}
+
+.wordmarkLogo {
+  width: clamp(220px, 30vw, 420px);
+  height: auto;
+  /* Logo art is black-on-transparent, built for light surfaces; invert it
+     to read on this page's near-black background and echo the same glow
+     the old text wordmark used. */
+  filter: invert(1) drop-shadow(0 0 40px rgba(94, 225, 242, 0.45));
 }
 
 .tagline {
@@ -125,6 +130,81 @@
   .grain,
   .glowA,
   .glowB {
+    animation: none;
+  }
+}
+
+/* ---- route-level loading skeleton (see loading.tsx) ---- */
+
+.skeletonShimmer {
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.03) 8%, rgba(255, 255, 255, 0.09) 24%, rgba(255, 255, 255, 0.03) 40%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+}
+
+.skeletonStage {
+  height: min(70vw, 420px);
+  border-radius: 22px;
+  border: 1px solid #1c2b32;
+}
+
+.skeletonFilterBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.skeletonPill {
+  width: 5.5rem;
+  height: 2.1rem;
+  border-radius: 999px;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .skeletonGrid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .skeletonGrid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.skeletonCard {
+  aspect-ratio: 782 / 1110;
+  border-radius: 10px;
+}
+
+.skeletonBoard {
+  margin: 2.5rem auto 0;
+  max-width: 640px;
+  width: 100%;
+  aspect-ratio: 1403 / 1800;
+  border-radius: 16px;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonShimmer {
     animation: none;
   }
 }

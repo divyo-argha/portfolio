@@ -37,12 +37,15 @@ export function DetailLayout({ detail, customBody }: { detail: DetailMeta; custo
           </div>
 
           {showHeroMark && detail.venueMark ? (
-            <div className={styles.heroMark}>
+            <div
+              className={styles.heroMark}
+              style={{ aspectRatio: `${detail.venueMark.width} / ${detail.venueMark.height}` }}
+            >
               <Image
                 src={detail.venueMark.src}
                 alt={detail.venueMark.alt}
-                width={500}
-                height={220}
+                width={detail.venueMark.width}
+                height={detail.venueMark.height}
                 className={styles.heroMarkImage}
                 priority
               />
