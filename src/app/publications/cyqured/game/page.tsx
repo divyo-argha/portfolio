@@ -14,7 +14,7 @@ const display = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "CyQured — Play the Cards",
+  title: "CyQured: Play the Cards",
   description: "The full CyQured card catalogue: every attack, defense, chance, and scenario card, with live threat-to-defense mappings.",
 };
 
@@ -44,7 +44,7 @@ export default function CyQuredGamePage() {
             />
           </h1>
           <p className={styles.tagline}>
-            34 attack and defense cards, 30 chance cards, 20 scenario cards — flip any card to see exactly
+            34 attack and defense cards, 30 chance cards, 20 scenario cards: flip any card to see exactly
             what stops it.
           </p>
         </header>

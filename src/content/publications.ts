@@ -41,7 +41,7 @@ export const publications: Publication[] = [
       },
     ],
     summary:
-      "Originated from our undergraduate thesis at SUST, where we substantially extended the game design, calibration study, and mixed-methods empirical evaluation with 50 participants to evaluate STRIDE-based smart-home threat learning — now accepted at USENIX SOUPS 2026.",
+      "Originated from our undergraduate thesis at SUST, where we substantially extended the game design, calibration study, and mixed-methods empirical evaluation with 50 participants to evaluate STRIDE-based smart-home threat learning: accepted at USENIX SOUPS 2026.",
     tags: [
       "STRIDE",
       "Tabletop game",

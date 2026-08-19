@@ -1,13 +1,13 @@
 /**
  * CyQured's own brand scope. Every shared detail component (BarChart,
  * StatGrid, CardGrid, Pipeline, HeroStat, Prose headings...) already reads
- * design tokens as CSS custom properties — see src/styles/tokens.css. This
+ * design tokens as CSS custom properties (see src/styles/tokens.css). This
  * wrapper redefines the same variable names locally, so everything inside
  * it re-skins automatically with zero changes to those shared components,
  * and zero effect on the rest of the site outside this wrapper.
  *
  * --font-sans drives every heading/title/stat-value in the shared
- * components (see base.css: h1-h4 { font-family: var(--font-sans) }) — so
+ * components (see base.css: h1-h4 { font-family: var(--font-sans) }): so
  * pointing it at the page-local display font retints all of those, while
  * --font-serif (body paragraphs) is left untouched for readability.
  */
@@ -21,7 +21,7 @@
   --font-sans: var(--font-cyq-display);
   --font-mono: var(--font-cyq-display);
 
-  /* Category swatches, sampled from the card art itself — used by the card
+  /* Category swatches, sampled from the card art itself: used by the card
      catalogue and anywhere a deck/category needs its own identity color. */
   --cyq-attack: #1b8ca6;
   --cyq-defense: #2e9e6f;

@@ -52,8 +52,7 @@ export default function CyQuredPage() {
                 <span className={styles.playEyebrow}>Interactive</span>
                 <h2 className={styles.playTitle}>Play every card</h2>
                 <p className={styles.playBody}>
-                  All 84 cards, flip animations, and live attack-to-defense mappings — the full catalogue,
-                  in its own space.
+                  All 84 cards, flip animations, and live attack-to-defense mappings: explore the full catalogue in its own space.
                 </p>
               </div>
               <span className={styles.playCta}>

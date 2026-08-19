@@ -2,8 +2,8 @@
 // chance, 20 scenario), read directly from the print-ready card images in
 // public/media/publications/cyqured/cards/. pairIds on action cards resolve
 // the card names each card's body text references as countering / being
-// countered by it, matched by title (see TODO comments for two references
-// — "Brute-Force" — that do not match any card title in the deck).
+// countered by it, (matched by title; see TODO comments for two references to
+// "Brute-Force" that do not match any card title in the deck).
 
 export type CardDeck = "action" | "chance" | "scenario";
 export type CardCategory = "attack" | "defense" | "chance" | "scenario";
@@ -177,7 +177,7 @@ This attack can be played on **all devices** when the victim uses weak or reused
 
 This attack can be played on **all devices** when they transmit unencrypted data over Wi-Fi or Bluetooth. This can be defended using the **Bluetooth & Wireless Security (WPA3)** and **VPN & Network Encryption** cards.`,
     // NOTE: card body says "VPN & Network Encryption" but the matching defense
-    // card (action-29) is actually titled "VPN & Secure Encryption" — treated
+    // card (action-29) is actually titled "VPN & Secure Encryption": treated
     // as the same card (only VPN-related defense in the deck; minor wording diff).
     pairIds: ["action-32", "action-29"],
     src: "/media/publications/cyqured/cards/action/action-13.png",
@@ -339,7 +339,7 @@ This card mitigates **Session Hijacking** attack to keep your online accounts an
     body: `Prevents attackers from repeatedly guessing passwords by locking accounts after multiple failed attempts and limiting login requests. This reduces the risk of brute-force and credential stuffing attacks.
 
 While this card is in play, **Brute-Force** and **Credential Stuffing** attacks fail to gain unauthorized access to your account.`,
-    // TODO: unresolved reference "Brute-Force" — no action card in the deck
+    // TODO: unresolved reference "Brute-Force": no action card in the deck
     // is titled "Brute-Force". Closest concept is action-11 "Password
     // Cracking" (repeated password guessing) but the title text does not
     // match, so it is intentionally left unlinked rather than guessed.
@@ -354,7 +354,7 @@ While this card is in play, **Brute-Force** and **Credential Stuffing** attacks 
     body: `Encourages the use of complex, unique passwords and securely stores them in an encrypted vault, preventing attackers from guessing or reusing stolen credentials.
 
 While this card is in play, **Brute-Force** and **Credential Stuffing** attacks fail, keeping your accounts safe from unauthorized access.`,
-    // TODO: unresolved reference "Brute-Force" — same as action-27, no
+    // TODO: unresolved reference "Brute-Force": same as action-27, no
     // matching card title in the deck; not guessed/linked.
     pairIds: ["action-12"],
     src: "/media/publications/cyqured/cards/action/action-28.png",
@@ -560,7 +560,7 @@ Move directly to the **smartphone** cell and **collect 3 cards** from the deck a
     deck: "chance",
     category: "chance",
     title: "Honeypot Deployed",
-    body: `You strategically set up a honeypot—an intentionally vulnerable system designed to attract cyber attackers. This decoy appears to hold valuable data and the intruders get tricked into interacting with it, while security systems silently monitor their actions. By analyzing attack patterns, you strengthen your defenses and prevent future breaches.
+    body: `You strategically set up a honeypot (an intentionally vulnerable system designed to attract cyber attackers). This decoy appears to hold valuable data and the intruders get tricked into interacting with it, while security systems silently monitor their actions. By analyzing attack patterns, you strengthen your defenses and prevent future breaches.
 
 **Gain 6 points** and **get 2 cards** from the action deck.`,
     src: "/media/publications/cyqured/cards/chance/chance-14.png",
@@ -671,7 +671,7 @@ You **lose 7 points** and **discard 1 action card.** You could prevent this by u
     deck: "chance",
     category: "chance",
     title: "Dumpster Diving Data Breach",
-    body: `You had improperly disposed of sensitive information—either by discarding old storage devices without securely wiping them or tossing documents without shredding them. Attackers recovered your deleted data, leading to a serious breach.
+    body: `You had improperly disposed of sensitive information: either by discarding old storage devices without securely wiping them or tossing documents without shredding them. Attackers recovered your deleted data, leading to a serious breach.
 
 **Lose 4 points** immediately. This could have been prevented by physically destroying storage devices, using data-wiping software, or shredding confidential documents before disposal.`,
     src: "/media/publications/cyqured/cards/chance/chance-25.png",
@@ -739,7 +739,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
   },
 
   // ===================== SCENARIO CARDS (20) =====================
-  // All 20 scenario cards use the generic title "Scenario" as printed —
+  // All 20 scenario cards use the generic title "Scenario" as printed:
   // none carry a distinct incident-specific title.
   {
     id: "scenario-02",
@@ -810,7 +810,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
-    body: `You download a free game from an untrusted website. Soon after, your device starts behaving strangely—pop-ups appear, and you notice unauthorized programs running in the background. Your antivirus software detects malware.`,
+    body: `You download a free game from an untrusted website. Soon after, your device starts behaving strangely: pop-ups appear, and you notice unauthorized programs running in the background. Your antivirus software detects malware.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-10.png",
   },
   {

@@ -40,7 +40,7 @@ export default function Loading() {
             />
           </h1>
           <p className={styles.tagline}>
-            34 attack and defense cards, 30 chance cards, 20 scenario cards — flip any card to see exactly
+            34 attack and defense cards, 30 chance cards, 20 scenario cards: flip any card to see exactly
             what stops it.
           </p>
         </header>
