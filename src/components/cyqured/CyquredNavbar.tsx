@@ -106,21 +106,11 @@ export function CyquredNavbar() {
                 </ul>
               </nav>
 
-              {/* Desktop Direct Bridge to Overview & Author Portfolio */}
+              {/* Desktop Direct Bridge to Overview */}
               <div className={styles.actionGroup}>
                 <Link href="/publications/cyqured" className={styles.paperLink}>
                   <span>Overview</span>
                   <IconArrowUpRight size={13} />
-                </Link>
-                <Link href="/" className={styles.authorBadgeLink} title="Argha Pratim Saha — Research Portfolio">
-                  <Image
-                    src="/media/people/portrait.jpg"
-                    alt="Argha"
-                    width={20}
-                    height={20}
-                    className={styles.authorBadgePhoto}
-                  />
-                  <span>Argha</span>
                 </Link>
               </div>
             </>
@@ -176,7 +166,7 @@ export function CyquredNavbar() {
                 </ul>
               </nav>
 
-              {/* Bottom Actions - Dignified, Scholarly */}
+              {/* Bottom Action - Scholarly Bridge */}
               <div className={styles.mobileExpandedFooter}>
                 <Link
                   href="/publications/cyqured"
@@ -185,21 +175,6 @@ export function CyquredNavbar() {
                 >
                   <span>Academic Study & Overview</span>
                   <IconArrowUpRight size={15} />
-                </Link>
-                <Link
-                  href="/"
-                  className={styles.mobilePortfolioBack}
-                  onClick={() => setIsExpanded(false)}
-                >
-                  <Image
-                    src="/media/people/portrait.jpg"
-                    alt="Argha Pratim Saha"
-                    width={18}
-                    height={18}
-                    className={styles.authorBadgePhoto}
-                  />
-                  <span>Argha Pratim Saha &middot; Research Portfolio</span>
-                  <IconArrowUpRight size={13} />
                 </Link>
               </div>
             </div>

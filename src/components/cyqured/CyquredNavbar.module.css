@@ -197,37 +197,6 @@
   box-shadow: 0 0 14px rgba(94, 225, 242, 0.3);
 }
 
-.authorBadgeLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: var(--font-sans, sans-serif);
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: #eaf7fb;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 0.25rem 0.65rem 0.25rem 0.35rem;
-  border-radius: 9999px;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.authorBadgeLink:hover {
-  background: rgba(94, 225, 242, 0.18);
-  border-color: #5ee1f2;
-  color: #5ee1f2;
-}
-
-.authorBadgePhoto {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid rgba(94, 225, 242, 0.4);
-}
-
 /* =========================================================================
    Mobile Dynamic Island & Morphing Menu Animation
    ========================================================================= */
@@ -471,29 +440,6 @@
 .mobilePaperCta:hover {
   background: rgba(94, 225, 242, 0.22);
   border-color: #5ee1f2;
-}
-
-.mobilePortfolioBack {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.6rem 0.8rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  font-family: var(--font-sans, sans-serif);
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: #8fb4bd;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.mobilePortfolioBack:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(94, 225, 242, 0.4);
-  color: #eaf7fb;
 }
 
 @media (min-width: 768px) {
