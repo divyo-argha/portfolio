@@ -60,7 +60,7 @@ function renderInline(text: string): ReactNode[] {
 }
 
 function coverSrcFor(deck: CardDeck) {
-  // .webp — the source .png covers are ~650KB each (busy gradient art
+  // .webp: the source .png covers are ~650KB each (busy gradient art
   // compresses poorly as PNG) and this face loads eagerly for every
   // card back plus the idle deck picker; re-encoding cut that by ~90%
   // with no visible loss.
@@ -68,20 +68,20 @@ function coverSrcFor(deck: CardDeck) {
 }
 
 // Shimmers behind every card image until it finishes loading, then
-// crossfades in — the "skeleton" for individual card art.
+// crossfades in: the "skeleton" for individual card art.
 //
 // fill, not width/height: every caller places this inside a box that's
 // already sized by CSS (the flip faces, thumb faces, idle deck cards, board
 // frame all reach LazyImg through a position:relative/absolute ancestor with
 // a definite aspect-ratio), and card art comes from many source files of
-// varying exact pixel dimensions — fill sizes to that box directly instead of
+// varying exact pixel dimensions: fill sizes to that box directly instead of
 // needing each one's real intrinsic size.
 function LazyImg({ src, alt, eager }: { src: string; alt: string; eager?: boolean }) {
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   // A cached/instant image can finish loading before hydration attaches
-  // onLoad below, so the event never fires — catch that case explicitly.
+  // onLoad below, so the event never fires: catch that case explicitly.
   useEffect(() => {
     if (imgRef.current?.complete) setLoaded(true);
   }, [src]);
@@ -120,7 +120,13 @@ export function GameExperience() {
       return;
     }
     setSelectedId(id);
-    stageRef.current?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+
+    if (typeof window !== "undefined" && window.scrollY > 0) {
+      window.scrollTo({
+        top: 0,
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    }
   }
 
   return (
@@ -281,7 +287,7 @@ function SelectedStage({
                   style={{ "--c": CATEGORY_COLOR[p.category] } as React.CSSProperties}
                   onClick={() => onJump(p.id)}
                 >
-                  {/* Fixed 22x30 chip icon, not fill — no positioned box to
+                  {/* Fixed 22x30 chip icon, not fill: no positioned box to
                       size to here, just a small inline decoration. 782x1110
                       matches the source card art's own aspect ratio; the
                       rendered size comes from .solutionChip img in CSS. */}
