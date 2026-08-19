@@ -61,139 +61,123 @@ export function CyquredNavbar() {
         className={[
           styles.navbarWrapper,
           isScrolled ? styles.navbarFloating : styles.navbarTop,
-          isExpanded ? styles.navbarExpanded : "",
         ].join(" ")}
       >
+        {/* Main Navbar Bar */}
         <div className={styles.islandContainer} ref={containerRef}>
-          {/* Collapsed State: CyQured Logo (Desktop & Mobile) */}
-          {!isExpanded ? (
-            <>
-              {/* Brand Logo Link */}
-              <Link
-                href="/publications/cyqured/game"
-                className={styles.brandLink}
-                aria-label="CyQured Game Home"
-              >
-                <Image
-                  src="/media/publications/cyqured/cyqured-logo.png"
-                  alt="CyQured"
-                  width={130}
-                  height={42}
-                  className={styles.brandLogo}
-                  priority
-                />
-              </Link>
+          {/* Brand Logo Link */}
+          <Link
+            href="/publications/cyqured/game"
+            className={styles.brandLink}
+            aria-label="CyQured Game Home"
+          >
+            <Image
+              src="/media/publications/cyqured/cyqured-logo.png"
+              alt="CyQured"
+              width={130}
+              height={42}
+              className={styles.brandLogo}
+              priority
+            />
+          </Link>
 
-              {/* Desktop Nav Links with Deterministic Route Active State */}
-              <nav className={styles.desktopNav} aria-label="Game Sections">
-                <ul className={styles.navList}>
-                  {GAME_NAV_LINKS.map((link) => {
-                    const isActive = pathname === link.href;
-                    return (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className={[
-                            styles.navLink,
-                            isActive ? styles.navLinkActive : "",
-                          ].join(" ")}
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </nav>
+          {/* Desktop Nav Links with Deterministic Route Active State */}
+          <nav className={styles.desktopNav} aria-label="Game Sections">
+            <ul className={styles.navList}>
+              {GAME_NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={[
+                        styles.navLink,
+                        isActive ? styles.navLinkActive : "",
+                      ].join(" ")}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-              {/* Desktop Direct Bridge to Overview */}
-              <div className={styles.actionGroup}>
-                <Link href="/publications/cyqured" className={styles.paperLink}>
-                  <span>Overview</span>
-                  <IconArrowUpRight size={13} />
-                </Link>
-              </div>
-            </>
-          ) : (
-            /* Expanded State: Morph into Floating Cyberpunk Menu Box */
-            <div className={styles.mobileExpandedContent}>
-              {/* Top Row: Centered Logo + Close Button */}
-              <div className={styles.expandedTopRow}>
-                <Link
-                  href="/publications/cyqured/game"
-                  className={styles.brandLink}
-                  onClick={() => setIsExpanded(false)}
-                >
-                  <Image
-                    src="/media/publications/cyqured/cyqured-logo.png"
-                    alt="CyQured"
-                    width={120}
-                    height={38}
-                    className={styles.brandLogo}
-                  />
-                </Link>
-                <button
-                  type="button"
-                  className={styles.expandedCloseButton}
-                  onClick={() => setIsExpanded(false)}
-                  aria-label="Close navigation"
-                >
-                  <IconClose size={18} />
-                </button>
-              </div>
+          {/* Desktop Direct Bridge to Overview */}
+          <div className={styles.actionGroup}>
+            <Link href="/publications/cyqured" className={styles.paperLink}>
+              <span>Overview</span>
+              <IconArrowUpRight size={13} />
+            </Link>
+          </div>
 
-              {/* Navigation list with Route Active Highlighting */}
-              <nav aria-label="Mobile Game Navigation">
-                <ul className={styles.mobileNavList}>
-                  {GAME_NAV_LINKS.map((link, idx) => {
-                    const isActive = pathname === link.href;
-                    return (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          onClick={() => setIsExpanded(false)}
-                          className={[
-                            styles.mobileNavItemLink,
-                            isActive ? styles.mobileNavItemLinkActive : "",
-                          ].join(" ")}
-                        >
-                          <span className={styles.mobileNavIndex}>0{idx + 1}</span>
-                          <span className={styles.mobileNavLabel}>{link.label}</span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </nav>
-
-              {/* Bottom Action - Scholarly Bridge */}
-              <div className={styles.mobileExpandedFooter}>
-                <Link
-                  href="/publications/cyqured"
-                  className={styles.mobilePaperCta}
-                  onClick={() => setIsExpanded(false)}
-                >
-                  <span>Academic Study & Overview</span>
-                  <IconArrowUpRight size={15} />
-                </Link>
-              </div>
-            </div>
-          )}
+          {/* Mobile Hamburger / Close Button */}
+          <button
+            type="button"
+            className={[
+              styles.mobileMenuToggle,
+              isExpanded ? styles.mobileMenuToggleActive : "",
+            ].join(" ")}
+            onClick={() => setIsExpanded((v) => !v)}
+            aria-label={isExpanded ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isExpanded}
+          >
+            {isExpanded ? (
+              <IconClose size={18} />
+            ) : (
+              <span className={styles.hamburgerLines}>
+                <span />
+                <span />
+                <span />
+              </span>
+            )}
+          </button>
         </div>
 
-        {/* Mobile Prolonged Dynamic Handle underneath the Pill */}
-        {!isExpanded ? (
-          <div className={styles.prolongedHandleRow}>
-            <button
-              type="button"
-              className={styles.prolongedHandle}
-              onClick={() => setIsExpanded(true)}
-              aria-label="Expand game navigation menu"
-            >
-              <span className={styles.notchGrip} />
-            </button>
+        {/* Structured Menu Panel that Expands Downward */}
+        <div
+          className={[
+            styles.expandedMenuPanel,
+            isExpanded ? styles.expandedMenuPanelOpen : "",
+          ].join(" ")}
+          aria-hidden={!isExpanded}
+        >
+          <div className={styles.expandedMenuInner}>
+            <nav aria-label="Mobile Navigation List">
+              <ul className={styles.mobileNavList}>
+                {GAME_NAV_LINKS.map((link, idx) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsExpanded(false)}
+                        className={[
+                          styles.mobileNavItemLink,
+                          isActive ? styles.mobileNavItemLinkActive : "",
+                        ].join(" ")}
+                      >
+                        <span className={styles.mobileNavIndex}>0{idx + 1}</span>
+                        <span className={styles.mobileNavLabel}>{link.label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            <div className={styles.mobileExpandedFooter}>
+              <Link
+                href="/publications/cyqured"
+                className={styles.mobilePaperCta}
+                onClick={() => setIsExpanded(false)}
+              >
+                <span>Academic Study & Overview</span>
+                <IconArrowUpRight size={15} />
+              </Link>
+            </div>
           </div>
-        ) : null}
+        </div>
       </header>
     </>
   );
