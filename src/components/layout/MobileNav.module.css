@@ -217,6 +217,17 @@
   transform: translateX(4px);
 }
 
+.linkActive {
+  background-color: var(--raised);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.linkActive .index {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .index {
   font-family: var(--font-mono);
   font-size: var(--text-xs);

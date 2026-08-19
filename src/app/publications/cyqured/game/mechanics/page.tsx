@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Chakra_Petch } from "next/font/google";
-import { GameBoardSection } from "@/components/cyqured/GameBoardSection";
-import { GameExperience } from "@/components/cyqured/GameExperience";
+import { GameRulesSection } from "@/components/cyqured/GameRulesSection";
 import { IconArrowUpRight, IconScholar } from "@/components/primitives/Icons";
 import { profile, socialLinks } from "@/content/profile";
-import styles from "./game.module.css";
+import styles from "../game.module.css";
 
 const display = Chakra_Petch({
   variable: "--font-cyq-display",
@@ -16,11 +15,11 @@ const display = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "CyQured: Game Assets",
-  description: "Explore all physical CyQured game assets: the 28-cell smart home board, 16 connected devices, and 84 playable action, chance, and scenario cards.",
+  title: "CyQured: Game Mechanics",
+  description: "Explore the game mechanics: 4-step turn progression, STRIDE threat taxonomy, device compromise battles, and victory rules.",
 };
 
-export default function CyQuredAssetsPage() {
+export default function CyQuredMechanicsPage() {
   const scholarLink = socialLinks.find((l) => l.label === "Google Scholar");
 
   return (
@@ -57,42 +56,8 @@ export default function CyQuredAssetsPage() {
           </div>
         </div>
 
-        {/* Hero Section */}
-        <header className={styles.hero}>
-          <p className={styles.eyebrow}>Physical Track & Playable Decks</p>
-          <h1 className={styles.wordmark}>
-            <Image
-              src="/media/publications/cyqured/cyqured-logo.png"
-              alt="cyQured"
-              width={632}
-              height={225}
-              priority
-              className={styles.wordmarkLogo}
-            />
-          </h1>
-          <p className={styles.tagline}>
-            Explore all tangible components of CyQured: the 28-cell connected home board, 16 acquirable smart devices, and all 84 attack, defense, chance, and scenario cards.
-          </p>
-        </header>
-
-        {/* Asset Component 1: 28-Cell Board & 16 Devices */}
-        <GameBoardSection />
-
-        {/* Asset Component 2: 84-Card Interactive Deck Catalogue */}
-        <section id="cards" style={{ marginTop: "4rem", paddingTop: "3rem", borderTop: "1px solid rgba(94, 225, 242, 0.15)" }}>
-          <div style={{ textAlign: "center", maxWidth: "680px", margin: "0 auto 2.5rem" }}>
-            <span style={{ fontFamily: "var(--font-cyq-display, sans-serif)", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#5ee1f2" }}>
-              Card Decks
-            </span>
-            <h2 style={{ fontFamily: "var(--font-cyq-display, sans-serif)", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 700, color: "#eaf7fb", margin: "0.35rem 0 0.75rem" }}>
-              Playable Cards Catalogue
-            </h2>
-            <p style={{ fontFamily: "var(--font-serif, serif)", fontSize: "1.05rem", lineHeight: 1.6, color: "#9fc3cc", margin: 0 }}>
-              Flip through all attack & defense mitigations, chance event triggers, and scenario challenges.
-            </p>
-          </div>
-          <GameExperience />
-        </section>
+        {/* Dedicated Game Mechanics Content */}
+        <GameRulesSection />
 
         {/* Bottom Bridge: Research Paper & Lead Researcher Attribution */}
         <footer className={styles.bottomBridge}>

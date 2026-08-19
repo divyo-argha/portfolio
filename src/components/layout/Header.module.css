@@ -71,6 +71,11 @@
   border-color: var(--accent);
 }
 
+.list a.active {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
 .actions {
   display: flex;
   align-items: center;

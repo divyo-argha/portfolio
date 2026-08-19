@@ -1,0 +1,518 @@
+/* Outer fixed frame */
+.navbarWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  transition:
+    top 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Backdrop for mobile expanded island */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(2, 4, 8, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+}
+
+.backdropVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Top docked state (desktop) */
+.navbarTop {
+  top: 0;
+  padding: 0.75rem 1.25rem 0;
+}
+
+.navbarTop .islandContainer {
+  width: 100%;
+  max-width: 1180px;
+  height: 56px;
+  background: rgba(5, 7, 13, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(94, 225, 242, 0.2);
+  border-radius: 16px;
+  padding: 0 1.25rem;
+}
+
+/* Floating Dynamic Island state (scrolled desktop) */
+.navbarFloating {
+  top: 0.85rem;
+  padding: 0 1rem;
+}
+
+.navbarFloating .islandContainer {
+  width: auto;
+  max-width: 780px;
+  height: 52px;
+  background: rgba(4, 7, 13, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(94, 225, 242, 0.35);
+  border-radius: 9999px;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.75),
+    0 0 25px rgba(94, 225, 242, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 0 1.25rem;
+}
+
+/* Island Container Base */
+.islandContainer {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  transform-origin: top center;
+  transition:
+    width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    max-width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brandLink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.brandLink:hover {
+  transform: translateY(-1px);
+}
+
+.brandLogo {
+  height: 24px;
+  width: auto;
+  filter: invert(1) drop-shadow(0 0 10px rgba(94, 225, 242, 0.55));
+  transition: filter 0.25s ease;
+}
+
+.brandLink:hover .brandLogo {
+  filter: invert(1) drop-shadow(0 0 16px rgba(94, 225, 242, 0.8));
+}
+
+/* Desktop navigation links */
+.desktopNav {
+  display: none;
+  white-space: nowrap;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8fb4bd;
+  text-decoration: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.navLink:hover {
+  color: #eaf7fb;
+  background: rgba(255, 255, 255, 0.05);
+  text-shadow: 0 0 10px rgba(94, 225, 242, 0.5);
+}
+
+.navLinkActive {
+  color: #5ee1f2;
+  background: rgba(94, 225, 242, 0.12);
+  border-color: rgba(94, 225, 242, 0.35);
+  text-shadow: 0 0 10px rgba(94, 225, 242, 0.6);
+}
+
+.actionGroup {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.paperLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5ee1f2;
+  background: rgba(94, 225, 242, 0.1);
+  border: 1px solid rgba(94, 225, 242, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.paperLink:hover {
+  background: rgba(94, 225, 242, 0.22);
+  border-color: #5ee1f2;
+  box-shadow: 0 0 14px rgba(94, 225, 242, 0.3);
+}
+
+.authorBadgeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #eaf7fb;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.25rem 0.65rem 0.25rem 0.35rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.authorBadgeLink:hover {
+  background: rgba(94, 225, 242, 0.18);
+  border-color: #5ee1f2;
+  color: #5ee1f2;
+}
+
+.authorBadgePhoto {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(94, 225, 242, 0.4);
+}
+
+/* =========================================================================
+   Mobile Dynamic Island & Morphing Menu Animation
+   ========================================================================= */
+
+@media (max-width: 767px) {
+  .navbarTop,
+  .navbarFloating {
+    top: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  /* Compact pill state on mobile: centered cyqured logo ONLY */
+  .islandContainer {
+    width: auto;
+    min-width: 170px;
+    height: 48px;
+    padding: 0 1.5rem;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(4, 7, 13, 0.94);
+    border: 1px solid rgba(94, 225, 242, 0.35);
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.75),
+      0 0 20px rgba(94, 225, 242, 0.15);
+    position: relative;
+  }
+
+  .brandLogo {
+    height: 22px;
+  }
+
+  /* Prolonged extension handle attached underneath the pill */
+  .prolongedHandleRow {
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: -2px;
+    transition: opacity 0.2s ease;
+  }
+
+  .prolongedHandle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 84px;
+    height: 12px;
+    background: rgba(4, 7, 13, 0.96);
+    border: 1px solid rgba(94, 225, 242, 0.35);
+    border-top: none;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+    padding: 0;
+    transition: all 0.25s ease;
+  }
+
+  .prolongedHandle:hover {
+    background: rgba(8, 14, 26, 0.98);
+    border-color: #5ee1f2;
+    width: 92px;
+  }
+
+  .notchGrip {
+    width: 34px;
+    height: 2.5px;
+    background: rgba(94, 225, 242, 0.65);
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(94, 225, 242, 0.4);
+    transition: all 0.25s ease;
+  }
+
+  .prolongedHandle:hover .notchGrip {
+    background: #5ee1f2;
+    width: 42px;
+    box-shadow: 0 0 10px rgba(94, 225, 242, 0.8);
+  }
+
+  /* When expanded: Morph the navbar container directly into the floating menu box! */
+  .navbarExpanded .islandContainer {
+    width: min(calc(100vw - 2rem), 400px);
+    max-width: 400px;
+    height: auto;
+    border-radius: 20px;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 1.25rem;
+    background: rgba(6, 10, 18, 0.96);
+    border: 1px solid rgba(94, 225, 242, 0.4);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.85),
+      0 0 35px rgba(94, 225, 242, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .navbarExpanded .prolongedHandleRow {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Expanded Card Content Elements */
+.mobileExpandedContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  animation: fadeInContent 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.expandedTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(94, 225, 242, 0.18);
+  width: 100%;
+}
+
+.expandedCloseButton {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #eaf7fb;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.expandedCloseButton:hover {
+  background: rgba(94, 225, 242, 0.2);
+  border-color: #5ee1f2;
+  color: #5ee1f2;
+}
+
+.mobileNavList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.mobileNavItemLink {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1.1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(94, 225, 242, 0.15);
+  border-radius: 12px;
+  text-decoration: none;
+  color: #eaf7fb;
+  transition: all 0.2s ease;
+}
+
+.mobileNavItemLink:hover {
+  background: rgba(94, 225, 242, 0.14);
+  border-color: #5ee1f2;
+  transform: translateX(4px);
+}
+
+.mobileNavItemLinkActive {
+  background: rgba(94, 225, 242, 0.16);
+  border-color: #5ee1f2;
+  box-shadow: 0 0 16px rgba(94, 225, 242, 0.2);
+}
+
+.mobileNavItemLinkActive .mobileNavIndex {
+  background: #5ee1f2;
+  color: #05070d;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.mobileNavItemLinkActive .mobileNavLabel {
+  color: #5ee1f2;
+}
+
+.mobileNavIndex {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #5ee1f2;
+  transition: all 0.2s ease;
+}
+
+.mobileNavLabel {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.mobileExpandedFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(94, 225, 242, 0.18);
+  width: 100%;
+}
+
+.mobilePaperCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, rgba(94, 225, 242, 0.15) 0%, rgba(94, 225, 242, 0.05) 100%);
+  border: 1px solid rgba(94, 225, 242, 0.35);
+  border-radius: 12px;
+  color: #5ee1f2;
+  text-decoration: none;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+
+.mobilePaperCta:hover {
+  background: rgba(94, 225, 242, 0.22);
+  border-color: #5ee1f2;
+}
+
+.mobilePortfolioBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #8fb4bd;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mobilePortfolioBack:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(94, 225, 242, 0.4);
+  color: #eaf7fb;
+}
+
+@media (min-width: 768px) {
+  .desktopNav {
+    display: block;
+  }
+  .actionGroup {
+    display: flex;
+  }
+  .prolongedHandleRow,
+  .mobileExpandedContent,
+  .backdrop {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbarWrapper,
+  .islandContainer,
+  .prolongedHandle,
+  .backdrop,
+  .mobileNavItemLink {
+    transition: none !important;
+    animation: none !important;
+  }
+}

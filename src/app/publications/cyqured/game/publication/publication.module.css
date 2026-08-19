@@ -1,0 +1,244 @@
+.paperCard {
+  background: rgba(8, 14, 26, 0.85);
+  border: 1px solid rgba(94, 225, 242, 0.3);
+  border-radius: 20px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.75),
+    0 0 30px rgba(94, 225, 242, 0.12);
+  margin-bottom: 2.5rem;
+}
+
+.venueBadge {
+  display: inline-block;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #5ee1f2;
+  background: rgba(94, 225, 242, 0.12);
+  border: 1px solid rgba(94, 225, 242, 0.35);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.paperTitle {
+  font-family: var(--font-sans, sans-serif);
+  font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: #eaf7fb;
+  margin: 0 0 1rem;
+}
+
+.authorList {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #9fc3cc;
+  margin-bottom: 1.5rem;
+}
+
+.authorHighlight {
+  color: #eaf7fb;
+  font-weight: 600;
+}
+
+.contributionNote {
+  font-size: 0.82rem;
+  color: #5ee1f2;
+  font-style: italic;
+}
+
+.abstractBlock {
+  background: rgba(5, 9, 16, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.abstractHeading {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5ee1f2;
+  margin: 0 0 0.65rem;
+}
+
+.abstractText {
+  font-family: var(--font-serif, serif);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #8fb4bd;
+  margin: 0 0 0.75rem;
+}
+
+.abstractText:last-child {
+  margin-bottom: 0;
+}
+
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #05070d;
+  background: #5ee1f2;
+  border: 1px solid #5ee1f2;
+  padding: 0.85rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(94, 225, 242, 0.4);
+  transition: all 0.2s ease;
+}
+
+.downloadButton:hover {
+  background: #84ebf8;
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(94, 225, 242, 0.6);
+}
+
+.overviewButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #eaf7fb;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(94, 225, 242, 0.35);
+  padding: 0.85rem 1.4rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.overviewButton:hover {
+  background: rgba(94, 225, 242, 0.18);
+  border-color: #5ee1f2;
+  color: #5ee1f2;
+}
+
+/* Overview Section Banner */
+.overviewSection {
+  background: linear-gradient(135deg, rgba(8, 14, 26, 0.9) 0%, rgba(5, 8, 16, 0.95) 100%);
+  border: 1px solid rgba(94, 225, 242, 0.25);
+  border-radius: 18px;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  margin-bottom: 2.5rem;
+}
+
+.overviewInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .overviewInner {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.overviewEyebrow {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #5ee1f2;
+}
+
+.overviewTitle {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: #eaf7fb;
+  margin: 0.35rem 0 0.5rem;
+}
+
+.overviewDesc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #9fc3cc;
+  margin: 0;
+  max-width: 620px;
+}
+
+.overviewCtaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #5ee1f2;
+  background: rgba(94, 225, 242, 0.1);
+  border: 1px solid rgba(94, 225, 242, 0.35);
+  padding: 0.8rem 1.4rem;
+  border-radius: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.overviewCtaButton:hover {
+  background: rgba(94, 225, 242, 0.22);
+  border-color: #5ee1f2;
+  color: #ffffff;
+}
+
+/* Citation Box */
+.citationSection {
+  background: rgba(8, 14, 26, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.citationHeading {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #eaf7fb;
+  margin: 0 0 1rem;
+}
+
+.codeWrapper {
+  background: #030508;
+  border: 1px solid rgba(94, 225, 242, 0.2);
+  border-radius: 10px;
+  padding: 1.25rem;
+  overflow-x: auto;
+}
+
+.codeBlock {
+  font-family: var(--font-code, monospace);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #5ee1f2;
+  margin: 0;
+}

@@ -13,14 +13,22 @@ import styles from "./MobileNav.module.css";
 // in sync here since the unmount timer can't read a CSS custom property.
 const CLOSE_DURATION_MS = 320;
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Email: IconMail,
   "Google Scholar": IconScholar,
   GitHub: IconGithub,
   LinkedIn: IconLinkedin,
 };
 
-export function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function MobileNav({
+  open,
+  onClose,
+  activeSection,
+}: {
+  open: boolean;
+  onClose: () => void;
+  activeSection?: string;
+}) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const navigateToSection = useSectionNav();
   const [rendered, setRendered] = useState(open);
@@ -154,18 +162,25 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
 
         <nav className={styles.navWrap}>
           <ul className={styles.list}>
-            {siteConfig.navLinks.map((link, index) => (
-              <li
-                key={link.href}
-                className={styles.item}
-                style={{ transitionDelay: visible ? `${60 + index * 35}ms` : "0ms" }}
-              >
-                <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className={styles.link}>
-                  <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
-                  <span className={styles.linkLabel}>{link.label}</span>
-                </a>
-              </li>
-            ))}
+            {siteConfig.navLinks.map((link, index) => {
+              const isActive = activeSection === link.href;
+              return (
+                <li
+                  key={link.href}
+                  className={styles.item}
+                  style={{ transitionDelay: visible ? `${60 + index * 35}ms` : "0ms" }}
+                >
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                    className={[styles.link, isActive ? styles.linkActive : ""].join(" ")}
+                  >
+                    <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
+                    <span className={styles.linkLabel}>{link.label}</span>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 

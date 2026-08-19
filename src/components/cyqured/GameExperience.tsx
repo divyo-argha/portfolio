@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { cardFaces, type CardCategory, type CardDeck, type CardFace } from "@/app/publications/cyqured/cardData";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { IconAttack, IconDefense, IconChance, IconScenario, IconBoard } from "@/components/primitives/Icons";
+import { IconAttack, IconDefense, IconChance, IconScenario } from "@/components/primitives/Icons";
 import styles from "./GameExperience.module.css";
 
 const CATEGORY_COLOR: Record<CardCategory, string> = {
@@ -46,8 +46,7 @@ const DEVICE_INFO: Record<string, { points: number; color: string }> = {
   "Home Server": { points: 20, color: "#7c8a93" },
 };
 
-const FILTERS: { id: CardCategory | "all"; label: string; Icon?: typeof IconAttack }[] = [
-  { id: "all", label: "All" },
+const FILTERS: { id: CardCategory; label: string; Icon: typeof IconAttack }[] = [
   { id: "attack", label: "Attack", Icon: IconAttack },
   { id: "defense", label: "Defense", Icon: IconDefense },
   { id: "chance", label: "Chance", Icon: IconChance },
@@ -103,13 +102,13 @@ function LazyImg({ src, alt, eager }: { src: string; alt: string; eager?: boolea
 }
 
 export function GameExperience() {
-  const [filter, setFilter] = useState<CardCategory | "all">("all");
+  const [filter, setFilter] = useState<CardCategory>("attack");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
 
   const visible = useMemo(
-    () => (filter === "all" ? cardFaces : cardFaces.filter((c) => c.category === filter)),
+    () => cardFaces.filter((c) => c.category === filter),
     [filter],
   );
   const selected = selectedId ? cardFaces.find((c) => c.id === selectedId) ?? null : null;
@@ -146,7 +145,7 @@ export function GameExperience() {
         </div>
       </div>
 
-      <div className={styles.filterBar} role="tablist" aria-label="Filter cards">
+      <div className={styles.filterBar} role="tablist" aria-label="Filter cards by category">
         {FILTERS.map(({ id, label, Icon }) => (
           <button
             key={id}
@@ -154,12 +153,12 @@ export function GameExperience() {
             role="tab"
             aria-selected={filter === id}
             className={filter === id ? styles.filterActive : styles.filter}
-            style={id !== "all" ? ({ "--f": CATEGORY_COLOR[id as CardCategory] } as React.CSSProperties) : undefined}
+            style={{ "--f": CATEGORY_COLOR[id] } as React.CSSProperties}
             onClick={() => setFilter(id)}
           >
-            {Icon ? <Icon size={14} /> : null}
+            <Icon size={14} />
             {label}
-            <span className={styles.count}>{id === "all" ? cardFaces.length : cardFaces.filter((c) => c.category === id).length}</span>
+            <span className={styles.count}>{cardFaces.filter((c) => c.category === id).length}</span>
           </button>
         ))}
       </div>
@@ -193,8 +192,6 @@ export function GameExperience() {
           );
         })}
       </div>
-
-      <BoardPanel />
     </div>
   );
 }
@@ -329,23 +326,6 @@ function FlipCard({ card, reducedMotion }: { card: CardFace; reducedMotion: bool
         <div className={[styles.face, styles.faceBack].join(" ")}>
           <LazyImg src={coverSrc} alt="" eager />
         </div>
-      </div>
-    </div>
-  );
-}
-
-function BoardPanel() {
-  return (
-    <div className={styles.boardPanel}>
-      <div className={styles.boardHeading}>
-        <IconBoard size={20} />
-        <span>The board</span>
-      </div>
-      <div className={styles.boardFrame}>
-        <LazyImg
-          src="/media/publications/cyqured/board.webp"
-          alt="The CyQured board: a 28-cell track of 16 devices, special cells, and three card decks at the center."
-        />
       </div>
     </div>
   );
