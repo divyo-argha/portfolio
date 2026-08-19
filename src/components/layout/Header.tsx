@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import { useSectionNav } from "@/hooks/useSectionNav";
 import { Container } from "@/components/primitives/Container";
-import { IconMenu } from "@/components/primitives/Icons";
 import { ThemeToggle } from "./ThemeToggle";
 import { MobileNav } from "./MobileNav";
 import styles from "./Header.module.css";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const navigateToSection = useSectionNav();
   const pathname = usePathname();
   const dark = pathname === "/publications/cyqured/game";
@@ -21,6 +21,13 @@ export function Header() {
   function handleAnchorClick(event: MouseEvent<HTMLAnchorElement>, href: string) {
     event.preventDefault();
     navigateToSection(href);
+  }
+
+  // Returns focus to the toggle button on close (Escape, backdrop click, nav
+  // link click) so keyboard/screen-reader users aren't dropped onto <body>.
+  function closeMenu() {
+    setOpen(false);
+    menuButtonRef.current?.focus();
   }
 
   return (
@@ -47,20 +54,25 @@ export function Header() {
           <div className={styles.actions}>
             <ThemeToggle />
             <button
+              ref={menuButtonRef}
               type="button"
-              className={styles.menuButton}
-              onClick={() => setOpen(true)}
+              className={open ? `${styles.menuButton} ${styles.menuButtonOpen}` : styles.menuButton}
+              onClick={() => setOpen((value) => !value)}
               aria-haspopup="dialog"
               aria-expanded={open}
-              aria-label="Open navigation"
+              aria-label={open ? "Close navigation" : "Open navigation"}
             >
-              <IconMenu />
+              <span className={styles.menuIcon} aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
             </button>
           </div>
         </div>
       </Container>
 
-      <MobileNav open={open} onClose={() => setOpen(false)} />
+      <MobileNav open={open} onClose={closeMenu} />
     </header>
   );
 }
