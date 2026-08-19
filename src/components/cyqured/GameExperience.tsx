@@ -97,11 +97,44 @@ function LazyImg({ src, alt, eager = false }: { src: string; alt: string; eager?
   );
 }
 
+/**
+ * Smooth, luxurious programmatic scrolling with easeInOutCubic easing.
+ * Eliminates snappy browser defaults and produces a silky, deliberate camera glide.
+ */
+function smoothScrollTo(targetY: number, duration = 850) {
+  if (typeof window === "undefined") return;
+
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  if (Math.abs(distance) < 4) return;
+
+  let startTime: number | null = null;
+
+  const easeInOutCubic = (t: number) =>
+    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  function animationStep(currentTime: number) {
+    if (!startTime) startTime = currentTime;
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = easeInOutCubic(progress);
+
+    window.scrollTo(0, startY + distance * ease);
+
+    if (progress < 1) {
+      requestAnimationFrame(animationStep);
+    }
+  }
+
+  requestAnimationFrame(animationStep);
+}
+
 export function GameExperience() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const stageRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchWrapperRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
@@ -156,22 +189,27 @@ export function GameExperience() {
   }, []);
 
   const updateUrl = useCallback(
-    (nextCategory: CardCategory, nextCardId: string | null, nextQ?: string) => {
+    (newFilter: CardCategory, newCardId: string | null, newSearch: string) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set("tab", "cards");
-      params.set("category", nextCategory);
-      if (nextCardId) {
-        params.set("card", nextCardId);
+
+      if (newSearch.trim()) {
+        params.set("q", newSearch.trim());
+      } else {
+        params.delete("q");
+      }
+
+      params.set("category", newFilter);
+
+      if (newCardId) {
+        params.set("card", newCardId);
       } else {
         params.delete("card");
       }
-      if (typeof nextQ === "string" && nextQ.trim()) {
-        params.set("q", nextQ.trim());
-      } else if (nextQ === "") {
-        params.delete("q");
-      }
+
       const qs = params.toString();
-      router.replace(`${pathname}?${qs}`, { scroll: false });
+      const nextUrl = qs ? `${pathname}?${qs}` : pathname;
+      router.replace(nextUrl, { scroll: false });
     },
     [searchParams, router, pathname],
   );
@@ -183,16 +221,40 @@ export function GameExperience() {
     updateUrl(filter, selected?.id ?? null, "");
   }, [filter, selected?.id, updateUrl]);
 
-  // Keyboard shortcut: Escape closes search
+  const closeCard = useCallback(() => {
+    updateUrl(filter, null, searchQuery);
+
+    if (gridRef.current) {
+      setTimeout(() => {
+        if (!gridRef.current) return;
+        const rect = gridRef.current.getBoundingClientRect();
+        const navbarOffset = 96;
+        const targetY = Math.max(0, window.scrollY + rect.top - navbarOffset);
+
+        if (reducedMotion) {
+          window.scrollTo({ top: targetY, behavior: "auto" });
+          return;
+        }
+
+        smoothScrollTo(targetY, 850);
+      }, 100);
+    }
+  }, [filter, searchQuery, updateUrl, reducedMotion]);
+
+  // Keyboard shortcut: Escape closes search or selected card
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape" && isSearchOpen) {
-        handleCloseSearch();
+      if (e.key === "Escape") {
+        if (isSearchOpen) {
+          handleCloseSearch();
+        } else if (selected) {
+          closeCard();
+        }
       }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isSearchOpen, handleCloseSearch]);
+  }, [isSearchOpen, selected, handleCloseSearch, closeCard]);
 
   // Real-time search matching strictly across card names (title) and card contents (body & targets)
   // Excludes card types/categories so category names do not match every card of that type
@@ -238,24 +300,33 @@ export function GameExperience() {
     updateUrl(filter, selected?.id ?? null, val);
   }
 
-  const scrollToStage = useCallback(() => {
-    if (typeof window === "undefined" || !stageRef.current) return;
-    const rect = stageRef.current.getBoundingClientRect();
-    // Navbar floating island pill is ~60px + top offset ~14px = ~74px.
-    // Leaving a crisp gap of ~12px below the pill gives an offset of 86px.
-    const navbarOffset = 86;
-    const targetY = window.scrollY + rect.top - navbarOffset;
+  const scrollToStage = useCallback(
+    (delayMs = 120) => {
+      if (typeof window === "undefined" || !stageRef.current) return;
 
-    window.scrollTo({
-      top: Math.max(0, targetY),
-      behavior: reducedMotion ? "auto" : "smooth",
-    });
-  }, [reducedMotion]);
+      setTimeout(() => {
+        if (!stageRef.current) return;
+        const rect = stageRef.current.getBoundingClientRect();
+        // Navbar floating island pill is ~60px + top offset ~14px = ~74px.
+        // Leaving a crisp gap of ~12px below the pill gives an offset of 86px.
+        const navbarOffset = 86;
+        const targetY = Math.max(0, window.scrollY + rect.top - navbarOffset);
+
+        if (reducedMotion) {
+          window.scrollTo({ top: targetY, behavior: "auto" });
+          return;
+        }
+
+        smoothScrollTo(targetY, 900);
+      }, delayMs);
+    },
+    [reducedMotion],
+  );
 
   function openCard(id: string) {
     if (id === selected?.id) {
-      // Toggle off / close card
-      updateUrl(filter, null, searchQuery);
+      // Toggle off / close card with smooth return scroll
+      closeCard();
       return;
     }
 
@@ -264,7 +335,8 @@ export function GameExperience() {
       updateUrl(target.category, target.id, searchQuery);
     }
 
-    scrollToStage();
+    // Scroll up to stage with deliberate 120ms delay allowing 3D flip card initiation
+    scrollToStage(120);
   }
 
   function handleSelectSuggestion(card: CardFace) {
@@ -282,7 +354,7 @@ export function GameExperience() {
         >
           <div key={selected?.id ?? "idle"} className={reducedMotion ? undefined : styles.stageSwap}>
             {selected ? (
-              <SelectedStage card={selected} onJump={openCard} reducedMotion={reducedMotion} />
+              <SelectedStage card={selected} onJump={openCard} onClose={closeCard} reducedMotion={reducedMotion} />
             ) : (
               <IdleStage onPick={openCard} />
             )}
@@ -291,7 +363,7 @@ export function GameExperience() {
       </div>
 
       {/* Filter Bar with Animated Expanding Search Bar */}
-      <div className={styles.filterBarWrapper} ref={searchWrapperRef}>
+      <div ref={gridRef} className={styles.filterBarWrapper}>
         <div className={styles.filterBar}>
           {/* 4 Category Tabs (smoothly collapses when search expands) */}
           <div
@@ -319,21 +391,25 @@ export function GameExperience() {
             ))}
           </div>
 
-          {/* Search Pill (Collapsed State) */}
-          {!isSearchOpen ? (
-            <button
-              type="button"
-              className={styles.searchPill}
-              onClick={handleOpenSearch}
-              aria-label="Search all cards"
-            >
-              <IconSearch size={14} />
-              <span>Search</span>
-            </button>
-          ) : (
-            /* Search Bar & Dropdown Wrapper */
-            <div className={styles.searchBarExpandedWrapper}>
-              <div className={styles.searchBarExpanded}>
+          {/* Morphing Search Container (Seamlessly expands and collapses in two-way animation) */}
+          <div
+            className={[
+              styles.searchContainer,
+              isSearchOpen ? styles.searchContainerExpanded : styles.searchContainerCollapsed,
+            ].join(" ")}
+          >
+            {!isSearchOpen ? (
+              <button
+                type="button"
+                className={styles.searchPillTrigger}
+                onClick={handleOpenSearch}
+                aria-label="Search all cards"
+              >
+                <IconSearch size={14} />
+                <span>Search</span>
+              </button>
+            ) : (
+              <div className={styles.searchBarInner}>
                 <span className={styles.searchIconGlow}>
                   <IconSearch size={16} />
                 </span>
@@ -362,54 +438,54 @@ export function GameExperience() {
                   <IconClose size={16} />
                 </button>
               </div>
+            )}
 
-              {/* Real-time Live Search Suggestions Dropdown */}
-              {isSearchOpen && showSuggestions && searchQuery.trim() ? (
-                <div className={styles.suggestionsDropdown} role="listbox" aria-label="Card search suggestions">
-                  {searchMatches.length > 0 ? (
-                    searchMatches.map((card) => (
-                      <button
-                        key={card.id}
-                        type="button"
-                        role="option"
-                        aria-selected={card.id === selected?.id}
-                        className={styles.suggestionItem}
-                        onClick={() => handleSelectSuggestion(card)}
-                      >
-                        <div className={styles.suggestionThumbWrap}>
-                          <LazyImg src={card.src} alt={card.title} />
+            {/* Real-time Live Search Suggestions Dropdown */}
+            {isSearchOpen && showSuggestions && searchQuery.trim() ? (
+              <div className={styles.suggestionsDropdown} role="listbox" aria-label="Card search suggestions">
+                {searchMatches.length > 0 ? (
+                  searchMatches.map((card) => (
+                    <button
+                      key={card.id}
+                      type="button"
+                      role="option"
+                      aria-selected={card.id === selected?.id}
+                      className={styles.suggestionItem}
+                      onClick={() => handleSelectSuggestion(card)}
+                    >
+                      <div className={styles.suggestionThumbWrap}>
+                        <LazyImg src={card.src} alt={card.title} />
+                      </div>
+                      <div className={styles.suggestionLeft}>
+                        <div className={styles.suggestionMetaRow}>
+                          <span
+                            className={styles.suggestionCatBadge}
+                            style={{ background: CATEGORY_COLOR[card.category] }}
+                          >
+                            {card.category}
+                          </span>
+                          {card.strideType ? (
+                            <span className={styles.suggestionStride}>· {card.strideType}</span>
+                          ) : null}
                         </div>
-                        <div className={styles.suggestionLeft}>
-                          <div className={styles.suggestionMetaRow}>
-                            <span
-                              className={styles.suggestionCatBadge}
-                              style={{ background: CATEGORY_COLOR[card.category] }}
-                            >
-                              {card.category}
-                            </span>
-                            {card.strideType ? (
-                              <span className={styles.suggestionStride}>· {card.strideType}</span>
-                            ) : null}
-                          </div>
-                          <h4 className={styles.suggestionTitle}>{card.title}</h4>
-                          <p className={styles.suggestionSnippet}>
-                            {card.body.replace(/\*\*/g, "")}
-                          </p>
-                        </div>
-                        <span className={styles.suggestionArrow}>
-                          <IconArrowUpRight size={14} />
-                        </span>
-                      </button>
-                    ))
-                  ) : (
-                    <div style={{ padding: "0.85rem", textAlign: "center", color: "#8fb4bd", fontSize: "0.82rem" }}>
-                      No cards match &ldquo;{searchQuery}&rdquo;
-                    </div>
-                  )}
-                </div>
-              ) : null}
-            </div>
-          )}
+                        <h4 className={styles.suggestionTitle}>{card.title}</h4>
+                        <p className={styles.suggestionSnippet}>
+                          {card.body.replace(/\*\*/g, "")}
+                        </p>
+                      </div>
+                      <span className={styles.suggestionArrow}>
+                        <IconArrowUpRight size={14} />
+                      </span>
+                    </button>
+                  ))
+                ) : (
+                  <div style={{ padding: "0.85rem", textAlign: "center", color: "#8fb4bd", fontSize: "0.82rem" }}>
+                    No cards match &ldquo;{searchQuery}&rdquo;
+                  </div>
+                )}
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
 
@@ -431,15 +507,23 @@ export function GameExperience() {
                 }
                 onClick={() => openCard(card.id)}
               >
-                <span className={[styles.thumbFlipper, isActive ? styles.thumbFlipped : ""].join(" ")}>
-                  <span className={styles.thumbFace}>
-                    <LazyImg src={card.src} alt={card.title} />
+                {/* Unified 3D Group: Card + Shadow move and rotate together */}
+                <span className={[styles.cardGroup, isActive ? styles.cardGroupActive : ""].join(" ")}>
+                  {/* 3D Tilted Cast Shadow */}
+                  <span className={styles.cardShadow} aria-hidden="true" />
+
+                  {/* 3D Flip Container */}
+                  <span className={[styles.thumbFlipper, isActive ? styles.thumbFlipped : ""].join(" ")}>
+                    <span className={styles.thumbFace}>
+                      <LazyImg src={card.src} alt={card.title} />
+                    </span>
+                    <span className={[styles.thumbFace, styles.thumbFaceBack].join(" ")}>
+                      <LazyImg src={coverSrcFor(card.deck)} alt="" />
+                    </span>
                   </span>
-                  <span className={[styles.thumbFace, styles.thumbFaceBack].join(" ")}>
-                    <LazyImg src={coverSrcFor(card.deck)} alt="" />
-                  </span>
+
+                  <span className={styles.thumbLabel}>{card.title}</span>
                 </span>
-                <span className={styles.thumbLabel}>{card.title}</span>
               </button>
             );
           })}
@@ -487,10 +571,12 @@ function IdleStage({ onPick }: { onPick: (id: string) => void }) {
 function SelectedStage({
   card,
   onJump,
+  onClose,
   reducedMotion,
 }: {
   card: CardFace;
   onJump: (id: string) => void;
+  onClose: () => void;
   reducedMotion: boolean;
 }) {
   const pairs = (card.pairIds ?? []).map((id) => cardFaces.find((c) => c.id === id)).filter((c): c is CardFace => Boolean(c));
@@ -500,10 +586,23 @@ function SelectedStage({
       <FlipCard card={card} reducedMotion={reducedMotion} />
 
       <div className={styles.detail}>
-        <span className={styles.detailBadge}>
-          {card.category}
-          {card.strideType ? ` · ${card.strideType}` : ""}
-        </span>
+        <div className={styles.detailHeaderRow}>
+          <span className={styles.detailBadge}>
+            {card.category}
+            {card.strideType ? ` · ${card.strideType}` : ""}
+          </span>
+          <button
+            type="button"
+            className={styles.closeStageBtn}
+            onClick={onClose}
+            title="Close card description"
+            aria-label="Close card description"
+          >
+            <IconClose size={13} />
+            <span>Close</span>
+          </button>
+        </div>
+
         <h3 className={styles.detailTitle}>{card.title}</h3>
         <div className={styles.detailBody}>
           {card.body.split("\n\n").map((p) => (

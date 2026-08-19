@@ -25,17 +25,19 @@
 }
 
 .stageSwap {
-  animation: stageIn 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+  animation: stageIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes stageIn {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(16px) scale(0.97);
+    filter: blur(4px);
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+    filter: blur(0px);
   }
 }
 
@@ -122,6 +124,7 @@
   perspective: 1600px;
   cursor: pointer;
   margin-inline: auto;
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
 @media (min-width: 720px) {
@@ -130,17 +133,29 @@
   }
 }
 
+.flipOuter:hover {
+  transform: translateY(-8px) scale(1.05);
+}
+
 .flipInner {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
   transform: rotateY(28deg);
-  transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.25, 1);
+  transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.flipOuter:hover .flipInner {
+  transform: rotateY(0deg);
 }
 
 .flipInner.flipped {
-  transform: rotateY(28deg) rotateY(180deg);
+  transform: rotateY(208deg);
+}
+
+.flipOuter:hover .flipInner.flipped {
+  transform: rotateY(180deg);
 }
 
 .face {
@@ -149,8 +164,20 @@
   backface-visibility: hidden;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4);
+  border: 1px solid color-mix(in srgb, var(--c) 45%, #22333b);
+  box-shadow:
+    -8px 16px 36px rgba(0, 0, 0, 0.65),
+    -2px 4px 14px color-mix(in srgb, var(--c) 30%, transparent);
+  transition:
+    box-shadow 0.45s cubic-bezier(0.2, 0.9, 0.25, 1),
+    border-color 0.35s ease;
+}
+
+.flipOuter:hover .face {
+  border-color: color-mix(in srgb, var(--c) 85%, #ffffff);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.8),
+    0 0 32px color-mix(in srgb, var(--c) 65%, transparent);
 }
 
 .face img {
@@ -162,6 +189,7 @@
 
 .faceBack {
   transform: rotateY(180deg);
+  border: 1px solid color-mix(in srgb, var(--c) 45%, #22333b);
 }
 
 /* ---- detail panel ---- */
@@ -171,6 +199,41 @@
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  width: 100%;
+}
+
+.detailHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.closeStageBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #8fb4bd;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.closeStageBtn:hover {
+  background: rgba(94, 225, 242, 0.15);
+  border-color: #5ee1f2;
+  color: #eaf7fb;
+  box-shadow: 0 0 14px rgba(94, 225, 242, 0.25);
+  transform: translateY(-1px);
 }
 
 .detailBadge {
@@ -317,30 +380,29 @@
 
 .categoryPillGroup {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   max-width: 650px;
   opacity: 1;
   transform: scale(1) translateX(0);
+  overflow: hidden;
   transition:
     max-width 0.48s cubic-bezier(0.2, 0.9, 0.25, 1),
-    opacity 0.3s ease,
-    transform 0.48s cubic-bezier(0.2, 0.9, 0.25, 1);
+    opacity 0.35s ease,
+    transform 0.48s cubic-bezier(0.2, 0.9, 0.25, 1),
+    gap 0.48s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
 .categoryPillGroupCollapsed {
-  max-width: 0;
-  max-height: 0;
-  opacity: 0;
-  transform: scale(0.9) translateX(-18px);
-  pointer-events: none;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  gap: 0;
-  display: none;
+  max-width: 0 !important;
+  opacity: 0 !important;
+  transform: scale(0.92) translateX(-20px) !important;
+  pointer-events: none !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .filter,
@@ -381,69 +443,79 @@
   opacity: 0.7;
 }
 
-/* Search Pill (Collapsed State) */
-.searchPill {
+/* ---- Morphing Search Container (Two-Way Animated) ---- */
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 9999px;
+  overflow: visible;
+  transition:
+    max-width 0.48s cubic-bezier(0.2, 0.9, 0.25, 1),
+    width 0.48s cubic-bezier(0.2, 0.9, 0.25, 1),
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.48s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.searchContainerCollapsed {
+  width: auto;
+  max-width: 120px;
+  background: rgba(94, 225, 242, 0.08);
+  border: 1px solid rgba(94, 225, 242, 0.35);
+}
+
+.searchContainerCollapsed:hover {
+  background: rgba(94, 225, 242, 0.2);
+  border-color: #5ee1f2;
+  box-shadow: 0 0 16px rgba(94, 225, 242, 0.35);
+  transform: translateY(-1px);
+}
+
+.searchPillTrigger {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   padding: 0.45rem 1rem;
-  border-radius: 999px;
+  background: transparent;
+  border: none;
   font-family: var(--font-cyq-display, sans-serif);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  cursor: pointer;
-  border: 1px solid rgba(94, 225, 242, 0.35);
-  background: rgba(94, 225, 242, 0.08);
   color: #5ee1f2;
+  cursor: pointer;
   white-space: nowrap;
-  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
-.searchPill:hover {
-  background: rgba(94, 225, 242, 0.2);
-  border-color: #5ee1f2;
-  color: #ffffff;
-  box-shadow: 0 0 16px rgba(94, 225, 242, 0.35);
-  transform: translateY(-1px);
-}
-
-/* Search Bar Wrapper & Expanded State */
-.searchBarExpandedWrapper {
-  position: relative;
+.searchContainerExpanded {
   width: 100%;
   max-width: 640px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.searchBarExpanded {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  width: 100%;
   background: rgba(8, 14, 26, 0.96);
   border: 1px solid rgba(94, 225, 242, 0.45);
-  border-radius: 9999px;
-  padding: 0.35rem 0.6rem 0.35rem 1.1rem;
   box-shadow:
     0 16px 40px rgba(0, 0, 0, 0.8),
     0 0 25px rgba(94, 225, 242, 0.2),
     0 0 60px rgba(255, 255, 255, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  animation: expandSearchBar 0.45s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
-@keyframes expandSearchBar {
+.searchBarInner {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.35rem 0.6rem 0.35rem 1.1rem;
+  animation: fadeInSearchContent 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+@keyframes fadeInSearchContent {
   from {
-    max-width: 140px;
-    opacity: 0.5;
+    opacity: 0;
     transform: scale(0.96);
   }
   to {
-    max-width: 100%;
     opacity: 1;
     transform: scale(1);
   }
@@ -705,45 +777,74 @@
   position: relative;
   aspect-ratio: 782 / 1110;
   margin: -7px;
-  border-radius: 10px;
-  cursor: pointer;
-  perspective: 900px;
   background: none;
   border: none;
   padding: 0;
+  cursor: pointer;
   animation: rise 0.5s ease-out both;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  perspective: 1200px;
 }
 
-.thumb:hover,
-.thumbActive:hover {
-  transform: translateY(-6px) scale(1.08);
-  box-shadow: 0 16px 34px color-mix(in srgb, var(--c) 40%, transparent);
-  z-index: 2;
-}
-
-.thumbActive {
-  z-index: 1;
-  box-shadow: 0 10px 26px color-mix(in srgb, var(--c) 35%, transparent);
-}
-
-.thumbFlipper {
+/* ---- 3D Group: Holds the card body AND the tilted shadow together ---- */
+.cardGroup {
   position: relative;
   display: block;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
   transform: rotateY(28deg);
-  transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.25, 1);
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.thumb:hover .cardGroup,
+.thumbActive:hover .cardGroup {
+  transform: rotateY(0deg) translateY(-8px) scale(1.08);
+  z-index: 10;
+}
+
+.cardGroupActive {
+  z-index: 5;
+}
+
+/* 3D Tilted Cast Shadow: Bound to the card's 3D rotation plane */
+.cardShadow {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow:
+    -8px 16px 28px rgba(0, 0, 0, 0.75),
+    -2px 4px 10px color-mix(in srgb, var(--c) 35%, transparent);
+  transform: translateZ(-2px);
+  pointer-events: none;
+  transition: box-shadow 0.45s cubic-bezier(0.2, 0.9, 0.25, 1), transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.thumb:hover .cardShadow,
+.thumbActive:hover .cardShadow {
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.85),
+    0 0 28px color-mix(in srgb, var(--c) 65%, transparent);
+  transform: translateZ(-4px);
+}
+
+.cardGroupActive .cardShadow {
+  box-shadow:
+    -8px 16px 32px rgba(0, 0, 0, 0.8),
+    0 0 22px color-mix(in srgb, var(--c) 60%, transparent);
+}
+
+/* ---- 3D Flip Container ---- */
+.thumbFlipper {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
 .thumbFlipper.thumbFlipped {
-  transform: rotateY(208deg);
-}
-
-.thumb:hover .thumbFlipper,
-.thumbActive:hover .thumbFlipper {
-  transform: rotateY(0deg);
+  transform: rotateY(180deg);
 }
 
 .thumbFace {
@@ -752,6 +853,17 @@
   border-radius: 10px;
   overflow: hidden;
   backface-visibility: hidden;
+  border: 1px solid color-mix(in srgb, var(--c) 45%, #1c2b32);
+  transition: border-color 0.35s ease;
+}
+
+.thumb:hover .thumbFace,
+.thumbActive:hover .thumbFace {
+  border-color: color-mix(in srgb, var(--c) 85%, #ffffff);
+}
+
+.thumbActive .thumbFace {
+  border-color: var(--c);
 }
 
 .thumbFace img {
@@ -762,7 +874,13 @@
 }
 
 .thumbFaceBack {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  backface-visibility: hidden;
   transform: rotateY(180deg);
+  border: 1px solid color-mix(in srgb, var(--c) 45%, #1c2b32);
 }
 
 .thumbLabel {
@@ -773,7 +891,11 @@
   font-size: 0.6rem;
   line-height: 1.2;
   color: #eaf7fb;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.85), transparent);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.88), transparent);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 @keyframes rise {
