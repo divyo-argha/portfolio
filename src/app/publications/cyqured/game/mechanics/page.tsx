@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Chakra_Petch } from "next/font/google";
-import { AssetsTabs } from "@/components/cyqured/AssetsTabs";
+import { GameRulesSection } from "@/components/cyqured/GameRulesSection";
 import { IconArrowUpRight } from "@/components/primitives/Icons";
-import styles from "./game.module.css";
+import styles from "../game.module.css";
 
 const display = Chakra_Petch({
   variable: "--font-cyq-display",
@@ -14,39 +13,20 @@ const display = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "CyQured: Game Assets",
-  description: "Explore all physical CyQured game assets: the 28-cell smart home board, 16 connected devices, and 84 playable action, chance, and scenario cards.",
+  title: "CyQured: Game Mechanics",
+  description: "Explore the game mechanics: 4-step turn progression, STRIDE threat taxonomy, device compromise battles, and victory rules.",
 };
 
-export default function CyQuredAssetsPage() {
+export default function CyQuredMechanicsPage() {
   return (
     <div className={`${display.variable} ${styles.page}`}>
       <div className={styles.grain} aria-hidden="true" />
-      <div className={styles.glowWhite} aria-hidden="true" />
       <div className={styles.glowA} aria-hidden="true" />
       <div className={styles.glowB} aria-hidden="true" />
 
       <div className={styles.inner}>
-        {/* Hero Section */}
-        <header className={styles.hero}>
-          <p className={styles.eyebrow}>Physical Track & Playable Decks</p>
-          <h1 className={styles.wordmark}>
-            <Image
-              src="/media/publications/cyqured/cyqured-logo.png"
-              alt="cyQured"
-              width={632}
-              height={225}
-              priority
-              className={styles.wordmarkLogo}
-            />
-          </h1>
-          <p className={styles.tagline}>
-            Explore all tangible components of CyQured: switch between the 84 playable cards catalogue and the 28-cell connected home board.
-          </p>
-        </header>
-
-        {/* Floating Tab Menu for Game Cards & Game Board (Managed by URL Query Param) */}
-        <AssetsTabs />
+        {/* Dedicated Game Mechanics Content */}
+        <GameRulesSection />
 
         {/* Bottom Bridge: Research Paper */}
         <footer className={styles.bottomBridge}>

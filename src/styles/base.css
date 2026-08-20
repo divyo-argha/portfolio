@@ -6,6 +6,31 @@
 
 html {
   background: var(--ground);
+  scrollbar-gutter: stable;
+}
+
+/* Universal thin blue scrollbars across the entire app */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #38bdf8 transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5ee1f2;
 }
 
 /* Anchor targets land below the sticky header instead of underneath it.

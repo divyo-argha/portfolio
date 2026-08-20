@@ -1,0 +1,94 @@
+.tabContainer {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem 0 1.75rem;
+  position: relative;
+  z-index: 10;
+}
+
+.tabBar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem;
+  background: rgba(8, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(94, 225, 242, 0.32);
+  border-radius: 9999px;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(94, 225, 242, 0.15),
+    0 0 60px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+
+.tabButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 9999px;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8fb4bd;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.tabButton:hover {
+  color: #eaf7fb;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tabButtonActive {
+  color: #05070d;
+  background: #5ee1f2;
+  border-color: #5ee1f2;
+  box-shadow:
+    0 0 20px rgba(94, 225, 242, 0.6),
+    0 0 40px rgba(255, 255, 255, 0.4);
+}
+
+.tabButtonActive:hover {
+  background: #84ebf8;
+  color: #05070d;
+}
+
+.tabIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabContentWrap {
+  animation: fadeInTab 0.35s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+@keyframes fadeInTab {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabButton,
+  .tabContentWrap {
+    transition: none !important;
+    animation: none !important;
+  }
+}
