@@ -8,6 +8,12 @@
   transition: background var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
 }
 
+@media print {
+  .header {
+    display: none;
+  }
+}
+
 .headerDark {
   --ink: #eaf7fb;
   --muted: #8fb4bd;

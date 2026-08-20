@@ -115,3 +115,24 @@
     color-scheme: dark;
   }
 }
+
+/* Printing always uses the light palette, regardless of the active theme —
+   saves ink and reads better on paper. Matches the specificity of the dark
+   theme rules above and relies on source order (this block comes last) to
+   win over them for print output. */
+@media print {
+  :root,
+  :root[data-theme="dark"],
+  :root:not([data-theme="light"]) {
+    --ground: #ffffff;
+    --surface: #ffffff;
+    --raised: #f4f5f3;
+    --ink: #111413;
+    --muted: #3a3f3c;
+    --line: #d9dbd6;
+    --accent: #0f5c4a;
+    --accent-ink: #ffffff;
+    --accent-soft: #e1ede8;
+    color-scheme: light;
+  }
+}

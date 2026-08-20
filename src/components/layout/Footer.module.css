@@ -3,6 +3,12 @@
   padding-block: var(--space-6);
 }
 
+@media print {
+  .footer {
+    display: none;
+  }
+}
+
 .row {
   display: flex;
   flex-direction: column;

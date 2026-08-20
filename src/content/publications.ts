@@ -96,6 +96,7 @@ export const publications: Publication[] = [
     citations: 3,
     scholarUrl:
       "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=EKrGm9UAAAAJ&citation_for_view=EKrGm9UAAAAJ:9yKSN-GCB0IC",
+    doi: "10.1109/ICCIT64618.2024.10878546",
     links: [
       {
         label: "Read the paper",

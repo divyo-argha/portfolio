@@ -127,3 +127,19 @@
     top: calc(var(--header-height) + var(--space-5));
   }
 }
+
+@media print {
+  .page {
+    padding-block: 0;
+  }
+
+  .grid {
+    display: block;
+  }
+
+  .rail {
+    position: static;
+    margin-top: var(--space-6);
+    break-inside: avoid;
+  }
+}

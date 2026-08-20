@@ -1,0 +1,39 @@
+.button {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--surface);
+  border: none;
+  box-shadow: var(--shadow-drop);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+.button.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.button:hover,
+.button:focus-visible {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+@media print {
+  .button {
+    display: none;
+  }
+}

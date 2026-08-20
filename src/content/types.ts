@@ -45,6 +45,7 @@ export type Publication = {
   citations?: number;
   scholarUrl?: string;
   scholarCitationsUrl?: string;
+  doi?: string;
   bentoSpan: "feature" | "wide" | "normal";
   venueMark: VenueMark;
   /** Show the venue mark huge on the detail page's hero, right-aligned. */

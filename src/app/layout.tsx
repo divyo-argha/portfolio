@@ -3,6 +3,7 @@ import { PT_Serif, Public_Sans, JetBrains_Mono } from "next/font/google";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { BackToTop } from "@/components/layout/BackToTop";
 import { themeInitScript } from "@/lib/theme";
 import { siteConfig } from "@/lib/site";
 import { personJsonLd } from "@/lib/jsonld";
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <BackToTop />
         <Analytics />
       </body>
     </html>

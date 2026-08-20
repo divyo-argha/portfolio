@@ -1,5 +1,6 @@
 import { Prose } from "@/components/primitives/Prose";
 import type { Block } from "@/content/types";
+import { CodeBlock } from "./CodeBlock";
 import { Figure } from "./Figure";
 import { Gallery } from "./Gallery";
 import { CardGrid } from "./CardGrid";
@@ -77,11 +78,7 @@ function renderBlock(block: Block) {
         </blockquote>
       );
     case "code":
-      return (
-        <pre className={styles.code}>
-          <code>{block.body}</code>
-        </pre>
-      );
+      return <CodeBlock body={block.body} language={block.language} />;
     default:
       return null;
   }

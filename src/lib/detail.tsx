@@ -83,6 +83,23 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
             ...(affiliationValue ? [{ label: "Affiliation", value: affiliationValue }] : []),
           ]
         : []),
+      ...(publication.doi
+        ? [
+            {
+              label: "DOI",
+              value: (
+                <a
+                  href={`https://doi.org/${publication.doi}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.doiLink}
+                >
+                  {publication.doi}
+                </a>
+              ),
+            },
+          ]
+        : []),
     ],
     links: publication.links ?? [],
     blocks: publicationDetails[slug] ?? [],

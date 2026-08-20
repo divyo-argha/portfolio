@@ -29,3 +29,9 @@
   transform: translateX(-2px);
   color: var(--accent);
 }
+
+@media print {
+  .link {
+    display: none;
+  }
+}

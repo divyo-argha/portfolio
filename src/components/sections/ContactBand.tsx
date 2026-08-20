@@ -22,7 +22,7 @@ export function ContactBand() {
                   <IconMail size={16} />
                   {profile.email}
                 </a>
-                <a href="/cv.pdf" className={styles.secondary}>
+                <a href="/cv.pdf" download="Argha-Pratim-Saha-CV.pdf" className={styles.secondary}>
                   <IconDownload size={16} />
                   Download CV
                 </a>
