@@ -10,7 +10,7 @@ export function Education() {
   const { university, secondary } = education;
 
   return (
-    <Section id="education" label="Education" title="Academic background">
+    <Section id="education" label="Education" title="Degrees, thesis & academic record.">
       <div className={styles.container}>
         {/* Featured University Card */}
         <Reveal>

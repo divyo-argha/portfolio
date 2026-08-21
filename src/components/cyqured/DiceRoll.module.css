@@ -43,7 +43,7 @@
 }
 
 .cubeTumbling {
-  animation: tumble 0.75s cubic-bezier(0.25, 0.1, 0.25, 1) 1;
+  animation: tumble 0.75s cubic-bezier(0.25, 0.1, 0.25, 1) 1 forwards;
 }
 
 .cubeSettled {
@@ -89,6 +89,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Without this, faces pointing away from the viewer still paint, and
+     during the tumble their z-fighting with the opposite face reads as
+     flicker. */
+  backface-visibility: hidden;
 }
 
 .faceFront {

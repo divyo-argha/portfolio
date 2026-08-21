@@ -12,10 +12,6 @@ export const problemSolvingData: ProblemSolvingData = {
     rating: "1416",
     ratingTier: "Specialist",
     badge: "Specialist (max. 1416)",
-    additionalHandles: [
-      { handle: "divyo.argha", rating: "1223", url: "https://codeforces.com/profile/divyo.argha" },
-      { handle: "bugichigi", rating: "1226", url: "https://codeforces.com/profile/bugichigi" },
-    ],
   },
   leetcode: {
     platform: "LeetCode",
@@ -28,9 +24,6 @@ export const problemSolvingData: ProblemSolvingData = {
     metaBadges: [
       { label: "Solved", value: "360+" },
       { label: "Max Rating", value: "1924" },
-      { label: "Solution Views", value: "24.8k" },
-      { label: "Reputation", value: "165+" },
-      { label: "Badges", value: "5" },
     ],
   },
   otherJudges: [

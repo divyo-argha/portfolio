@@ -1,50 +1,25 @@
-import type { Link, NewsItem, VenueCredential } from "./types";
+import type { Link, NewsItem } from "./types";
 
 export const profile = {
   name: "Argha Pratim Saha",
   subtitle: "Researcher · Usable Security & Privacy · Human-Computer Interaction · Applied Machine Learning",
   status: "Applying for PhD positions, Fall 2027 intake",
-  positioning: "Human-Centered Security · Usable Privacy · Applied Machine Learning",
-  bio: "I am a Researcher with a background in usable security, human-computer interaction, and applied machine learning. My research focuses on how people who have never been taught security recognise and respond to digital threats, including phishing, smishing, and other forms of social engineering.",
+  bio: "My research looks at how people who were never taught security recognize and respond to digital threats: phishing, smishing, and the kind of social engineering that arrives on a shared phone. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game accepted at USENIX SOUPS 2026.",
   location: "Dhaka, Bangladesh",
-  email: "[EMAIL_ADDRESS]",
-  phone: "+880 1521 200978",
-  applyingFor: "Applying for PhD positions, Fall 2027 intake",
-  cgpa: "3.71 / 4.00",
+  email: "strangerfugitive@gmail.com",
   university: "Shahjalal University of Science and Technology (SUST)",
   cvUrl: "/cv.pdf",
 
   /** The core research philosophy and direction. */
   statement: [
-    "Most security advice assumes people who already understand threats and institutional defenses. My research starts from the opposite reality: the individuals most vulnerable to attacks are often those with no security training, shared devices, or formal vocabulary for what they experience.",
-    "I build human-centered security interventions and evaluate them empirically through mixed-methods user studies (pre/post assessments, NASA-TLX, SUS, thematic coding) to measure both learning gains and cognitive burdens.",
+    "Most security advice is written for people who already understand the threat and have an institution standing behind them. I start from the other end. The people most exposed to attacks usually have no training, no device of their own, and no vocabulary for what happened to them.",
+    "So I build interventions for that group, then evaluate them properly. Pre/post knowledge assessment, NASA-TLX, SUS, interviews, thematic coding. I want to know what people learned and what it cost them to learn it.",
   ],
 
-  trajectory: [
-    "My early work in applied machine learning (medical imaging at ICCIT 2024, clinical text-to-SQL at NAACL 2024) grounded my systems background. It taught me that model accuracy alone does not equal a usable, trustworthy system—leading directly to my focus on usable security in CyQured (SOUPS 2026) and ongoing phishing research at BRAC University.",
-  ],
-
-  openQuestionHeading: "Doctoral Research Vision",
+  openQuestionHeading: "What I want to work on next",
   openQuestion:
-    "I aim to investigate security mental models, mobile financial risks, and privacy mechanisms in emerging, non-WEIRD environments—such as mobile money ecosystems on shared Android devices—designing and evaluating interventions that hold up under real-world human and socio-technical constraints.",
+    "The constant in my work is security and privacy for people the system was never designed around. Shared Android phones, mobile money, first-time internet users well outside the WEIRD sample. The angle is open. I am equally interested in reaching that problem through human factors and study design, through systems and applied security, or through machine learning for detection and risk. What matters to me is that whatever we build survives contact with real users, real devices, and real constraints.",
 } as const;
-
-/** The published record, shown in the hero so it lands before any scrolling. */
-export const venueCredentials: VenueCredential[] = [
-  {
-    venue: "USENIX SOUPS 2026",
-    note: "Co-first author",
-    href: "/publications/cyqured",
-  },
-  {
-    venue: "IEEE ICCIT 2024",
-    href: "/publications/arsenic",
-  },
-  {
-    venue: "NAACL 2024 · Clinical NLP",
-    href: "/publications/ehrsql-primus-text-to-sql",
-  },
-];
 
 export const socialLinks: Link[] = [
   { label: "CV (PDF)", href: "/cv.pdf" },
@@ -60,7 +35,7 @@ export const news: NewsItem[] = [
     badge: "USENIX SOUPS 2026",
     title: "Paper Accepted at USENIX SOUPS 2026",
     description:
-      "Our paper 'CyQured: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education' was accepted at the 22nd USENIX Symposium on Usable Privacy and Security, held in Hanover, Germany in August 2026.",
+      "Our paper 'CyQured: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education' was accepted at the 22nd USENIX Symposium on Usable Privacy and Security in Hanover, Germany.",
     link: { label: "CyQured Write-up", href: "/publications/cyqured" },
     secondaryLink: { label: "Paper (PDF)", href: "/papers/cyqured.pdf" },
   },
@@ -69,7 +44,7 @@ export const news: NewsItem[] = [
     badge: "BRAC University",
     title: "Joined BRAC University as a Research Assistant",
     description:
-      "Started as a part-time Research Assistant with Dr. Farida Chowdhury, studying how young adults in Bangladesh recognise phishing and smishing, and helping found the Human-Centered Computing and Society (HCCS) research group.",
+      "Joined Dr. Farida Chowdhury's group part-time to study how young adults in Bangladesh read phishing and smishing attempts. I am also a founding member of the new Human-Centered Computing and Society (HCCS) research group.",
     link: { label: "Experience", href: "#experience" },
   },
   {
@@ -95,20 +70,20 @@ export const news: NewsItem[] = [
     badge: "SUST",
     title: "Graduated with B.Sc. in Computer Science & Engineering",
     description:
-      "Completed B.Sc. (Engg.) in CSE from Shahjalal University of Science and Technology (SUST) with CGPA 3.71 / 4.00, with an undergraduate thesis on usable cybersecurity education.",
+      "Completed B.Sc. (Engg.) in CSE at Shahjalal University of Science and Technology with a CGPA of 3.71 / 4.00. My undergraduate thesis grew into CyQured.",
     link: { label: "Education Details", href: "#education" },
   },
 ];
 
 /** Two, not three. The old first and third pillars described the same work
- * twice; the ML pillar is framed as background rather than a parallel track. */
+ * twice; the ML pillar is framed as grounding rather than a parallel track. */
 export const pillars = [
   {
     title: "Usable security & empirical HCI",
-    body: "I design security interventions and then evaluate them properly: mixed-methods study design, pre/post knowledge assessment, cognitive load and usability instrumentation, and thematic analysis of what participants actually said. CyQured is the worked example, with fifty participants and a set of findings that included the ways the design fell short.",
+    body: "I design security interventions and then evaluate them properly. Mixed-methods study design, pre/post knowledge assessment, cognitive load and usability instrumentation, thematic analysis of what participants actually said. CyQured is the worked example: fifty participants, and a set of findings that included the places where the design fell short.",
   },
   {
-    title: "Applied machine learning, as background",
-    body: "Two published papers in medical imaging and clinical NLP. I still build in this area, but I treat it as the technical grounding underneath human-centered work rather than as a separate research direction.",
+    title: "Applied machine learning",
+    body: "Two published papers, one in medical imaging and one in clinical NLP. I still build and read in this space. For me it sits underneath the human-centered work rather than beside it, though the two keep meeting around detection, risk scoring, and anything that has to explain itself to a non-expert user.",
   },
 ] as const;

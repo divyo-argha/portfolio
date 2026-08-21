@@ -46,7 +46,7 @@ export const publications: Publication[] = [
       },
     ],
     summary:
-      "Originated from our undergraduate thesis at SUST, where we substantially extended the game design, calibration study, and mixed-methods empirical evaluation with 50 participants to evaluate STRIDE-based smart-home threat learning: accepted at USENIX SOUPS 2026.",
+      "A tabletop game that teaches people to reason about threats in their own smart home, built around STRIDE. It began as our undergraduate thesis at SUST. We then rebuilt the design, ran a calibration study, and evaluated it with fifty participants using pre/post knowledge tests, NASA-TLX, SUS, and interviews.",
     tags: [
       "STRIDE",
       "Tabletop game",
@@ -63,7 +63,7 @@ export const publications: Publication[] = [
     bentoSpan: "feature",
     cover: {
       src: "/media/publications/cyqured/board-card.webp",
-      alt: "The CyQured board: a square track of smart-home devices — wireless router, IP camera, smart TV, thermostat, smartphone — around a centre holding the Scenario, Chance and Action card decks.",
+      alt: "The CyQured board. A square track of smart-home devices (wireless router, IP camera, smart TV, thermostat, smartphone) runs around a center that holds the Scenario, Chance and Action card decks.",
       width: 900,
       height: 1155,
     },

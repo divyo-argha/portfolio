@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { Container } from "@/components/primitives/Container";
 import { Portrait } from "@/components/primitives/Portrait";
 import { IconLink } from "@/components/primitives/IconLink";
 import { IconMail, IconScholar, IconGithub, IconLinkedin, IconDownload } from "@/components/primitives/Icons";
-import { profile, venueCredentials } from "@/content/profile";
+import { profile } from "@/content/profile";
 import styles from "./Hero.module.css";
 
 export function Hero() {
@@ -61,28 +60,6 @@ export function Hero() {
             </div>
           </div>
         </div>
-
-        {/* The published record, above the fold. Previously a reader had to
-            scroll past two prose sections before learning any of this. */}
-        <nav className={styles.credentials} aria-label="Published work">
-          <span className={styles.credentialsLabel}>Published at</span>
-          <ul className={styles.credentialsList}>
-            {venueCredentials.map((credential) => (
-              <li key={credential.venue}>
-                {/* Text only. The venue logos are a wide conference banner, a
-                    cartoon mascot and a dense wordmark; shrunk to a 22px chip
-                    they read as noise. They have room to work on the
-                    publication cards below. */}
-                <Link href={credential.href} className={styles.credential}>
-                  <span className={styles.credentialVenue}>{credential.venue}</span>
-                  {credential.note ? (
-                    <span className={styles.credentialNote}>{credential.note}</span>
-                  ) : null}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </Container>
     </section>
   );

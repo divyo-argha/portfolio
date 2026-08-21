@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import styles from "./DiceRoll.module.css";
 
@@ -69,12 +69,6 @@ export function DiceRoll({ result }: { result: number }) {
   const reducedMotion = useReducedMotion();
   const [rolling, setRolling] = useState(!reducedMotion);
 
-  useEffect(() => {
-    if (reducedMotion) return;
-    const timeout = window.setTimeout(() => setRolling(false), 750);
-    return () => window.clearTimeout(timeout);
-  }, [reducedMotion]);
-
   const target = FACE_ROTATION[result] ?? FACE_ROTATION[1];
 
   return (
@@ -84,6 +78,7 @@ export function DiceRoll({ result }: { result: number }) {
         <div
           className={[styles.cube, rolling ? styles.cubeTumbling : styles.cubeSettled].join(" ")}
           style={rolling ? undefined : { transform: `rotateX(${target.x}deg) rotateY(${target.y}deg)` }}
+          onAnimationEnd={() => setRolling(false)}
         >
           <div className={[styles.face, styles.faceFront].join(" ")}>
             <Pips value={1} />

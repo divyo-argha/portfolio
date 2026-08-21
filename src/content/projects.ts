@@ -13,7 +13,6 @@ export const projects: Project[] = [
     stats: [
       { label: "npm downloads / mo", value: "4,555" },
       { label: "npm downloads / 2026", value: "9,795" },
-      { label: "GitHub stars", value: "6" },
     ],
     links: [
       { label: "GitHub", href: "https://github.com/divyo-argha/git-user" },

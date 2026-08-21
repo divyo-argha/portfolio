@@ -20,7 +20,7 @@ export const projectDetails: Record<string, Block[]> = {
         { label: "Downloads / 2026", value: "9,795" },
       ],
     },
-    { kind: "code", language: "bash", body: "npm install -g git-userhub\ngit-user switch work" },
+    { kind: "code", language: "bash", body: "npm install -g git-userhub" },
   ],
 
   autoscriber: [

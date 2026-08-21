@@ -38,10 +38,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: "Argha Pratim Saha",
-    template: "%s — Argha Pratim Saha",
+    template: "%s · Argha Pratim Saha",
   },
   description:
-    "Argha Pratim Saha — research in usable security & privacy, security education, and qualitative HCI. PhD applicant.",
+    "Argha Pratim Saha. Research in usable security and privacy, security education, and qualitative HCI. Applying for PhD positions.",
   // No `icons` block: src/app/{favicon.ico,icon.svg,icon.png,apple-icon.png}
   // are file-convention routes and Next emits the full link set from them.
   // Declaring `icons.icon` here replaced that set wholesale, which silently

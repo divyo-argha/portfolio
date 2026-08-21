@@ -5,7 +5,7 @@ import type { MethodGroup } from "./types";
  * list reads as experience — which is what it actually is. */
 export const methodGroups: MethodGroup[] = [
   {
-    study: "CyQured — tabletop security education",
+    study: "CyQured · tabletop security education",
     context: "N = 50 · USENIX SOUPS 2026",
     href: "/publications/cyqured",
     methods: [

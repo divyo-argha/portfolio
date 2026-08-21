@@ -7,8 +7,8 @@ export const siteConfig = {
   indexable: false,
   navLinks: [
     { label: "Research & Publications", href: "#research" },
-    { label: "Experience", href: "#experience" },
     { label: "Education", href: "#education" },
+    { label: "Experience", href: "#experience" },
     { label: "Programming", href: "#programming" },
     { label: "Contact", href: "#contact" },
   ],

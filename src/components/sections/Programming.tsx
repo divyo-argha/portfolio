@@ -97,7 +97,7 @@ export function Programming() {
                       <span>{codeforces.handle}</span>
                       <IconArrowUpRight size={13} className={styles.handleArrow} />
                     </a>
-                    <span className={styles.handleSubtext}>Primary Handle · Max Rating {codeforces.rating}</span>
+                    <span className={styles.handleSubtext}>Primary handle</span>
                   </div>
 
                   {codeforces.additionalHandles && codeforces.additionalHandles.length > 0 ? (
@@ -143,7 +143,7 @@ export function Programming() {
                       <span>{leetcode.handle}</span>
                       <IconArrowUpRight size={13} className={styles.handleArrow} />
                     </a>
-                    <span className={styles.handleSubtext}>Knight · Rating {leetcode.rating}</span>
+                    <span className={styles.handleSubtext}>{leetcode.problemsSolved} problems solved</span>
                   </div>
 
                   {leetcode.metaBadges && leetcode.metaBadges.length > 0 ? (

@@ -7,12 +7,6 @@ export type Link = {
 
 /** One entry in the hero's credential strip — the published record, stated
  * before the reader has to scroll for it. */
-export type VenueCredential = {
-  venue: string;
-  note?: string;
-  href: string;
-};
-
 /** A study grouped with the methods it actually used, so the methods section
  * reads as experience rather than as a vocabulary list. */
 export type MethodGroup = {
