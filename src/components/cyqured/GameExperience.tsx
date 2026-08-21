@@ -928,12 +928,21 @@ function SelectedStage({
   );
 }
 
-export function FlipCard({ card, reducedMotion }: { card: CardFace; reducedMotion: boolean }) {
+export function FlipCard({
+  card,
+  reducedMotion,
+  compact,
+}: {
+  card: CardFace;
+  reducedMotion: boolean;
+  /** Smaller footprint for tight spaces like a player's hand grid. */
+  compact?: boolean;
+}) {
   const [flipped, setFlipped] = useState(false);
 
   return (
     <div
-      className={styles.flipOuter}
+      className={compact ? [styles.flipOuter, styles.flipOuterCompact].join(" ") : styles.flipOuter}
       onClick={() => setFlipped((v) => !v)}
       role="button"
       tabIndex={0}

@@ -360,6 +360,7 @@
 /* ---- selected player detail ---- */
 
 .detailCard {
+  position: relative;
   background: rgba(7, 12, 20, 0.7);
   border: 1px solid color-mix(in srgb, var(--c) 35%, #22333b);
   border-radius: 14px;
@@ -372,6 +373,78 @@
   align-items: center;
   gap: 0.6rem;
   margin-bottom: 0.9rem;
+}
+
+.handSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--c) 20%, transparent);
+}
+
+/* A loosely fanned stack, not a grid: each card sits a bit under the last,
+   tilted, overlapping by a small amount so the hand still reads at a
+   glance. Hovering brings a card to the front and squares it up. The
+   padding here is deliberately generous (not cosmetic): it's what keeps the
+   hover-lift and the rotated corners from clipping against this box's own
+   edge — overflow-x:auto implicitly makes overflow-y auto too, so anything
+   taller than the padded box gets cut off instead of just scrolling. */
+.handGrid {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 22px 10px 34px 4px;
+  max-width: 100%;
+}
+
+.handCardHolder {
+  flex-shrink: 0;
+  position: relative;
+  z-index: var(--i);
+  transform: translateY(calc(var(--i) * 3px)) rotate(var(--rot));
+  transition: transform 0.2s ease;
+}
+
+.handCardHolder:not(:first-child) {
+  margin-left: -34px;
+}
+
+.handCardHolder:hover,
+.handCardHolder:focus-within {
+  transform: translateY(-10px) rotate(0deg) scale(1.08);
+  z-index: 50;
+}
+
+/* Absolutely positioned against .detailCard (its nearest positioned
+   ancestor, regardless of DOM nesting) so showing/hiding it never resizes
+   any layout, and anchored to that card's own top edge per its padding. */
+.handPreview {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.4rem;
+  width: min(34vw, 150px);
+  aspect-ratio: 782 / 1110;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--c) 55%, #22333b);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.65), 0 0 24px color-mix(in srgb, var(--c) 35%, transparent);
+  pointer-events: none;
+  z-index: 60;
+}
+
+.handPreview :global(img) {
+  object-fit: cover;
+}
+
+@media (max-width: 560px) {
+  .handPreview {
+    top: 1rem;
+    right: 1rem;
+    width: min(28vw, 105px);
+  }
 }
 
 .detailAvatarDot {

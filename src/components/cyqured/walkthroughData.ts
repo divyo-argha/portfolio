@@ -37,7 +37,12 @@ export type PlayerState = {
   credits: number;
   points: number;
   devices: string[];
-  handSize: number;
+  /** The actual card ids this player is physically holding right now (not
+   * just a count) — starts as 8 action cards, plus any Chance card whose
+   * effect the narration says they keep rather than resolve immediately —
+   * so the UI can render each one with the same card art used everywhere
+   * else. */
+  hand: string[];
   boardPos: number;
   skippingNextTurn?: boolean;
   note?: string;
@@ -132,18 +137,58 @@ export const BOARD_TRACK: BoardCell[] = [
   deviceCell("Laptop", 1, 8),
 ];
 
+// Starting hands: 8 real cards each, dealt from the shared 34-card
+// attack-and-defense action deck (action-02 .. action-35 in cardData.ts).
+// Every id a later combat/penalty step spends is seeded into the right
+// player's hand here, so a card never leaves a hand it wasn't actually in.
 const START: Record<PlayerId, PlayerState> = {
-  alice: { credits: 50, points: 0, devices: [], handSize: 8, boardPos: 0 },
-  bob: { credits: 50, points: 0, devices: [], handSize: 8, boardPos: 0 },
-  dylan: { credits: 50, points: 0, devices: [], handSize: 8, boardPos: 0 },
-  divyo: { credits: 50, points: 0, devices: [], handSize: 8, boardPos: 0 },
-  argha: { credits: 50, points: 0, devices: [], handSize: 8, boardPos: 0 },
+  alice: {
+    credits: 50,
+    points: 0,
+    devices: [],
+    hand: ["action-06", "action-10", "action-11", "action-12", "action-14", "action-17", "action-18", "action-33"],
+    boardPos: 0,
+  },
+  bob: {
+    credits: 50,
+    points: 0,
+    devices: [],
+    hand: ["action-13", "action-19", "action-20", "action-21", "action-22", "action-23", "action-24", "action-29"],
+    boardPos: 0,
+  },
+  dylan: {
+    credits: 50,
+    points: 0,
+    devices: [],
+    hand: ["action-02", "action-03", "action-04", "action-05", "action-06", "action-10", "action-34", "action-35"],
+    boardPos: 0,
+  },
+  divyo: {
+    credits: 50,
+    points: 0,
+    devices: [],
+    hand: ["action-09", "action-25", "action-26", "action-27", "action-28", "action-30", "action-31", "action-32"],
+    boardPos: 0,
+  },
+  argha: {
+    credits: 50,
+    points: 0,
+    devices: [],
+    hand: ["action-02", "action-03", "action-04", "action-05", "action-07", "action-08", "action-15", "action-16"],
+    boardPos: 0,
+  },
 };
 
 function clone(state: Record<PlayerId, PlayerState>): Record<PlayerId, PlayerState> {
   const next = {} as Record<PlayerId, PlayerState>;
-  for (const id of PLAYER_IDS) next[id] = { ...state[id], devices: [...state[id].devices] };
+  for (const id of PLAYER_IDS) next[id] = { ...state[id], devices: [...state[id].devices], hand: [...state[id].hand] };
   return next;
+}
+
+/** Removes one card from a player's hand by id (a card being spent in
+ * combat, or discarded to a Card Penalty cell). */
+function discard(s: Record<PlayerId, PlayerState>, player: PlayerId, cardId: string) {
+  s[player].hand = s[player].hand.filter((id) => id !== cardId);
 }
 
 export type PhaseKind = "setup" | "roll" | "land" | "resolve" | "combat" | "snapshot";
@@ -301,7 +346,7 @@ pushRoll("t1-bob-roll", "bob", 6, "Turn 1 — Bob", "Bob rolls a 6.");
 {
   const s = prev();
   s.bob.boardPos = 6;
-  s.bob.handSize -= 1;
+  discard(s, "bob", "action-19");
   steps.push({
     id: "t1-bob-land",
     phase: "land",
@@ -350,6 +395,7 @@ pushLand("t1-argha-land", "argha", 2, "Turn 1 — Argha", [
 {
   const s = prev();
   s.argha.note = "Holding a Firewall Upgrade bonus";
+  s.argha.hand.push("chance-06");
   steps.push({
     id: "t1-argha-resolve",
     phase: "resolve",
@@ -446,7 +492,7 @@ pushRoll("t2-alice-roll", "alice", 1, "Turn 2 — Alice", "Alice rolls a 1.");
 {
   const s = prev();
   s.alice.boardPos = 6;
-  s.alice.handSize -= 1;
+  discard(s, "alice", "action-06");
   steps.push({
     id: "t2-alice-land",
     phase: "land",
@@ -502,8 +548,8 @@ pushLand("t2-argha-land", "argha", 5, "Turn 2 — Argha", [
 }
 {
   const s = prev();
-  s.argha.handSize -= 1;
-  s.alice.handSize -= 1;
+  discard(s, "argha", "action-07");
+  discard(s, "alice", "action-33");
   steps.push({
     id: "t2-argha-resolve-1",
     phase: "resolve",
@@ -553,7 +599,7 @@ pushLand("t2-argha-land", "argha", 5, "Turn 2 — Argha", [
 }
 {
   const s = prev();
-  s.argha.handSize -= 1;
+  discard(s, "argha", "action-15");
   s.argha.points += 18;
   s.argha.devices.push("Wireless Router");
   s.alice.points -= 18;
@@ -641,7 +687,7 @@ pushLand("t3-divyo-land", "divyo", 10, "Turn 3 — Divyo", [
 }
 {
   const s = prev();
-  s.divyo.handSize -= 1;
+  discard(s, "divyo", "action-09");
   s.divyo.points += 5;
   s.bob.points -= 5;
   steps.push({
@@ -742,6 +788,7 @@ pushLand("t4-divyo-land-1", "divyo", 16, "Turn 4 — Divyo", [
 ]);
 {
   const s = prev();
+  s.divyo.hand.push("chance-02");
   steps.push({
     id: "t4-divyo-resolve-1",
     phase: "resolve",
@@ -787,7 +834,7 @@ pushLand("t4-bob-land", "bob", 3, "Turn 4 — Bob", [
 {
   const s = prev();
   const card = cardById("action-13");
-  s.bob.handSize -= 1;
+  discard(s, "bob", card.id);
   s.dylan.points += 2;
   steps.push({
     id: "t4-bob-combat",
@@ -857,8 +904,8 @@ pushLand("t4-argha-land", "argha", 12, "Turn 4 — Argha", [
 }
 {
   const s = prev();
-  s.argha.handSize -= 1;
-  s.bob.handSize -= 1;
+  discard(s, "argha", "action-16");
+  discard(s, "bob", "action-29");
   steps.push({
     id: "t4-argha-resolve-1",
     phase: "resolve",
@@ -907,8 +954,8 @@ pushLand("t4-argha-land", "argha", 12, "Turn 4 — Argha", [
 }
 {
   const s = prev();
-  s.argha.handSize -= 1;
-  s.bob.handSize -= 1;
+  discard(s, "argha", "action-08");
+  discard(s, "bob", "action-24");
   steps.push({
     id: "t4-argha-resolve-2",
     phase: "resolve",

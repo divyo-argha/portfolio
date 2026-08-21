@@ -10,15 +10,17 @@ import {
   rankByTotal,
   eliminationStatus,
   totalScore,
+  cardById,
   TARGET_SCORE,
   type PlayerId,
 } from "./walkthroughData";
+import type { CardFace } from "@/app/publications/cyqured/cardData";
 import { CONNECTED_DEVICES } from "./GameBoardSection";
 import { GameTable } from "./GameTable";
 import { DiceRoll } from "./DiceRoll";
 import { CombatCard } from "./CombatCard";
 import { TurnProgressBar, segmentFor } from "./TurnProgressBar";
-import { FlipCard, CATEGORY_COLOR } from "./GameExperience";
+import { FlipCard, CATEGORY_COLOR, LazyImg } from "./GameExperience";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { IconArrowLeft, IconArrowRight, IconCheck } from "@/components/primitives/Icons";
 import styles from "./GameplayWalkthrough.module.css";
@@ -52,6 +54,60 @@ function DrawnCardBox({ card }: { card: (typeof WALKTHROUGH_STEPS)[number]["draw
       </div>
       <p className={styles.flipHint}>Click the card to flip it over.</p>
     </div>
+  );
+}
+
+/** Just the hovered/focused hand card, blown up to a readable size — the
+ * fanned cards render too small to read. Absolutely positioned (anchored to
+ * .detailCard, its nearest positioned ancestor) so it overlays the top of
+ * the player detail box instead of pushing its layout around, and renders
+ * nothing at all when no card is hovered. */
+function HandPreview({ card }: { card: CardFace | null }) {
+  if (!card) return null;
+  return (
+    <div className={styles.handPreview} style={{ "--c": CATEGORY_COLOR[card.category] } as React.CSSProperties}>
+      <LazyImg src={card.src} alt={card.title} eager />
+    </div>
+  );
+}
+
+/** A player's actual hand, rendered with the same flippable card art used
+ * everywhere else (Cards tab, combat, chance/scenario draws), fanned out a
+ * bit like cards held in hand. Hovering/focusing a card blows it up in the
+ * preview overlay, since the cards themselves are too small to read. */
+function HandGrid({ cardIds }: { cardIds: string[] }) {
+  const reducedMotion = useReducedMotion();
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  if (cardIds.length === 0) {
+    return <p className={styles.noDevices}>No cards left in hand.</p>;
+  }
+  const hoveredCard = hoveredIndex !== null ? cardById(cardIds[hoveredIndex]) : null;
+  return (
+    <>
+      <div className={styles.handGrid}>
+        {cardIds.map((id, i) => {
+          const card = cardById(id);
+          // A gentle, deterministic tilt per card (not random) so the hand
+          // reads as a loosely fanned stack, each one peeking out from under
+          // the last, instead of a rigid grid.
+          const rot = ((i % 5) - 2) * 2.4;
+          return (
+            <div
+              key={`${id}-${i}`}
+              className={styles.handCardHolder}
+              style={{ "--c": CATEGORY_COLOR[card.category], "--i": i, "--rot": `${rot}deg` } as React.CSSProperties}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex((v) => (v === i ? null : v))}
+              onFocus={() => setHoveredIndex(i)}
+              onBlur={() => setHoveredIndex((v) => (v === i ? null : v))}
+            >
+              <FlipCard card={card} reducedMotion={reducedMotion} compact />
+            </div>
+          );
+        })}
+      </div>
+      <HandPreview card={hoveredCard} />
+    </>
   );
 }
 
@@ -263,12 +319,16 @@ export function GameplayWalkthrough() {
           </div>
           <div className={styles.detailStat}>
             <span className={styles.detailStatLabel}>Hand</span>
-            <span className={styles.detailStatValue}>{selectedState.handSize} cards</span>
+            <span className={styles.detailStatValue}>{selectedState.hand.length} cards</span>
           </div>
           <div className={styles.detailStat}>
             <span className={styles.detailStatLabel}>Current stage</span>
             <span className={styles.detailStatValue}>{BOARD_TRACK[selectedState.boardPos].name}</span>
           </div>
+        </div>
+        <div className={styles.handSection}>
+          <span className={styles.detailDevicesLabel}>{selectedPlayerMeta.name}&apos;s hand</span>
+          <HandGrid key={selectedPlayer} cardIds={selectedState.hand} />
         </div>
         <div className={styles.detailDevices}>
           <span className={styles.detailDevicesLabel}>Devices owned</span>

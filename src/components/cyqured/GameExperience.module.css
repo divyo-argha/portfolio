@@ -137,6 +137,15 @@
   transform: translateY(-8px) scale(1.05);
 }
 
+.flipOuterCompact {
+  width: min(22vw, 92px);
+  margin-inline: 0;
+}
+
+.flipOuterCompact:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
 .flipInner {
   position: relative;
   width: 100%;
