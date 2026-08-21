@@ -4,39 +4,27 @@ import { BOARD_TRACK, PLAYERS, type BoardCell, type PlayerId, type PlayerState }
 import { IconChance, IconScenario } from "@/components/primitives/Icons";
 import styles from "./GameTable.module.css";
 
-const VB = 640;
-const CENTER = VB / 2;
-const BOARD_MIN = 150;
-const BOARD_MAX = 490;
-const AVATAR_RADIUS = 275;
+const VB = 700;
+const CENTER = 350;
+const AVATAR_RADIUS = 270;
 
-const CELL_KIND_COLOR: Record<string, string> = {
-  go: "#5ee1f2",
-  stop: "#ff5e7e",
-  "power-outage": "#f5a623",
-  "card-penalty": "#7c8a93",
-  chance: "#a3d94f",
-  scenario: "#b48fe0",
-};
+// The real board image is 1403x1800px (7 columns x 9 rows of square cells).
+// Keep that exact aspect ratio here so cell positions line up precisely.
+const BOARD_H = 380;
+const BOARD_W = (BOARD_H * 1403) / 1800;
+const BOARD_X_MIN = CENTER - BOARD_W / 2;
+const BOARD_Y_MIN = CENTER - BOARD_H / 2;
+const COLS = 7;
+const ROWS = 9;
 
-/** Maps a board-track index (0-27) to an (x, y) point on the square track's
- * perimeter. 7 cells per side, corners at 0/7/14/21, matching the paper's
- * cyclic 28-cell design. Illustrative layout, not the literal photographed
- * board (no per-cell coordinates exist for that). */
+/** Maps a board cell's (col, row) on the real board image's 7x9 grid to an
+ * (x, y) point in the SVG canvas. */
 function cellPoint(index: number): { x: number; y: number } {
-  const size = BOARD_MAX - BOARD_MIN;
-  const side = Math.floor(index / 7) % 4;
-  const t = (index % 7) / 7;
-  switch (side) {
-    case 0:
-      return { x: BOARD_MIN + t * size, y: BOARD_MAX };
-    case 1:
-      return { x: BOARD_MAX, y: BOARD_MAX - t * size };
-    case 2:
-      return { x: BOARD_MAX - t * size, y: BOARD_MIN };
-    default:
-      return { x: BOARD_MIN, y: BOARD_MIN + t * size };
-  }
+  const cell = BOARD_TRACK[index];
+  return {
+    x: BOARD_X_MIN + ((cell.col + 0.5) / COLS) * BOARD_W,
+    y: BOARD_Y_MIN + ((cell.row + 0.5) / ROWS) * BOARD_H,
+  };
 }
 
 function avatarPoint(seatIndex: number): { x: number; y: number; angle: number } {
@@ -47,10 +35,10 @@ function avatarPoint(seatIndex: number): { x: number; y: number; angle: number }
 
 const TOKEN_OFFSETS = [
   { dx: 0, dy: 0 },
-  { dx: 9, dy: -3 },
-  { dx: -9, dy: -3 },
-  { dx: 5, dy: 8 },
-  { dx: -5, dy: 8 },
+  { dx: 7, dy: -2 },
+  { dx: -7, dy: -2 },
+  { dx: 4, dy: 6 },
+  { dx: -4, dy: 6 },
 ];
 
 export function GameTable({
@@ -68,6 +56,8 @@ export function GameTable({
 }) {
   const highlightCell = highlightCellIndex !== null ? BOARD_TRACK[highlightCellIndex] : null;
   const highlightPoint = highlightCellIndex !== null ? cellPoint(highlightCellIndex) : null;
+  const cellW = BOARD_W / COLS;
+  const cellH = BOARD_H / ROWS;
 
   return (
     <svg viewBox={`0 0 ${VB} ${VB}`} className={styles.svg} role="img" aria-label="Round table with five players and the CyQured board">
@@ -79,52 +69,37 @@ export function GameTable({
       </defs>
 
       {/* Table */}
-      <circle cx={CENTER} cy={CENTER} r={305} fill="url(#tableGrad)" stroke="rgba(94,225,242,0.18)" strokeWidth={2} />
-      <circle cx={CENTER} cy={CENTER} r={305} fill="none" stroke="rgba(94,225,242,0.08)" strokeWidth={14} />
+      <circle cx={CENTER} cy={CENTER} r={330} fill="url(#tableGrad)" stroke="rgba(94,225,242,0.18)" strokeWidth={2} />
+      <circle cx={CENTER} cy={CENTER} r={330} fill="none" stroke="rgba(94,225,242,0.08)" strokeWidth={14} />
 
-      {/* Board */}
-      <rect
-        x={BOARD_MIN - 14}
-        y={BOARD_MIN - 14}
-        width={BOARD_MAX - BOARD_MIN + 28}
-        height={BOARD_MAX - BOARD_MIN + 28}
-        rx={10}
-        fill="rgba(5,8,16,0.85)"
-        stroke="rgba(255,255,255,0.1)"
+      {/* The real printed board */}
+      <image
+        href="/media/publications/cyqured/board.webp"
+        x={BOARD_X_MIN}
+        y={BOARD_Y_MIN}
+        width={BOARD_W}
+        height={BOARD_H}
+        preserveAspectRatio="none"
       />
-      <text x={CENTER} y={CENTER - 6} textAnchor="middle" className={styles.boardLabel}>
-        cyQured
-      </text>
-      <text x={CENTER} y={CENTER + 16} textAnchor="middle" className={styles.boardSubLabel}>
-        28-cell board
-      </text>
+      <rect x={BOARD_X_MIN} y={BOARD_Y_MIN} width={BOARD_W} height={BOARD_H} fill="none" stroke="rgba(0,0,0,0.6)" strokeWidth={2} />
 
-      {/* Cells */}
-      {BOARD_TRACK.map((cell, i) => {
-        const p = cellPoint(i);
-        const isActive = i === highlightCellIndex;
-        const fill = cell.kind === "device" ? cell.color ?? "#5c6b78" : CELL_KIND_COLOR[cell.kind];
-        return (
-          <rect
-            key={i}
-            x={p.x - (isActive ? 11 : 7)}
-            y={p.y - (isActive ? 11 : 7)}
-            width={isActive ? 22 : 14}
-            height={isActive ? 22 : 14}
-            rx={3}
-            fill={fill}
-            opacity={isActive ? 1 : 0.55}
-            stroke={isActive ? "#eaf7fb" : "rgba(0,0,0,0.35)"}
-            strokeWidth={isActive ? 2 : 1}
-            className={isActive ? styles.activeCell : undefined}
-          />
-        );
-      })}
+      {/* Active-cell highlight ring */}
+      {highlightPoint ? (
+        <rect
+          x={highlightPoint.x - cellW / 2}
+          y={highlightPoint.y - cellH / 2}
+          width={cellW}
+          height={cellH}
+          fill="none"
+          stroke="#5ee1f2"
+          strokeWidth={3}
+          rx={3}
+          className={styles.activeCell}
+        />
+      ) : null}
 
       {/* Active-cell callout */}
-      {highlightCell && highlightPoint ? (
-        <CellCallout point={highlightPoint} cell={highlightCell} />
-      ) : null}
+      {highlightCell && highlightPoint ? <CellCallout point={highlightPoint} cell={highlightCell} /> : null}
 
       {/* Player tokens on the board */}
       {PLAYERS.map((pl, i) => {
@@ -136,10 +111,10 @@ export function GameTable({
             key={pl.id}
             cx={cp.x + off.dx}
             cy={cp.y + off.dy}
-            r={7}
+            r={6}
             fill={pl.color}
             stroke="#05070d"
-            strokeWidth={1.5}
+            strokeWidth={1.3}
           />
         );
       })}
@@ -183,7 +158,7 @@ export function GameTable({
 
 function CellCallout({ point, cell }: { point: { x: number; y: number }; cell: BoardCell }) {
   const above = point.y > CENTER;
-  const y = above ? point.y - 30 : point.y + 30;
+  const y = above ? point.y - 34 : point.y + 34;
   const isChance = cell.kind === "chance";
   const isScenario = cell.kind === "scenario";
   return (

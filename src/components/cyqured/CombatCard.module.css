@@ -33,19 +33,21 @@
   color: #8fb4bd;
 }
 
-.cardArt {
-  width: 92px;
-  aspect-ratio: 3 / 4;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: #0a121c;
+.flipHolder {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  transform: scale(0.72);
+  transform-origin: top center;
+  margin-bottom: -34px;
 }
 
-.cardArt img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.flipHint {
+  margin: -0.4rem 0 0;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #5c7a86;
+  font-style: italic;
 }
 
 .cardArtEmpty {

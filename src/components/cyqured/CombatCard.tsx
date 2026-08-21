@@ -1,7 +1,9 @@
 "use client";
 
-import { LazyImg } from "./GameExperience";
-import { PLAYERS, type CardRef, type CombatInfo, type PlayerId } from "./walkthroughData";
+import type { CardFace } from "@/app/publications/cyqured/cardData";
+import { FlipCard, CATEGORY_COLOR } from "./GameExperience";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { PLAYERS, type CombatInfo, type PlayerId } from "./walkthroughData";
 import styles from "./CombatCard.module.css";
 
 const OUTCOME_LABEL: Record<CombatInfo["outcome"], string> = {
@@ -15,21 +17,23 @@ function nameOf(id: PlayerId): string {
   return PLAYERS.find((p) => p.id === id)!.name;
 }
 
-function CardFace({ card, label }: { card: CardRef | null; label: string }) {
+function CardSlot({ card, label, reducedMotion }: { card: CardFace | null; label: string; reducedMotion: boolean }) {
   return (
     <div className={styles.side}>
       <span className={styles.sideLabel}>{label}</span>
       {card ? (
-        <>
-          <div className={styles.cardArt}>
-            <LazyImg src={card.src} alt={card.title} eager />
-          </div>
-          <span className={styles.cardName}>{card.title}</span>
-          {card.strideType ? <span className={styles.cardStride}>{card.strideType}</span> : null}
-        </>
+        <div className={styles.flipHolder} style={{ "--c": CATEGORY_COLOR[card.category] } as React.CSSProperties}>
+          <FlipCard card={card} reducedMotion={reducedMotion} />
+        </div>
       ) : (
         <div className={styles.cardArtEmpty}>No matching card in hand</div>
       )}
+      {card ? (
+        <>
+          <span className={styles.cardName}>{card.title}</span>
+          {card.strideType ? <span className={styles.cardStride}>{card.strideType}</span> : null}
+        </>
+      ) : null}
     </div>
   );
 }
@@ -46,13 +50,15 @@ function fmtDelta(n: number): string {
 }
 
 export function CombatCard({ combat }: { combat: CombatInfo }) {
+  const reducedMotion = useReducedMotion();
   return (
     <div className={styles.combatWrap}>
       <div className={styles.duel}>
-        <CardFace card={combat.attackCard} label={`${nameOf(combat.attacker)} attacks with`} />
+        <CardSlot card={combat.attackCard} label={`${nameOf(combat.attacker)} attacks with`} reducedMotion={reducedMotion} />
         <span className={styles.vsBadge}>VS</span>
-        <CardFace card={combat.defenseCard} label={`${nameOf(combat.defender)} defends with`} />
+        <CardSlot card={combat.defenseCard} label={`${nameOf(combat.defender)} defends with`} reducedMotion={reducedMotion} />
       </div>
+      <p className={styles.flipHint}>Click a card to flip it over.</p>
 
       <div className={styles.resolutionBox} data-outcome={combat.outcome}>
         <span className={styles.resolutionLabel}>{OUTCOME_LABEL[combat.outcome]}</span>

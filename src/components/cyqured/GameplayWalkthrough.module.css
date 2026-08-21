@@ -39,10 +39,9 @@
 /* ---- stage: table + narration ---- */
 
 .stage {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   background: rgba(7, 12, 20, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
@@ -52,8 +51,37 @@
 
 @media (min-width: 960px) {
   .stage {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     padding: 2rem;
+  }
+}
+
+/* Pinned at the top of the box so it never moves as content below changes height. */
+.navBar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.navBarLabel {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5c7a86;
+  white-space: nowrap;
+}
+
+.stageGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .stageGrid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   }
 }
 
@@ -64,18 +92,13 @@
   min-width: 0;
 }
 
-.stepMeta {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
 .stepCounter {
   font-family: var(--font-cyq-display, sans-serif);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #8fb4bd;
+  white-space: nowrap;
 }
 
 .turnLabel {
@@ -87,6 +110,61 @@
   border-radius: 999px;
   background: rgba(94, 225, 242, 0.1);
   border: 1px solid rgba(94, 225, 242, 0.25);
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.titleRowLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+/* Fine navigation, positioned to the right of the event title. */
+.phaseNav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding-top: 0.15rem;
+}
+
+.phaseNavButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #a4c7d0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.phaseNavButton:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #eaf7fb;
+}
+
+.phaseNavButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.phaseNavCounter {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.68rem;
+  color: #5c7a86;
+  min-width: 1.6rem;
+  text-align: center;
 }
 
 .stepTitle {
@@ -103,13 +181,6 @@
   line-height: 1.65;
   color: #a4c7d0;
   margin: 0;
-}
-
-.navRow {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  margin-top: 1rem;
 }
 
 .navButton,
@@ -206,6 +277,36 @@
   line-height: 1.5;
   color: #a4c7d0;
   margin: 0;
+}
+
+/* ---- drawn card (chance / scenario) ---- */
+
+.drawnCardBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0 0.25rem;
+}
+
+.drawnCardLabel {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8fb4bd;
+}
+
+.drawnCardFlip {
+  transform: scale(0.85);
+  margin: -14px 0;
+}
+
+.flipHint {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #5c7a86;
+  font-style: italic;
 }
 
 /* ---- player chip row ---- */

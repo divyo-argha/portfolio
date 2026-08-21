@@ -15,10 +15,29 @@ import { CONNECTED_DEVICES } from "./GameBoardSection";
 import { GameTable } from "./GameTable";
 import { DiceRoll } from "./DiceRoll";
 import { CombatCard } from "./CombatCard";
+import { FlipCard, CATEGORY_COLOR } from "./GameExperience";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { IconArrowLeft, IconArrowRight, IconCheck } from "@/components/primitives/Icons";
 import styles from "./GameplayWalkthrough.module.css";
 
 const DEVICE_COLOR: Record<string, string> = Object.fromEntries(CONNECTED_DEVICES.map((d) => [d.name, d.color]));
+
+/** Step indices where a new turn's die roll begins (plus 0, the setup
+ * step), used by the top "turn" navigation to jump between rolls and skip
+ * every decision/event phase in between. */
+const TURN_BOUNDARIES: number[] = [0];
+WALKTHROUGH_STEPS.forEach((s, i) => {
+  if (s.phase === "roll") TURN_BOUNDARIES.push(i);
+});
+
+function turnGroupOf(stepIndex: number): number {
+  let g = 0;
+  for (let i = 0; i < TURN_BOUNDARIES.length; i++) {
+    if (TURN_BOUNDARIES[i] <= stepIndex) g = i;
+    else break;
+  }
+  return g;
+}
 
 function CellInfoBox({ cellIndex }: { cellIndex: number }) {
   const cell = BOARD_TRACK[cellIndex];
@@ -36,13 +55,27 @@ function CellInfoBox({ cellIndex }: { cellIndex: number }) {
   );
 }
 
+function DrawnCardBox({ card }: { card: (typeof WALKTHROUGH_STEPS)[number]["drawnCard"] }) {
+  const reducedMotion = useReducedMotion();
+  if (!card) return null;
+  return (
+    <div className={styles.drawnCardBox}>
+      <span className={styles.drawnCardLabel}>Card drawn</span>
+      <div className={styles.drawnCardFlip} style={{ "--c": CATEGORY_COLOR[card.category] } as React.CSSProperties}>
+        <FlipCard card={card} reducedMotion={reducedMotion} />
+      </div>
+      <p className={styles.flipHint}>Click the card to flip it over.</p>
+    </div>
+  );
+}
+
 export function GameplayWalkthrough() {
   const [stepIndex, setStepIndex] = useState(0);
   const [manualSelection, setManualSelection] = useState<PlayerId | null>(null);
 
   const step = WALKTHROUGH_STEPS[stepIndex];
-  const isFirst = stepIndex === 0;
-  const isLast = stepIndex === WALKTHROUGH_STEPS.length - 1;
+  const isFirstStep = stepIndex === 0;
+  const isLastStep = stepIndex === WALKTHROUGH_STEPS.length - 1;
   const selectedPlayer = manualSelection ?? step.activePlayer ?? "alice";
 
   const history = useMemo(
@@ -54,12 +87,34 @@ export function GameplayWalkthrough() {
   const elimination = useMemo(() => eliminationStatus(step.playerStates), [step.playerStates]);
   const leader = standings[0];
 
-  function goNext() {
+  const turnGroup = turnGroupOf(stepIndex);
+  const isFirstTurn = turnGroup === 0;
+  const isLastTurn = turnGroup === TURN_BOUNDARIES.length - 1 && isLastStep;
+  const turnStart = TURN_BOUNDARIES[turnGroup];
+  const turnEnd = (TURN_BOUNDARIES[turnGroup + 1] ?? WALKTHROUGH_STEPS.length) - 1;
+  const phaseInTurn = stepIndex - turnStart + 1;
+  const phasesInTurn = turnEnd - turnStart + 1;
+
+  // Fine navigation: one phase at a time (roll, land, resolve, combat...).
+  function goNextStep() {
     setStepIndex((i) => Math.min(i + 1, WALKTHROUGH_STEPS.length - 1));
     setManualSelection(null);
   }
-  function goBack() {
+  function goBackStep() {
     setStepIndex((i) => Math.max(i - 1, 0));
+    setManualSelection(null);
+  }
+
+  // Coarse navigation: jump straight to the next/previous die roll, skipping
+  // every decision/event phase in between.
+  function goNextTurn() {
+    const g = turnGroupOf(stepIndex);
+    setStepIndex(TURN_BOUNDARIES[g + 1] ?? WALKTHROUGH_STEPS.length - 1);
+    setManualSelection(null);
+  }
+  function goBackTurn() {
+    const g = turnGroupOf(stepIndex);
+    setStepIndex(TURN_BOUNDARIES[Math.max(0, g - 1)]);
     setManualSelection(null);
   }
 
@@ -79,52 +134,88 @@ export function GameplayWalkthrough() {
       </div>
 
       <div className={styles.stage}>
-        <GameTable
-          playerStates={step.playerStates}
-          activePlayer={step.activePlayer}
-          selectedPlayer={selectedPlayer}
-          onSelectPlayer={setManualSelection}
-          highlightCellIndex={step.highlightCellIndex}
-        />
-
-        <div className={styles.narrationCol}>
-          <div className={styles.stepMeta}>
-            <span className={styles.stepCounter}>
-              Step {stepIndex + 1} / {WALKTHROUGH_STEPS.length}
-            </span>
-            <span className={styles.turnLabel}>{step.turnLabel}</span>
+        {/* Nav bar pinned at the top-left of the simulation box, so it never
+            shifts position as narration/combat content below it changes length.
+            This is the coarse "turn" navigation: it jumps straight to the next
+            or previous die roll, skipping every decision/event phase between them. */}
+        <div className={styles.navBar}>
+          <span className={styles.navBarLabel}>Turn navigation</span>
+          <button type="button" className={styles.navButton} onClick={goBackTurn} disabled={isFirstTurn}>
+            <IconArrowLeft size={15} />
+            <span>Back</span>
+          </button>
+          <button type="button" className={styles.navButtonPrimary} onClick={goNextTurn} disabled={isLastTurn}>
+            <span>Next</span>
+            <IconArrowRight size={15} />
+          </button>
+          <div className={styles.progressBarTrack} aria-hidden="true">
+            <div
+              className={styles.progressBarFill}
+              style={{ width: `${((stepIndex + 1) / WALKTHROUGH_STEPS.length) * 100}%` }}
+            />
           </div>
-          <h3 className={styles.stepTitle}>{step.title}</h3>
+          <span className={styles.stepCounter}>
+            {turnGroup === 0 ? "Setup" : `Turn ${turnGroup} / ${TURN_BOUNDARIES.length - 1}`}
+          </span>
+        </div>
 
-          {step.phase === "roll" && step.roll ? <DiceRoll key={step.id} result={step.roll} /> : null}
+        <div className={styles.stageGrid}>
+          <GameTable
+            playerStates={step.playerStates}
+            activePlayer={step.activePlayer}
+            selectedPlayer={selectedPlayer}
+            onSelectPlayer={setManualSelection}
+            highlightCellIndex={step.highlightCellIndex}
+          />
 
-          {step.phase === "land" && step.highlightCellIndex !== null ? (
-            <CellInfoBox cellIndex={step.highlightCellIndex} />
-          ) : null}
-
-          {step.narration.map((p) => (
-            <p key={p.slice(0, 24)} className={styles.narrationText}>
-              {p}
-            </p>
-          ))}
-
-          {step.phase === "combat" && step.combat ? <CombatCard combat={step.combat} /> : null}
-
-          <div className={styles.navRow}>
-            <button type="button" className={styles.navButton} onClick={goBack} disabled={isFirst}>
-              <IconArrowLeft size={15} />
-              <span>Back</span>
-            </button>
-            <div className={styles.progressBarTrack} aria-hidden="true">
-              <div
-                className={styles.progressBarFill}
-                style={{ width: `${((stepIndex + 1) / WALKTHROUGH_STEPS.length) * 100}%` }}
-              />
+          <div className={styles.narrationCol}>
+            <div className={styles.titleRow}>
+              <div className={styles.titleRowLeft}>
+                <span className={styles.turnLabel}>{step.turnLabel}</span>
+                <h3 className={styles.stepTitle}>{step.title}</h3>
+              </div>
+              {/* Fine navigation: steps through the decisions/events within
+                  this turn one at a time (roll, land, resolve, combat...). */}
+              <div className={styles.phaseNav}>
+                <button
+                  type="button"
+                  className={styles.phaseNavButton}
+                  onClick={goBackStep}
+                  disabled={isFirstStep}
+                  aria-label="Previous event"
+                >
+                  <IconArrowLeft size={13} />
+                </button>
+                <span className={styles.phaseNavCounter}>
+                  {phaseInTurn}/{phasesInTurn}
+                </span>
+                <button
+                  type="button"
+                  className={styles.phaseNavButton}
+                  onClick={goNextStep}
+                  disabled={isLastStep}
+                  aria-label="Next event"
+                >
+                  <IconArrowRight size={13} />
+                </button>
+              </div>
             </div>
-            <button type="button" className={styles.navButtonPrimary} onClick={goNext} disabled={isLast}>
-              <span>Next</span>
-              <IconArrowRight size={15} />
-            </button>
+
+            {step.phase === "roll" && step.roll ? <DiceRoll key={step.id} result={step.roll} /> : null}
+
+            {step.phase === "land" && step.highlightCellIndex !== null ? (
+              <CellInfoBox cellIndex={step.highlightCellIndex} />
+            ) : null}
+
+            {step.narration.map((p) => (
+              <p key={p.slice(0, 24)} className={styles.narrationText}>
+                {p}
+              </p>
+            ))}
+
+            {step.phase === "resolve" && step.drawnCard ? <DrawnCardBox card={step.drawnCard} /> : null}
+
+            {step.phase === "combat" && step.combat ? <CombatCard combat={step.combat} /> : null}
           </div>
         </div>
       </div>
@@ -149,7 +240,7 @@ export function GameplayWalkthrough() {
                 {isActive ? <span className={styles.chipActiveTag}>turn</span> : null}
               </span>
               <span className={styles.chipStats}>
-                {s.credits}cr · {s.points}pt · {s.devices.length} {s.devices.length === 1 ? "device" : "devices"}
+                {s.credits} credits · {BOARD_TRACK[s.boardPos].name}
               </span>
             </button>
           );
@@ -181,8 +272,8 @@ export function GameplayWalkthrough() {
             <span className={styles.detailStatValue}>{selectedState.handSize} cards</span>
           </div>
           <div className={styles.detailStat}>
-            <span className={styles.detailStatLabel}>Board cell</span>
-            <span className={styles.detailStatValue}>#{selectedState.boardPos}</span>
+            <span className={styles.detailStatLabel}>Current stage</span>
+            <span className={styles.detailStatValue}>{BOARD_TRACK[selectedState.boardPos].name}</span>
           </div>
         </div>
         <div className={styles.detailDevices}>

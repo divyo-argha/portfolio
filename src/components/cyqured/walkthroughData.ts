@@ -1,3 +1,4 @@
+import { cardFaces, type CardFace } from "@/app/publications/cyqured/cardData";
 import { CONNECTED_DEVICES } from "./GameBoardSection";
 
 /** A single hand-authored example playthrough, grounded in the rules described
@@ -42,62 +43,16 @@ export type PlayerState = {
   note?: string;
 };
 
-export type CardRef = {
-  id: string;
-  title: string;
-  category: "attack" | "defense";
-  strideType?: string;
-  src: string;
-};
+/** Looks up a real card by its cardData.ts id. Every card shown in this
+ * walkthrough (attack, defense, chance, scenario) is the actual card, not a
+ * stand-in, so it renders with the same flippable art used in the Cards tab. */
+export function cardById(id: string): CardFace {
+  const card = cardFaces.find((c) => c.id === id);
+  if (!card) throw new Error(`walkthroughData: unknown card id "${id}"`);
+  return card;
+}
 
-const cardImg = (id: string) => `/media/publications/cyqured/cards/action/${id}.png`;
-
-/** The small set of real cards (ids match cardData.ts exactly) used in this
- * walkthrough's combat rounds. */
-export const CARDS: Record<string, CardRef> = {
-  "action-07": {
-    id: "action-07",
-    title: "Zero-Day Exploit",
-    category: "attack",
-    strideType: "Elevation of Privilege",
-    src: cardImg("action-07"),
-  },
-  "action-09": {
-    id: "action-09",
-    title: "Activity Log Manipulation",
-    category: "attack",
-    strideType: "Repudiation",
-    src: cardImg("action-09"),
-  },
-  "action-13": {
-    id: "action-13",
-    title: "Wireless Sniffing",
-    category: "attack",
-    strideType: "Information Disclosure",
-    src: cardImg("action-13"),
-  },
-  "action-15": {
-    id: "action-15",
-    title: "Router Hijacking",
-    category: "attack",
-    strideType: "Tampering",
-    src: cardImg("action-15"),
-  },
-  "action-33": {
-    id: "action-33",
-    title: "Intrusion Detection & Prevention System",
-    category: "defense",
-    src: cardImg("action-33"),
-  },
-  "action-34": {
-    id: "action-34",
-    title: "Immutable Logging",
-    category: "defense",
-    src: cardImg("action-34"),
-  },
-};
-
-export type BoardCellKind = "go" | "stop" | "power-outage" | "card-penalty" | "chance" | "scenario" | "device";
+export type BoardCellKind = "go" | "stop" | "power-outage" | "card-penalty" | "bonus-cards" | "chance" | "scenario" | "device";
 
 export type BoardCell = {
   kind: BoardCellKind;
@@ -105,18 +60,22 @@ export type BoardCell = {
   color?: string;
   points?: number;
   description: string;
+  /** Column (0-6) and row (0-8) on the real board image's 7x9 cell grid. */
+  col: number;
+  row: number;
 };
 
 const KIND_DESC: Record<Exclude<BoardCellKind, "device">, string> = {
   go: "Complete a full circuit to collect 10 credit points and draw an action card.",
-  stop: "Forced incident-response lockdown: forfeit your next turn to run system diagnostics.",
+  stop: "Skip a turn: forced incident-response lockdown.",
   "power-outage": "Devices briefly lose their continuous active protections, a short window where attacks land more easily.",
   "card-penalty": "Discard one action card from your hand into the central discard pile.",
+  "bonus-cards": "Get 2 cards from the action deck.",
   chance: "Draw an unexpected event card: real-world vulnerabilities, zero-days, or sudden security incidents.",
   scenario: "Draw a situational security prompt and classify its STRIDE threat category to earn points.",
 };
 
-const deviceCell = (name: string): BoardCell => {
+const deviceCell = (name: string, col: number, row: number): BoardCell => {
   const dev = CONNECTED_DEVICES.find((d) => d.name === name)!;
   return {
     kind: "device",
@@ -124,47 +83,53 @@ const deviceCell = (name: string): BoardCell => {
     color: dev.color,
     points: dev.points,
     description: `${dev.category} device, worth ${dev.points} points. Unowned: pay ${dev.points} credits to claim it. Owned by someone else: pay half its value to pass, or attack for it.`,
+    col,
+    row,
   };
 };
 
-const specialCell = (kind: Exclude<BoardCellKind, "device">, name: string): BoardCell => ({
+const specialCell = (kind: Exclude<BoardCellKind, "device">, name: string, col: number, row: number): BoardCell => ({
   kind,
   name,
   description: KIND_DESC[kind],
+  col,
+  row,
 });
 
-/** 28-cell board track. Corners sit at indices 0, 7, 14, 21 (7 cells per
- * side, matching the paper's cyclic 28-cell design). Device cells reuse the
- * canonical 16-device list from the Game Board tab. */
+/** The 28-cell board track, matching the real printed board
+ * (public/media/publications/cyqured/board.webp) exactly: a 7-column x
+ * 9-row grid of square cells, GO at the bottom-left corner, play moving up
+ * the left side first. Every device, point value, and special cell here is
+ * read directly off that image, not invented. */
 export const BOARD_TRACK: BoardCell[] = [
-  specialCell("go", "GO"),
-  deviceCell("Smart Utility Meter"),
-  deviceCell("Smart Thermostat"),
-  specialCell("chance", "Chance"),
-  deviceCell("IP Camera"),
-  deviceCell("Smart Door-lock"),
-  specialCell("scenario", "Scenario"),
-  specialCell("stop", "STOP"),
-  deviceCell("Smart Speaker"),
-  deviceCell("Smart TV"),
-  specialCell("chance", "Chance"),
-  deviceCell("Smart Printer"),
-  deviceCell("Smart Fridge"),
-  specialCell("scenario", "Scenario"),
-  specialCell("power-outage", "Power Outage"),
-  deviceCell("Laptop"),
-  deviceCell("Desktop"),
-  specialCell("chance", "Chance"),
-  deviceCell("Smartphone"),
-  deviceCell("Tablet"),
-  specialCell("scenario", "Scenario"),
-  specialCell("card-penalty", "Card Penalty"),
-  deviceCell("Gaming Console"),
-  deviceCell("Smart Wearables"),
-  specialCell("chance", "Chance"),
-  deviceCell("Wireless Router"),
-  deviceCell("Home Server"),
-  specialCell("scenario", "Scenario"),
+  specialCell("go", "GO", 0, 8),
+  deviceCell("Smart Fridge", 0, 7),
+  specialCell("chance", "Chance", 0, 6),
+  deviceCell("Smart Printer", 0, 5),
+  specialCell("scenario", "Scenario", 0, 4),
+  deviceCell("Wireless Router", 0, 3),
+  specialCell("card-penalty", "Card Penalty", 0, 2),
+  deviceCell("Smart Thermostat", 0, 1),
+  specialCell("power-outage", "Power Outage", 0, 0),
+  deviceCell("Smart Utility Meter", 1, 0),
+  deviceCell("Smart Door-lock", 2, 0),
+  specialCell("chance", "Chance", 3, 0),
+  deviceCell("IP Camera", 4, 0),
+  deviceCell("Smart Speaker", 5, 0),
+  specialCell("bonus-cards", "+2 Cards", 6, 0),
+  deviceCell("Smart TV", 6, 1),
+  specialCell("chance", "Chance", 6, 2),
+  deviceCell("Home Server", 6, 3),
+  specialCell("scenario", "Scenario", 6, 4),
+  deviceCell("Smart Wearables", 6, 5),
+  specialCell("card-penalty", "Card Penalty", 6, 6),
+  deviceCell("Tablet", 6, 7),
+  specialCell("stop", "STOP", 6, 8),
+  deviceCell("Smartphone", 5, 8),
+  deviceCell("Gaming Console", 4, 8),
+  specialCell("chance", "Chance", 3, 8),
+  deviceCell("Desktop", 2, 8),
+  deviceCell("Laptop", 1, 8),
 ];
 
 const START: Record<PlayerId, PlayerState> = {
@@ -190,8 +155,8 @@ export type CombatInfo = {
   defender: PlayerId;
   deviceName: string;
   round: number;
-  attackCard: CardRef;
-  defenseCard: CardRef | null;
+  attackCard: CardFace;
+  defenseCard: CardFace | null;
   outcome: CombatOutcome;
   pointsDelta: { attacker: number; defender: number };
   deviceTransferred: boolean;
@@ -209,6 +174,8 @@ export type WalkthroughStep = {
   historyEntries: string[];
   roll?: number;
   combat?: CombatInfo;
+  /** A chance/scenario card being drawn and shown at this step. */
+  drawnCard?: CardFace;
 };
 
 const steps: WalkthroughStep[] = [];
@@ -273,93 +240,95 @@ function pushLand(
   });
 }
 
-// =========================================================================
-// Round 1 — everyone takes a first turn
-// =========================================================================
+// Every move below is a real, single six-sided die roll (1-6) added to that
+// player's own last known position on the real board layout above. Where a
+// player needs to travel further than one roll can reach, the narration
+// says so explicitly ("a few turns later") instead of pretending one roll
+// covered the distance.
 
-// ---- Alice: buy IP Camera ----
-pushRoll("r1-alice-roll", "alice", 4, "Turn 1 — Alice", "Alice rolls a 4.");
-pushLand("r1-alice-land", "alice", 4, "Turn 1 — Alice", [
-  "She moves 4 cells and lands on the IP Camera: a Home Security device, unowned, worth 10 points.",
+// ---- Turn 1: everyone's opening move ----
+
+// Dylan buys the Smart Fridge
+pushRoll("t1-dylan-roll", "dylan", 1, "Turn 1 — Dylan", "Dylan goes first. He rolls a 1.");
+pushLand("t1-dylan-land", "dylan", 1, "Turn 1 — Dylan", [
+  "He moves one cell up from GO and lands on the Smart Fridge: an Appliances device, unowned, worth 6 points.",
 ]);
 {
   const s = prev();
-  s.alice.credits -= 10;
-  s.alice.points += 10;
-  s.alice.devices.push("IP Camera");
+  s.dylan.credits -= 6;
+  s.dylan.points += 6;
+  s.dylan.devices.push("Smart Fridge");
   steps.push({
-    id: "r1-alice-resolve",
-    phase: "resolve",
-    turnLabel: "Turn 1 — Alice",
-    activePlayer: "alice",
-    highlightCellIndex: 4,
-    title: "Alice buys the IP Camera",
-    narration: ["It's unowned, so she pays its 10-credit value outright and claims it. +10 points."],
-    playerStates: s,
-    historyEntries: ["Alice rolled 4, landed on IP Camera (unowned), paid 10 credits to acquire it. +10 points."],
-  });
-}
-
-// ---- Bob: buy Smart Door-lock ----
-pushRoll("r1-bob-roll", "bob", 5, "Turn 1 — Bob", "Bob rolls a 5.");
-pushLand("r1-bob-land", "bob", 5, "Turn 1 — Bob", [
-  "He moves 5 cells and lands on the Smart Door-lock: a Home Security device, unowned, worth 10 points.",
-]);
-{
-  const s = prev();
-  s.bob.credits -= 10;
-  s.bob.points += 10;
-  s.bob.devices.push("Smart Door-lock");
-  steps.push({
-    id: "r1-bob-resolve",
-    phase: "resolve",
-    turnLabel: "Turn 1 — Bob",
-    activePlayer: "bob",
-    highlightCellIndex: 5,
-    title: "Bob buys the Smart Door-lock",
-    narration: ["He pays the 10-credit value and claims it. +10 points."],
-    playerStates: s,
-    historyEntries: ["Bob rolled 5, landed on Smart Door-lock (unowned), paid 10 credits to acquire it. +10 points."],
-  });
-}
-
-// ---- Dylan: buy Smart Utility Meter ----
-pushRoll("r1-dylan-roll", "dylan", 1, "Turn 1 — Dylan", "Dylan rolls a 1.");
-pushLand("r1-dylan-land", "dylan", 1, "Turn 1 — Dylan", [
-  "He moves 1 cell and lands on the Smart Utility Meter: an Energy & Comfort device, unowned, worth 8 points.",
-]);
-{
-  const s = prev();
-  s.dylan.credits -= 8;
-  s.dylan.points += 8;
-  s.dylan.devices.push("Smart Utility Meter");
-  steps.push({
-    id: "r1-dylan-resolve",
+    id: "t1-dylan-resolve",
     phase: "resolve",
     turnLabel: "Turn 1 — Dylan",
     activePlayer: "dylan",
     highlightCellIndex: 1,
-    title: "Dylan buys the Smart Utility Meter",
-    narration: ["He pays 8 credits and claims it. He's already planning to come back for its Energy & Comfort partner."],
+    title: "Dylan buys the Smart Fridge",
+    narration: ["He pays 6 credits and claims it. There's a second Appliances device further up the same side; he's already eyeing it."],
     playerStates: s,
-    historyEntries: ["Dylan rolled 1, landed on Smart Utility Meter (unowned), paid 8 credits to acquire it. +8 points."],
+    historyEntries: ["Dylan rolled 1, landed on Smart Fridge (unowned), paid 6 credits to acquire it. +6 points."],
   });
 }
 
-// ---- Divyo: Scenario ----
-pushRoll("r1-divyo-roll", "divyo", 6, "Turn 1 — Divyo", "Divyo rolls a 6.");
-pushLand("r1-divyo-land", "divyo", 6, "Turn 1 — Divyo", [
-  "He moves 6 cells and lands on Scenario: draw a situational prompt and classify its STRIDE category to earn points.",
+// Alice buys the Wireless Router
+pushRoll("t1-alice-roll", "alice", 5, "Turn 1 — Alice", "Alice rolls a 5.");
+pushLand("t1-alice-land", "alice", 5, "Turn 1 — Alice", [
+  "She moves 5 cells up the same side and lands on the Wireless Router: critical infrastructure, unowned, worth 18 points.",
+]);
+{
+  const s = prev();
+  s.alice.credits -= 18;
+  s.alice.points += 18;
+  s.alice.devices.push("Wireless Router");
+  steps.push({
+    id: "t1-alice-resolve",
+    phase: "resolve",
+    turnLabel: "Turn 1 — Alice",
+    activePlayer: "alice",
+    highlightCellIndex: 5,
+    title: "Alice buys the Wireless Router",
+    narration: [
+      "She pays the full 18 credits and claims it. It's expensive, but owning a router is worth a lot, if she can hold onto it.",
+    ],
+    playerStates: s,
+    historyEntries: ["Alice rolled 5, landed on Wireless Router (unowned), paid 18 credits to acquire it. +18 points."],
+  });
+}
+
+// Bob lands on Card Penalty
+pushRoll("t1-bob-roll", "bob", 6, "Turn 1 — Bob", "Bob rolls a 6.");
+{
+  const s = prev();
+  s.bob.boardPos = 6;
+  s.bob.handSize -= 1;
+  steps.push({
+    id: "t1-bob-land",
+    phase: "land",
+    turnLabel: "Turn 1 — Bob",
+    activePlayer: "bob",
+    highlightCellIndex: 6,
+    title: "Bob lands on Card Penalty",
+    narration: ["Rough start: he has to discard one action card from his hand into the central discard pile, sight unseen."],
+    playerStates: s,
+    historyEntries: ["Bob rolled 6, landed on Card Penalty. Discarded 1 action card."],
+  });
+}
+
+// Divyo lands on Scenario
+pushRoll("t1-divyo-roll", "divyo", 4, "Turn 1 — Divyo", "Divyo rolls a 4.");
+pushLand("t1-divyo-land", "divyo", 4, "Turn 1 — Divyo", [
+  "He moves 4 cells and lands on Scenario: draw a situational prompt and classify its STRIDE category to earn points.",
 ]);
 {
   const s = prev();
   s.divyo.points += 6;
   steps.push({
-    id: "r1-divyo-resolve",
+    id: "t1-divyo-resolve",
     phase: "resolve",
     turnLabel: "Turn 1 — Divyo",
     activePlayer: "divyo",
-    highlightCellIndex: 6,
+    highlightCellIndex: 4,
     title: "Divyo reasons out a Scenario",
     narration: [
       "He draws a card describing an ISP phishing email asking for payment details, and says out loud which STRIDE category it is, and why.",
@@ -367,90 +336,298 @@ pushLand("r1-divyo-land", "divyo", 6, "Turn 1 — Divyo", [
     ],
     playerStates: s,
     historyEntries: [
-      "Divyo rolled 6, landed on Scenario, drew \"ISP Phishing Email.\" Correctly identified it as Spoofing. +6 points.",
+      "Divyo rolled 4, landed on Scenario, drew \"ISP Phishing Email.\" Correctly identified it as Spoofing. +6 points.",
     ],
+    drawnCard: cardById("scenario-02"),
   });
 }
 
-// ---- Argha: Chance ----
-pushRoll("r1-argha-roll", "argha", 3, "Turn 1 — Argha", "Argha rolls a 3.");
-pushLand("r1-argha-land", "argha", 3, "Turn 1 — Argha", [
-  "He moves 3 cells and lands on Chance: draw an unexpected event card.",
+// Argha draws Chance
+pushRoll("t1-argha-roll", "argha", 2, "Turn 1 — Argha", "Argha rolls a 2.");
+pushLand("t1-argha-land", "argha", 2, "Turn 1 — Argha", [
+  "He moves 2 cells and lands on Chance: draw an unexpected event card.",
 ]);
 {
   const s = prev();
   s.argha.note = "Holding a Firewall Upgrade bonus";
   steps.push({
-    id: "r1-argha-resolve",
+    id: "t1-argha-resolve",
     phase: "resolve",
     turnLabel: "Turn 1 — Argha",
     activePlayer: "argha",
-    highlightCellIndex: 3,
+    highlightCellIndex: 2,
     title: "Argha draws Firewall Upgrade",
     narration: [
       "The card blocks the next attacker who lands on his cell, and earns him points from the block. He tucks it away for later.",
     ],
     playerStates: s,
-    historyEntries: ["Argha rolled 3, landed on Chance, drew \"Firewall Upgrade\" (blocks the next attacker on his cell)."],
+    historyEntries: ["Argha rolled 2, landed on Chance, drew \"Firewall Upgrade\" (blocks the next attacker on his cell)."],
+    drawnCard: cardById("chance-06"),
   });
 }
 
 // =========================================================================
-// Round 2 — a color group completes, then the first fight
+// Turn 2 — a color group completes, then the first fight
 // =========================================================================
 
-// ---- Dylan: buy Smart Thermostat, complete Energy & Comfort ----
-pushRoll("r2-dylan-roll", "dylan", 1, "Turn 2 — Dylan", "Dylan rolls a 1.");
-pushLand("r2-dylan-land", "dylan", 2, "Turn 2 — Dylan", [
-  "He moves 1 cell and lands on the Smart Thermostat: the second and last Energy & Comfort device, unowned, worth 6 points.",
+// Dylan buys the Smart Printer, completes Appliances
+pushRoll("t2-dylan-roll", "dylan", 2, "Turn 2 — Dylan", "Dylan rolls a 2.");
+pushLand("t2-dylan-land", "dylan", 3, "Turn 2 — Dylan", [
+  "He moves 2 cells and lands on the Smart Printer: the second and last Appliances device, unowned, worth 8 points.",
 ]);
 {
   const s = prev();
-  s.dylan.credits -= 6;
-  s.dylan.points += 6;
-  s.dylan.devices.push("Smart Thermostat");
+  s.dylan.credits -= 8;
+  s.dylan.points += 8;
+  s.dylan.devices.push("Smart Printer");
   steps.push({
-    id: "r2-dylan-resolve",
+    id: "t2-dylan-resolve",
     phase: "resolve",
     turnLabel: "Turn 2 — Dylan",
     activePlayer: "dylan",
-    highlightCellIndex: 2,
-    title: "Dylan completes the Energy & Comfort group",
+    highlightCellIndex: 3,
+    title: "Dylan completes the Appliances group",
     narration: [
-      "He pays 6 credits and claims it. Because he now owns every device in that color group, Color-Group Immunity kicks in: both devices are now immune to attack, and point gains tied to them grow.",
+      "He pays 8 credits and claims it. Because he now owns every device in that color group, Color-Group Immunity kicks in: both the Fridge and the Printer are now immune to attack, and point gains tied to them grow.",
     ],
     playerStates: s,
     historyEntries: [
-      "Dylan rolled 1, landed on Smart Thermostat (unowned), paid 6 credits to acquire it. +6 points.",
-      "Dylan now owns the full Energy & Comfort group. Color-Group Immunity is active on Smart Utility Meter and Smart Thermostat.",
+      "Dylan rolled 2, landed on Smart Printer (unowned), paid 8 credits to acquire it. +8 points.",
+      "Dylan now owns the full Appliances group. Color-Group Immunity is active on Smart Fridge and Smart Printer.",
     ],
   });
 }
 
-// ---- Alice attacks Bob's Smart Door-lock ----
-pushRoll("r2-alice-roll", "alice", 1, "Turn 2 — Alice", "Alice rolls a 1.");
-pushLand("r2-alice-land", "alice", 5, "Turn 2 — Alice", [
-  "She moves 1 cell and lands on the Smart Door-lock, which Bob already owns.",
-  "Landing on an occupied device is a choice: pay Bob half its value (5 credits) to pass, or attack it outright with a card from her hand. Alice decides to attack.",
+// Bob buys the Smart Door-lock
+pushRoll("t2-bob-roll", "bob", 4, "Turn 2 — Bob", "Bob rolls a 4.");
+pushLand("t2-bob-land", "bob", 10, "Turn 2 — Bob", [
+  "He moves 4 cells and lands on the Smart Door-lock: a Home Security device, unowned, worth 10 points.",
 ]);
 {
   const s = prev();
-  const card = CARDS["action-09"];
+  s.bob.credits -= 10;
+  s.bob.points += 10;
+  s.bob.devices.push("Smart Door-lock");
   steps.push({
-    id: "r2-alice-combat-1",
-    phase: "combat",
+    id: "t2-bob-resolve",
+    phase: "resolve",
+    turnLabel: "Turn 2 — Bob",
+    activePlayer: "bob",
+    highlightCellIndex: 10,
+    title: "Bob buys the Smart Door-lock",
+    narration: ["He pays 10 credits and claims it."],
+    playerStates: s,
+    historyEntries: ["Bob rolled 4, landed on Smart Door-lock (unowned), paid 10 credits to acquire it. +10 points."],
+  });
+}
+
+// Divyo lands on Power Outage
+pushRoll("t2-divyo-roll", "divyo", 4, "Turn 2 — Divyo", "Divyo rolls a 4.");
+{
+  const s = prev();
+  s.divyo.boardPos = 8;
+  steps.push({
+    id: "t2-divyo-land",
+    phase: "land",
+    turnLabel: "Turn 2 — Divyo",
+    activePlayer: "divyo",
+    highlightCellIndex: 8,
+    title: "Divyo lands on Power Outage",
+    narration: [
+      "Every device briefly loses its continuous active protections, a short window where an attack lands more easily than usual, until the next turn passes.",
+    ],
+    playerStates: s,
+    historyEntries: ["Divyo rolled 4, landed on Power Outage. Active device protections are briefly down."],
+  });
+}
+
+// Alice lands on Card Penalty
+pushRoll("t2-alice-roll", "alice", 1, "Turn 2 — Alice", "Alice rolls a 1.");
+{
+  const s = prev();
+  s.alice.boardPos = 6;
+  s.alice.handSize -= 1;
+  steps.push({
+    id: "t2-alice-land",
+    phase: "land",
     turnLabel: "Turn 2 — Alice",
     activePlayer: "alice",
-    highlightCellIndex: 5,
-    title: "Round 1: Alice plays Activity Log Manipulation",
+    highlightCellIndex: 6,
+    title: "Alice lands on Card Penalty",
     narration: [
-      "She plays Activity Log Manipulation, a Repudiation attack: the plan is to delete the Smart Door-lock's access logs so there's no clean record of what happened.",
+      "She discards one action card. Her Wireless Router stays put a few cells back, still very much a target for anyone who lands on it.",
+    ],
+    playerStates: s,
+    historyEntries: ["Alice rolled 1, landed on Card Penalty. Discarded 1 action card."],
+  });
+}
+
+// Argha attacks Alice's Wireless Router: two rounds
+pushRoll("t2-argha-roll", "argha", 3, "Turn 2 — Argha", "Argha rolls a 3.");
+pushLand("t2-argha-land", "argha", 5, "Turn 2 — Argha", [
+  "He lands right on Alice's Wireless Router. Routers and Home Servers are flagged as critical infrastructure: a single successful compromise here can transfer the whole device, not just a few points, because a breached gateway can expose everything connected to it.",
+  "Argha chooses to attack rather than pay.",
+]);
+{
+  const s = prev();
+  const card = cardById("action-07");
+  const def = cardById("action-33");
+  steps.push({
+    id: "t2-argha-combat-1",
+    phase: "combat",
+    turnLabel: "Turn 2 — Argha",
+    activePlayer: "argha",
+    highlightCellIndex: 5,
+    title: "Round 1: Argha plays Zero-Day Exploit",
+    narration: [
+      "He plays Zero-Day Exploit, an Elevation of Privilege attack that can target any device before a patch exists.",
+      "Alice happens to have Intrusion Detection & Prevention System in hand. It monitors traffic in real time and catches the exploit attempt. The defense succeeds.",
+    ],
+    playerStates: s,
+    historyEntries: [
+      "Round 1: Argha plays Zero-Day Exploit (Elevation of Privilege) on Alice's Wireless Router. Alice defends with Intrusion Detection & Prevention System. Defense succeeds, attack blocked.",
+    ],
+    combat: {
+      attacker: "argha",
+      defender: "alice",
+      deviceName: "Wireless Router",
+      round: 1,
+      attackCard: card,
+      defenseCard: def,
+      outcome: "defended",
+      pointsDelta: { attacker: 0, defender: 0 },
+      deviceTransferred: false,
+    },
+  });
+}
+{
+  const s = prev();
+  s.argha.handSize -= 1;
+  s.alice.handSize -= 1;
+  steps.push({
+    id: "t2-argha-resolve-1",
+    phase: "resolve",
+    turnLabel: "Turn 2 — Argha (round 1 resolution)",
+    activePlayer: "argha",
+    highlightCellIndex: 5,
+    title: "Resolution: Alice defends, nobody scores",
+    narration: [
+      "No points move and the router stays with Alice. Both cards used this round are spent: Argha's Zero-Day Exploit and Alice's Intrusion Detection & Prevention System. Argha still has other ideas, so he tries again.",
+    ],
+    playerStates: s,
+    historyEntries: [
+      "Round 1 resolved: defended, no points change. Argha's Zero-Day Exploit and Alice's Intrusion Detection & Prevention System are both spent.",
+    ],
+  });
+}
+{
+  const s = prev();
+  const card = cardById("action-15");
+  steps.push({
+    id: "t2-argha-combat-2",
+    phase: "combat",
+    turnLabel: "Turn 2 — Argha",
+    activePlayer: "argha",
+    highlightCellIndex: 5,
+    title: "Round 2: Argha plays Router Hijacking",
+    narration: [
+      "Undeterred, Argha plays Router Hijacking, a Tampering attack that only works on routers, but is exactly on target here.",
+      "Alice checks her hand again. Her one broad defense card is already spent from round 1, and she doesn't have Secure DNS or a Firewall card either. The defense fails.",
+    ],
+    playerStates: s,
+    historyEntries: [
+      "Round 2: Argha plays Router Hijacking (Tampering) on Alice's Wireless Router. Alice has no defense left for it.",
+    ],
+    combat: {
+      attacker: "argha",
+      defender: "alice",
+      deviceName: "Wireless Router",
+      round: 2,
+      attackCard: card,
+      defenseCard: null,
+      outcome: "critical-transfer",
+      pointsDelta: { attacker: 18, defender: -18 },
+      deviceTransferred: true,
+    },
+  });
+}
+{
+  const s = prev();
+  s.argha.handSize -= 1;
+  s.argha.points += 18;
+  s.argha.devices.push("Wireless Router");
+  s.alice.points -= 18;
+  s.alice.devices = s.alice.devices.filter((d) => d !== "Wireless Router");
+  steps.push({
+    id: "t2-argha-resolve-2",
+    phase: "resolve",
+    turnLabel: "Turn 2 — Argha (round 2 resolution)",
+    activePlayer: "argha",
+    highlightCellIndex: 5,
+    title: "Resolution: the router changes hands",
+    narration: [
+      "Because the Wireless Router is critical infrastructure, this one failed defense is enough: ownership transfers straight to Argha. Alice loses the router's 18 points; Argha gains them and takes the device.",
+      "This is the outsized-impact rule in action: a single breached gateway really does cost more than a smart bulb, and it took a second, different attack card to get there after the first one was blocked.",
+    ],
+    playerStates: s,
+    historyEntries: [
+      "Round 2 resolved: attack succeeded. Because Wireless Router is critical infrastructure, ownership transfers to Argha on this single failure. Argha +18 points, Alice -18 points.",
+    ],
+  });
+}
+
+// =========================================================================
+// Turn 3 — new purchases, a normal-asset fight, and a half-price pass
+// =========================================================================
+
+// Bob buys the IP Camera
+pushRoll("t3-bob-roll", "bob", 2, "Turn 3 — Bob", "Bob rolls a 2.");
+pushLand("t3-bob-land", "bob", 12, "Turn 3 — Bob", [
+  "He moves 2 cells and lands on the IP Camera: a Home Security device, unowned, worth 10 points.",
+]);
+{
+  const s = prev();
+  s.bob.credits -= 10;
+  s.bob.points += 10;
+  s.bob.devices.push("IP Camera");
+  steps.push({
+    id: "t3-bob-resolve",
+    phase: "resolve",
+    turnLabel: "Turn 3 — Bob",
+    activePlayer: "bob",
+    highlightCellIndex: 12,
+    title: "Bob buys the IP Camera",
+    narration: ["He pays 10 credits and claims it."],
+    playerStates: s,
+    historyEntries: ["Bob rolled 2, landed on IP Camera (unowned), paid 10 credits to acquire it. +10 points."],
+  });
+}
+
+// Divyo attacks Bob's Smart Door-lock
+pushRoll("t3-divyo-roll", "divyo", 2, "Turn 3 — Divyo", "Divyo rolls a 2.");
+pushLand("t3-divyo-land", "divyo", 10, "Turn 3 — Divyo", [
+  "He lands on Bob's Smart Door-lock. Landing on an occupied device is a choice: pay Bob half its value to pass, or attack it outright. Divyo attacks.",
+]);
+{
+  const s = prev();
+  const card = cardById("action-09");
+  steps.push({
+    id: "t3-divyo-combat",
+    phase: "combat",
+    turnLabel: "Turn 3 — Divyo",
+    activePlayer: "divyo",
+    highlightCellIndex: 10,
+    title: "Divyo plays Activity Log Manipulation",
+    narration: [
+      "He plays Activity Log Manipulation, a Repudiation attack: the plan is to delete the lock's access logs so there's no clean record of what happened.",
       "Bob checks his hand for Immutable Logging, the one defense that stops this attack, and doesn't have it. The defense fails.",
     ],
     playerStates: s,
-    historyEntries: ["Alice plays Activity Log Manipulation (Repudiation) on Bob's Smart Door-lock. Bob has no Immutable Logging in hand."],
+    historyEntries: [
+      "Divyo plays Activity Log Manipulation (Repudiation) on Bob's Smart Door-lock. Bob has no Immutable Logging in hand.",
+    ],
     combat: {
-      attacker: "alice",
+      attacker: "divyo",
       defender: "bob",
       deviceName: "Smart Door-lock",
       round: 1,
@@ -464,78 +641,211 @@ pushLand("r2-alice-land", "alice", 5, "Turn 2 — Alice", [
 }
 {
   const s = prev();
-  s.alice.handSize -= 1;
-  s.alice.points += 5;
+  s.divyo.handSize -= 1;
+  s.divyo.points += 5;
   s.bob.points -= 5;
   steps.push({
-    id: "r2-alice-resolve",
+    id: "t3-divyo-resolve",
     phase: "resolve",
-    turnLabel: "Turn 2 — Alice (resolution)",
-    activePlayer: "alice",
-    highlightCellIndex: 5,
-    title: "Resolution: Alice wins the round",
-    narration: [
-      "A failed defense lets the attacker gain points: Alice +5, Bob -5. The Smart Door-lock isn't critical infrastructure like a router, so ownership does not change hands on a single failed defense. Bob keeps it, just with a smaller score and no clean log of the breach.",
-    ],
-    playerStates: s,
-    historyEntries: [
-      "Round resolved: attack succeeded. Alice +5 points, Bob -5 points. Ownership of Smart Door-lock stays with Bob (not a critical asset). Alice's Activity Log Manipulation is spent.",
-    ],
-  });
-}
-
-// ---- Bob: buy Wireless Router (elided travel) ----
-pushRoll("r2-bob-roll", "bob", 6, "Turn 2 — Bob", "A couple of turns later, Bob rolls a 6.");
-pushLand("r2-bob-land", "bob", 25, "Turn 2 — Bob", [
-  "He lands on the Wireless Router: critical infrastructure, unowned, worth 18 points. Landing here on an owned Router or Home Server works the same as any device, except a single failed defense is enough to change hands, not just points.",
-]);
-{
-  const s = prev();
-  s.bob.credits -= 18;
-  s.bob.points += 18;
-  s.bob.devices.push("Wireless Router");
-  steps.push({
-    id: "r2-bob-resolve",
-    phase: "resolve",
-    turnLabel: "Turn 2 — Bob",
-    activePlayer: "bob",
-    highlightCellIndex: 25,
-    title: "Bob buys the Wireless Router",
-    narration: ["He pays the full 18 credits and claims it, hoping to recover the points he just lost to Alice."],
-    playerStates: s,
-    historyEntries: ["Bob rolled 6, landed on Wireless Router (unowned), paid 18 credits to acquire it. +18 points."],
-  });
-}
-
-// ---- Divyo attacks Bob's Router: two rounds ----
-pushRoll("r2-divyo-roll", "divyo", 4, "Turn 2 — Divyo", "A turn later, Divyo rolls a 4.");
-pushLand("r2-divyo-land", "divyo", 25, "Turn 2 — Divyo", [
-  "He lands right on Bob's new Wireless Router. Routers and Home Servers are flagged as critical infrastructure: a single successful compromise here can transfer the whole device, not just a few points, because a breached gateway can expose everything connected to it.",
-  "Divyo chooses to attack.",
-]);
-{
-  const s = prev();
-  const card = CARDS["action-07"];
-  const def = CARDS["action-33"];
-  steps.push({
-    id: "r2-divyo-combat-1",
-    phase: "combat",
-    turnLabel: "Turn 2 — Divyo",
+    turnLabel: "Turn 3 — Divyo (resolution)",
     activePlayer: "divyo",
-    highlightCellIndex: 25,
-    title: "Round 1: Divyo plays Zero-Day Exploit",
+    highlightCellIndex: 10,
+    title: "Resolution: Divyo wins the round",
     narration: [
-      "He plays Zero-Day Exploit, an Elevation of Privilege attack that can target any device before a patch exists.",
-      "Bob happens to have Intrusion Detection & Prevention System in hand. It monitors traffic in real time and catches the exploit attempt. The defense succeeds.",
+      "A failed defense lets the attacker gain points: Divyo +5, Bob -5. The Smart Door-lock isn't critical infrastructure like a router, so ownership does not change hands on a single failed defense. Bob keeps it, just with a smaller score and no clean log of the breach.",
     ],
     playerStates: s,
     historyEntries: [
-      "Round 1: Divyo plays Zero-Day Exploit (Elevation of Privilege) on Bob's Wireless Router. Bob defends with Intrusion Detection & Prevention System. Defense succeeds, attack blocked.",
+      "Round resolved: attack succeeded. Divyo +5 points, Bob -5 points. Ownership of Smart Door-lock stays with Bob (not a critical asset). Divyo's Activity Log Manipulation is spent.",
+    ],
+  });
+}
+
+// Alice lands on Bob's IP Camera and pays instead of fighting
+pushRoll("t3-alice-roll", "alice", 6, "Turn 3 — Alice", "Alice rolls a 6.");
+pushLand("t3-alice-land", "alice", 12, "Turn 3 — Alice", [
+  "She lands on Bob's IP Camera. She could attack, but she's still short on cards after losing the router, so she chooses to just pay and pass.",
+]);
+{
+  const s = prev();
+  s.alice.credits -= 5;
+  s.bob.credits += 5;
+  steps.push({
+    id: "t3-alice-resolve",
+    phase: "resolve",
+    turnLabel: "Turn 3 — Alice",
+    activePlayer: "alice",
+    highlightCellIndex: 12,
+    title: "Alice pays half value instead of attacking",
+    narration: [
+      "For a normal device, passing costs half its point value in credits: the IP Camera is worth 10 points, so Alice pays Bob 5 credits. No cards are used, no points move, and the device stays exactly as it was.",
+    ],
+    playerStates: s,
+    historyEntries: ["Alice rolled 6, landed on Bob's IP Camera (occupied). Chose to pay instead of attack: 5 credits to Bob (half of 10)."],
+  });
+}
+
+// Dylan buys the Smart Thermostat
+pushRoll("t3-dylan-roll", "dylan", 4, "Turn 3 — Dylan", "Dylan rolls a 4.");
+pushLand("t3-dylan-land", "dylan", 7, "Turn 3 — Dylan", [
+  "He moves 4 cells and lands on the Smart Thermostat: an Energy & Comfort device, unowned, worth 6 points. It's not part of his Appliances group, but it's still worth having.",
+]);
+{
+  const s = prev();
+  s.dylan.credits -= 6;
+  s.dylan.points += 6;
+  s.dylan.devices.push("Smart Thermostat");
+  steps.push({
+    id: "t3-dylan-resolve",
+    phase: "resolve",
+    turnLabel: "Turn 3 — Dylan",
+    activePlayer: "dylan",
+    highlightCellIndex: 7,
+    title: "Dylan buys the Smart Thermostat",
+    narration: ["He pays 6 credits and claims it."],
+    playerStates: s,
+    historyEntries: ["Dylan rolled 4, landed on Smart Thermostat (unowned), paid 6 credits to acquire it. +6 points."],
+  });
+}
+
+// Argha buys the Smart Utility Meter
+pushRoll("t3-argha-roll", "argha", 4, "Turn 3 — Argha", "Argha rolls a 4.");
+pushLand("t3-argha-land", "argha", 9, "Turn 3 — Argha", [
+  "He moves 4 cells from his new Wireless Router and lands on the Smart Utility Meter: unowned, worth 8 points.",
+]);
+{
+  const s = prev();
+  s.argha.credits -= 8;
+  s.argha.points += 8;
+  s.argha.devices.push("Smart Utility Meter");
+  steps.push({
+    id: "t3-argha-resolve",
+    phase: "resolve",
+    turnLabel: "Turn 3 — Argha",
+    activePlayer: "argha",
+    highlightCellIndex: 9,
+    title: "Argha buys the Smart Utility Meter",
+    narration: ["He pays 8 credits and claims it."],
+    playerStates: s,
+    historyEntries: ["Argha rolled 4, landed on Smart Utility Meter (unowned), paid 8 credits to acquire it. +8 points."],
+  });
+}
+
+// =========================================================================
+// Turn 4 — Divyo grabs the Home Server, then the last two fights
+// =========================================================================
+
+// Divyo draws Chance, then buys Home Server
+pushRoll("t4-divyo-roll-1", "divyo", 6, "Turn 4 — Divyo", "Divyo rolls a 6.");
+pushLand("t4-divyo-land-1", "divyo", 16, "Turn 4 — Divyo", [
+  "He moves 6 cells and lands on Chance: draw another unexpected event card.",
+]);
+{
+  const s = prev();
+  steps.push({
+    id: "t4-divyo-resolve-1",
+    phase: "resolve",
+    turnLabel: "Turn 4 — Divyo",
+    activePlayer: "divyo",
+    highlightCellIndex: 16,
+    title: "Divyo draws Backup Power Generator",
+    narration: [
+      "The card automatically restores his systems the moment a power outage hits, useful given what happened to him earlier. He keeps it in reserve.",
+    ],
+    playerStates: s,
+    historyEntries: ["Divyo rolled 6, landed on Chance, drew \"Backup Power Generator.\""],
+    drawnCard: cardById("chance-02"),
+  });
+}
+pushRoll("t4-divyo-roll-2", "divyo", 1, "Turn 4 — Divyo", "Divyo rolls a 1.");
+pushLand("t4-divyo-land-2", "divyo", 17, "Turn 4 — Divyo", [
+  "He moves 1 more cell and lands on the Home Server: the second piece of critical infrastructure, unowned, worth 20 points, the most valuable device on the board.",
+]);
+{
+  const s = prev();
+  s.divyo.credits -= 20;
+  s.divyo.points += 20;
+  s.divyo.devices.push("Home Server");
+  steps.push({
+    id: "t4-divyo-resolve-2",
+    phase: "resolve",
+    turnLabel: "Turn 4 — Divyo",
+    activePlayer: "divyo",
+    highlightCellIndex: 17,
+    title: "Divyo buys the Home Server",
+    narration: ["He pays the full 20 credits and claims it."],
+    playerStates: s,
+    historyEntries: ["Divyo rolled 1, landed on Home Server (unowned), paid 20 credits to acquire it. +20 points."],
+  });
+}
+
+// Bob attacks Dylan's immune Smart Printer, blocked
+pushRoll("t4-bob-roll", "bob", 5, "Turn 4 — Bob", "A few turns later, Bob rolls a 5.");
+pushLand("t4-bob-land", "bob", 3, "Turn 4 — Bob", [
+  "He lands on Dylan's Smart Printer, not realizing Dylan owns the whole Appliances group. He decides to attack.",
+]);
+{
+  const s = prev();
+  const card = cardById("action-13");
+  s.bob.handSize -= 1;
+  s.dylan.points += 2;
+  steps.push({
+    id: "t4-bob-combat",
+    phase: "combat",
+    turnLabel: "Turn 4 — Bob",
+    activePlayer: "bob",
+    highlightCellIndex: 3,
+    title: "Bob plays Wireless Sniffing, but Color-Group Immunity blocks it",
+    narration: [
+      "He plays Wireless Sniffing, an Information Disclosure attack that works on any device. It doesn't matter: Color-Group Immunity blocks it automatically, before any defense card is even needed.",
+      "Dylan doesn't lose anything, and the rules reward a successful immunity with a small point bonus. Bob's card is still spent, though: he committed it before finding out.",
+    ],
+    playerStates: s,
+    historyEntries: [
+      "Bob plays Wireless Sniffing (Information Disclosure) on Dylan's Smart Printer. Auto-blocked by Color-Group Immunity before any defense is needed. Dylan +2 points. Bob's card is spent regardless.",
     ],
     combat: {
-      attacker: "divyo",
+      attacker: "bob",
+      defender: "dylan",
+      deviceName: "Smart Printer",
+      round: 1,
+      attackCard: card,
+      defenseCard: null,
+      outcome: "immunity-block",
+      pointsDelta: { attacker: 0, defender: 2 },
+      deviceTransferred: false,
+    },
+  });
+}
+
+// Argha tries Bob's IP Camera: two rounds, defended both times, he gives up
+pushRoll("t4-argha-roll", "argha", 3, "Turn 4 — Argha", "Argha rolls a 3.");
+pushLand("t4-argha-land", "argha", 12, "Turn 4 — Argha", [
+  "He lands on Bob's IP Camera. He's had good and bad luck with attacks so far; he decides to press it again rather than pay.",
+]);
+{
+  const s = prev();
+  const card = cardById("action-16");
+  const def = cardById("action-29");
+  steps.push({
+    id: "t4-argha-combat-1",
+    phase: "combat",
+    turnLabel: "Turn 4 — Argha",
+    activePlayer: "argha",
+    highlightCellIndex: 12,
+    title: "Round 1: Argha plays ARP Spoofing",
+    narration: [
+      "He plays ARP Spoofing, a Tampering and Information Disclosure attack that forges the local network's address table to intercept traffic.",
+      "Bob has VPN & Secure Encryption in hand. It encrypts the connection so intercepted traffic is unreadable. The defense succeeds.",
+    ],
+    playerStates: s,
+    historyEntries: [
+      "Round 1: Argha plays ARP Spoofing (Tampering, Information Disclosure) on Bob's IP Camera. Bob defends with VPN & Secure Encryption. Defense succeeds, attack blocked.",
+    ],
+    combat: {
+      attacker: "argha",
       defender: "bob",
-      deviceName: "Wireless Router",
+      deviceName: "IP Camera",
       round: 1,
       attackCard: card,
       defenseCard: def,
@@ -547,226 +857,122 @@ pushLand("r2-divyo-land", "divyo", 25, "Turn 2 — Divyo", [
 }
 {
   const s = prev();
-  s.divyo.handSize -= 1;
+  s.argha.handSize -= 1;
   s.bob.handSize -= 1;
   steps.push({
-    id: "r2-divyo-resolve-1",
+    id: "t4-argha-resolve-1",
     phase: "resolve",
-    turnLabel: "Turn 2 — Divyo (round 1 resolution)",
-    activePlayer: "divyo",
-    highlightCellIndex: 25,
+    turnLabel: "Turn 4 — Argha (round 1 resolution)",
+    activePlayer: "argha",
+    highlightCellIndex: 12,
     title: "Resolution: Bob defends, nobody scores",
     narration: [
-      "No points move and the router stays with Bob. But both cards used to fight this round are spent: Divyo's Zero-Day Exploit and Bob's Intrusion Detection & Prevention System are gone. Divyo still has other attack cards, so he tries again.",
+      "Both cards used this round are spent: Argha's ARP Spoofing and Bob's VPN & Secure Encryption. He still has one more idea, so he tries again.",
     ],
     playerStates: s,
-    historyEntries: [
-      "Round 1 resolved: defended, no points change. Divyo's Zero-Day Exploit and Bob's Intrusion Detection & Prevention System are both spent.",
-    ],
+    historyEntries: ["Round 1 resolved: defended, no points change. Argha's ARP Spoofing and Bob's VPN & Secure Encryption are both spent."],
   });
 }
 {
   const s = prev();
-  const card = CARDS["action-15"];
+  const card = cardById("action-08");
+  const def = cardById("action-24");
   steps.push({
-    id: "r2-divyo-combat-2",
+    id: "t4-argha-combat-2",
     phase: "combat",
-    turnLabel: "Turn 2 — Divyo",
-    activePlayer: "divyo",
-    highlightCellIndex: 25,
-    title: "Round 2: Divyo plays Router Hijacking",
-    narration: [
-      "Undeterred, Divyo plays Router Hijacking, a Tampering attack that only works on routers, but is exactly on target here.",
-      "Bob checks his hand again. His one broad defense card is already spent from round 1, and he doesn't have Secure DNS or a Firewall card either. The defense fails.",
-    ],
-    playerStates: s,
-    historyEntries: [
-      "Round 2: Divyo plays Router Hijacking (Tampering) on Bob's Wireless Router. Bob has no defense left for it.",
-    ],
-    combat: {
-      attacker: "divyo",
-      defender: "bob",
-      deviceName: "Wireless Router",
-      round: 2,
-      attackCard: card,
-      defenseCard: null,
-      outcome: "critical-transfer",
-      pointsDelta: { attacker: 18, defender: -18 },
-      deviceTransferred: true,
-    },
-  });
-}
-{
-  const s = prev();
-  s.divyo.handSize -= 1;
-  s.divyo.points += 18;
-  s.divyo.devices.push("Wireless Router");
-  s.bob.points -= 18;
-  s.bob.devices = s.bob.devices.filter((d) => d !== "Wireless Router");
-  steps.push({
-    id: "r2-divyo-resolve-2",
-    phase: "resolve",
-    turnLabel: "Turn 2 — Divyo (round 2 resolution)",
-    activePlayer: "divyo",
-    highlightCellIndex: 25,
-    title: "Resolution: the router changes hands",
-    narration: [
-      "Because the Wireless Router is critical infrastructure, this one failed defense is enough: ownership transfers straight to Divyo. Bob loses the router's 18 points; Divyo gains them and takes the device.",
-      "This is the outsized-impact rule in action: a single breached gateway really does cost more than a smart bulb, and it took a second, different attack card to get there after the first one was blocked.",
-    ],
-    playerStates: s,
-    historyEntries: [
-      "Round 2 resolved: attack succeeded. Because Wireless Router is critical infrastructure, ownership transfers to Divyo on this single failure. Divyo +18 points, Bob -18 points.",
-    ],
-  });
-}
-
-// ---- Argha crosses GO, attacks Dylan's immune meter ----
-pushRoll("r2-argha-roll", "argha", 4, "Turn 2 — Argha", "A few turns later, Argha rolls a 4.");
-{
-  const s = prev();
-  s.argha.boardPos = 1;
-  s.argha.credits += 10;
-  s.argha.handSize += 1;
-  steps.push({
-    id: "r2-argha-land",
-    phase: "land",
-    turnLabel: "Turn 2 — Argha",
+    turnLabel: "Turn 4 — Argha",
     activePlayer: "argha",
-    highlightCellIndex: 1,
-    title: "Argha crosses GO and lands on Dylan's Smart Utility Meter",
+    highlightCellIndex: 12,
+    title: "Round 2: Argha plays Firmware Attack",
     narration: [
-      "His token has been quietly circling the board. This roll crosses GO for the first time, so he collects the standard 10-credit bonus and draws an extra action card, then keeps moving to land on Dylan's Smart Utility Meter.",
-      "Dylan owns it, so it's another decision point: pay half its value (4 credits) to pass, or attack. Argha decides to attack, not realizing Dylan owns the whole Energy & Comfort group.",
-    ],
-    playerStates: s,
-    historyEntries: ["Argha rolled 4, crossed GO (+10 credits, +1 card), landed on Dylan's Smart Utility Meter (occupied)."],
-  });
-}
-{
-  const s = prev();
-  const card = CARDS["action-13"];
-  s.argha.handSize -= 1;
-  s.dylan.points += 2;
-  steps.push({
-    id: "r2-argha-combat",
-    phase: "combat",
-    turnLabel: "Turn 2 — Argha",
-    activePlayer: "argha",
-    highlightCellIndex: 1,
-    title: "Argha plays Wireless Sniffing, but Color-Group Immunity blocks it",
-    narration: [
-      "He plays Wireless Sniffing, an Information Disclosure attack that works on any device. It doesn't matter: Color-Group Immunity blocks it automatically before any defense card is even needed.",
-      "Dylan doesn't lose anything, and the rules reward a successful immunity with a small point bonus. Argha's card is still spent, though, he committed it before finding out.",
+      "He switches tactics and plays Firmware Attack, aiming to slip malicious code into the camera's low-level software.",
+      "Bob happens to also have Secure Firmware & Software Updates in hand. His firmware is already patched, so there's nothing to exploit. The defense succeeds again.",
     ],
     playerStates: s,
     historyEntries: [
-      "Argha plays Wireless Sniffing (Information Disclosure) on Dylan's Smart Utility Meter. Auto-blocked by Color-Group Immunity before any defense is needed. Dylan +2 points. Argha's card is spent regardless.",
+      "Round 2: Argha plays Firmware Attack (Tampering, Elevation of Privilege) on Bob's IP Camera. Bob defends with Secure Firmware & Software Updates. Defense succeeds, attack blocked.",
     ],
     combat: {
       attacker: "argha",
-      defender: "dylan",
-      deviceName: "Smart Utility Meter",
-      round: 1,
+      defender: "bob",
+      deviceName: "IP Camera",
+      round: 2,
       attackCard: card,
-      defenseCard: null,
-      outcome: "immunity-block",
-      pointsDelta: { attacker: 0, defender: 2 },
+      defenseCard: def,
+      outcome: "defended",
+      pointsDelta: { attacker: 0, defender: 0 },
       deviceTransferred: false,
     },
   });
 }
-
-// =========================================================================
-// Round 3 — passing instead of fighting, then the special cells
-// =========================================================================
-
-// ---- Bob lands on Alice's IP Camera and pays instead of fighting ----
-pushRoll("r3-bob-roll", "bob", 4, "Turn 3 — Bob", "A couple of turns later, Bob rolls a 4.");
-pushLand("r3-bob-land", "bob", 4, "Turn 3 — Bob", [
-  "He lands on Alice's IP Camera. He could attack, but he's saving his remaining cards for a safer fight, so he chooses to just pay and pass.",
-]);
 {
   const s = prev();
-  s.bob.credits -= 5;
-  s.alice.credits += 5;
+  s.argha.handSize -= 1;
+  s.bob.handSize -= 1;
   steps.push({
-    id: "r3-bob-resolve",
+    id: "t4-argha-resolve-2",
     phase: "resolve",
-    turnLabel: "Turn 3 — Bob",
-    activePlayer: "bob",
-    highlightCellIndex: 4,
-    title: "Bob pays half value instead of attacking",
+    turnLabel: "Turn 4 — Argha (gives up)",
+    activePlayer: "argha",
+    highlightCellIndex: 12,
+    title: "Argha gives up the fight",
     narration: [
-      "For a normal device, passing costs half its point value in credits: the IP Camera is worth 10 points, so Bob pays Alice 5 credits. No cards are used, no points move, and the device stays exactly as it was.",
-    ],
-    playerStates: s,
-    historyEntries: ["Bob rolled 4, landed on Alice's IP Camera (occupied). Chose to pay instead of attack: 5 credits to Alice (half of 10)."],
-  });
-}
-
-// ---- Dylan lands on Divyo's Router and pays the full value ----
-pushRoll("r3-dylan-roll", "dylan", 6, "Turn 3 — Dylan", "Several turns later, Dylan rolls a 6.");
-pushLand("r3-dylan-land", "dylan", 25, "Turn 3 — Dylan", [
-  "He lands on Divyo's Wireless Router. It's critical infrastructure, he doesn't have a card he trusts for it, and he's not willing to risk losing his own devices' worth of cards for a fight he might lose. He pays instead.",
-]);
-{
-  const s = prev();
-  s.dylan.credits -= 18;
-  s.divyo.credits += 18;
-  steps.push({
-    id: "r3-dylan-resolve",
-    phase: "resolve",
-    turnLabel: "Turn 3 — Dylan",
-    activePlayer: "dylan",
-    highlightCellIndex: 25,
-    title: "Dylan pays the full value on critical infrastructure",
-    narration: [
-      "Special cells don't get the half-price discount: passing on a Router or Home Server costs its full value. Dylan pays Divyo all 18 credits. No attack, no risk, no points change, ownership stays with Divyo.",
+      "Two attacks, two clean defenses, and four cards gone between them. Argha checks his hand and doesn't have another card he trusts against this camera, so he stops here rather than keep guessing.",
+      "This is the same rule as before working in the defender's favor: the attacker can keep trying with different cards, but nothing forces them to, and nothing forces the defender to lose eventually either. Bob keeps the IP Camera untouched, no points change, and both players are a little lighter on cards for it.",
     ],
     playerStates: s,
     historyEntries: [
-      "Dylan rolled 6, landed on Divyo's Wireless Router (occupied, critical infrastructure). Chose to pay instead of attack: 18 credits to Divyo (full value).",
+      "Argha has no further suitable attack card and stops. IP Camera stays with Bob, unaffected. Two rounds cost Argha 2 attack cards and Bob 2 defense cards, with no points or ownership changing hands.",
     ],
   });
 }
 
-// ---- Bob lands on STOP ----
-pushRoll("r3b-bob-roll", "bob", 3, "Turn 4 — Bob", "A turn later, Bob rolls a 3.");
+// =========================================================================
+// Turn 5 — passing on a critical asset, then STOP
+// =========================================================================
+
+// Dylan lands on Divyo's Home Server and pays the full value
+pushRoll("t5-dylan-roll", "dylan", 4, "Turn 5 — Dylan", "A few turns later, Dylan rolls a 4.");
+pushLand("t5-dylan-land", "dylan", 17, "Turn 5 — Dylan", [
+  "He lands on Divyo's Home Server. It's critical infrastructure, he doesn't have a card he trusts for it, and he's not willing to risk a fight he might lose. He pays instead.",
+]);
 {
   const s = prev();
-  s.bob.boardPos = 7;
+  s.dylan.credits -= 20;
+  s.divyo.credits += 20;
+  steps.push({
+    id: "t5-dylan-resolve",
+    phase: "resolve",
+    turnLabel: "Turn 5 — Dylan",
+    activePlayer: "dylan",
+    highlightCellIndex: 17,
+    title: "Dylan pays the full value on critical infrastructure",
+    narration: [
+      "Special cells don't get the half-price discount: passing on a Router or Home Server costs its full value. Dylan pays Divyo all 20 credits. No attack, no risk, no points change, ownership stays with Divyo.",
+    ],
+    playerStates: s,
+    historyEntries: [
+      "Dylan rolled 4, landed on Divyo's Home Server (occupied, critical infrastructure). Chose to pay instead of attack: 20 credits to Divyo (full value).",
+    ],
+  });
+}
+
+// Bob lands on STOP
+pushRoll("t5-bob-roll", "bob", 6, "Turn 5 — Bob", "A turn later, Bob rolls a 6.");
+{
+  const s = prev();
+  s.bob.boardPos = 22;
   s.bob.skippingNextTurn = true;
   steps.push({
-    id: "r3b-bob-land",
+    id: "t5-bob-land",
     phase: "land",
-    turnLabel: "Turn 4 — Bob",
+    turnLabel: "Turn 5 — Bob",
     activePlayer: "bob",
-    highlightCellIndex: 7,
+    highlightCellIndex: 22,
     title: "Bob lands on STOP",
-    narration: ["A forced incident-response lockdown: he has to forfeit his next turn to run system diagnostics before he can act again."],
+    narration: ["Skip a turn: he has to sit out his next go before he can act again."],
     playerStates: s,
-    historyEntries: ["Bob rolled 3, landed on STOP. He forfeits his next turn."],
-  });
-}
-
-// ---- Divyo lands on Power Outage ----
-pushRoll("r3b-divyo-roll", "divyo", 5, "Turn 3 — Divyo", "A few turns later, Divyo rolls a 5.");
-{
-  const s = prev();
-  s.divyo.boardPos = 13;
-  steps.push({
-    id: "r3b-divyo-land",
-    phase: "land",
-    turnLabel: "Turn 3 — Divyo",
-    activePlayer: "divyo",
-    highlightCellIndex: 13,
-    title: "Divyo lands on Power Outage",
-    narration: [
-      "Every device briefly loses its continuous active protections, a short window where an attack lands more easily than usual, until the next turn passes.",
-    ],
-    playerStates: s,
-    historyEntries: ["Divyo rolled 5, landed on Power Outage. Active device protections are briefly down."],
+    historyEntries: ["Bob rolled 6, landed on STOP. He forfeits his next turn."],
   });
 }
 

@@ -99,7 +99,7 @@ export function renderInline(text: string): ReactNode[] {
   return parts.map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part));
 }
 
-function coverSrcFor(deck: CardDeck) {
+export function coverSrcFor(deck: CardDeck) {
   return `/media/publications/cyqured/covers/${deck}.webp`;
 }
 
@@ -928,7 +928,7 @@ function SelectedStage({
   );
 }
 
-function FlipCard({ card, reducedMotion }: { card: CardFace; reducedMotion: boolean }) {
+export function FlipCard({ card, reducedMotion }: { card: CardFace; reducedMotion: boolean }) {
   const [flipped, setFlipped] = useState(false);
 
   return (

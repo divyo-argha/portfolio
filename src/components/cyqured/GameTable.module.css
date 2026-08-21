@@ -2,24 +2,8 @@
   width: 100%;
   height: auto;
   display: block;
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
-}
-
-.boardLabel {
-  font-family: var(--font-cyq-display, sans-serif);
-  font-size: 22px;
-  font-weight: 700;
-  fill: #eaf7fb;
-  letter-spacing: 0.02em;
-}
-
-.boardSubLabel {
-  font-family: var(--font-cyq-display, sans-serif);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  fill: #5c7a86;
 }
 
 .activeCell {
