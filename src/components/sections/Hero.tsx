@@ -1,7 +1,7 @@
 import { Container } from "@/components/primitives/Container";
 import { Portrait } from "@/components/primitives/Portrait";
 import { IconLink } from "@/components/primitives/IconLink";
-import { IconMail, IconScholar, IconGithub, IconLinkedin } from "@/components/primitives/Icons";
+import { IconMail, IconScholar, IconGithub, IconLinkedin, IconDownload } from "@/components/primitives/Icons";
 import { profile } from "@/content/profile";
 import styles from "./Hero.module.css";
 
@@ -26,25 +26,37 @@ export function Hero() {
 
             <p className={styles.statement}>{profile.bio}</p>
 
-            <div className={styles.linkRow}>
-              <IconLink href={`mailto:${profile.email}`} icon={<IconMail size={16} />}>
-                {profile.email}
-              </IconLink>
-              <IconLink
-                href="https://scholar.google.com/citations?user=EKrGm9UAAAAJ&hl=en"
-                icon={<IconScholar size={16} />}
+            <div className={styles.actionRow}>
+              <a
+                href={profile.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.cvButton}
               >
-                Google Scholar
-              </IconLink>
-              <IconLink href="https://github.com/divyo-argha" icon={<IconGithub size={16} />}>
-                GitHub
-              </IconLink>
-              <IconLink
-                href="https://www.linkedin.com/in/argha-pratim-saha-a25b502b5/"
-                icon={<IconLinkedin size={16} />}
-              >
-                LinkedIn
-              </IconLink>
+                <IconDownload size={15} />
+                <span>Curriculum Vitae (PDF)</span>
+              </a>
+
+              <div className={styles.linkRow}>
+                <IconLink
+                  href="https://scholar.google.com/citations?user=EKrGm9UAAAAJ&hl=en"
+                  icon={<IconScholar size={16} />}
+                >
+                  Google Scholar
+                </IconLink>
+                <IconLink href={`mailto:${profile.email}`} icon={<IconMail size={16} />}>
+                  Email
+                </IconLink>
+                <IconLink href="https://github.com/divyo-argha" icon={<IconGithub size={16} />}>
+                  GitHub
+                </IconLink>
+                <IconLink
+                  href="https://www.linkedin.com/in/argha-pratim-saha-a25b502b5/"
+                  icon={<IconLinkedin size={16} />}
+                >
+                  LinkedIn
+                </IconLink>
+              </div>
             </div>
           </div>
         </div>

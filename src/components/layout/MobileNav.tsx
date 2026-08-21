@@ -6,7 +6,7 @@ import { useLockScroll } from "@/hooks/useLockScroll";
 import { useSectionNav } from "@/hooks/useSectionNav";
 import { siteConfig } from "@/lib/site";
 import { profile, socialLinks } from "@/content/profile";
-import { IconClose, IconMail, IconGithub, IconLinkedin, IconScholar } from "@/components/primitives/Icons";
+import { IconClose, IconMail, IconGithub, IconLinkedin, IconScholar, IconDownload } from "@/components/primitives/Icons";
 import styles from "./MobileNav.module.css";
 
 // Closing transition length must match --duration-base in tokens.css — kept
@@ -14,6 +14,7 @@ import styles from "./MobileNav.module.css";
 const CLOSE_DURATION_MS = 320;
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  "CV (PDF)": IconDownload,
   Email: IconMail,
   "Google Scholar": IconScholar,
   GitHub: IconGithub,

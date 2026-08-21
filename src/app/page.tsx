@@ -1,10 +1,11 @@
 import { Hero } from "@/components/sections/Hero";
+import { News } from "@/components/sections/News";
 import { ResearchFocus } from "@/components/sections/ResearchFocus";
-import { Education } from "@/components/sections/Education";
 import { ResearchBento } from "@/components/sections/ResearchBento";
 import { Experience } from "@/components/sections/Experience";
-import { Engineering } from "@/components/sections/Engineering";
 import { ProblemSolving } from "@/components/sections/ProblemSolving";
+import { Education } from "@/components/sections/Education";
+import { Engineering } from "@/components/sections/Engineering";
 import { MethodsStack } from "@/components/sections/MethodsStack";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { HashScrollHandler } from "@/components/HashScrollHandler";
@@ -14,12 +15,13 @@ export default function Home() {
     <>
       <HashScrollHandler />
       <Hero />
+      <News />
       <ResearchFocus />
-      <Education />
       <ResearchBento />
       <Experience />
-      <Engineering />
       <ProblemSolving />
+      <Education />
+      <Engineering />
       <MethodsStack />
       <ContactBand />
     </>

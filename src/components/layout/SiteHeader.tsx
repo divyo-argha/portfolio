@@ -82,6 +82,14 @@ export function SiteHeader() {
           </nav>
 
           <div className={styles.actions}>
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.headerCvLink}
+            >
+              CV (PDF)
+            </a>
             <ThemeToggle />
             <button
               ref={menuButtonRef}

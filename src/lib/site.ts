@@ -6,12 +6,13 @@ export const siteConfig = {
    * and cannot half-fail. */
   indexable: false,
   navLinks: [
+    { label: "News", href: "#news" },
     { label: "Research", href: "#research" },
-    { label: "Education", href: "#education" },
     { label: "Publications", href: "#publications" },
     { label: "Experience", href: "#experience" },
-    { label: "Engineering", href: "#engineering" },
     { label: "Problem Solving", href: "#problem-solving" },
+    { label: "Education", href: "#education" },
+    { label: "Engineering", href: "#engineering" },
     { label: "Contact", href: "#contact" },
   ],
 };

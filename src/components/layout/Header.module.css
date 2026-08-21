@@ -88,6 +88,35 @@
   gap: var(--space-3);
 }
 
+.headerCvLink {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--surface);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+@media (min-width: 640px) {
+  .headerCvLink {
+    display: inline-flex;
+  }
+}
+
+.headerCvLink:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
 .menuButton {
   display: inline-flex;
   align-items: center;

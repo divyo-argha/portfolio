@@ -5,6 +5,15 @@ export type Link = {
   href: string;
 };
 
+export type NewsItem = {
+  date: string;
+  badge?: string;
+  title: string;
+  description: string;
+  link?: Link;
+  secondaryLink?: Link;
+};
+
 export type PublicationStatus = "accepted" | "published" | "in-progress";
 
 export type VenueMark = {
