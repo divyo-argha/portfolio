@@ -166,6 +166,19 @@ export function GameExperience() {
   const [compareMode, setCompareMode] = useState(false);
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [showCompareModal, setShowCompareModal] = useState(false);
+  const hadCompareSelectionRef = useRef(false);
+
+  useEffect(() => {
+    if (compareIds.length > 0) {
+      hadCompareSelectionRef.current = true;
+      return;
+    }
+    if (hadCompareSelectionRef.current) {
+      hadCompareSelectionRef.current = false;
+      setCompareMode(false);
+      setShowCompareModal(false);
+    }
+  }, [compareIds]);
 
   // Determine currently selected card from URL query param
   const selected = useMemo(
