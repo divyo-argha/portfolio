@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { cardFaces, type CardFace } from "@/app/publications/cyqured/cardData";
 import { IconClose } from "@/components/primitives/Icons";
-import { CATEGORY_COLOR, LazyImg, renderInline, compareGroupOf, type CompareGroup } from "./GameExperience";
+import { CATEGORY_COLOR, LazyImg, renderInline, compareGroupOf, displayTitle, type CompareGroup } from "./GameExperience";
 import styles from "./CompareModal.module.css";
 
 const GROUP_LABEL: Record<CompareGroup, string> = {
@@ -82,15 +82,15 @@ export function CompareModal({
                   type="button"
                   className={styles.removeBtn}
                   onClick={() => onRemove(card.id)}
-                  aria-label={`Remove ${card.title} from comparison`}
+                  aria-label={`Remove ${displayTitle(card)} from comparison`}
                 >
                   <IconClose size={12} />
                 </button>
                 <div className={styles.cardArt}>
-                  <LazyImg src={card.src} alt={card.title} eager />
+                  <LazyImg src={card.src} alt={displayTitle(card)} eager />
                 </div>
                 <span className={styles.cardBadge}>{card.category}</span>
-                <h3 className={styles.cardTitle}>{card.title}</h3>
+                <h3 className={styles.cardTitle}>{displayTitle(card)}</h3>
                 {card.category === "scenario" || card.category === "chance" ? (
                   <span className={styles.cardSubId}>#{card.id.split("-")[1]}</span>
                 ) : null}

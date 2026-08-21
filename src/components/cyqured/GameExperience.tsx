@@ -37,6 +37,13 @@ export function compareGroupOf(category: CardCategory): CompareGroup {
   return category;
 }
 
+/** Scenario cards all print the generic title "Scenario"; their `label`
+ * (e.g. "ISP Phishing Email") is the identifying name shown instead. Other
+ * card kinds have no `label`, so this falls back to their printed `title`. */
+export function displayTitle(card: CardFace): string {
+  return card.label ?? card.title;
+}
+
 const MAX_COMPARE = 4;
 
 const DECK_COLOR: Record<CardDeck, string> = {
@@ -347,7 +354,7 @@ export function GameExperience() {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return [];
     return cardFaces.filter((card) => {
-      const matchTitle = card.title.toLowerCase().includes(q);
+      const matchTitle = displayTitle(card).toLowerCase().includes(q);
       const matchBody = card.body.toLowerCase().includes(q);
       const matchTargets = card.targets?.some((t) => t.toLowerCase().includes(q));
       return matchTitle || matchBody || matchTargets;
@@ -555,7 +562,7 @@ export function GameExperience() {
                       onClick={() => handleSelectSuggestion(card)}
                     >
                       <div className={styles.suggestionThumbWrap}>
-                        <LazyImg src={card.src} alt={card.title} />
+                        <LazyImg src={card.src} alt={displayTitle(card)} />
                       </div>
                       <div className={styles.suggestionLeft}>
                         <div className={styles.suggestionMetaRow}>
@@ -569,7 +576,7 @@ export function GameExperience() {
                             <span className={styles.suggestionStride}>· {card.strideType}</span>
                           ) : null}
                         </div>
-                        <h4 className={styles.suggestionTitle}>{card.title}</h4>
+                        <h4 className={styles.suggestionTitle}>{displayTitle(card)}</h4>
                         <p className={styles.suggestionSnippet}>
                           {card.body.replace(/\*\*/g, "")}
                         </p>
@@ -664,7 +671,7 @@ export function GameExperience() {
                   {/* 3D Flip Container */}
                   <span className={[styles.thumbFlipper, isActive ? styles.thumbFlipped : ""].join(" ")}>
                     <span className={styles.thumbFace}>
-                      <LazyImg src={card.src} alt={card.title} />
+                      <LazyImg src={card.src} alt={displayTitle(card)} />
                     </span>
                     <span className={[styles.thumbFace, styles.thumbFaceBack].join(" ")}>
                       <LazyImg src={coverSrcFor(card.deck)} alt="" />
@@ -677,7 +684,7 @@ export function GameExperience() {
                     </span>
                   ) : null}
 
-                  <span className={styles.thumbLabel}>{card.title}</span>
+                  <span className={styles.thumbLabel}>{displayTitle(card)}</span>
                 </span>
               </button>
             );
@@ -703,12 +710,12 @@ export function GameExperience() {
                 className={styles.compareTrayThumb}
                 style={{ "--c": CATEGORY_COLOR[card.category] } as React.CSSProperties}
               >
-                <LazyImg src={card.src} alt={card.title} />
+                <LazyImg src={card.src} alt={displayTitle(card)} />
                 <button
                   type="button"
                   className={styles.compareTrayRemove}
                   onClick={() => toggleCompareCard(card.id)}
-                  aria-label={`Remove ${card.title} from comparison`}
+                  aria-label={`Remove ${displayTitle(card)} from comparison`}
                 >
                   <IconClose size={10} />
                 </button>
@@ -828,7 +835,7 @@ function SelectedStage({
           </button>
         </div>
 
-        <h3 className={styles.detailTitle}>{card.title}</h3>
+        <h3 className={styles.detailTitle}>{displayTitle(card)}</h3>
         <div className={styles.detailBody}>
           {card.body.split("\n\n").map((p) => (
             <p key={p.slice(0, 24)}>{renderInline(p)}</p>
@@ -892,7 +899,7 @@ function FlipCard({ card, reducedMotion }: { card: CardFace; reducedMotion: bool
       onClick={() => setFlipped((v) => !v)}
       role="button"
       tabIndex={0}
-      aria-label={`${card.title}, click to flip`}
+      aria-label={`${displayTitle(card)}, click to flip`}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -905,7 +912,7 @@ function FlipCard({ card, reducedMotion }: { card: CardFace; reducedMotion: bool
         style={{ transition: reducedMotion ? "none" : undefined }}
       >
         <div className={styles.face}>
-          <LazyImg src={card.src} alt={card.title} eager />
+          <LazyImg src={card.src} alt={displayTitle(card)} eager />
         </div>
         <div className={[styles.face, styles.faceBack].join(" ")}>
           <LazyImg src={coverSrcFor(card.deck)} alt={`${card.deck} deck cover`} eager />

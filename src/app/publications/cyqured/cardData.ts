@@ -13,7 +13,13 @@ export type CardFace = {
   deck: CardDeck;
   category: CardCategory;
   title: string;
-  strideType?: string; // attack cards only
+  label?: string; // scenario cards only: identifying name (all print the generic title "Scenario")
+  strideType?: string; // attack cards: the STRIDE category the card teaches.
+  // scenario cards: the STRIDE category of the incident depicted, matched against
+  // the closest attack card in this deck (same wording/category as that card) where
+  // one exists, reasoned independently where it doesn't — see strideReason.
+  strideReason?: string; // scenario cards only: why that STRIDE category applies
+  difficulty?: number; // scenario cards only: ascending rank, 1 = easiest to identify
   targets?: string[]; // attack cards only: devices it can be played against
   body: string;
   pairIds?: string[]; // action cards only: ids of cards it references as countering/countered-by
@@ -739,13 +745,22 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
   },
 
   // ===================== SCENARIO CARDS (20) =====================
-  // All 20 scenario cards use the generic title "Scenario" as printed:
-  // none carry a distinct incident-specific title.
+  // All 20 scenario cards use the generic title "Scenario" as printed: none
+  // carry a distinct incident-specific title, so `label` names each one for
+  // identification. `strideType`/`strideReason` are matched against the
+  // closest attack card in this same deck (reusing that card's own STRIDE
+  // label) where one exists; reasoned independently where none does. Ordered
+  // by `difficulty` ascending — easiest to identify first.
   {
     id: "scenario-02",
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "ISP Phishing Email",
+    strideType: "Spoofing",
+    strideReason:
+      "Mirrors the Phishing attack card: a message impersonates a trusted sender (the ISP) to harvest payment details.",
+    difficulty: 1,
     body: `You receive an email pretending to be from your ISP, urging you to click a link to "update your payment details." The email looks official, with the ISP's logo and branding, but the link leads to a suspicious website asking for your credit card information.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-02.png",
   },
@@ -754,46 +769,24 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Fake Bank Call (Vishing)",
+    strideType: "Spoofing",
+    strideReason:
+      "Mirrors the Caller ID Spoofing attack card: the caller's number is forged to impersonate the bank and extract account details.",
+    difficulty: 2,
     body: `You receive a call from someone claiming to be from your bank. They say there's suspicious activity on your account and ask for your account details to "verify your identity." The caller ID shows your bank's official number, which makes the call seem legitimate.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-03.png",
-  },
-  {
-    id: "scenario-04",
-    deck: "scenario",
-    category: "scenario",
-    title: "Scenario",
-    body: `You type your bank's official URL into your browser, but instead of the real website, you're redirected to a fake site that looks identical. The fake site asks you to log in with your credentials.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-04.png",
-  },
-  {
-    id: "scenario-05",
-    deck: "scenario",
-    category: "scenario",
-    title: "Scenario",
-    body: `You receive an alert that someone tried logging into your email from an unfamiliar location. You realize you've reused the same password on multiple sites, and one of those sites was recently breached.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-05.png",
-  },
-  {
-    id: "scenario-06",
-    deck: "scenario",
-    category: "scenario",
-    title: "Scenario",
-    body: `Your internet slows down, and you notice unfamiliar devices connected to your router. When you check the router settings, you see changes you didn't make, like a new admin password or DNS settings.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-06.png",
-  },
-  {
-    id: "scenario-07",
-    deck: "scenario",
-    category: "scenario",
-    title: "Scenario",
-    body: `Your indoor security camera starts moving independently, and you notice unfamiliar logins to the camera's admin panel. Even after resetting the camera, the issue persists, and you can't regain control.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-07.png",
   },
   {
     id: "scenario-08",
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Ransomware Attachment",
+    strideType: "Denial of Service",
+    strideReason:
+      "Mirrors the Ransomware attack card, which this deck classifies as Denial of Service: the attack's goal is withholding access to your files, not just altering them.",
+    difficulty: 3,
     body: `You open an email attachment, and suddenly all your files are encrypted. A message pops up demanding payment in cryptocurrency to unlock your files. The message warns that your files will be permanently deleted if you don't pay within 48 hours.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-08.png",
   },
@@ -802,6 +795,11 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "ATM Shoulder Surfing",
+    strideType: "Information Disclosure",
+    strideReason:
+      "Mirrors the Shoulder Surfing attack card: an onlooker captures a secret (the PIN) by observation, a disclosure of information rather than impersonation.",
+    difficulty: 4,
     body: `While entering your PIN at an ATM, you notice someone standing unusually close to you. Later, you find unauthorized transactions on your account, and the bank confirms that your PIN was used at another ATM.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-09.png",
   },
@@ -810,6 +808,11 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Malicious Game Download",
+    strideType: "Tampering, Elevation of Privilege",
+    strideReason:
+      "Mirrors the Trojan Horse attack card: a seemingly harmless download secretly modifies the system and grants the attacker unauthorized control.",
+    difficulty: 5,
     body: `You download a free game from an untrusted website. Soon after, your device starts behaving strangely: pop-ups appear, and you notice unauthorized programs running in the background. Your antivirus software detects malware.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-10.png",
   },
@@ -818,14 +821,89 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Gaming Platform DDoS",
+    strideType: "Denial of Service",
+    strideReason:
+      "Mirrors the DDoS Attack with Botnet attack card: a traffic flood explicitly aimed at denying availability.",
+    difficulty: 6,
     body: `You try to access your favorite online gaming platform, but it's unavailable. Later, you hear that the platform was overwhelmed by a massive surge in traffic, causing it to crash. The platform confirms it was a targeted attack.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-11.png",
+  },
+  {
+    id: "scenario-15",
+    deck: "scenario",
+    category: "scenario",
+    title: "Scenario",
+    label: "Wi-Fi Jamming",
+    strideType: "Denial of Service",
+    strideReason:
+      "Mirrors the Network Jammer attack card: RF interference denies wireless connectivity to legitimate devices.",
+    difficulty: 7,
+    body: `Your Wi-Fi suddenly stops working, and none of your devices can connect. When you check, you notice that your router's signal is being disrupted by a nearby device emitting strong radio signals.`,
+    src: "/media/publications/cyqured/cards/scenario/scenario-15.png",
+  },
+  {
+    id: "scenario-05",
+    deck: "scenario",
+    category: "scenario",
+    title: "Scenario",
+    label: "Reused Password Breach",
+    strideType: "Spoofing",
+    strideReason:
+      "Mirrors the Credential Stuffing attack card: credentials leaked from one breach are reused to impersonate the victim elsewhere.",
+    difficulty: 8,
+    body: `You receive an alert that someone tried logging into your email from an unfamiliar location. You realize you've reused the same password on multiple sites, and one of those sites was recently breached.`,
+    src: "/media/publications/cyqured/cards/scenario/scenario-05.png",
+  },
+  {
+    id: "scenario-06",
+    deck: "scenario",
+    category: "scenario",
+    title: "Scenario",
+    label: "Router Hijack",
+    strideType: "Tampering",
+    strideReason:
+      "Mirrors the Router Hijacking attack card: unauthorized changes to the admin password/DNS settings, an integrity violation of the router's configuration.",
+    difficulty: 9,
+    body: `Your internet slows down, and you notice unfamiliar devices connected to your router. When you check the router settings, you see changes you didn't make, like a new admin password or DNS settings.`,
+    src: "/media/publications/cyqured/cards/scenario/scenario-06.png",
+  },
+  {
+    id: "scenario-04",
+    deck: "scenario",
+    category: "scenario",
+    title: "Scenario",
+    label: "Fake Banking Website (DNS Redirect)",
+    strideType: "Tampering",
+    strideReason:
+      "Mirrors the Router Hijacking attack card's 'redirect traffic' effect: the DNS path itself has been altered, not just a spoofed page served directly.",
+    difficulty: 10,
+    body: `You type your bank's official URL into your browser, but instead of the real website, you're redirected to a fake site that looks identical. The fake site asks you to log in with your credentials.`,
+    src: "/media/publications/cyqured/cards/scenario/scenario-04.png",
+  },
+  {
+    id: "scenario-14",
+    deck: "scenario",
+    category: "scenario",
+    title: "Scenario",
+    label: "Social Media Account Takeover",
+    strideType: "Elevation of Privilege",
+    strideReason:
+      "The 'multiple failed login attempts' detail mirrors the Password Cracking attack card (repeated guesses) rather than Credential Stuffing (a single correct reused password).",
+    difficulty: 11,
+    body: `You receive multiple failed login attempt notifications for your social media account. Later, you find that your account has been accessed, and spam messages were sent to your contacts.`,
+    src: "/media/publications/cyqured/cards/scenario/scenario-14.png",
   },
   {
     id: "scenario-12",
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Banking Session Hijack",
+    strideType: "Tampering, Spoofing",
+    strideReason:
+      "Mirrors the Session Hijacking attack card exactly: an intercepted session token lets the attacker act as the authenticated user.",
+    difficulty: 12,
     body: `You're logged into your online banking account when suddenly you're logged out. When you try to log back in, you see unfamiliar transactions. The bank confirms that someone accessed your account using your active session.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-12.png",
   },
@@ -834,30 +912,63 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "ARP Spoofing on Home Network",
+    strideType: "Tampering, Information Disclosure",
+    strideReason:
+      "Mirrors the ARP Spoofing attack card: forged IP-MAC mappings enable interception and alteration of local traffic.",
+    difficulty: 13,
     body: `You notice that your internet connection is slow, and some websites load strange content. When you check your network, you see unfamiliar devices listed as connected. Your router's ARP table shows incorrect IP-MAC mappings.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-13.png",
   },
   {
-    id: "scenario-14",
+    id: "scenario-21",
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
-    body: `You receive multiple failed login attempt notifications for your social media account. Later, you find that your account has been accessed, and spam messages were sent to your contacts.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-14.png",
+    label: "Gaming Console OS Exploit",
+    strideType: "Elevation of Privilege",
+    strideReason:
+      "Mirrors the Zero-Day Exploit attack card: an unpatched vulnerability is exploited to disrupt and corrupt the system.",
+    difficulty: 14,
+    body: `You're playing an online game on your gaming console, and suddenly, the system freezes and restarts. Upon reboot, all your saved data is gone. A vulnerability in the console OS was exploited to cause system-wide corruption.`,
+    src: "/media/publications/cyqured/cards/scenario/scenario-21.png",
   },
   {
-    id: "scenario-15",
+    id: "scenario-07",
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
-    body: `Your Wi-Fi suddenly stops working, and none of your devices can connect. When you check, you notice that your router's signal is being disrupted by a nearby device emitting strong radio signals.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-15.png",
+    label: "Hijacked Security Camera",
+    strideType: "Tampering, Elevation of Privilege",
+    strideReason:
+      "Mirrors the Firmware Attack card: control surviving a reset is the signature of a firmware-level compromise, not just a stolen account password.",
+    difficulty: 15,
+    body: `Your indoor security camera starts moving independently, and you notice unfamiliar logins to the camera's admin panel. Even after resetting the camera, the issue persists, and you can't regain control.`,
+    src: "/media/publications/cyqured/cards/scenario/scenario-07.png",
+  },
+  {
+    id: "scenario-18",
+    deck: "scenario",
+    category: "scenario",
+    title: "Scenario",
+    label: "Smart Fridge Malware Proxy",
+    strideType: "Tampering, Elevation of Privilege",
+    strideReason:
+      "Mirrors the Firmware Attack card again: infected firmware turns the device into a persistent malicious proxy.",
+    difficulty: 16,
+    body: `Your smart refrigerator displays ads and redirects your mobile phone to phishing sites when connected to its app. You find that malware has infected the fridge's firmware, acting as a proxy to intercept traffic.`,
+    src: "/media/publications/cyqured/cards/scenario/scenario-18.png",
   },
   {
     id: "scenario-16",
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Smart Meter Spoofing",
+    strideType: "Spoofing",
+    strideReason:
+      "No matching attack card in this deck; reasoned independently — the scenario states outright that the meter's communication itself was spoofed to falsify readings.",
+    difficulty: 17,
     body: `Your smart utility meter starts sending incorrect usage data to your provider, showing abnormally high consumption. You later discover a nearby attacker spoofed your meter's communication to inflate usage, possibly to trick you into overpaying or causing billing chaos.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-16.png",
   },
@@ -866,22 +977,24 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Exposed Smart Printer",
+    strideType: "Elevation of Privilege",
+    strideReason:
+      "No matching attack card in this deck; closest in spirit to Zero-Day Exploit — an exposed service gives the attacker unauthorized remote control of the device.",
+    difficulty: 18,
     body: `You notice your smart printer printing strange documents at random times. Investigation reveals a hacker accessed the printer remotely through an exposed port and used it to store and print malicious material.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-17.png",
-  },
-  {
-    id: "scenario-18",
-    deck: "scenario",
-    category: "scenario",
-    title: "Scenario",
-    body: `Your smart refrigerator displays ads and redirects your mobile phone to phishing sites when connected to its app. You find that malware has infected the fridge's firmware, acting as a proxy to intercept traffic.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-18.png",
   },
   {
     id: "scenario-19",
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Smart Lock Replay Attack",
+    strideType: "Spoofing",
+    strideReason:
+      "No matching attack card in this deck; a classic replay attack — intercepted access tokens are re-sent to impersonate an authorized unlock, the same impersonation logic as Session Hijacking.",
+    difficulty: 19,
     body: `Your smart door lock unlocks automatically without your command while you're away. Reviewing the logs, you see access tokens were reused by an attacker intercepting previous traffic.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-19.png",
   },
@@ -890,15 +1003,12 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     deck: "scenario",
     category: "scenario",
     title: "Scenario",
+    label: "Smartwatch Data Exfiltration",
+    strideType: "Information Disclosure",
+    strideReason:
+      "No matching attack card in this deck; malware is delivered like a Trojan Horse, but the threat modeled here is the resulting leak of health/location data to an unknown server.",
+    difficulty: 20,
     body: `Your smartwatch battery drains rapidly and gets hot. A diagnostic app shows it has been constantly sending location and health data to an unknown IP. Malware was installed through a third-party app.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-20.png",
-  },
-  {
-    id: "scenario-21",
-    deck: "scenario",
-    category: "scenario",
-    title: "Scenario",
-    body: `You're playing an online game on your gaming console, and suddenly, the system freezes and restarts. Upon reboot, all your saved data is gone. A vulnerability in the console OS was exploited to cause system-wide corruption.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-21.png",
   },
 ];
