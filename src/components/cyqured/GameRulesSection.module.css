@@ -161,6 +161,12 @@
   letter-spacing: 0.05em;
 }
 
+.strideInitial {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
 .strideLetter {
   width: 24px;
   height: 24px;

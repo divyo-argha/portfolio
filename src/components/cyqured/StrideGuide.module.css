@@ -12,6 +12,9 @@
 }
 
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: var(--font-cyq-display, sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
@@ -85,7 +88,7 @@
   font: inherit;
 }
 
-.itemLetter {
+.itemIconBadge {
   flex-shrink: 0;
   width: 34px;
   height: 34px;
@@ -95,9 +98,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-cyq-display, sans-serif);
-  font-weight: 700;
-  font-size: 1rem;
   color: var(--c);
 }
 
@@ -115,6 +115,13 @@
   font-weight: 700;
   color: #eaf7fb;
   letter-spacing: 0.02em;
+}
+
+.itemInitial {
+  color: var(--c);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
 }
 
 .itemSummary {
@@ -176,7 +183,9 @@
 }
 
 .spotLabel {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-family: var(--font-cyq-display, sans-serif);
   font-size: 0.68rem;
   letter-spacing: 0.08em;

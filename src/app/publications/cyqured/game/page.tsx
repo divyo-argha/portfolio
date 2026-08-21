@@ -75,7 +75,7 @@ export default function CyQuredGameHomePage() {
               </p>
             </div>
             <Link href="/publications/cyqured" className={styles.bridgeButton}>
-              <span>View Academic Overview</span>
+              <span>Research Overview</span>
               <IconArrowUpRight size={16} />
             </Link>
           </div>

@@ -339,6 +339,9 @@
 }
 
 .strideBoxLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-family: var(--font-cyq-display);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
@@ -353,6 +356,9 @@
 }
 
 .strideBoxTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-family: var(--font-cyq-display);
   font-size: 0.72rem;
   letter-spacing: 0.04em;

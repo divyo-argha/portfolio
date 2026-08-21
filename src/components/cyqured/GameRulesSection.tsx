@@ -100,7 +100,10 @@ export function GameRulesSection() {
           >
             <div className={styles.strideBadge}>
               <span className={styles.strideLetter}>{cat.letter}</span>
-              <span>{cat.name}</span>
+              <span>
+                <span className={styles.strideInitial}>{cat.name.charAt(0)}</span>
+                {cat.name.slice(1)}
+              </span>
             </div>
             <p className={styles.strideDesc}>{cat.desc}</p>
           </div>
@@ -134,7 +137,7 @@ export function GameRulesSection() {
         </div>
 
         <div className={styles.ruleBox}>
-          <h3 className={styles.ruleBoxTitle}>Victory Conditions</h3>
+          <h3 className={styles.ruleBoxTitle}>Victory Conditions (Flexible: Choose One)</h3>
           <ul className={styles.ruleList}>
             <li className={styles.ruleItem}>
               <span className={styles.ruleBullet}>01</span>

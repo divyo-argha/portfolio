@@ -15,9 +15,10 @@ import {
   IconArrowUpRight,
   IconCompare,
   IconCheck,
+  IconInfo,
 } from "@/components/primitives/Icons";
 import { CompareModal } from "./CompareModal";
-import { strideSlug } from "./StrideGuide";
+import { strideSlug, strideIconFor } from "./StrideGuide";
 import styles from "./GameExperience.module.css";
 
 /** Opens (and scrolls to) the matching card in the STRIDE guide below the
@@ -852,20 +853,27 @@ function SelectedStage({
 
         {card.strideReason ? (
           <div className={styles.strideBox} style={{ "--c": CATEGORY_COLOR[card.category] } as React.CSSProperties}>
-            <span className={styles.strideBoxLabel}>What&apos;s actually happening here</span>
+            <span className={styles.strideBoxLabel}>
+              <IconInfo size={13} />
+              What&apos;s actually happening here
+            </span>
             {card.strideType ? (
               <span className={styles.strideBoxTags}>
-                {card.strideType.split(", ").map((name) => (
-                  <button
-                    key={name}
-                    type="button"
-                    className={styles.strideBoxTag}
-                    onClick={() => jumpToStride(name)}
-                    title={`Learn more about ${name}`}
-                  >
-                    {name}
-                  </button>
-                ))}
+                {card.strideType.split(", ").map((name) => {
+                  const StrideIcon = strideIconFor(name);
+                  return (
+                    <button
+                      key={name}
+                      type="button"
+                      className={styles.strideBoxTag}
+                      onClick={() => jumpToStride(name)}
+                      title={`Learn more about ${name}`}
+                    >
+                      {StrideIcon ? <StrideIcon size={13} /> : null}
+                      {name}
+                    </button>
+                  );
+                })}
               </span>
             ) : null}
             <p className={styles.strideBoxReason}>{card.strideReason}</p>

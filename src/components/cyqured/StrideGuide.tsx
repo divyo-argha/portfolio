@@ -2,6 +2,18 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import {
+  IconSpoofing,
+  IconTampering,
+  IconRepudiation,
+  IconInfoDisclosure,
+  IconDenialOfService,
+  IconElevation,
+  IconSearch,
+  IconDefense,
+  IconChevronDown,
+  type IconProps,
+} from "@/components/primitives/Icons";
 import styles from "./StrideGuide.module.css";
 
 export type StrideCategoryDef = {
@@ -12,6 +24,7 @@ export type StrideCategoryDef = {
   summary: string;
   body: string[];
   spot: string;
+  icon: React.ComponentType<IconProps>;
 };
 
 /** Matches a `strideType` value from cardData.ts (e.g. "Information Disclosure")
@@ -26,6 +39,7 @@ const STRIDE_GUIDE: StrideCategoryDef[] = [
     letter: "S",
     name: "Spoofing",
     color: "#5ee1f2",
+    icon: IconSpoofing,
     summary: "Someone or something pretends to be a person, company, or device you trust.",
     body: [
       "Spoofing is when an attacker pretends to be someone else. It could be a person, a company, a website, or even a device on your home network. The goal is simple: if you believe the fake thing is real, you will trust it and do what it asks.",
@@ -39,6 +53,7 @@ const STRIDE_GUIDE: StrideCategoryDef[] = [
     letter: "T",
     name: "Tampering",
     color: "#4fe0a8",
+    icon: IconTampering,
     summary: "Something gets changed without your permission, like a file, a setting, or a message.",
     body: [
       "Tampering means an attacker changes something that should have stayed the same. This could be a file on your computer, a setting on your router, or a message as it travels across the network.",
@@ -52,6 +67,7 @@ const STRIDE_GUIDE: StrideCategoryDef[] = [
     letter: "R",
     name: "Repudiation",
     color: "#b48fe0",
+    icon: IconRepudiation,
     summary: "There is no record to prove what really happened, so the attacker can deny it.",
     body: [
       "Repudiation is a little different from the others. It is not about breaking in, it is about covering tracks afterward. If there is no proof that something happened, the attacker can simply deny it.",
@@ -65,6 +81,7 @@ const STRIDE_GUIDE: StrideCategoryDef[] = [
     letter: "I",
     name: "Information Disclosure",
     color: "#f5a623",
+    icon: IconInfoDisclosure,
     summary: "Private information ends up somewhere, or with someone, it should never reach.",
     body: [
       "Information Disclosure means private information is seen by someone who should not see it. This does not always need hacking. Sometimes it is as simple as someone watching you type your PIN, or a message being read while it travels unprotected across a network.",
@@ -78,6 +95,7 @@ const STRIDE_GUIDE: StrideCategoryDef[] = [
     letter: "D",
     name: "Denial of Service",
     color: "#ff5e7e",
+    icon: IconDenialOfService,
     summary: "Something that should work suddenly does not, even though nothing was stolen or changed.",
     body: [
       "Denial of Service means making something unavailable. It could be a website that will not load, a Wi-Fi network that stops working, or files you cannot open because they are locked.",
@@ -91,6 +109,7 @@ const STRIDE_GUIDE: StrideCategoryDef[] = [
     letter: "E",
     name: "Elevation of Privilege",
     color: "#a3d94f",
+    icon: IconElevation,
     summary: "Someone or something ends up with more power than they should have.",
     body: [
       "Elevation of Privilege happens when an attacker starts with very little access and ends up with a lot. They might begin as a random visitor and end up as an administrator who can control everything.",
@@ -103,6 +122,12 @@ const STRIDE_GUIDE: StrideCategoryDef[] = [
 
 const COLUMN_LEFT = STRIDE_GUIDE.slice(0, 3);
 const COLUMN_RIGHT = STRIDE_GUIDE.slice(3);
+
+/** Looks up the icon for a `strideType` value from cardData.ts (e.g.
+ * "Information Disclosure"), for use outside this file (the card detail box). */
+export function strideIconFor(name: string): React.ComponentType<IconProps> | undefined {
+  return STRIDE_GUIDE.find((c) => c.slug === strideSlug(name))?.icon;
+}
 
 export function StrideGuide() {
   const reducedMotion = useReducedMotion();
@@ -131,7 +156,10 @@ export function StrideGuide() {
   return (
     <section id="stride-guide" className={styles.section} aria-label="STRIDE threat categories guide">
       <div className={styles.header}>
-        <span className={styles.eyebrow}>Learn The Threats</span>
+        <span className={styles.eyebrow}>
+          <IconDefense size={13} />
+          Learn The Threats
+        </span>
         <h2 className={styles.title}>What do the STRIDE letters mean?</h2>
         <p className={styles.subtitle}>
           Every attack and scenario card in this deck fits into one of six simple buckets. Open one below to see what
@@ -173,15 +201,18 @@ function StrideItem({
         aria-expanded={open}
         aria-controls={`stride-${cat.slug}-panel`}
       >
-        <span className={styles.itemLetter}>{cat.letter}</span>
+        <span className={styles.itemIconBadge}>
+          <cat.icon size={18} />
+        </span>
         <span className={styles.itemHeaderText}>
-          <span className={styles.itemName}>{cat.name}</span>
+          <span className={styles.itemName}>
+            <span className={styles.itemInitial}>{cat.name.charAt(0)}</span>
+            {cat.name.slice(1)}
+          </span>
           <span className={styles.itemSummary}>{cat.summary}</span>
         </span>
         <span className={[styles.itemChevron, open ? styles.itemChevronOpen : ""].join(" ")} aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
+          <IconChevronDown size={14} />
         </span>
       </button>
       <div
@@ -195,7 +226,10 @@ function StrideItem({
             <p key={p.slice(0, 24)}>{p}</p>
           ))}
           <div className={styles.spotBox}>
-            <span className={styles.spotLabel}>How to spot it</span>
+            <span className={styles.spotLabel}>
+              <IconSearch size={12} />
+              How to spot it
+            </span>
             <p>{cat.spot}</p>
           </div>
         </div>
