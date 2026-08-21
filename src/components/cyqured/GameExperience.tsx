@@ -17,7 +17,15 @@ import {
   IconCheck,
 } from "@/components/primitives/Icons";
 import { CompareModal } from "./CompareModal";
+import { strideSlug } from "./StrideGuide";
 import styles from "./GameExperience.module.css";
+
+/** Opens (and scrolls to) the matching card in the STRIDE guide below the
+ * card grid. The guide listens for this event so a click works regardless
+ * of whether its accordion item is currently expanded. */
+function jumpToStride(name: string) {
+  window.dispatchEvent(new CustomEvent("cyq:jump-to-stride", { detail: { slug: strideSlug(name) } }));
+}
 
 export const CATEGORY_COLOR: Record<CardCategory, string> = {
   attack: "var(--cyq-attack)",
@@ -841,6 +849,28 @@ function SelectedStage({
             <p key={p.slice(0, 24)}>{renderInline(p)}</p>
           ))}
         </div>
+
+        {card.strideReason ? (
+          <div className={styles.strideBox} style={{ "--c": CATEGORY_COLOR[card.category] } as React.CSSProperties}>
+            <span className={styles.strideBoxLabel}>What&apos;s actually happening here</span>
+            {card.strideType ? (
+              <span className={styles.strideBoxTags}>
+                {card.strideType.split(", ").map((name) => (
+                  <button
+                    key={name}
+                    type="button"
+                    className={styles.strideBoxTag}
+                    onClick={() => jumpToStride(name)}
+                    title={`Learn more about ${name}`}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </span>
+            ) : null}
+            <p className={styles.strideBoxReason}>{card.strideReason}</p>
+          </div>
+        ) : null}
 
         {card.targets && card.targets.length > 0 ? (
           <div className={styles.solutions}>

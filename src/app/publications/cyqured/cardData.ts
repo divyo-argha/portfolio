@@ -17,7 +17,7 @@ export type CardFace = {
   strideType?: string; // attack cards: the STRIDE category the card teaches.
   // scenario cards: the STRIDE category of the incident depicted, matched against
   // the closest attack card in this deck (same wording/category as that card) where
-  // one exists, reasoned independently where it doesn't — see strideReason.
+  // one exists, reasoned independently where it doesn't, see strideReason.
   strideReason?: string; // scenario cards only: why that STRIDE category applies
   difficulty?: number; // scenario cards only: ascending rank, 1 = easiest to identify
   targets?: string[]; // attack cards only: devices it can be played against
@@ -750,7 +750,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
   // identification. `strideType`/`strideReason` are matched against the
   // closest attack card in this same deck (reusing that card's own STRIDE
   // label) where one exists; reasoned independently where none does. Ordered
-  // by `difficulty` ascending — easiest to identify first.
+  // by `difficulty` ascending, easiest to identify first.
   {
     id: "scenario-02",
     deck: "scenario",
@@ -759,7 +759,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "ISP Phishing Email",
     strideType: "Spoofing",
     strideReason:
-      "Mirrors the Phishing attack card: a message impersonates a trusted sender (the ISP) to harvest payment details.",
+      "That email is not really from your ISP. It just looks like it, with the same logo and colors. This is Spoofing. Someone pretends to be a person or company you trust, so you hand over your card details without thinking twice.",
     difficulty: 1,
     body: `You receive an email pretending to be from your ISP, urging you to click a link to "update your payment details." The email looks official, with the ISP's logo and branding, but the link leads to a suspicious website asking for your credit card information.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-02.png",
@@ -772,7 +772,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Fake Bank Call (Vishing)",
     strideType: "Spoofing",
     strideReason:
-      "Mirrors the Caller ID Spoofing attack card: the caller's number is forged to impersonate the bank and extract account details.",
+      "The caller ID lied to you. The number looked real, but it was faked to look like your bank's number. It is the same trick as the phishing email, just over the phone instead of in your inbox. This is Spoofing.",
     difficulty: 2,
     body: `You receive a call from someone claiming to be from your bank. They say there's suspicious activity on your account and ask for your account details to "verify your identity." The caller ID shows your bank's official number, which makes the call seem legitimate.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-03.png",
@@ -785,7 +785,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Ransomware Attachment",
     strideType: "Denial of Service",
     strideReason:
-      "Mirrors the Ransomware attack card, which this deck classifies as Denial of Service: the attack's goal is withholding access to your files, not just altering them.",
+      "This is not really about your files being changed. It is about you not being able to use them anymore. That is why it counts as Denial of Service and not Tampering. The whole point was to lock you out, not to edit your files.",
     difficulty: 3,
     body: `You open an email attachment, and suddenly all your files are encrypted. A message pops up demanding payment in cryptocurrency to unlock your files. The message warns that your files will be permanently deleted if you don't pay within 48 hours.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-08.png",
@@ -798,7 +798,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "ATM Shoulder Surfing",
     strideType: "Information Disclosure",
     strideReason:
-      "Mirrors the Shoulder Surfing attack card: an onlooker captures a secret (the PIN) by observation, a disclosure of information rather than impersonation.",
+      "Nobody hacked anything here. Someone just watched you type your PIN. That is the whole attack. A secret that should have stayed private was seen by the wrong person. This is Information Disclosure, and no computer was even needed.",
     difficulty: 4,
     body: `While entering your PIN at an ATM, you notice someone standing unusually close to you. Later, you find unauthorized transactions on your account, and the bank confirms that your PIN was used at another ATM.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-09.png",
@@ -811,7 +811,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Malicious Game Download",
     strideType: "Tampering, Elevation of Privilege",
     strideReason:
-      "Mirrors the Trojan Horse attack card: a seemingly harmless download secretly modifies the system and grants the attacker unauthorized control.",
+      "That \"free game\" was a Trojan Horse. It looked harmless, but once it ran, it changed things on your system without asking. That part is Tampering. Then it gave itself more control than it should have had. That part is Elevation of Privilege.",
     difficulty: 5,
     body: `You download a free game from an untrusted website. Soon after, your device starts behaving strangely: pop-ups appear, and you notice unauthorized programs running in the background. Your antivirus software detects malware.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-10.png",
@@ -824,7 +824,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Gaming Platform DDoS",
     strideType: "Denial of Service",
     strideReason:
-      "Mirrors the DDoS Attack with Botnet attack card: a traffic flood explicitly aimed at denying availability.",
+      "A flood of traffic knocked the platform offline. This is a clear case of Denial of Service. Nobody stole any data and nobody broke into an account. The attacker just sent so many requests that the platform could not keep up.",
     difficulty: 6,
     body: `You try to access your favorite online gaming platform, but it's unavailable. Later, you hear that the platform was overwhelmed by a massive surge in traffic, causing it to crash. The platform confirms it was a targeted attack.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-11.png",
@@ -837,7 +837,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Wi-Fi Jamming",
     strideType: "Denial of Service",
     strideReason:
-      "Mirrors the Network Jammer attack card: RF interference denies wireless connectivity to legitimate devices.",
+      "This is the wireless version of the DDoS attack above. Someone sent out strong radio signals so your devices could not talk to the router. Nothing was stolen and nothing was changed. The attacker just made the connection useless. This is Denial of Service.",
     difficulty: 7,
     body: `Your Wi-Fi suddenly stops working, and none of your devices can connect. When you check, you notice that your router's signal is being disrupted by a nearby device emitting strong radio signals.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-15.png",
@@ -850,7 +850,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Reused Password Breach",
     strideType: "Spoofing",
     strideReason:
-      "Mirrors the Credential Stuffing attack card: credentials leaked from one breach are reused to impersonate the victim elsewhere.",
+      "Your password leaked somewhere else, and now someone is trying it here too. When they log in with your real password, the system just thinks they are you. This is Spoofing. It works because the same password was used on more than one site.",
     difficulty: 8,
     body: `You receive an alert that someone tried logging into your email from an unfamiliar location. You realize you've reused the same password on multiple sites, and one of those sites was recently breached.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-05.png",
@@ -863,7 +863,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Router Hijack",
     strideType: "Tampering",
     strideReason:
-      "Mirrors the Router Hijacking attack card: unauthorized changes to the admin password/DNS settings, an integrity violation of the router's configuration.",
+      "Somebody got into the router's admin panel and changed settings that were not theirs to change, like the password or the DNS. The router is still yours, but you can no longer trust its settings. This is Tampering.",
     difficulty: 9,
     body: `Your internet slows down, and you notice unfamiliar devices connected to your router. When you check the router settings, you see changes you didn't make, like a new admin password or DNS settings.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-06.png",
@@ -876,7 +876,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Fake Banking Website (DNS Redirect)",
     strideType: "Tampering",
     strideReason:
-      "Mirrors the Router Hijacking attack card's 'redirect traffic' effect: the DNS path itself has been altered, not just a spoofed page served directly.",
+      "You typed the right web address, but you still ended up on a fake site. This only happens when the path your traffic takes has been changed, not just the page you see. It has the same cause as a hijacked router: something along the way was tampered with.",
     difficulty: 10,
     body: `You type your bank's official URL into your browser, but instead of the real website, you're redirected to a fake site that looks identical. The fake site asks you to log in with your credentials.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-04.png",
@@ -889,7 +889,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Social Media Account Takeover",
     strideType: "Elevation of Privilege",
     strideReason:
-      "The 'multiple failed login attempts' detail mirrors the Password Cracking attack card (repeated guesses) rather than Credential Stuffing (a single correct reused password).",
+      "The clue here is \"multiple failed login attempts.\" That means someone kept guessing your password instead of using one they already had. Once a guess works, they go from being a stranger to being logged in as you. This is Elevation of Privilege.",
     difficulty: 11,
     body: `You receive multiple failed login attempt notifications for your social media account. Later, you find that your account has been accessed, and spam messages were sent to your contacts.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-14.png",
@@ -902,7 +902,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Banking Session Hijack",
     strideType: "Tampering, Spoofing",
     strideReason:
-      "Mirrors the Session Hijacking attack card exactly: an intercepted session token lets the attacker act as the authenticated user.",
+      "You did not get logged out by accident. Someone took your active login session and used it as if it were their own. They did not guess your password, they just borrowed your login. This is Tampering with the session, done so they can spoof being you.",
     difficulty: 12,
     body: `You're logged into your online banking account when suddenly you're logged out. When you try to log back in, you see unfamiliar transactions. The bank confirms that someone accessed your account using your active session.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-12.png",
@@ -915,7 +915,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "ARP Spoofing on Home Network",
     strideType: "Tampering, Information Disclosure",
     strideReason:
-      "Mirrors the ARP Spoofing attack card: forged IP-MAC mappings enable interception and alteration of local traffic.",
+      "Your router keeps a list that matches each device to its address, called the ARP table. Someone changed entries in that list so your traffic passes through them first. Changing the list is Tampering. Reading your traffic afterward is Information Disclosure.",
     difficulty: 13,
     body: `You notice that your internet connection is slow, and some websites load strange content. When you check your network, you see unfamiliar devices listed as connected. Your router's ARP table shows incorrect IP-MAC mappings.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-13.png",
@@ -928,7 +928,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Gaming Console OS Exploit",
     strideType: "Elevation of Privilege",
     strideReason:
-      "Mirrors the Zero-Day Exploit attack card: an unpatched vulnerability is exploited to disrupt and corrupt the system.",
+      "A weak spot in the console's software let someone do things they should never have been able to do. Going from a normal player to someone who can break the whole system is exactly what Elevation of Privilege means.",
     difficulty: 14,
     body: `You're playing an online game on your gaming console, and suddenly, the system freezes and restarts. Upon reboot, all your saved data is gone. A vulnerability in the console OS was exploited to cause system-wide corruption.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-21.png",
@@ -941,7 +941,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Hijacked Security Camera",
     strideType: "Tampering, Elevation of Privilege",
     strideReason:
-      "Mirrors the Firmware Attack card: control surviving a reset is the signature of a firmware-level compromise, not just a stolen account password.",
+      "A reset should have removed the attacker, but it did not. That means they are not just logged in, they are hiding inside the camera's firmware. That is deeper than a stolen password. Changing the firmware is Tampering, and keeping control this way is Elevation of Privilege.",
     difficulty: 15,
     body: `Your indoor security camera starts moving independently, and you notice unfamiliar logins to the camera's admin panel. Even after resetting the camera, the issue persists, and you can't regain control.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-07.png",
@@ -954,7 +954,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Smart Fridge Malware Proxy",
     strideType: "Tampering, Elevation of Privilege",
     strideReason:
-      "Mirrors the Firmware Attack card again: infected firmware turns the device into a persistent malicious proxy.",
+      "This is the same idea as the hijacked camera, just with a fridge. The fridge's firmware was infected, so now it quietly sits between you and the internet, watching your traffic. Changing the firmware is Tampering, and using it this way is Elevation of Privilege.",
     difficulty: 16,
     body: `Your smart refrigerator displays ads and redirects your mobile phone to phishing sites when connected to its app. You find that malware has infected the fridge's firmware, acting as a proxy to intercept traffic.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-18.png",
@@ -967,7 +967,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Smart Meter Spoofing",
     strideType: "Spoofing",
     strideReason:
-      "No matching attack card in this deck; reasoned independently — the scenario states outright that the meter's communication itself was spoofed to falsify readings.",
+      "There is no matching attack card for this one, so this is a judgment call. But the scenario gives us the answer directly. The attacker faked the meter's messages to the power company. Faking a device's identity like this is Spoofing.",
     difficulty: 17,
     body: `Your smart utility meter starts sending incorrect usage data to your provider, showing abnormally high consumption. You later discover a nearby attacker spoofed your meter's communication to inflate usage, possibly to trick you into overpaying or causing billing chaos.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-16.png",
@@ -980,7 +980,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Exposed Smart Printer",
     strideType: "Elevation of Privilege",
     strideReason:
-      "No matching attack card in this deck; closest in spirit to Zero-Day Exploit — an exposed service gives the attacker unauthorized remote control of the device.",
+      "There is no exact match for this one either. The closest is Zero-Day Exploit. An open port let someone walk in and take control of a device they should never have been able to touch. Gaining that kind of control is Elevation of Privilege.",
     difficulty: 18,
     body: `You notice your smart printer printing strange documents at random times. Investigation reveals a hacker accessed the printer remotely through an exposed port and used it to store and print malicious material.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-17.png",
@@ -993,7 +993,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Smart Lock Replay Attack",
     strideType: "Spoofing",
     strideReason:
-      "No matching attack card in this deck; a classic replay attack — intercepted access tokens are re-sent to impersonate an authorized unlock, the same impersonation logic as Session Hijacking.",
+      "This is called a replay attack. The attacker did not break any code. They just recorded a real unlock signal and played it back later. The lock cannot tell it apart from the real thing, so it opens. This is Spoofing, done with a recording instead of a fake ID.",
     difficulty: 19,
     body: `Your smart door lock unlocks automatically without your command while you're away. Reviewing the logs, you see access tokens were reused by an attacker intercepting previous traffic.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-19.png",
@@ -1006,7 +1006,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
     label: "Smartwatch Data Exfiltration",
     strideType: "Information Disclosure",
     strideReason:
-      "No matching attack card in this deck; malware is delivered like a Trojan Horse, but the threat modeled here is the resulting leak of health/location data to an unknown server.",
+      "The malware got onto the watch the same way a Trojan Horse would, but that is not the important part here. What matters is where your health and location data ended up: an unknown server that has no right to have it. This is Information Disclosure.",
     difficulty: 20,
     body: `Your smartwatch battery drains rapidly and gets hot. A diagnostic app shows it has been constantly sending location and health data to an unknown IP. Malware was installed through a third-party app.`,
     src: "/media/publications/cyqured/cards/scenario/scenario-20.png",

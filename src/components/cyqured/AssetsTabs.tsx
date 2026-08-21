@@ -4,6 +4,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Suspense, useCallback } from "react";
 import { GameExperience } from "./GameExperience";
 import { GameBoardSection } from "./GameBoardSection";
+import { StrideGuide } from "./StrideGuide";
 import styles from "./AssetsTabs.module.css";
 
 function AssetsTabsContent() {
@@ -86,6 +87,7 @@ function AssetsTabsContent() {
         {currentTab === "cards" ? (
           <div id="cards-panel" role="tabpanel" aria-label="Game Cards">
             <GameExperience />
+            <StrideGuide />
           </div>
         ) : (
           <div id="board-panel" role="tabpanel" aria-label="Game Board">
