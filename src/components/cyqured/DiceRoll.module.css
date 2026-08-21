@@ -2,58 +2,120 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1.5rem 0;
+  gap: 0.85rem;
+  padding: 1.75rem 0 1.25rem;
+}
+
+.scene {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  perspective: 500px;
+}
+
+.shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 60px;
+  height: 14px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55) 0%, transparent 70%);
+  transform: translateX(-50%);
+  animation: shadowPulse 0.75s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateX(-50%) scaleX(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: translateX(-50%) scaleX(0.7);
+  }
 }
 
 .cube {
-  width: 84px;
-  height: 84px;
-  border-radius: 16px;
-  background: linear-gradient(145deg, #16222f 0%, #0a121c 100%);
-  border: 1px solid rgba(94, 225, 242, 0.35);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(94, 225, 242, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
 }
 
-.cubeRolling {
-  animation: shake 0.22s ease-in-out infinite;
+.cubeTumbling {
+  animation: tumble 0.75s cubic-bezier(0.25, 0.1, 0.25, 1) 1;
 }
 
 .cubeSettled {
-  animation: settle 0.35s cubic-bezier(0.2, 0.9, 0.25, 1);
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes shake {
-  0%,
-  100% {
-    transform: rotate(-6deg) scale(1);
+@keyframes tumble {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: rotateX(260deg) rotateY(180deg);
   }
   50% {
-    transform: rotate(6deg) scale(1.04);
+    transform: rotateX(540deg) rotateY(400deg);
   }
-}
-
-@keyframes settle {
-  0% {
-    transform: scale(1.18);
-    box-shadow: 0 0 30px rgba(94, 225, 242, 0.5);
+  75% {
+    transform: rotateX(760deg) rotateY(630deg);
   }
   100% {
-    transform: scale(1);
+    transform: rotateX(1030deg) rotateY(830deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cubeRolling,
+  .cubeTumbling,
   .cubeSettled {
+    animation: none;
+    transition: none;
+  }
+  .shadow {
     animation: none;
   }
 }
 
 .face {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #16222f 0%, #0a121c 100%);
+  border: 1px solid rgba(94, 225, 242, 0.35);
+  box-shadow: inset 0 0 14px rgba(94, 225, 242, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faceFront {
+  transform: translateZ(45px);
+}
+
+.faceBack {
+  transform: rotateY(180deg) translateZ(45px);
+}
+
+.faceRight {
+  transform: rotateY(90deg) translateZ(45px);
+}
+
+.faceLeft {
+  transform: rotateY(-90deg) translateZ(45px);
+}
+
+.faceTop {
+  transform: rotateX(90deg) translateZ(45px);
+}
+
+.faceBottom {
+  transform: rotateX(-90deg) translateZ(45px);
+}
+
+.pipGrid {
   width: 62px;
   height: 62px;
   display: grid;

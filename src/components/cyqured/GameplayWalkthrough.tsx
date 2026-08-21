@@ -5,6 +5,8 @@ import {
   PLAYERS,
   WALKTHROUGH_STEPS,
   BOARD_TRACK,
+  TURN_BOUNDARIES,
+  turnGroupOf,
   rankByTotal,
   eliminationStatus,
   totalScore,
@@ -15,29 +17,13 @@ import { CONNECTED_DEVICES } from "./GameBoardSection";
 import { GameTable } from "./GameTable";
 import { DiceRoll } from "./DiceRoll";
 import { CombatCard } from "./CombatCard";
+import { TurnProgressBar, segmentFor } from "./TurnProgressBar";
 import { FlipCard, CATEGORY_COLOR } from "./GameExperience";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { IconArrowLeft, IconArrowRight, IconCheck } from "@/components/primitives/Icons";
 import styles from "./GameplayWalkthrough.module.css";
 
 const DEVICE_COLOR: Record<string, string> = Object.fromEntries(CONNECTED_DEVICES.map((d) => [d.name, d.color]));
-
-/** Step indices where a new turn's die roll begins (plus 0, the setup
- * step), used by the top "turn" navigation to jump between rolls and skip
- * every decision/event phase in between. */
-const TURN_BOUNDARIES: number[] = [0];
-WALKTHROUGH_STEPS.forEach((s, i) => {
-  if (s.phase === "roll") TURN_BOUNDARIES.push(i);
-});
-
-function turnGroupOf(stepIndex: number): number {
-  let g = 0;
-  for (let i = 0; i < TURN_BOUNDARIES.length; i++) {
-    if (TURN_BOUNDARIES[i] <= stepIndex) g = i;
-    else break;
-  }
-  return g;
-}
 
 function CellInfoBox({ cellIndex }: { cellIndex: number }) {
   const cell = BOARD_TRACK[cellIndex];
@@ -74,8 +60,7 @@ export function GameplayWalkthrough() {
   const [manualSelection, setManualSelection] = useState<PlayerId | null>(null);
 
   const step = WALKTHROUGH_STEPS[stepIndex];
-  const isFirstStep = stepIndex === 0;
-  const isLastStep = stepIndex === WALKTHROUGH_STEPS.length - 1;
+  const isVeryLastStep = stepIndex === WALKTHROUGH_STEPS.length - 1;
   const selectedPlayer = manualSelection ?? step.activePlayer ?? "alice";
 
   const history = useMemo(
@@ -89,24 +74,33 @@ export function GameplayWalkthrough() {
 
   const turnGroup = turnGroupOf(stepIndex);
   const isFirstTurn = turnGroup === 0;
-  const isLastTurn = turnGroup === TURN_BOUNDARIES.length - 1 && isLastStep;
+  const isLastTurn = turnGroup === TURN_BOUNDARIES.length - 1 && isVeryLastStep;
   const turnStart = TURN_BOUNDARIES[turnGroup];
   const turnEnd = (TURN_BOUNDARIES[turnGroup + 1] ?? WALKTHROUGH_STEPS.length) - 1;
   const phaseInTurn = stepIndex - turnStart + 1;
   const phasesInTurn = turnEnd - turnStart + 1;
+  // Fine nav stays inside the current turn — rolling the die for a new turn
+  // is only ever done with the top-level turn navigation.
+  const isFirstStep = stepIndex === turnStart;
+  const isLastStep = stepIndex === turnEnd;
 
-  // Fine navigation: one phase at a time (roll, land, resolve, combat...).
+  const currentSegment = segmentFor(stepIndex);
+  const currentSegmentPlayer = currentSegment.player ? PLAYERS.find((p) => p.id === currentSegment.player) : null;
+
+  // Fine navigation: one phase at a time (roll, land, resolve, combat...),
+  // constrained to this turn. This is what moves the token: advancing from
+  // the roll phase into the land phase is what animates it to its new cell.
   function goNextStep() {
-    setStepIndex((i) => Math.min(i + 1, WALKTHROUGH_STEPS.length - 1));
+    setStepIndex((i) => Math.min(i + 1, turnEnd));
     setManualSelection(null);
   }
   function goBackStep() {
-    setStepIndex((i) => Math.max(i - 1, 0));
+    setStepIndex((i) => Math.max(i - 1, turnStart));
     setManualSelection(null);
   }
 
-  // Coarse navigation: jump straight to the next/previous die roll, skipping
-  // every decision/event phase in between.
+  // Coarse navigation: rolls the die for the next/previous turn, jumping
+  // straight to it and skipping every decision/event phase in between.
   function goNextTurn() {
     const g = turnGroupOf(stepIndex);
     setStepIndex(TURN_BOUNDARIES[g + 1] ?? WALKTHROUGH_STEPS.length - 1);
@@ -115,6 +109,10 @@ export function GameplayWalkthrough() {
   function goBackTurn() {
     const g = turnGroupOf(stepIndex);
     setStepIndex(TURN_BOUNDARIES[Math.max(0, g - 1)]);
+    setManualSelection(null);
+  }
+  function jumpTo(index: number) {
+    setStepIndex(index);
     setManualSelection(null);
   }
 
@@ -148,14 +146,10 @@ export function GameplayWalkthrough() {
             <span>Next</span>
             <IconArrowRight size={15} />
           </button>
-          <div className={styles.progressBarTrack} aria-hidden="true">
-            <div
-              className={styles.progressBarFill}
-              style={{ width: `${((stepIndex + 1) / WALKTHROUGH_STEPS.length) * 100}%` }}
-            />
-          </div>
+          <TurnProgressBar stepIndex={stepIndex} onJump={jumpTo} />
           <span className={styles.stepCounter}>
-            {turnGroup === 0 ? "Setup" : `Turn ${turnGroup} / ${TURN_BOUNDARIES.length - 1}`}
+            {currentSegment.label}
+            {currentSegmentPlayer ? ` — ${currentSegmentPlayer.name}` : ""}
           </span>
         </div>
 

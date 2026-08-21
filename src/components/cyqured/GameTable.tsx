@@ -33,13 +33,33 @@ function avatarPoint(seatIndex: number): { x: number; y: number; angle: number }
   return { x: CENTER + AVATAR_RADIUS * Math.cos(rad), y: CENTER + AVATAR_RADIUS * Math.sin(rad), angle };
 }
 
-const TOKEN_OFFSETS = [
-  { dx: 0, dy: 0 },
-  { dx: 7, dy: -2 },
-  { dx: -7, dy: -2 },
-  { dx: 4, dy: 6 },
-  { dx: -4, dy: 6 },
-];
+/** Small, tight offset clusters so tokens sharing a cell fan out just enough
+ * to stay readable, while a lone token sits dead-centre on its cell. */
+const CLUSTER_OFFSETS: Record<number, { dx: number; dy: number }[]> = {
+  1: [{ dx: 0, dy: 0 }],
+  2: [
+    { dx: -8, dy: 0 },
+    { dx: 8, dy: 0 },
+  ],
+  3: [
+    { dx: 0, dy: -8 },
+    { dx: -8, dy: 6 },
+    { dx: 8, dy: 6 },
+  ],
+  4: [
+    { dx: -8, dy: -8 },
+    { dx: 8, dy: -8 },
+    { dx: -8, dy: 8 },
+    { dx: 8, dy: 8 },
+  ],
+  5: [
+    { dx: 0, dy: -10 },
+    { dx: -10, dy: -3 },
+    { dx: 10, dy: -3 },
+    { dx: -6, dy: 9 },
+    { dx: 6, dy: 9 },
+  ],
+};
 
 export function GameTable({
   playerStates,
@@ -101,22 +121,34 @@ export function GameTable({
       {/* Active-cell callout */}
       {highlightCell && highlightPoint ? <CellCallout point={highlightPoint} cell={highlightCell} /> : null}
 
-      {/* Player tokens on the board */}
-      {PLAYERS.map((pl, i) => {
-        const pos = playerStates[pl.id].boardPos;
+      {/* Player tokens on the board, grouped by cell so shared cells fan out
+          just enough to stay readable, and a lone token sits dead-centre. */}
+      {Object.entries(
+        PLAYERS.reduce<Record<number, typeof PLAYERS>>((acc, pl) => {
+          const pos = playerStates[pl.id].boardPos;
+          (acc[pos] ??= []).push(pl);
+          return acc;
+        }, {}),
+      ).flatMap(([posStr, group]) => {
+        const pos = Number(posStr);
         const cp = cellPoint(pos);
-        const off = TOKEN_OFFSETS[i];
-        return (
-          <circle
-            key={pl.id}
-            cx={cp.x + off.dx}
-            cy={cp.y + off.dy}
-            r={6}
-            fill={pl.color}
-            stroke="#05070d"
-            strokeWidth={1.3}
-          />
-        );
+        const offsets = CLUSTER_OFFSETS[group.length] ?? CLUSTER_OFFSETS[5];
+        return group.map((pl, i) => {
+          const off = offsets[i];
+          const isActive = pl.id === activePlayer;
+          return (
+            <circle
+              key={pl.id}
+              cx={cp.x + off.dx}
+              cy={cp.y + off.dy}
+              r={isActive ? 12 : 8}
+              fill={pl.color}
+              stroke={isActive ? "#eaf7fb" : "#05070d"}
+              strokeWidth={isActive ? 2.2 : 1.6}
+              className={isActive ? [styles.token, styles.tokenActive].join(" ") : styles.token}
+            />
+          );
+        });
       })}
 
       {/* Avatars around the table */}

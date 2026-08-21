@@ -997,6 +997,24 @@ pushRoll("t5-bob-roll", "bob", 6, "Turn 5 — Bob", "A turn later, Bob rolls a 6
 
 export const WALKTHROUGH_STEPS: WalkthroughStep[] = steps;
 
+/** Step indices where a new turn's die roll begins (plus 0, the setup
+ * step). The coarse "turn" navigation jumps between these, skipping every
+ * decision/event phase in between; the progress bar uses them to draw one
+ * segment per turn. */
+export const TURN_BOUNDARIES: number[] = [0];
+WALKTHROUGH_STEPS.forEach((s, i) => {
+  if (s.phase === "roll") TURN_BOUNDARIES.push(i);
+});
+
+export function turnGroupOf(stepIndex: number): number {
+  let g = 0;
+  for (let i = 0; i < TURN_BOUNDARIES.length; i++) {
+    if (TURN_BOUNDARIES[i] <= stepIndex) g = i;
+    else break;
+  }
+  return g;
+}
+
 export function totalScore(state: PlayerState): number {
   return state.credits + state.points;
 }

@@ -224,22 +224,6 @@
   cursor: not-allowed;
 }
 
-.progressBarTrack {
-  flex: 1;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-.progressBarFill {
-  height: 100%;
-  border-radius: 999px;
-  background: #5ee1f2;
-  box-shadow: 0 0 8px rgba(94, 225, 242, 0.5);
-  transition: width 0.25s ease;
-}
-
 /* ---- cell info box (land phase) ---- */
 
 .cellInfoBox {
