@@ -153,24 +153,59 @@
   cursor: not-allowed;
 }
 
-.progressTrack {
+.progressBarTrack {
   flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-}
-
-.progressDot,
-.progressDotActive {
-  width: 6px;
   height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
 }
 
-.progressDotActive {
+.progressBarFill {
+  height: 100%;
+  border-radius: 999px;
   background: #5ee1f2;
-  box-shadow: 0 0 6px rgba(94, 225, 242, 0.6);
+  box-shadow: 0 0 8px rgba(94, 225, 242, 0.5);
+  transition: width 0.25s ease;
+}
+
+/* ---- cell info box (land phase) ---- */
+
+.cellInfoBox {
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  background: rgba(94, 225, 242, 0.06);
+  border: 1px solid rgba(94, 225, 242, 0.25);
+  margin-bottom: 0.3rem;
+}
+
+.cellInfoHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.cellInfoName {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #eaf7fb;
+}
+
+.cellInfoTag {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.68rem;
+  color: #5ee1f2;
+  white-space: nowrap;
+}
+
+.cellInfoDesc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #a4c7d0;
+  margin: 0;
 }
 
 /* ---- player chip row ---- */

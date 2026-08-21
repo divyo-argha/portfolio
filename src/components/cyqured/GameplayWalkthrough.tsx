@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import {
   PLAYERS,
   WALKTHROUGH_STEPS,
+  BOARD_TRACK,
   rankByTotal,
   eliminationStatus,
   totalScore,
@@ -12,10 +13,28 @@ import {
 } from "./walkthroughData";
 import { CONNECTED_DEVICES } from "./GameBoardSection";
 import { GameTable } from "./GameTable";
+import { DiceRoll } from "./DiceRoll";
+import { CombatCard } from "./CombatCard";
 import { IconArrowLeft, IconArrowRight, IconCheck } from "@/components/primitives/Icons";
 import styles from "./GameplayWalkthrough.module.css";
 
 const DEVICE_COLOR: Record<string, string> = Object.fromEntries(CONNECTED_DEVICES.map((d) => [d.name, d.color]));
+
+function CellInfoBox({ cellIndex }: { cellIndex: number }) {
+  const cell = BOARD_TRACK[cellIndex];
+  return (
+    <div className={styles.cellInfoBox}>
+      <div className={styles.cellInfoHeader}>
+        <span className={styles.cellInfoName}>{cell.name}</span>
+        <span className={styles.cellInfoTag}>
+          Cell #{cellIndex}
+          {cell.points ? ` · ${cell.points} pts` : ""}
+        </span>
+      </div>
+      <p className={styles.cellInfoDesc}>{cell.description}</p>
+    </div>
+  );
+}
 
 export function GameplayWalkthrough() {
   const [stepIndex, setStepIndex] = useState(0);
@@ -76,21 +95,31 @@ export function GameplayWalkthrough() {
             <span className={styles.turnLabel}>{step.turnLabel}</span>
           </div>
           <h3 className={styles.stepTitle}>{step.title}</h3>
+
+          {step.phase === "roll" && step.roll ? <DiceRoll key={step.id} result={step.roll} /> : null}
+
+          {step.phase === "land" && step.highlightCellIndex !== null ? (
+            <CellInfoBox cellIndex={step.highlightCellIndex} />
+          ) : null}
+
           {step.narration.map((p) => (
             <p key={p.slice(0, 24)} className={styles.narrationText}>
               {p}
             </p>
           ))}
 
+          {step.phase === "combat" && step.combat ? <CombatCard combat={step.combat} /> : null}
+
           <div className={styles.navRow}>
             <button type="button" className={styles.navButton} onClick={goBack} disabled={isFirst}>
               <IconArrowLeft size={15} />
               <span>Back</span>
             </button>
-            <div className={styles.progressTrack} aria-hidden="true">
-              {WALKTHROUGH_STEPS.map((s, i) => (
-                <span key={s.id} className={i === stepIndex ? styles.progressDotActive : styles.progressDot} />
-              ))}
+            <div className={styles.progressBarTrack} aria-hidden="true">
+              <div
+                className={styles.progressBarFill}
+                style={{ width: `${((stepIndex + 1) / WALKTHROUGH_STEPS.length) * 100}%` }}
+              />
             </div>
             <button type="button" className={styles.navButtonPrimary} onClick={goNext} disabled={isLast}>
               <span>Next</span>
@@ -120,7 +149,7 @@ export function GameplayWalkthrough() {
                 {isActive ? <span className={styles.chipActiveTag}>turn</span> : null}
               </span>
               <span className={styles.chipStats}>
-                {s.credits}cr · {s.points}pt
+                {s.credits}cr · {s.points}pt · {s.devices.length} {s.devices.length === 1 ? "device" : "devices"}
               </span>
             </button>
           );

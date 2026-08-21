@@ -1,0 +1,90 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+}
+
+.cube {
+  width: 84px;
+  height: 84px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #16222f 0%, #0a121c 100%);
+  border: 1px solid rgba(94, 225, 242, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(94, 225, 242, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cubeRolling {
+  animation: shake 0.22s ease-in-out infinite;
+}
+
+.cubeSettled {
+  animation: settle 0.35s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(-6deg) scale(1);
+  }
+  50% {
+    transform: rotate(6deg) scale(1.04);
+  }
+}
+
+@keyframes settle {
+  0% {
+    transform: scale(1.18);
+    box-shadow: 0 0 30px rgba(94, 225, 242, 0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cubeRolling,
+  .cubeSettled {
+    animation: none;
+  }
+}
+
+.face {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  padding: 6px;
+}
+
+.pipOn,
+.pipOff {
+  border-radius: 50%;
+  align-self: center;
+  justify-self: center;
+  width: 12px;
+  height: 12px;
+}
+
+.pipOn {
+  background: #5ee1f2;
+  box-shadow: 0 0 6px rgba(94, 225, 242, 0.7);
+}
+
+.pipOff {
+  background: transparent;
+}
+
+.resultLabel {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #eaf7fb;
+}

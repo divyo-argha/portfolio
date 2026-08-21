@@ -1,0 +1,139 @@
+.combatWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.duel {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .duel {
+    grid-template-columns: 1fr;
+  }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.sideLabel {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8fb4bd;
+}
+
+.cardArt {
+  width: 92px;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #0a121c;
+}
+
+.cardArt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardArtEmpty {
+  width: 92px;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.68rem;
+  color: #5c7a86;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.cardName {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #eaf7fb;
+  max-width: 110px;
+}
+
+.cardStride {
+  font-size: 0.68rem;
+  color: #5ee1f2;
+}
+
+.vsBadge {
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.7rem;
+  color: #5c7a86;
+  letter-spacing: 0.06em;
+}
+
+.resolutionBox {
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  border: 1px solid;
+}
+
+.resolutionBox[data-outcome="attack-succeeds"],
+.resolutionBox[data-outcome="critical-transfer"] {
+  background: rgba(255, 94, 126, 0.08);
+  border-color: rgba(255, 94, 126, 0.35);
+}
+
+.resolutionBox[data-outcome="defended"],
+.resolutionBox[data-outcome="immunity-block"] {
+  background: rgba(163, 217, 79, 0.08);
+  border-color: rgba(163, 217, 79, 0.35);
+}
+
+.resolutionLabel {
+  display: block;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  color: #eaf7fb;
+}
+
+.resolutionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  font-size: 0.85rem;
+  color: #a4c7d0;
+}
+
+.resolutionRow strong {
+  color: #eaf7fb;
+}
+
+.pointsPositive {
+  color: #a3d94f;
+  font-weight: 700;
+}
+
+.pointsNegative {
+  color: #ff5e7e;
+  font-weight: 700;
+}
+
+.pointsNeutral {
+  color: #8fb4bd;
+  font-weight: 700;
+}
