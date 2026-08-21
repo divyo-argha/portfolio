@@ -3,10 +3,10 @@ import type { Link, NewsItem } from "./types";
 export const profile = {
   name: "Argha Pratim Saha",
   subtitle: "Researcher · Usable Security & Privacy · Human-Computer Interaction · Applied Machine Learning",
-  status: "Applying for PhD positions, Fall 2027 intake",
+  status: "PhD applicant · Fall 2027 intake",
   bio: "My research looks at how people who were never taught security recognize and respond to digital threats: phishing, smishing, and the kind of social engineering that arrives on a shared phone. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game accepted at USENIX SOUPS 2026.",
   location: "Dhaka, Bangladesh",
-  email: "strangerfugitive@gmail.com",
+  email: "arghapratimsaha00@gmail.com",
   university: "Shahjalal University of Science and Technology (SUST)",
   cvUrl: "/cv.pdf",
 
