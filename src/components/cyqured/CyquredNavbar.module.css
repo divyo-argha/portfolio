@@ -198,32 +198,6 @@
   box-shadow: 0 0 14px rgba(94, 225, 242, 0.3);
 }
 
-/* Secondary bridge back out of the game section to the rest of the portfolio */
-.homeLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: var(--font-cyq-display, sans-serif);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #8fb4bd;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.homeLink:hover {
-  color: #eaf7fb;
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
 /* =========================================================================
    Mobile Hamburger Trigger & Downward-Expanding Menu Panel
    ========================================================================= */

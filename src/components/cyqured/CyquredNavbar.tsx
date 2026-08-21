@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { IconArrowLeft, IconArrowUpRight, IconClose } from "@/components/primitives/Icons";
+import { IconArrowUpRight, IconClose } from "@/components/primitives/Icons";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import styles from "./CyquredNavbar.module.css";
 
 export const GAME_NAV_LINKS = [
-  { label: "Assets", href: "/publications/cyqured/game" },
+  { label: "Home", href: "/publications/cyqured/game" },
+  { label: "Assets", href: "/publications/cyqured/game/assets" },
   { label: "Mechanics", href: "/publications/cyqured/game/mechanics" },
   { label: "Publication", href: "/publications/cyqured/game/publication" },
 ];
@@ -103,12 +104,8 @@ export function CyquredNavbar() {
             </ul>
           </nav>
 
-          {/* Desktop Direct Bridge to Overview + Rest of the Site */}
+          {/* Desktop Direct Bridge to Overview */}
           <div className={styles.actionGroup}>
-            <Link href="/" className={styles.homeLink}>
-              <IconArrowLeft size={13} />
-              <span>Portfolio</span>
-            </Link>
             <Link href="/publications/cyqured" className={styles.paperLink}>
               <span>Overview</span>
               <IconArrowUpRight size={13} />
@@ -178,14 +175,6 @@ export function CyquredNavbar() {
               >
                 <span>Academic Study & Overview</span>
                 <IconArrowUpRight size={15} />
-              </Link>
-              <Link
-                href="/"
-                className={styles.mobilePaperCta}
-                onClick={() => setIsExpanded(false)}
-              >
-                <span>Back to Portfolio</span>
-                <IconArrowLeft size={15} />
               </Link>
             </div>
           </div>
