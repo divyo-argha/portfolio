@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Chakra_Petch } from "next/font/google";
-import { GameRulesSection } from "@/components/cyqured/GameRulesSection";
+import { MechanicsTabs } from "@/components/cyqured/MechanicsTabs";
 import { IconArrowUpRight } from "@/components/primitives/Icons";
 import styles from "../game.module.css";
 
@@ -25,8 +25,8 @@ export default function CyQuredMechanicsPage() {
       <div className={styles.glowB} aria-hidden="true" />
 
       <div className={styles.inner}>
-        {/* Dedicated Game Mechanics Content */}
-        <GameRulesSection />
+        {/* Rules & Mechanics / Example Walkthrough (Managed by URL Query Param) */}
+        <MechanicsTabs />
 
         {/* Bottom Bridge: Research Paper */}
         <footer className={styles.bottomBridge}>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./GameBoardSection.module.css";
 
-const CONNECTED_DEVICES = [
+export const CONNECTED_DEVICES = [
   { name: "Smart Utility Meter", category: "Energy & Comfort", points: 8, color: "#e5493c" },
   { name: "Smart Thermostat", category: "Energy & Comfort", points: 6, color: "#e5493c" },
   { name: "IP Camera", category: "Home Security", points: 10, color: "#2f6fe0" },
