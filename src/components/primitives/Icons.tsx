@@ -229,6 +229,15 @@ export function IconCheck({ size = 16, className }: IconProps) {
   );
 }
 
+export function IconCompare({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <rect x="4" y="10" width="6" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+      <rect x="14" y="4" width="6" height="16" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
 export function IconArrowUp({ size = 16, className }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">

@@ -210,6 +210,52 @@
   width: 100%;
 }
 
+.detailHeaderLeft {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.compareDetailButton,
+.compareDetailButtonActive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-family: var(--font-cyq-display, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.compareDetailButton {
+  border: 1px solid #22333b;
+  background: rgba(255, 255, 255, 0.02);
+  color: #8fb4bd;
+}
+
+.compareDetailButton:hover:not(:disabled) {
+  border-color: #5ee1f2;
+  color: #eaf7fb;
+}
+
+.compareDetailButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.compareDetailButtonActive {
+  border: 1px solid #5ee1f2;
+  background: rgba(94, 225, 242, 0.18);
+  color: #eaf7fb;
+  box-shadow: 0 0 12px rgba(94, 225, 242, 0.25);
+}
+
 .closeStageBtn {
   display: inline-flex;
   align-items: center;
@@ -441,6 +487,56 @@
 .count {
   font-size: 0.65rem;
   opacity: 0.7;
+}
+
+/* ---- Compare mode toggle ---- */
+.compareControlRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: -0.75rem;
+}
+
+.compareToggle,
+.compareToggleActive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-family: var(--font-cyq-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.compareToggle {
+  border: 1px solid #22333b;
+  background: rgba(255, 255, 255, 0.02);
+  color: #8fb4bd;
+}
+
+.compareToggle:hover {
+  border-color: #5ee1f2;
+  color: #eaf7fb;
+}
+
+.compareToggleActive {
+  border: 1px solid #5ee1f2;
+  background: rgba(94, 225, 242, 0.18);
+  color: #eaf7fb;
+  box-shadow: 0 0 16px rgba(94, 225, 242, 0.3);
+}
+
+.compareHint {
+  font-family: var(--font-cyq-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  color: #8fb4bd;
 }
 
 /* ---- Morphing Search Container (Two-Way Animated) ---- */
@@ -883,6 +979,33 @@
   border: 1px solid color-mix(in srgb, var(--c) 45%, #1c2b32);
 }
 
+/* ---- Compare-mode selection state ---- */
+.thumbCompareSelected .thumbFace {
+  border-color: #5ee1f2;
+  box-shadow: 0 0 0 2px rgba(94, 225, 242, 0.5), 0 0 20px rgba(94, 225, 242, 0.35);
+}
+
+.thumbCompareBlocked {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.compareCheckBadge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #5ee1f2;
+  color: #05070d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
 .thumbLabel {
   position: absolute;
   inset: auto 0 0 0;
@@ -947,4 +1070,117 @@
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* ---- Floating compare tray ---- */
+.compareTray {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: min(94vw, 640px);
+  padding: 0.6rem 0.75rem 0.6rem 0.6rem;
+  background: rgba(8, 14, 26, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(94, 225, 242, 0.32);
+  border-radius: 9999px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(94, 225, 242, 0.15);
+  animation: rise 0.35s ease-out both;
+}
+
+.compareTrayThumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  overflow-x: auto;
+}
+
+.compareTrayThumb {
+  position: relative;
+  flex-shrink: 0;
+  width: 34px;
+  height: 48px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--c) 55%, #1c2b32);
+}
+
+.compareTrayRemove {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #eaf7fb;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.compareTrayActions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.compareTrayCount {
+  font-family: var(--font-cyq-display);
+  font-size: 0.68rem;
+  color: #8fb4bd;
+}
+
+.compareTrayClear {
+  font-family: var(--font-cyq-display);
+  font-size: 0.7rem;
+  color: #8fb4bd;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem 0.2rem;
+  transition: color 0.2s ease;
+}
+
+.compareTrayClear:hover {
+  color: #eaf7fb;
+}
+
+.compareTrayButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-cyq-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #05070d;
+  background: #5ee1f2;
+  border: none;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(94, 225, 242, 0.4);
+  transition: all 0.2s ease;
+}
+
+.compareTrayButton:hover:not(:disabled) {
+  background: #84ebf8;
+  box-shadow: 0 0 22px rgba(94, 225, 242, 0.55);
+}
+
+.compareTrayButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
 }

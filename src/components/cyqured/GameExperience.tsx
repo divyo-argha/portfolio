@@ -13,15 +13,31 @@ import {
   IconSearch,
   IconClose,
   IconArrowUpRight,
+  IconCompare,
+  IconCheck,
 } from "@/components/primitives/Icons";
+import { CompareModal } from "./CompareModal";
 import styles from "./GameExperience.module.css";
 
-const CATEGORY_COLOR: Record<CardCategory, string> = {
+export const CATEGORY_COLOR: Record<CardCategory, string> = {
   attack: "var(--cyq-attack)",
   defense: "var(--cyq-defense)",
   chance: "var(--cyq-chance)",
   scenario: "var(--cyq-scenario)",
 };
+
+/** Which cards can sit in the same comparison: attack/defense share a
+ * comparable shape (strideType, targets, pairIds) and compare cross-category
+ * against each other; chance and scenario are body-only text cards with no
+ * shared structure, so each only compares against its own kind. */
+export type CompareGroup = "combat" | "chance" | "scenario";
+
+export function compareGroupOf(category: CardCategory): CompareGroup {
+  if (category === "attack" || category === "defense") return "combat";
+  return category;
+}
+
+const MAX_COMPARE = 4;
 
 const DECK_COLOR: Record<CardDeck, string> = {
   action: "var(--cyq-attack)",
@@ -62,7 +78,7 @@ const FILTERS: { id: CardCategory; label: string; Icon: typeof IconAttack }[] = 
   { id: "scenario", label: "Scenario", Icon: IconScenario },
 ];
 
-function renderInline(text: string): ReactNode[] {
+export function renderInline(text: string): ReactNode[] {
   const parts = text.split(/\*\*(.+?)\*\*/g);
   return parts.map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part));
 }
@@ -71,7 +87,7 @@ function coverSrcFor(deck: CardDeck) {
   return `/media/publications/cyqured/covers/${deck}.webp`;
 }
 
-function LazyImg({ src, alt, eager = false }: { src: string; alt: string; eager?: boolean }) {
+export function LazyImg({ src, alt, eager = false }: { src: string; alt: string; eager?: boolean }) {
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
@@ -147,11 +163,29 @@ export function GameExperience() {
   const [searchQuery, setSearchQuery] = useState(qParam);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const [compareMode, setCompareMode] = useState(false);
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [showCompareModal, setShowCompareModal] = useState(false);
+
   // Determine currently selected card from URL query param
   const selected = useMemo(
     () => (cardParam ? cardFaces.find((c) => c.id === cardParam) ?? null : null),
     [cardParam],
   );
+
+  // Cards staged for comparison, in selection order. The modal itself is
+  // gated on `compareCards.length >= 2` at the render site below, so
+  // `showCompareModal` dropping stale-true after a removal is harmless —
+  // it just re-shows once a second card is added back.
+  const compareCards = useMemo(
+    () => compareIds.map((id) => cardFaces.find((c) => c.id === id)).filter((c): c is CardFace => Boolean(c)),
+    [compareIds],
+  );
+
+  // The comparison group the tray is currently locked to (set by whichever
+  // card was added first) — null while the tray is empty and open to any group.
+  const activeCompareGroup: CompareGroup | null =
+    compareCards.length > 0 ? compareGroupOf(compareCards[0].category) : null;
 
   // Active category: If card is selected, use card's category; otherwise read ?category or default to "attack"
   const filter: CardCategory = useMemo(() => {
@@ -241,11 +275,13 @@ export function GameExperience() {
     }
   }, [filter, searchQuery, updateUrl, reducedMotion]);
 
-  // Keyboard shortcut: Escape closes search or selected card
+  // Keyboard shortcut: Escape closes the compare modal, then search, then selected card
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        if (isSearchOpen) {
+        if (showCompareModal) {
+          setShowCompareModal(false);
+        } else if (isSearchOpen) {
           handleCloseSearch();
         } else if (selected) {
           closeCard();
@@ -254,7 +290,43 @@ export function GameExperience() {
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isSearchOpen, selected, handleCloseSearch, closeCard]);
+  }, [isSearchOpen, selected, showCompareModal, handleCloseSearch, closeCard]);
+
+  function toggleCompareMode() {
+    setCompareMode((v) => {
+      const next = !v;
+      if (!next) {
+        setCompareIds([]);
+        setShowCompareModal(false);
+      }
+      return next;
+    });
+  }
+
+  function toggleCompareCard(id: string) {
+    setCompareIds((prev) => {
+      if (prev.includes(id)) return prev.filter((x) => x !== id);
+
+      const card = cardFaces.find((c) => c.id === id);
+      if (!card) return prev;
+
+      if (prev.length > 0) {
+        const activeGroup = compareGroupOf(cardFaces.find((c) => c.id === prev[0])!.category);
+        if (compareGroupOf(card.category) !== activeGroup) return prev;
+      }
+
+      if (prev.length >= MAX_COMPARE) return prev;
+      return [...prev, id];
+    });
+  }
+
+  // Add (or remove) a card from the compare tray straight from its detail
+  // view, turning compare mode on if it wasn't already — lets a card someone
+  // is already looking at kick off a comparison without pre-toggling Compare.
+  function toggleCompareFromDetail(id: string) {
+    setCompareMode(true);
+    toggleCompareCard(id);
+  }
 
   // Real-time search matching strictly across card names (title) and card contents (body & targets)
   // Excludes card types/categories so category names do not match every card of that type
@@ -354,7 +426,23 @@ export function GameExperience() {
         >
           <div key={selected?.id ?? "idle"} className={reducedMotion ? undefined : styles.stageSwap}>
             {selected ? (
-              <SelectedStage card={selected} onJump={openCard} onClose={closeCard} reducedMotion={reducedMotion} />
+              <SelectedStage
+                card={selected}
+                onJump={openCard}
+                onClose={closeCard}
+                reducedMotion={reducedMotion}
+                isInCompare={compareIds.includes(selected.id)}
+                compareBlockedReason={
+                  activeCompareGroup !== null &&
+                  !compareIds.includes(selected.id) &&
+                  compareGroupOf(selected.category) !== activeCompareGroup
+                    ? "Clear the tray to compare a different kind of card"
+                    : compareIds.length >= MAX_COMPARE && !compareIds.includes(selected.id)
+                      ? `Max ${MAX_COMPARE} cards — remove one to add another`
+                      : null
+                }
+                onToggleCompare={toggleCompareFromDetail}
+              />
             ) : (
               <IdleStage onPick={openCard} />
             )}
@@ -489,23 +577,71 @@ export function GameExperience() {
         </div>
       </div>
 
+      {/* Compare Mode Toggle — Attack/Defense compare against each other;
+          Chance and Scenario each only compare within their own kind */}
+      <div className={styles.compareControlRow}>
+        <button
+          type="button"
+          className={compareMode ? styles.compareToggleActive : styles.compareToggle}
+          onClick={toggleCompareMode}
+          aria-pressed={compareMode}
+          title="Compare cards of the same kind side by side"
+        >
+          <IconCompare size={14} />
+          <span>Compare</span>
+        </button>
+        {compareMode ? (
+          <span className={styles.compareHint}>
+            Select cards of the same type to compare
+            {compareIds.length > 0 ? ` · ${compareIds.length}/${MAX_COMPARE} selected` : ""}
+          </span>
+        ) : null}
+      </div>
+
       {/* Card Grid or Empty State */}
       {visible.length > 0 ? (
         <div className={styles.grid}>
           {visible.map((card, i) => {
             const isActive = card.id === selected?.id;
+            const isCompareSelected = compareIds.includes(card.id);
+            const isWrongCompareGroup =
+              compareMode &&
+              activeCompareGroup !== null &&
+              !isCompareSelected &&
+              compareGroupOf(card.category) !== activeCompareGroup;
+            const isCompareCapped =
+              compareMode && !isCompareSelected && !isWrongCompareGroup && compareIds.length >= MAX_COMPARE;
+            const isCompareBlocked = isWrongCompareGroup || isCompareCapped;
+
             return (
               <button
                 key={card.id}
                 type="button"
-                className={isActive ? styles.thumbActive : styles.thumb}
+                className={[
+                  isActive ? styles.thumbActive : styles.thumb,
+                  isCompareSelected ? styles.thumbCompareSelected : "",
+                  isCompareBlocked ? styles.thumbCompareBlocked : "",
+                ].join(" ")}
                 style={
                   {
                     "--c": CATEGORY_COLOR[card.category],
                     animationDelay: `${Math.min(i, 24) * 18}ms`,
                   } as React.CSSProperties
                 }
-                onClick={() => openCard(card.id)}
+                title={
+                  isWrongCompareGroup
+                    ? "Clear the tray to compare a different kind of card"
+                    : isCompareCapped
+                      ? `Max ${MAX_COMPARE} cards — remove one to add another`
+                      : undefined
+                }
+                onClick={() => {
+                  if (compareMode) {
+                    toggleCompareCard(card.id);
+                  } else {
+                    openCard(card.id);
+                  }
+                }}
               >
                 {/* Unified 3D Group: Card + Shadow move and rotate together */}
                 <span className={[styles.cardGroup, isActive ? styles.cardGroupActive : ""].join(" ")}>
@@ -522,6 +658,12 @@ export function GameExperience() {
                     </span>
                   </span>
 
+                  {isCompareSelected ? (
+                    <span className={styles.compareCheckBadge} aria-hidden="true">
+                      <IconCheck size={11} />
+                    </span>
+                  ) : null}
+
                   <span className={styles.thumbLabel}>{card.title}</span>
                 </span>
               </button>
@@ -537,6 +679,57 @@ export function GameExperience() {
           </button>
         </div>
       )}
+
+      {/* Floating Compare Tray */}
+      {compareMode && compareCards.length > 0 ? (
+        <div className={styles.compareTray} role="region" aria-label="Card comparison tray">
+          <div className={styles.compareTrayThumbs}>
+            {compareCards.map((card) => (
+              <span
+                key={card.id}
+                className={styles.compareTrayThumb}
+                style={{ "--c": CATEGORY_COLOR[card.category] } as React.CSSProperties}
+              >
+                <LazyImg src={card.src} alt={card.title} />
+                <button
+                  type="button"
+                  className={styles.compareTrayRemove}
+                  onClick={() => toggleCompareCard(card.id)}
+                  aria-label={`Remove ${card.title} from comparison`}
+                >
+                  <IconClose size={10} />
+                </button>
+              </span>
+            ))}
+          </div>
+
+          <div className={styles.compareTrayActions}>
+            <span className={styles.compareTrayCount}>
+              {compareIds.length}/{MAX_COMPARE} selected
+            </span>
+            <button type="button" className={styles.compareTrayClear} onClick={() => setCompareIds([])}>
+              Clear
+            </button>
+            <button
+              type="button"
+              className={styles.compareTrayButton}
+              disabled={compareCards.length < 2}
+              onClick={() => setShowCompareModal(true)}
+            >
+              Compare
+              <IconArrowUpRight size={13} />
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {showCompareModal && compareCards.length >= 2 ? (
+        <CompareModal
+          cards={compareCards}
+          onClose={() => setShowCompareModal(false)}
+          onRemove={toggleCompareCard}
+        />
+      ) : null}
     </div>
   );
 }
@@ -573,11 +766,17 @@ function SelectedStage({
   onJump,
   onClose,
   reducedMotion,
+  isInCompare,
+  compareBlockedReason,
+  onToggleCompare,
 }: {
   card: CardFace;
   onJump: (id: string) => void;
   onClose: () => void;
   reducedMotion: boolean;
+  isInCompare: boolean;
+  compareBlockedReason: string | null;
+  onToggleCompare: (id: string) => void;
 }) {
   const pairs = (card.pairIds ?? []).map((id) => cardFaces.find((c) => c.id === id)).filter((c): c is CardFace => Boolean(c));
 
@@ -587,10 +786,23 @@ function SelectedStage({
 
       <div className={styles.detail}>
         <div className={styles.detailHeaderRow}>
-          <span className={styles.detailBadge}>
-            {card.category}
-            {card.strideType ? ` · ${card.strideType}` : ""}
-          </span>
+          <div className={styles.detailHeaderLeft}>
+            <span className={styles.detailBadge}>
+              {card.category}
+              {card.strideType ? ` · ${card.strideType}` : ""}
+            </span>
+            <button
+              type="button"
+              className={isInCompare ? styles.compareDetailButtonActive : styles.compareDetailButton}
+              onClick={() => onToggleCompare(card.id)}
+              disabled={!isInCompare && Boolean(compareBlockedReason)}
+              title={compareBlockedReason ?? (isInCompare ? "Remove from comparison" : "Add to comparison")}
+              aria-pressed={isInCompare}
+            >
+              <IconCompare size={12} />
+              <span>{isInCompare ? "Added to Compare" : "Add to Compare"}</span>
+            </button>
+          </div>
           <button
             type="button"
             className={styles.closeStageBtn}
