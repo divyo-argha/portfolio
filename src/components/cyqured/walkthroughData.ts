@@ -138,43 +138,58 @@ export const BOARD_TRACK: BoardCell[] = [
 ];
 
 // Starting hands: 8 real cards each, dealt from the shared 34-card
-// attack-and-defense action deck (action-02 .. action-35 in cardData.ts).
-// Every id a later combat/penalty step spends is seeded into the right
-// player's hand here, so a card never leaves a hand it wasn't actually in.
+// attack-and-defense action deck (17 attack ids action-02..action-18, 17
+// defense ids action-19..action-35 in cardData.ts). A real shuffle-and-deal
+// doesn't hand every player a balanced 4-4 split — it produces a spread of
+// ratios. Each player here gets one distinct attack:defense split from
+// {7-1, 6-2, 5-3, 4-4, 3-5}, so nobody is holding an implausible 8-0 or 1-7
+// hand. Every id a later combat/penalty step spends is seeded into the
+// right player's hand here, so a card never leaves a hand it wasn't
+// actually in.
 const START: Record<PlayerId, PlayerState> = {
+  // 3 attack / 5 defense — Alice never initiates a fight all game; she only
+  // ever defends once and pays to pass otherwise, so a defense-heavy hand
+  // matches how she actually plays.
   alice: {
     credits: 50,
     points: 0,
     devices: [],
-    hand: ["action-06", "action-10", "action-11", "action-12", "action-14", "action-17", "action-18", "action-33"],
+    hand: ["action-20", "action-05", "action-33", "action-21", "action-06", "action-22", "action-10", "action-23"],
     boardPos: 0,
   },
+  // 4 attack / 4 defense — Bob both attacks once and defends twice, an
+  // even mix.
   bob: {
     credits: 50,
     points: 0,
     devices: [],
-    hand: ["action-13", "action-19", "action-20", "action-21", "action-22", "action-23", "action-24", "action-29"],
+    hand: ["action-24", "action-11", "action-13", "action-25", "action-29", "action-12", "action-26", "action-14"],
     boardPos: 0,
   },
+  // 6 attack / 2 defense — Dylan never fights at all (he's only ever on the
+  // buying/passing side), so his hand composition is just flavor.
   dylan: {
     credits: 50,
     points: 0,
     devices: [],
-    hand: ["action-02", "action-03", "action-04", "action-05", "action-06", "action-10", "action-34", "action-35"],
+    hand: ["action-31", "action-02", "action-05", "action-32", "action-03", "action-14", "action-04", "action-06"],
     boardPos: 0,
   },
+  // 5 attack / 3 defense — Divyo only ever attacks (once), never defends.
   divyo: {
     credits: 50,
     points: 0,
     devices: [],
-    hand: ["action-09", "action-25", "action-26", "action-27", "action-28", "action-30", "action-31", "action-32"],
+    hand: ["action-09", "action-27", "action-17", "action-30", "action-12", "action-18", "action-28", "action-10"],
     boardPos: 0,
   },
+  // 7 attack / 1 defense — Argha is the table's aggressor: every fight in
+  // this walkthrough that isn't Bob-vs-Dylan is Argha attacking someone.
   argha: {
     credits: 50,
     points: 0,
     devices: [],
-    hand: ["action-02", "action-03", "action-04", "action-05", "action-07", "action-08", "action-15", "action-16"],
+    hand: ["action-07", "action-02", "action-19", "action-15", "action-03", "action-08", "action-04", "action-16"],
     boardPos: 0,
   },
 };
@@ -346,7 +361,7 @@ pushRoll("t1-bob-roll", "bob", 6, "Turn 1 — Bob", "Bob rolls a 6.");
 {
   const s = prev();
   s.bob.boardPos = 6;
-  discard(s, "bob", "action-19");
+  discard(s, "bob", "action-11");
   steps.push({
     id: "t1-bob-land",
     phase: "land",
