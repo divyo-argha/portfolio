@@ -145,3 +145,33 @@ export type DetailMeta = {
   authors?: Author[];
   affiliationInfo?: AffiliationInfo[];
 };
+
+export type OnlineJudgeProfile = {
+  platform: string;
+  handle: string;
+  url: string;
+  rating?: string | number;
+  ratingTier?: string;
+  problemsSolved?: string | number;
+  badge?: string;
+  metaBadges?: { label: string; value: string }[];
+  additionalHandles?: { handle: string; rating?: string | number; url: string }[];
+};
+
+export type CampusContestInfo = {
+  title: string;
+  institution: string;
+  dates: string;
+  tag: string;
+  detail: string;
+};
+
+export type ProblemSolvingData = {
+  totalSolved: string;
+  headline: string;
+  description: string;
+  codeforces: OnlineJudgeProfile;
+  leetcode: OnlineJudgeProfile;
+  otherJudges: { platform: string; handle: string; url: string; badge?: string }[];
+  campusContests: CampusContestInfo;
+};

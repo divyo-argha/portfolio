@@ -336,3 +336,38 @@ export function IconElevation({ size = 18, className }: IconProps) {
   );
 }
 
+export function IconTrophy({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M8 21h8m-4-4v4M6 4h12v4a6 6 0 0 1-12 0V4Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 6H3.5a1.5 1.5 0 0 0-1.5 1.5v1a3.5 3.5 0 0 0 3.5 3.5H6m12-6h2.5a1.5 1.5 0 0 1 1.5 1.5v1a3.5 3.5 0 0 1-3.5 3.5H18"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function IconCode({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M16 18l6-6-6-6M8 6l-6 6 6 6M14 4.5l-4 15"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+

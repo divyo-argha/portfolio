@@ -9,8 +9,9 @@ export const siteConfig = {
     { label: "Research", href: "#research" },
     { label: "Education", href: "#education" },
     { label: "Publications", href: "#publications" },
-    { label: "Positions", href: "#positions" },
+    { label: "Experience", href: "#experience" },
     { label: "Engineering", href: "#engineering" },
+    { label: "Problem Solving", href: "#problem-solving" },
     { label: "Contact", href: "#contact" },
   ],
 };
