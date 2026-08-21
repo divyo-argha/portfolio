@@ -14,30 +14,35 @@ export const publications: Publication[] = [
         name: "Utsho Das",
         equalContribution: true,
         avatar: "/media/people/utsho.jpeg",
+        affiliationMark: 1,
       },
       {
         name: "Argha Pratim Saha",
         you: true,
         equalContribution: true,
         avatar: "/media/people/portrait-alt.jpg",
-      },
-      {
-        name: "Md Masum",
-        avatar: "/media/people/masum-sir.jpg",
-        url: "https://www.sust.edu/departments/cse/faculty/masum@sust.edu",
-        email: "masum-cse@sust.edu",
-      },
-      {
-        name: "Farida Chowdhury",
-        avatar: "/media/people/fdc-maam.jpeg",
-        url: "https://cse.bracu.ac.bd/faculty_profile/211/dr_farida_chowdhury",
-        email: "farida.chowdhury@bracu.ac.bd",
+        affiliationMark: 1,
       },
       {
         name: "Md Sadek Ferdous",
         avatar: "/media/people/sadek-sir.jpg",
         url: "https://www.bracu.ac.bd/about/people/md-sadek-ferdous-phd",
         email: "sadek.ferdous@bracu.ac.bd",
+        affiliationMark: 2,
+      },
+      {
+        name: "Md Masum",
+        avatar: "/media/people/masum-sir.jpg",
+        url: "https://www.sust.edu/departments/cse/faculty/masum@sust.edu",
+        email: "masum-cse@sust.edu",
+        affiliationMark: 1,
+      },
+      {
+        name: "Farida Chowdhury",
+        avatar: "/media/people/fdc-maam.jpeg",
+        url: "https://cse.bracu.ac.bd/faculty_profile/211/dr_farida_chowdhury",
+        email: "farida.chowdhury@bracu.ac.bd",
+        affiliationMark: 2,
       },
     ],
     summary:
@@ -58,13 +63,24 @@ export const publications: Publication[] = [
     bentoSpan: "feature",
     venueMark: { src: "/media/venues/soups.png", alt: "SOUPS 2026 logo", width: 30, height: 32 },
     heroMark: true,
+    heroMarkScale: 0.7,
     affiliation: "Shahjalal University of Science and Technology (SUST)",
-    affiliationInfo: {
-      department: "Department of Computer Science and Engineering",
-      institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
-      location: "Sylhet, Bangladesh",
-      logo: "/media/institutions/sust.png",
-    },
+    affiliationInfo: [
+      {
+        department: "Department of Computer Science and Engineering",
+        institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
+        location: "Sylhet, Bangladesh",
+        logo: "/media/institutions/sust.png",
+        mark: 1,
+      },
+      {
+        department: "Department of Computer Science and Engineering",
+        institution: "BRAC University",
+        location: "Dhaka, Bangladesh",
+        logo: "/media/institutions/bracu.png",
+        mark: 2,
+      },
+    ],
   },
   {
     slug: "arsenic",
@@ -96,23 +112,25 @@ export const publications: Publication[] = [
     citations: 3,
     scholarUrl:
       "https://scholar.google.com/citations?view_op=view_citation&hl=en&oe=ASCII&user=EKrGm9UAAAAJ&citation_for_view=EKrGm9UAAAAJ:9yKSN-GCB0IC",
-    doi: "10.1109/ICCIT64618.2024.10878546",
+    doi: "10.1109/ICCIT64611.2024.11022014",
     links: [
       {
         label: "Read the paper",
-        href: "https://doi.org/10.1109/ICCIT64618.2024.10878546",
+        href: "/papers/iccit.pdf",
       },
     ],
     bentoSpan: "normal",
     venueMark: { src: "/media/venues/iccit.jpeg", alt: "ICCIT 2024 logo", width: 88, height: 32 },
     heroMark: true,
     affiliation: "Shahjalal University of Science and Technology (SUST)",
-    affiliationInfo: {
-      department: "Department of Computer Science and Engineering",
-      institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
-      location: "Sylhet, Bangladesh",
-      logo: "/media/institutions/sust.png",
-    },
+    affiliationInfo: [
+      {
+        department: "Department of Computer Science and Engineering",
+        institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
+        location: "Sylhet, Bangladesh",
+        logo: "/media/institutions/sust.png",
+      },
+    ],
   },
   {
     slug: "ehrsql-primus-text-to-sql",
@@ -152,11 +170,13 @@ export const publications: Publication[] = [
     venueMark: { src: "/media/venues/naacl.webp", alt: "NAACL 2024 logo", width: 32, height: 32 },
     heroMark: true,
     affiliation: "Shahjalal University of Science and Technology (SUST)",
-    affiliationInfo: {
-      department: "Department of Computer Science and Engineering",
-      institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
-      location: "Sylhet, Bangladesh",
-      logo: "/media/institutions/sust.png",
-    },
+    affiliationInfo: [
+      {
+        department: "Department of Computer Science and Engineering",
+        institution: "Shahjalal University of Science and Technology, Sylhet (SUST)",
+        location: "Sylhet, Bangladesh",
+        logo: "/media/institutions/sust.png",
+      },
+    ],
   },
 ];

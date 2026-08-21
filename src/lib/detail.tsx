@@ -77,7 +77,7 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
     meta: [
       { label: "Venue", value: publication.venue },
       { label: "Year", value: yearValue },
-      ...(!publication.affiliationInfo
+      ...(!publication.affiliationInfo || publication.affiliationInfo.length === 0
         ? [
             { label: "Authors", value: authorsValue },
             ...(affiliationValue ? [{ label: "Affiliation", value: affiliationValue }] : []),
@@ -106,6 +106,7 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
     tabs: publicationTabs[slug],
     venueMark: publication.venueMark,
     heroMark: publication.heroMark,
+    heroMarkScale: publication.heroMarkScale,
     scholarUrl: publication.scholarUrl,
     publicationStatus: publication.status,
     authors: publication.authors,

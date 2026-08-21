@@ -22,6 +22,9 @@ export type Author = {
   url?: string;
   email?: string;
   role?: string;
+  /** Superscript index into the publication's affiliationInfo array (1-based),
+   * for papers whose authors span more than one institution. */
+  affiliationMark?: number;
 };
 
 export type AffiliationInfo = {
@@ -29,6 +32,9 @@ export type AffiliationInfo = {
   institution: string;
   location?: string;
   logo: string;
+  /** 1-based index shown as a superscript badge, matched against each
+   * author's affiliationMark. */
+  mark?: number;
 };
 
 export type Publication = {
@@ -50,8 +56,13 @@ export type Publication = {
   venueMark: VenueMark;
   /** Show the venue mark huge on the detail page's hero, right-aligned. */
   heroMark?: boolean;
+  /** Scales the hero venue mark relative to the shared default size (e.g. 0.7
+   * for a mark that would otherwise dominate the header). Defaults to 1. */
+  heroMarkScale?: number;
   affiliation?: string;
-  affiliationInfo?: AffiliationInfo;
+  /** One entry per institution involved — multi-institution papers (e.g.
+   * co-authors split across two universities) list one plate per institution. */
+  affiliationInfo?: AffiliationInfo[];
 };
 
 export type Position = {
@@ -128,8 +139,9 @@ export type DetailMeta = {
   tabs?: DetailTab[];
   venueMark?: VenueMark;
   heroMark?: boolean;
+  heroMarkScale?: number;
   scholarUrl?: string;
   publicationStatus?: PublicationStatus;
   authors?: Author[];
-  affiliationInfo?: AffiliationInfo;
+  affiliationInfo?: AffiliationInfo[];
 };

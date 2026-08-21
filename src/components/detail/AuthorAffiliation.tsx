@@ -9,9 +9,9 @@ export function AuthorAffiliation({
   affiliation,
 }: {
   authors?: Author[];
-  affiliation?: AffiliationInfo;
+  affiliation?: AffiliationInfo[];
 }) {
-  if (!authors && !affiliation) return null;
+  if (!authors && (!affiliation || affiliation.length === 0)) return null;
 
   return (
     <div className={styles.byline}>
@@ -43,6 +43,9 @@ export function AuthorAffiliation({
                 )}
                 <span className={styles.name}>
                   {isYou ? <u>{author.name}</u> : author.name}
+                  {author.affiliationMark ? (
+                    <sup className={styles.affMark}>{author.affiliationMark}</sup>
+                  ) : null}
                   {author.equalContribution ? <sup className={styles.sup}>*</sup> : null}
                   {hasExternalLink ? <IconArrowUpRight size={11} className={styles.arrow} /> : null}
                 </span>
@@ -91,25 +94,32 @@ export function AuthorAffiliation({
         <p className={styles.equalNote}>* Equal contribution</p>
       ) : null}
 
-      {/* Prominent Institutional Affiliation Plate */}
-      {affiliation ? (
-        <div className={styles.affiliationPlate}>
-          <div className={styles.logoFrame}>
-            <Image
-              src={affiliation.logo}
-              alt={`${affiliation.institution} logo`}
-              width={42}
-              height={42}
-              className={styles.instLogo}
-            />
-          </div>
-          <div className={styles.affiliationText}>
-            <span className={styles.dept}>{affiliation.department}</span>
-            <span className={styles.institution}>
-              {affiliation.institution}
-              {affiliation.location ? ` · ${affiliation.location}` : ""}
-            </span>
-          </div>
+      {/* Prominent Institutional Affiliation Plate(s) — one per institution */}
+      {affiliation && affiliation.length > 0 ? (
+        <div className={styles.affiliationRow}>
+          {affiliation.map((info) => (
+            <div key={info.institution} className={styles.affiliationPlate}>
+              <div className={styles.logoFrame}>
+                <Image
+                  src={info.logo}
+                  alt={`${info.institution} logo`}
+                  width={48}
+                  height={48}
+                  className={styles.instLogo}
+                />
+              </div>
+              <div className={styles.affiliationText}>
+                <span className={styles.dept}>
+                  {info.mark ? <sup className={styles.affMark}>{info.mark}</sup> : null}
+                  {info.department}
+                </span>
+                <span className={styles.institution}>
+                  {info.institution}
+                  {info.location ? ` · ${info.location}` : ""}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       ) : null}
     </div>

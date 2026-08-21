@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Chakra_Petch } from "next/font/google";
+import { Hero } from "@/components/cyqured/Hero";
 import { AssetsTabs } from "@/components/cyqured/AssetsTabs";
 import { IconArrowUpRight } from "@/components/primitives/Icons";
 import styles from "./game.module.css";
@@ -29,20 +29,9 @@ export default function CyQuredAssetsPage() {
       <div className={styles.inner}>
         {/* Hero Section */}
         <header className={styles.hero}>
+          <h1 className="visually-hidden">CyQured: Game Assets</h1>
           <p className={styles.eyebrow}>Physical Track & Playable Decks</p>
-          <h1 className={styles.wordmark}>
-            <Image
-              src="/media/publications/cyqured/cyqured-logo.png"
-              alt="cyQured"
-              width={632}
-              height={225}
-              priority
-              className={styles.wordmarkLogo}
-            />
-          </h1>
-          <p className={styles.tagline}>
-            Explore all tangible components of CyQured: switch between the 84 playable cards catalogue and the 28-cell connected home board.
-          </p>
+          <Hero />
         </header>
 
         {/* Floating Tab Menu for Game Cards & Game Board (Managed by URL Query Param) */}

@@ -313,7 +313,7 @@ export const publicationTabs: Record<string, DetailTab[]> = {
                Information Technology (ICCIT)},
   year      = {2024},
   publisher = {IEEE},
-  doi       = {10.1109/ICCIT64618.2024.10878546},
+  doi       = {10.1109/ICCIT64611.2024.11022014},
 }`,
         },
       ],

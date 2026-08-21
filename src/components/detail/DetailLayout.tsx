@@ -39,7 +39,10 @@ export function DetailLayout({ detail, customBody }: { detail: DetailMeta; custo
           {showHeroMark && detail.venueMark ? (
             <div
               className={styles.heroMark}
-              style={{ aspectRatio: `${detail.venueMark.width} / ${detail.venueMark.height}` }}
+              style={{
+                aspectRatio: `${detail.venueMark.width} / ${detail.venueMark.height}`,
+                ["--hero-mark-scale" as string]: detail.heroMarkScale ?? 1,
+              }}
             >
               <Image
                 src={detail.venueMark.src}

@@ -64,9 +64,13 @@
   flex-shrink: 0;
   /* Sized from the venue mark's own aspect-ratio (set inline per item) so a
      square logo gets a square badge instead of sitting stranded in a wide
-     landscape box — a landscape logo like ICCIT's still gets a wide one. */
-  width: min(100%, 240px);
-  max-width: 240px;
+     landscape box — a landscape logo like ICCIT's still gets a wide one.
+     --hero-mark-scale (set inline per publication, default 1) shrinks or
+     grows this relative to the shared base size without needing a
+     breakpoint-by-breakpoint override. */
+  --hero-mark-base: 240px;
+  width: min(100%, calc(var(--hero-mark-base) * var(--hero-mark-scale, 1)));
+  max-width: calc(var(--hero-mark-base) * var(--hero-mark-scale, 1));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,6 +80,9 @@
   padding: var(--space-4);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
+  /* A touch higher and to the right of dead-center, so the badge feels
+     placed against the title rather than pinned flush to the grid edge. */
+  transform: translate(6%, -8%);
 }
 
 .heroMarkImage {
@@ -98,8 +105,9 @@
   }
 
   .heroMark {
-    width: min(100%, 300px);
-    max-width: 300px;
+    --hero-mark-base: 300px;
+    width: min(100%, calc(var(--hero-mark-base) * var(--hero-mark-scale, 1)));
+    max-width: calc(var(--hero-mark-base) * var(--hero-mark-scale, 1));
     padding: var(--space-5);
   }
 }
@@ -111,8 +119,9 @@
   }
 
   .heroMark {
-    width: min(100%, 340px);
-    max-width: 340px;
+    --hero-mark-base: 340px;
+    width: min(100%, calc(var(--hero-mark-base) * var(--hero-mark-scale, 1)));
+    max-width: calc(var(--hero-mark-base) * var(--hero-mark-scale, 1));
   }
 }
 

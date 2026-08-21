@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { IconArrowUpRight, IconClose } from "@/components/primitives/Icons";
+import { IconArrowLeft, IconArrowUpRight, IconClose } from "@/components/primitives/Icons";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import styles from "./CyquredNavbar.module.css";
 
@@ -103,8 +103,12 @@ export function CyquredNavbar() {
             </ul>
           </nav>
 
-          {/* Desktop Direct Bridge to Overview */}
+          {/* Desktop Direct Bridge to Overview + Rest of the Site */}
           <div className={styles.actionGroup}>
+            <Link href="/" className={styles.homeLink}>
+              <IconArrowLeft size={13} />
+              <span>Portfolio</span>
+            </Link>
             <Link href="/publications/cyqured" className={styles.paperLink}>
               <span>Overview</span>
               <IconArrowUpRight size={13} />
@@ -174,6 +178,14 @@ export function CyquredNavbar() {
               >
                 <span>Academic Study & Overview</span>
                 <IconArrowUpRight size={15} />
+              </Link>
+              <Link
+                href="/"
+                className={styles.mobilePaperCta}
+                onClick={() => setIsExpanded(false)}
+              >
+                <span>Back to Portfolio</span>
+                <IconArrowLeft size={15} />
               </Link>
             </div>
           </div>
