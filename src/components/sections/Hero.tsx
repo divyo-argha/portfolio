@@ -11,7 +11,7 @@ export function Hero() {
       <Container>
         <div className={styles.grid}>
           <div className={styles.portraitCol}>
-            <Portrait src="/media/people/portrait.jpg" alt="Argha Pratim Saha" priority />
+            <Portrait src="/media/people/portrait.png" alt="Argha Pratim Saha" priority />
           </div>
 
           <div className={styles.identity}>

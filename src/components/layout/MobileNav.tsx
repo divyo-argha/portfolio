@@ -124,7 +124,7 @@ export function MobileNav({
         <div className={styles.panelHeader}>
           <div className={styles.profile}>
             <Image
-              src="/media/people/portrait.jpg"
+              src="/media/people/portrait.png"
               alt={profile.name}
               width={42}
               height={42}

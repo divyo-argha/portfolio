@@ -351,7 +351,7 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           kind: "carousel",
           items: [
             {
-              src: "/media/people/portrait.jpg",
+              src: "/media/people/portrait.png",
               alt: "Project presentation session at SUST",
               caption: "Project presentation at SUST",
             },
