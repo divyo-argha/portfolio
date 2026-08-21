@@ -1,9 +1,10 @@
 .frame {
-  --cut: clamp(20px, 12%, 34px);
+  --cut: clamp(14px, 10%, 24px);
 
   position: relative;
   aspect-ratio: 4 / 5;
   width: 100%;
+  border-radius: var(--radius-md);
   clip-path: polygon(
     0 0,
     calc(100% - var(--cut)) 0,
@@ -12,6 +13,9 @@
     var(--cut) 100%,
     0 calc(100% - var(--cut))
   );
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--surface) 100%);
+  padding: 3px;
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--line);
   filter: drop-shadow(var(--shadow-drop));
 }
 
@@ -30,6 +34,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 22%;
+  object-position: 50% 8%;
   background: var(--raised);
+  border-radius: inherit;
+  display: block;
 }
+

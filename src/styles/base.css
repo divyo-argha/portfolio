@@ -9,10 +9,10 @@ html {
   scrollbar-gutter: stable;
 }
 
-/* Universal thin blue scrollbars across the entire app */
+/* Thin scrollbars in the site's own accent, not a hardcoded sky blue. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #38bdf8 transparent;
+  scrollbar-color: var(--accent) transparent;
 }
 
 ::-webkit-scrollbar {
@@ -25,12 +25,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #38bdf8;
+  background: var(--accent);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #5ee1f2;
+  background: var(--ink);
 }
 
 /* Anchor targets land below the sticky header instead of underneath it.

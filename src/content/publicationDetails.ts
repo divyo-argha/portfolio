@@ -8,7 +8,7 @@ export const publicationDetails: Record<string, Block[]> = {
   cyqured: [],
 
   // Content for this publication lives in `publicationTabs` below (Write-up /
-  // Poster / Photos tabs) instead of a flat block list.
+  // Poster tabs) instead of a flat block list.
   arsenic: [],
 
   "ehrsql-primus-text-to-sql": [
@@ -334,33 +334,6 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           alt: "Academic poster for 'A Deep Learning Approach to Automate Classification of Arsenic-Affected Skin using EfficientNet-B1', presented at SUST",
           caption: "Click the poster to open it at full size.",
           href: "/papers/iccit-poster.png",
-        },
-      ],
-    },
-    {
-      id: "photos",
-      label: "Photos",
-      blocks: [
-        {
-          kind: "prose",
-          body: [
-            "Photographs from our project presentation and academic sessions at Shahjalal University of Science and Technology (SUST), demonstrating the EfficientNet-B1 arsenic lesion classifier and evaluation findings.",
-          ],
-        },
-        {
-          kind: "carousel",
-          items: [
-            {
-              src: "/media/people/portrait.png",
-              alt: "Project presentation session at SUST",
-              caption: "Project presentation at SUST",
-            },
-            {
-              src: "/media/people/portrait-alt.jpg",
-              alt: "Department presentation and discussion at SUST",
-              caption: "Department presentation & discussion at SUST",
-            },
-          ],
         },
       ],
     },

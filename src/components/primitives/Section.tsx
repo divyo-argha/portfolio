@@ -15,6 +15,12 @@ type SectionProps = {
 };
 
 export function Section({ id, label, title, lede, children, bleed, tone = "default" }: SectionProps) {
+  // The <h2> always renders, because `aria-labelledby` below always points at
+  // it. When a section has no visible title it falls back to its eyebrow label
+  // and is hidden visually only — that keeps the accessible name intact and
+  // stops the heading outline jumping from <h1> straight to <h3>.
+  const hasVisibleTitle = Boolean(title);
+
   return (
     <section
       id={id}
@@ -25,11 +31,12 @@ export function Section({ id, label, title, lede, children, bleed, tone = "defau
         <Reveal>
           <div className={styles.head}>
             <Eyebrow>{label}</Eyebrow>
-            {title ? (
-              <h2 id={`${id}-heading`} className={styles.title}>
-                {title}
-              </h2>
-            ) : null}
+            <h2
+              id={`${id}-heading`}
+              className={hasVisibleTitle ? styles.title : "visually-hidden"}
+            >
+              {hasVisibleTitle ? title : label}
+            </h2>
             {lede ? <p className={styles.lede}>{lede}</p> : null}
           </div>
         </Reveal>

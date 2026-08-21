@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { useSectionNav } from "@/hooks/useSectionNav";
 import { siteConfig } from "@/lib/site";
@@ -123,13 +122,6 @@ export function MobileNav({
       <div className={styles.panel} ref={panelRef}>
         <div className={styles.panelHeader}>
           <div className={styles.profile}>
-            <Image
-              src="/media/people/portrait.png"
-              alt={profile.name}
-              width={42}
-              height={42}
-              className={styles.avatar}
-            />
             <div className={styles.profileInfo}>
               <span className={styles.name}>{profile.name}</span>
               <span className={styles.location}>

@@ -18,7 +18,7 @@ type PortraitProps = {
 export function Portrait({ src, alt, priority, mirrored }: PortraitProps) {
   return (
     <div className={[styles.frame, mirrored ? styles.mirrored : ""].join(" ")}>
-      <Image src={src} alt={alt} width={1280} height={1599} priority={priority} className={styles.image} />
+      <Image src={src} alt={alt} width={447} height={558} priority={priority} className={styles.image} />
     </div>
   );
 }

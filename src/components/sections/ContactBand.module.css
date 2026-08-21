@@ -1,5 +1,5 @@
 .band {
-  padding-block: var(--space-8);
+  padding-block: var(--space-7);
   border-top: var(--border-hairline);
   background: var(--raised);
 }
@@ -10,19 +10,34 @@
   align-items: center;
 }
 
-.photoCol {
-  max-width: 220px;
-  justify-self: start;
+/* The second portrait that used to sit here is gone. One photo of yourself is
+   a professional site; two is a personal one. Heading left, actions right, so
+   the band doesn't stack four left-aligned rows down a 1116px container. */
+.inner {
+  display: grid;
+  gap: var(--space-5);
+  align-items: center;
 }
 
-@media (min-width: 760px) {
-  .layout {
-    grid-template-columns: 1fr 200px;
+.headingCol {
+  min-width: 0;
+}
+
+.actionCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+@media (min-width: 820px) {
+  .inner {
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    gap: var(--space-7);
   }
 
-  .photoCol {
-    justify-self: end;
-    max-width: 200px;
+  .actionCol {
+    align-items: flex-end;
   }
 }
 

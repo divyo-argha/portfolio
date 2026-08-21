@@ -5,6 +5,23 @@ export type Link = {
   href: string;
 };
 
+/** One entry in the hero's credential strip — the published record, stated
+ * before the reader has to scroll for it. */
+export type VenueCredential = {
+  venue: string;
+  note?: string;
+  href: string;
+};
+
+/** A study grouped with the methods it actually used, so the methods section
+ * reads as experience rather than as a vocabulary list. */
+export type MethodGroup = {
+  study: string;
+  context: string;
+  href?: string;
+  methods: string[];
+};
+
 export type NewsItem = {
   date: string;
   badge?: string;
@@ -63,6 +80,9 @@ export type Publication = {
   doi?: string;
   bentoSpan: "feature" | "wide" | "normal";
   venueMark: VenueMark;
+  /** Research imagery for the homepage bento card — the artifact or a key
+   * figure, so the card shows the work rather than only describing it. */
+  cover?: { src: string; alt: string; width: number; height: number };
   /** Show the venue mark huge on the detail page's hero, right-aligned. */
   heroMark?: boolean;
   /** Scales the hero venue mark relative to the shared default size (e.g. 0.7
@@ -92,6 +112,9 @@ export type Project = {
   description: string;
   stack: string[];
   featured?: boolean;
+  /** Smaller side projects, rendered as a compact list rather than full
+   * cards so they don't visually compete with the substantive work. */
+  minor?: boolean;
   stats?: { label: string; value: string }[];
   links: Link[];
   installCommand?: string;

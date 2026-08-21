@@ -6,6 +6,12 @@ export const THEME_STORAGE_KEY = "divyo-argha-theme";
  */
 export const themeInitScript = `
 (function () {
+  // Scroll-reveal content is authored at opacity 0 and faded in after
+  // hydration. <html> therefore ships with .no-js, which CSS uses to force
+  // that content visible; this removes it before first paint whenever
+  // scripting is actually available, so a reader with JS off or JS broken
+  // still gets a fully readable page instead of a blank one.
+  document.documentElement.classList.remove("no-js");
   try {
     var stored = localStorage.getItem("${THEME_STORAGE_KEY}");
     if (stored === "light" || stored === "dark") {

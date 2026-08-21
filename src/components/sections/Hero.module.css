@@ -5,12 +5,12 @@
 
 .grid {
   display: grid;
-  gap: var(--space-6);
+  gap: var(--space-4);
   align-items: center;
 }
 
 .portraitCol {
-  max-width: 220px;
+  max-width: 135px;
 }
 
 .identity {
@@ -112,22 +112,89 @@
   align-items: center;
 }
 
+/* ---- Credential strip ---- */
+
+.credentials {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: var(--border-hairline);
+}
+
+.credentialsLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.credentialsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.credential {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-hairline);
+  border-radius: 999px;
+  background: var(--surface);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.credential:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.credentialVenue {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.credentialNote {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
 @media (min-width: 640px) {
   .portraitCol {
-    max-width: 260px;
+    max-width: 155px;
   }
 
   .actionRow {
     flex-direction: row;
     align-items: center;
-    gap: var(--space-5);
+    gap: var(--space-4);
   }
 }
 
 @media (min-width: 860px) {
   .grid {
-    grid-template-columns: minmax(200px, 280px) 1fr;
-    gap: var(--space-8);
+    grid-template-columns: 170px 1fr;
+    gap: var(--space-6);
+  }
+
+  .portraitCol {
+    max-width: 170px;
   }
 }
 

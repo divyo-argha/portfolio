@@ -58,7 +58,7 @@
 
 .list {
   display: flex;
-  gap: var(--space-6);
+  gap: var(--space-4);
 }
 
 .list a {
@@ -192,7 +192,11 @@
   }
 }
 
-@media (min-width: 860px) {
+/* The eight-item nav needs ~700px on its own; with the brand, the CV button
+   and the theme toggle the row does not fit until ~1040px. Below that the
+   desktop nav overflowed its container and collided with the wordmark, so the
+   (already built) hamburger holds until there is genuinely room. */
+@media (min-width: 1040px) {
   .nav {
     display: block;
   }

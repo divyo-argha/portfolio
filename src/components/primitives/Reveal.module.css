@@ -29,3 +29,23 @@
 .delay5 {
   transition-delay: 300ms;
 }
+
+/* The reveal starts at opacity 0, which means the statically exported HTML
+   ships invisible until hydration runs the IntersectionObserver. These two
+   blocks are the safety net: anyone who has asked for reduced motion, and
+   anyone whose JavaScript never arrives, sees the content immediately.
+   `useReducedMotion` handles the same case in JS, but only after hydration —
+   this handles it at first paint. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+:global(html.no-js) .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}

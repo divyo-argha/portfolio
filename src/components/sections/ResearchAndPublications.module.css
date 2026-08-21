@@ -1,4 +1,44 @@
-.grid {
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.subBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.subheadRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.subheadEyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.subheadTitle {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+
+.divider {
+  border: none;
+  border-top: var(--border-hairline);
+  margin: var(--space-2) 0;
+}
+
+.focusGrid {
   display: grid;
   gap: var(--space-4);
   grid-template-columns: 1fr;
@@ -6,23 +46,23 @@
 }
 
 @media (min-width: 860px) {
-  .grid {
+  .focusGrid {
     grid-template-columns: 1.1fr 1fr;
     gap: var(--space-5);
   }
 }
 
-.leftCol {
+.focusLeft {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
   justify-content: space-between;
 }
 
-.rightCol {
+.focusRight {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
   justify-content: space-between;
 }
 
@@ -37,7 +77,7 @@
   box-shadow: var(--shadow-sm);
 }
 
-.eyebrow {
+.cardEyebrow {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
@@ -51,6 +91,7 @@
   font-size: var(--text-sm);
   line-height: 1.6;
   color: var(--ink);
+  margin: 0;
 }
 
 .openBox {
@@ -78,6 +119,7 @@
   font-size: var(--text-xs);
   line-height: 1.55;
   color: var(--ink);
+  margin: 0;
 }
 
 .pillar {
@@ -113,6 +155,7 @@
   font-weight: 700;
   color: var(--ink);
   line-height: 1.3;
+  margin: 0;
 }
 
 .pillarBody {
@@ -120,4 +163,5 @@
   font-size: var(--text-xs);
   color: var(--muted);
   line-height: 1.55;
+  margin: 0;
 }

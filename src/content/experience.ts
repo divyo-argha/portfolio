@@ -1,8 +1,8 @@
 import type { Position } from "./types";
 
-const bracuLogo = { src: "/media/institutions/bracu.png", alt: "BRAC University logo", width: 56, height: 52 };
-const shellbeehakenLogo = { src: "/media/institutions/shellbeehaken.jpeg", alt: "ShellBeeHaken logo", width: 56, height: 56 };
-const hccsLogo = { src: "/media/institutions/hccs.jpeg", alt: "Human-Centered Computing and Society (HCCS) logo", width: 56, height: 56 };
+const bracuLogo = { src: "/media/institutions/bracu.webp", alt: "BRAC University logo", width: 56, height: 52 };
+const shellbeehakenLogo = { src: "/media/institutions/shellbeehaken.webp", alt: "ShellBeeHaken logo", width: 56, height: 56 };
+const hccsLogo = { src: "/media/institutions/hccs.webp", alt: "Human-Centered Computing and Society (HCCS) logo", width: 56, height: 56 };
 
 export const positions: Position[] = [
   {
@@ -16,6 +16,7 @@ export const positions: Position[] = [
       "Extending evaluation frameworks and threat scenario design from CyQured to broader home and mobile network contexts.",
       "Mentoring undergraduate thesis groups on problem formulation, experimental study design, qualitative coding, and scholarly writing.",
     ],
+    link: { label: "website", href: "https://www.bracu.ac.bd/" },
     logo: bracuLogo,
   },
   {
@@ -29,7 +30,7 @@ export const positions: Position[] = [
       "Leading and coordinating student research initiatives, reading groups, and workshops on digital accessibility and usable privacy.",
       "Directing cross-institutional HCI outreach, collaborative research seminars, and peer mentorship programs for student researchers.",
     ],
-    link: { label: "website", href: "https://sites.google.com/bracu.ac.bd/hccs" },
+    link: { label: "website", href: "https://hccs.cse.bracu.ac.bd/" },
     logo: hccsLogo,
   },
   {
@@ -42,6 +43,7 @@ export const positions: Position[] = [
       "Designed a Bengali–English code-switching framework for a real-time conversational voice agent, backed by a retrieval-augmented generation (RAG) pipeline to keep responses grounded.",
       "Engineered the WebSocket layer for low-latency, two-way audio streaming between clients and the conversational agent.",
     ],
+    link: { label: "website", href: "https://shellbeehaken.com/" },
     logo: shellbeehakenLogo,
   },
 ];

@@ -38,7 +38,7 @@ export const education = {
     dates: "Feb 2020 – Jul 2025",
     result: "CGPA 3.71 / 4.00",
     logo: {
-      src: "/media/institutions/sust.png",
+      src: "/media/institutions/sust.webp",
       alt: "SUST logo",
       width: 120,
       height: 120,
@@ -57,7 +57,7 @@ export const education = {
     institution: "BCIC School & College",
     location: "Dhaka, Bangladesh",
     logo: {
-      src: "/media/institutions/bcic.jpeg",
+      src: "/media/institutions/bcic.webp",
       alt: "BCIC School & College logo",
       width: 80,
       height: 80,

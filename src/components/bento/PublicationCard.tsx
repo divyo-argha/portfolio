@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
+import { Chip } from "@/components/primitives/Chip";
 import { IconArrowUpRight } from "@/components/primitives/Icons";
 import type { Publication } from "@/content/types";
 import cardStyles from "./BentoCard.module.css";
@@ -8,34 +9,18 @@ import styles from "./PublicationCard.module.css";
 
 export function PublicationCard({
   publication,
-  variant,
 }: {
   publication: Publication;
   variant?: "banner" | "compact";
 }) {
-  const isBanner = variant === "banner" || publication.slug === "arsenic";
-
   return (
     <article
       className={[
         cardStyles.card,
         cardStyles.interactive,
-        isBanner ? styles.bannerCard : styles.compactCard,
+        styles.compactCard,
       ].join(" ")}
     >
-      {/* For ICCIT: Edge-to-edge wide top banner */}
-      {isBanner && publication.venueMark ? (
-        <div className={styles.topBanner}>
-          <Image
-            src={publication.venueMark.src}
-            alt={publication.venueMark.alt}
-            width={600}
-            height={200}
-            className={styles.bannerImg}
-          />
-        </div>
-      ) : null}
-
       <div className={styles.body}>
         {/* Top metadata row with Status, Venue, Citations, and hover Arrow */}
         <div className={styles.head}>
@@ -60,31 +45,25 @@ export function PublicationCard({
           </Link>
         </div>
 
-        {/* Title area: For compact (NAACL), title on left + logo on right side */}
-        {!isBanner && publication.venueMark ? (
-          <div className={styles.compactHeaderRow}>
-            <h3 className={styles.title}>
-              <Link href={`/publications/${publication.slug}`} className={styles.titleLink}>
-                {publication.title}
-              </Link>
-            </h3>
-            <div className={styles.sideLogoWrapper}>
-              <Image
-                src={publication.venueMark.src}
-                alt={publication.venueMark.alt}
-                width={120}
-                height={120}
-                className={styles.sideLogoImg}
-              />
-            </div>
-          </div>
-        ) : (
+        {/* Compact Header: Title on left, Venue Logo on right */}
+        <div className={styles.compactHeaderRow}>
           <h3 className={styles.title}>
             <Link href={`/publications/${publication.slug}`} className={styles.titleLink}>
               {publication.title}
             </Link>
           </h3>
-        )}
+          {publication.venueMark ? (
+            <div className={styles.sideLogoWrapper}>
+              <Image
+                src={publication.venueMark.src}
+                alt={publication.venueMark.alt}
+                width={56}
+                height={56}
+                className={styles.sideLogoImg}
+              />
+            </div>
+          ) : null}
+        </div>
 
         <p className={styles.authors}>
           {publication.authors.map((author, i) => {
@@ -112,6 +91,16 @@ export function PublicationCard({
         ) : null}
 
         <p className={styles.summary}>{publication.summary}</p>
+
+        {publication.tags && publication.tags.length > 0 ? (
+          <ul className={styles.tags}>
+            {publication.tags.map((tag) => (
+              <li key={tag}>
+                <Chip>{tag}</Chip>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </div>
     </article>
   );

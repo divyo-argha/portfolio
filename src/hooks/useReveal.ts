@@ -25,7 +25,13 @@ export function useReveal<T extends HTMLElement>() {
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+      // Reveal *before* the element reaches the viewport: the bottom margin
+      // extends the root downward, so a card starts fading in while it is
+      // still below the fold and is fully painted by the time it scrolls into
+      // view. The previous values (threshold 0.15 with a negative bottom
+      // margin) required 15% of a tall card to already be on screen, which
+      // left a full screen of empty page during a normal-speed scroll.
+      { threshold: 0, rootMargin: "0px 0px 20% 0px" },
     );
 
     observer.observe(node);

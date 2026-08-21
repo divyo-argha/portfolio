@@ -1,7 +1,6 @@
 import { IconDownload, IconGithub, IconLinkedin, IconMail, IconScholar } from "@/components/primitives/Icons";
 import { Container } from "@/components/primitives/Container";
 import { Reveal } from "@/components/primitives/Reveal";
-import { Portrait } from "@/components/primitives/Portrait";
 import { profile } from "@/content/profile";
 import styles from "./ContactBand.module.css";
 
@@ -11,12 +10,15 @@ export function ContactBand() {
       <Container>
         <div className={styles.layout}>
           <Reveal>
-            <div>
-              <p className={styles.eyebrow}>Contact</p>
-              <h2 id="contact-heading" className={styles.title}>
-                {profile.applyingFor}
-              </h2>
+            <div className={styles.inner}>
+              <div className={styles.headingCol}>
+                <p className={styles.eyebrow}>Contact</p>
+                <h2 id="contact-heading" className={styles.title}>
+                  Get in touch
+                </h2>
+              </div>
 
+              <div className={styles.actionCol}>
               <div className={styles.actions}>
                 <a href={`mailto:${profile.email}`} className={styles.primary}>
                   <IconMail size={16} />
@@ -39,14 +41,10 @@ export function ContactBand() {
                   <IconLinkedin size={16} /> LinkedIn
                 </a>
               </div>
+              </div>
             </div>
           </Reveal>
 
-          <Reveal delay={1}>
-            <div className={styles.photoCol}>
-              <Portrait src="/media/people/portrait-alt.jpg" alt="Argha Pratim Saha, outdoors" mirrored />
-            </div>
-          </Reveal>
         </div>
       </Container>
     </section>

@@ -20,12 +20,13 @@
   --accent-soft: #e1ede8;
 
   /* ---- Type ----
-     --font-sans / --font-serif come from next/font (see app/layout.tsx).
-     --font-mono aliases sans deliberately — the site doesn't use a
-     monospace face anywhere; components that predate this still reference
-     var(--font-mono) for compact/uppercase labels, so this keeps them
-     working without a real coding font. */
-  --font-mono: var(--font-sans);
+     --font-sans / --font-serif / --font-code all come from next/font (see
+     app/layout.tsx). --font-mono used to alias sans, which meant ~100 call
+     sites asked for a monospace label and silently got Public Sans. It now
+     resolves to the real face: eyebrows, venue labels, stat numbers, and
+     metadata read as technical rather than as slightly-tracked body copy,
+     and the family is already being downloaded for code blocks either way. */
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* ---- Type scale (fluid) ---- */
   --text-xs: clamp(0.72rem, 0.69rem + 0.15vw, 0.8rem);

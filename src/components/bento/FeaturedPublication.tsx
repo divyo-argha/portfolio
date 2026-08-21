@@ -20,7 +20,7 @@ export function FeaturedPublication({ publication }: { publication: Publication 
           className={styles.arrowBadge}
           aria-label={`View ${publication.title}`}
         >
-          <IconArrowUpRight size={16} className={styles.arrowIcon} />
+          <IconArrowUpRight size={15} className={styles.arrowIcon} />
         </Link>
       </div>
 
@@ -38,8 +38,8 @@ export function FeaturedPublication({ publication }: { publication: Publication 
             <Image
               src={publication.venueMark.src}
               alt={publication.venueMark.alt}
-              width={110}
-              height={110}
+              width={72}
+              height={72}
               className={styles.logoImg}
             />
           </div>

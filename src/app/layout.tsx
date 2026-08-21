@@ -42,13 +42,10 @@ export const metadata: Metadata = {
   },
   description:
     "Argha Pratim Saha — research in usable security & privacy, security education, and qualitative HCI. PhD applicant.",
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    apple: "/apple-icon.png",
-  },
+  // No `icons` block: src/app/{favicon.ico,icon.svg,icon.png,apple-icon.png}
+  // are file-convention routes and Next emits the full link set from them.
+  // Declaring `icons.icon` here replaced that set wholesale, which silently
+  // dropped the apple-touch-icon link along with it.
   openGraph: {
     title: "Argha Pratim Saha",
     description: "Research in usable security & privacy, security education, and qualitative HCI.",
@@ -73,7 +70,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable} ${code.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`no-js ${sans.variable} ${serif.variable} ${code.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Blocking, pre-hydration: reads the stored theme before first paint so there's no flash. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

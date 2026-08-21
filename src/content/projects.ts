@@ -20,7 +20,7 @@ export const projects: Project[] = [
       { label: "npm", href: "https://www.npmjs.com/package/git-userhub" },
       { label: "pkg.go.dev", href: "https://pkg.go.dev/github.com/divyo-argha/git-user" },
     ],
-    logo: { src: "/media/gu_logo.png", alt: "git-user logo", width: 120, height: 120 },
+    logo: { src: "/media/gu_logo.webp", alt: "git-user logo", width: 120, height: 120 },
   },
   {
     slug: "autoscriber",
@@ -38,6 +38,7 @@ export const projects: Project[] = [
   {
     slug: "polaris-vpn",
     name: "polaris-vpn",
+    minor: true,
     tagline: "Zero-config, self-hosted VPN CLI over an encrypted SSH tunnel.",
     description:
       "A lightweight, zero-config, self-hosted VPN CLI built in Node.js. It instantly establishes an encrypted SSH SOCKS5 tunnel through any Linux VPS to secure web traffic, using any standard server you already have SSH access to, with no extra configuration.",
@@ -47,6 +48,7 @@ export const projects: Project[] = [
   {
     slug: "claude-user",
     name: "claude-user",
+    minor: true,
     tagline: "Session isolation and terminal switching CLI for multiple AI agent accounts.",
     description:
       "A Rust CLI and interactive TUI for running and switching between multiple isolated Claude Code and developer accounts across terminals without credential collision.",

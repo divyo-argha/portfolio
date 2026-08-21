@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
-import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import { useSectionNav } from "@/hooks/useSectionNav";
 import { Container } from "@/components/primitives/Container";
@@ -58,7 +57,6 @@ export function SiteHeader() {
       <Container>
         <div className={styles.bar}>
           <a href="#top" className={styles.mark} onClick={(e) => handleAnchorClick(e, "#top")}>
-            <Image src="/media/people/portrait.png" alt="" width={32} height={32} className={styles.markPhoto} />
             Argha
           </a>
 
