@@ -9,8 +9,9 @@ html {
   scrollbar-gutter: stable;
 }
 
-/* Thin scrollbars in the site's own accent, not a hardcoded sky blue. */
-* {
+/* Thin scrollbars in the site's own accent, scoped to avoid universal evaluation. */
+html,
+body {
   scrollbar-width: thin;
   scrollbar-color: var(--accent) transparent;
 }
@@ -46,8 +47,7 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  transition: background-color var(--duration-base) var(--ease-out),
-    color var(--duration-base) var(--ease-out);
+  transition: background-color var(--duration-base) var(--ease-out);
 }
 
 h1,

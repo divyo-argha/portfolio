@@ -15,19 +15,10 @@
   position: absolute;
   inset: 0;
   background-image:
-    repeating-linear-gradient(60deg, rgba(94, 225, 242, 0.06) 0px, rgba(94, 225, 242, 0.06) 1px, transparent 1px, transparent 40px),
-    repeating-linear-gradient(-60deg, rgba(94, 225, 242, 0.06) 0px, rgba(94, 225, 242, 0.06) 1px, transparent 1px, transparent 40px);
-  background-size: 140% 140%;
-  animation: drift 26s linear infinite;
-}
-
-@keyframes drift {
-  from {
-    background-position: 0 0, 0 0;
-  }
-  to {
-    background-position: 400px 400px, -400px 400px;
-  }
+    repeating-linear-gradient(60deg, rgba(94, 225, 242, 0.04) 0px, rgba(94, 225, 242, 0.04) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(-60deg, rgba(94, 225, 242, 0.04) 0px, rgba(94, 225, 242, 0.04) 1px, transparent 1px, transparent 40px);
+  pointer-events: none;
+  transform: translateZ(0);
 }
 
 .glowA,
@@ -35,20 +26,18 @@
 .glowWhite {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
   pointer-events: none;
+  transform: translateZ(0);
 }
 
 .glowWhite {
   top: -5%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0);
   width: 65vw;
   height: 40vw;
-  filter: blur(100px);
-  opacity: 0.22;
-  background: radial-gradient(circle, #ffffff 0%, rgba(94, 225, 242, 0.45) 45%, transparent 70%);
-  animation: floatWhite 20s ease-in-out infinite;
+  opacity: 0.18;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(94, 225, 242, 0.25) 40%, transparent 70%);
 }
 
 .glowA {
@@ -56,9 +45,8 @@
   left: -5%;
   width: 50vw;
   height: 50vw;
-  opacity: 0.35;
-  background: radial-gradient(circle, #5ee1f2, transparent 70%);
-  animation: floatA 18s ease-in-out infinite;
+  opacity: 0.28;
+  background: radial-gradient(circle at center, rgba(94, 225, 242, 0.45) 0%, rgba(94, 225, 242, 0.15) 45%, transparent 70%);
 }
 
 .glowB {
@@ -66,24 +54,8 @@
   right: -10%;
   width: 45vw;
   height: 45vw;
-  opacity: 0.35;
-  background: radial-gradient(circle, #b48fe0, transparent 70%);
-  animation: floatB 22s ease-in-out infinite;
-}
-
-@keyframes floatWhite {
-  0%, 100% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.08); }
-}
-
-@keyframes floatA {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(4%, 6%); }
-}
-
-@keyframes floatB {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-5%, -4%); }
+  opacity: 0.28;
+  background: radial-gradient(circle at center, rgba(180, 143, 224, 0.45) 0%, rgba(180, 143, 224, 0.15) 45%, transparent 70%);
 }
 
 .inner {
@@ -116,10 +88,7 @@
 .wordmarkLogo {
   width: clamp(220px, 30vw, 420px);
   height: auto;
-  filter: invert(1)
-    drop-shadow(0 0 20px rgba(255, 255, 255, 0.6))
-    drop-shadow(0 0 45px rgba(94, 225, 242, 0.5))
-    drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
+  filter: invert(1) drop-shadow(0 0 25px rgba(94, 225, 242, 0.5));
 }
 
 .tagline {
@@ -129,14 +98,6 @@
   font-size: 1.08rem;
   line-height: 1.6;
   color: #9fc3cc;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .grain,
-  .glowA,
-  .glowB {
-    animation: none;
-  }
 }
 
 /* Game Home: section cards linking out to Assets / Mechanics / Publication */

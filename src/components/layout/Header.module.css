@@ -4,6 +4,8 @@
   z-index: var(--z-header);
   background: color-mix(in srgb, var(--ground) 88%, transparent);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateZ(0);
   border-bottom: var(--border-hairline);
   transition: background var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
 }

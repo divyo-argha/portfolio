@@ -1,13 +1,13 @@
 .reveal {
   height: 100%;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translate3d(0, 8px, 0);
   transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
 }
 
 .revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .delay1 {

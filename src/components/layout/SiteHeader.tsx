@@ -27,7 +27,8 @@ export function SiteHeader() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`);
+            const next = `#${entry.target.id}`;
+            setActiveSection((prev) => (prev !== next ? next : prev));
           }
         });
       },

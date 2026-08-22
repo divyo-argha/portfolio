@@ -25,8 +25,16 @@ export function CyquredNavbar() {
 
   // Scroll detection for Dynamic Island morphing
   useEffect(() => {
+    let ticking = false;
     function handleScroll() {
-      setIsScrolled(window.scrollY > 25);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const next = window.scrollY > 25;
+          setIsScrolled((prev) => (prev !== next ? next : prev));
+          ticking = false;
+        });
+        ticking = true;
+      }
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
