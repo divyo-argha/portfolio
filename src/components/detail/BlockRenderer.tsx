@@ -14,6 +14,8 @@ import { RocCurve } from "./RocCurve";
 import { Accordion } from "./Accordion";
 import { QuoteBento } from "./QuoteBento";
 import { SerpentinePipeline } from "./SerpentinePipeline";
+import { BoardShowcase } from "./BoardShowcase";
+import { CardRow } from "./CardRow";
 import styles from "./BlockRenderer.module.css";
 
 export function BlockRenderer({ blocks }: { blocks: Block[] }) {
@@ -95,6 +97,10 @@ function renderBlock(block: Block) {
       return <QuoteBento />;
     case "serpentinePipeline":
       return <SerpentinePipeline />;
+    case "boardShowcase":
+      return <BoardShowcase />;
+    case "cardRow":
+      return <CardRow />;
     default:
       return null;
   }

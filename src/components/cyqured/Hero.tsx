@@ -25,21 +25,7 @@ const DECKS = [
 export function Hero() {
   return (
     <div className={styles.stage}>
-      {/* These three are DIRECT children of .stage on purpose. CSS perspective
-          only reaches an element's direct children, so the old wrapper around
-          them had to carry transform-style: preserve-3d to pass it down — and
-          that put the whole scene in a real 3D rendering context, where paint
-          order comes from depth sorting and every hover has to be hit-tested
-          by inverse-projecting the pointer through the transform. That was the
-          source of the flaky hovers and the re-rasterisation jank. Parented
-          straight to .stage they get exactly the same projection with no 3D
-          context at all: plain z-index paint order, plain hit-testing. */}
       <HeroBoard />
-      {/* Light falloff across the table, sharing the board's box and tilt so it
-          lies in the board's plane. The board art is a bright white printout
-          and needs shading to live in this dark scene at all — but a scrim in
-          viewport space over a perspective scene reads as a grey patch pasted
-          on top. Tilted with the board, the same gradient reads as light. */}
       <div className={styles.tableLight} aria-hidden="true" />
       <HeroCardFan />
       <HeroLogoLockup />

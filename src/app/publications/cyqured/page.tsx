@@ -44,21 +44,22 @@ export default function CyQuredPage() {
         customBody={
           <div className={`${display.variable} ${styles.brandScope}`}>
             <div className={styles.heroBand}>
+              <Link
+                href="/publications/cyqured/game"
+                className={styles.cornerGameButton}
+                title="Explore all 84 cards and interactive game mechanics"
+              >
+                <span className={styles.cornerPulse} />
+                <span className={styles.cornerText}>
+                  <span className={styles.cornerEyebrow}>Interactive Game Details</span>
+                  <span className={styles.cornerLabel}>Explore the Game & Rules</span>
+                </span>
+                <span className={styles.cornerArrow}>
+                  <IconArrowUpRight size={18} />
+                </span>
+              </Link>
               <Hero />
             </div>
-
-            <Link href="/publications/cyqured/game" className={styles.playBanner}>
-              <div>
-                <span className={styles.playEyebrow}>Interactive</span>
-                <h2 className={styles.playTitle}>Play every card</h2>
-                <p className={styles.playBody}>
-                  All 84 cards, flip animations, and live attack-to-defense mappings: explore the full catalogue in its own space.
-                </p>
-              </div>
-              <span className={styles.playCta}>
-                Enter the game <IconArrowUpRight size={16} />
-              </span>
-            </Link>
 
             <Tabs
               panels={[

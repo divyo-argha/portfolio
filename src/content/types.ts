@@ -148,7 +148,9 @@ type BlockVariant =
     }
   | { kind: "accordion"; title: string; subtitle?: string; defaultOpen?: boolean; content: string[] }
   | { kind: "quoteBento" }
-  | { kind: "serpentinePipeline" };
+  | { kind: "serpentinePipeline" }
+  | { kind: "boardShowcase" }
+  | { kind: "cardRow" };
 
 export type Block = BlockVariant & { heading?: string };
 

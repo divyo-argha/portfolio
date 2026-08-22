@@ -41,31 +41,12 @@ export const overviewBlocks: Block[] = [
     ],
   },
   {
-    kind: "gallery",
+    kind: "boardShowcase",
     heading: "The physical game on the table",
-    columns: 2,
-    items: [
-      {
-        src: "/media/publications/cyqured/board.webp",
-        alt: "The CyQured physical board layout modeling connected home devices",
-        caption: "Tabletop board modeling 16 connected devices across a modern home ecosystem",
-      },
-      {
-        src: "/media/publications/cyqured/example-attack.webp",
-        alt: "Close-up of a CyQured attack action card",
-        caption: "Attack card translating STRIDE threats into concrete, playable decisions",
-      },
-      {
-        src: "/media/publications/cyqured/example-defense.webp",
-        alt: "Close-up of a CyQured defense action card",
-        caption: "Defense card specifying matching mitigations and protected device targets",
-      },
-      {
-        src: "/media/publications/cyqured/example-chance.webp",
-        alt: "Close-up of a CyQured chance card",
-        caption: "Chance card introducing real-world unpredictability and security incidents",
-      },
-    ],
+  },
+  {
+    kind: "cardRow",
+    heading: "Action, chance, and scenario cards",
   },
   {
     kind: "cardGrid",
