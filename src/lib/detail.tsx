@@ -59,7 +59,7 @@ export function getPublicationDetail(slug: string): DetailMeta | undefined {
   const affiliationValue: ReactNode = publication.affiliation ? (
     <span className={styles.affiliationRow}>
       <Image
-        src="/media/institutions/sust.png"
+        src="/media/institutions/sust.webp"
         alt="SUST logo"
         width={18}
         height={18}

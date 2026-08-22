@@ -34,17 +34,17 @@ export const overviewBlocks: Block[] = [
         caption: "Tabletop board representing connected devices in a modern home",
       },
       {
-        src: "/media/publications/cyqured/example-attack.png",
+        src: "/media/publications/cyqured/example-attack.webp",
         alt: "Close-up of a CyQured attack action card",
         caption: "Attack card turning common threats into playable actions",
       },
       {
-        src: "/media/publications/cyqured/example-defense.png",
+        src: "/media/publications/cyqured/example-defense.webp",
         alt: "Close-up of a CyQured defense action card",
         caption: "Defense card specifying counters and security mitigations",
       },
       {
-        src: "/media/publications/cyqured/example-chance.png",
+        src: "/media/publications/cyqured/example-chance.webp",
         alt: "Close-up of a CyQured chance card",
         caption: "Chance card introducing uncertainty and real-world incidents",
       },

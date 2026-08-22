@@ -81,7 +81,7 @@ export function CyquredNavbar() {
             aria-label="CyQured Game Home"
           >
             <Image
-              src="/media/publications/cyqured/cyqured-logo.png"
+              src="/media/publications/cyqured/cyqured-logo.webp"
               alt="CyQured"
               width={130}
               height={42}

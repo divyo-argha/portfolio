@@ -132,7 +132,7 @@ export const publications: Publication[] = [
       },
     ],
     bentoSpan: "normal",
-    venueMark: { src: "/media/venues/iccit-logo.jpeg", alt: "ICCIT 2024 logo", width: 200, height: 200 },
+    venueMark: { src: "/media/venues/iccit-logo.webp", alt: "ICCIT 2024 logo", width: 200, height: 200 },
     heroMark: true,
     affiliation: "Shahjalal University of Science and Technology (SUST)",
     affiliationInfo: [

@@ -23,7 +23,7 @@ export type CardFace = {
   targets?: string[]; // attack cards only: devices it can be played against
   body: string;
   pairIds?: string[]; // action cards only: ids of cards it references as countering/countered-by
-  src: string; // e.g. "/media/publications/cyqured/cards/action/action-02.png"
+  src: string; // e.g. "/media/publications/cyqured/cards/action/action-02.webp"
 };
 
 export const cardFaces: CardFace[] = [
@@ -40,7 +40,7 @@ export const cardFaces: CardFace[] = [
 
 Target the defender's **Smartphone**, **Tablet**, **Laptop**, or **Desktop**. This can be defended using **Multi Factor Authentication** and **Email Filtering** & **Anti-Phishing** defense cards.`,
     pairIds: ["action-19", "action-21"],
-    src: "/media/publications/cyqured/cards/action/action-02.png",
+    src: "/media/publications/cyqured/cards/action/action-02.webp",
   },
   {
     id: "action-03",
@@ -53,7 +53,7 @@ Target the defender's **Smartphone**, **Tablet**, **Laptop**, or **Desktop**. Th
 
 This attack can be played on **Smartphones** and can be mitigated by using **Call Authentication Protocol**.`,
     pairIds: ["action-20"],
-    src: "/media/publications/cyqured/cards/action/action-03.png",
+    src: "/media/publications/cyqured/cards/action/action-03.webp",
   },
   {
     id: "action-04",
@@ -66,7 +66,7 @@ This attack can be played on **Smartphones** and can be mitigated by using **Cal
 
 This attack can be played on **laptops**, **desktops**, **smartphones**, **tablets**, and **home servers** when the victim downloads or installs unverified software and can be defended using the **Anti-virus** & **Anti-malware**.`,
     pairIds: ["action-22"],
-    src: "/media/publications/cyqured/cards/action/action-04.png",
+    src: "/media/publications/cyqured/cards/action/action-04.webp",
   },
   {
     id: "action-05",
@@ -79,7 +79,7 @@ This attack can be played on **laptops**, **desktops**, **smartphones**, **table
 
 This attack can be played on **Laptops**, **Desktops**, **Smartphones**, **Tablets**, **Smart Doorlocks** when the victim enters credentials or sensitive data in an exposed setting. It can be defended using **Multi-Factor Authentication** and **Strong Password Policy & Manager** cards.`,
     pairIds: ["action-19", "action-28"],
-    src: "/media/publications/cyqured/cards/action/action-05.png",
+    src: "/media/publications/cyqured/cards/action/action-05.webp",
   },
   {
     id: "action-06",
@@ -92,7 +92,7 @@ This attack can be played on **Laptops**, **Desktops**, **Smartphones**, **Table
 
 This attack can be played on **laptops**, **desktops**, **smartphones**, **tablets**, and **home servers**. This can be defended using the **Data Backup & Recovery** and **Anti-Virus** & **Anti-Malware**.`,
     pairIds: ["action-23", "action-22"],
-    src: "/media/publications/cyqured/cards/action/action-06.png",
+    src: "/media/publications/cyqured/cards/action/action-06.webp",
   },
   {
     id: "action-07",
@@ -105,7 +105,7 @@ This attack can be played on **laptops**, **desktops**, **smartphones**, **table
 
 This attack can be played on **all devices** and can be defended using **Secure Firmware & Software Updates** and **Intrusion Detection & Prevention Systems (IPS/IDS)**.`,
     pairIds: ["action-24", "action-33"],
-    src: "/media/publications/cyqured/cards/action/action-07.png",
+    src: "/media/publications/cyqured/cards/action/action-07.webp",
   },
   {
     id: "action-08",
@@ -118,7 +118,7 @@ This attack can be played on **all devices** and can be defended using **Secure 
 
 This attack can be played on **all devices** when the device runs outdated or vulnerable firmware. This can be defended using the **Secure Firmware & Software Updates** and **Intrusion Detection & Prevention (IDS/IPS)** cards.`,
     pairIds: ["action-24", "action-33"],
-    src: "/media/publications/cyqured/cards/action/action-08.png",
+    src: "/media/publications/cyqured/cards/action/action-08.webp",
   },
   {
     id: "action-09",
@@ -131,7 +131,7 @@ This attack can be played on **all devices** when the device runs outdated or vu
 
 This attack can be played on any device or system that maintains activity logs, such as **Laptops**, **Desktops**, **Home Servers**, **Smart Doorlocks**, and **IP Cameras**. It can be mitigated using **Immutable Logging** defense cards.`,
     pairIds: ["action-34"],
-    src: "/media/publications/cyqured/cards/action/action-09.png",
+    src: "/media/publications/cyqured/cards/action/action-09.webp",
   },
   {
     id: "action-10",
@@ -144,7 +144,7 @@ This attack can be played on any device or system that maintains activity logs, 
 
 This attack can be played on **laptops**, **desktops**, **smartphones**, and **tablets**. It can be defended using **Secure Session Management & Browser Security**.`,
     pairIds: ["action-26"],
-    src: "/media/publications/cyqured/cards/action/action-10.png",
+    src: "/media/publications/cyqured/cards/action/action-10.webp",
   },
   {
     id: "action-11",
@@ -157,7 +157,7 @@ This attack can be played on **laptops**, **desktops**, **smartphones**, and **t
 
 This attack can be played on **all devices** that are secured with passwords. It can be defended using **Strong Password Policy & Manager**, **Account Lockout & Rate Limiting**, and **Multi-Factor Authentication**.`,
     pairIds: ["action-28", "action-27", "action-19"],
-    src: "/media/publications/cyqured/cards/action/action-11.png",
+    src: "/media/publications/cyqured/cards/action/action-11.webp",
   },
   {
     id: "action-12",
@@ -170,7 +170,7 @@ This attack can be played on **all devices** that are secured with passwords. It
 
 This attack can be played on **all devices** when the victim uses weak or reused credentials. It can be defended using **Multi-Factor Authentication** and **Strong Password Policy & Manager** cards.`,
     pairIds: ["action-19", "action-28"],
-    src: "/media/publications/cyqured/cards/action/action-12.png",
+    src: "/media/publications/cyqured/cards/action/action-12.webp",
   },
   {
     id: "action-13",
@@ -186,7 +186,7 @@ This attack can be played on **all devices** when they transmit unencrypted data
     // card (action-29) is actually titled "VPN & Secure Encryption": treated
     // as the same card (only VPN-related defense in the deck; minor wording diff).
     pairIds: ["action-32", "action-29"],
-    src: "/media/publications/cyqured/cards/action/action-13.png",
+    src: "/media/publications/cyqured/cards/action/action-13.webp",
   },
   {
     id: "action-14",
@@ -199,7 +199,7 @@ This attack can be played on **all devices** when they transmit unencrypted data
 
 This attack can be played on **all devices** when they are exposed to high-volume malicious traffic. This can be defended using **Intrusion Detection & Prevention (IDS/IPS)** and **Firewall & Network Segmentation** cards.`,
     pairIds: ["action-33", "action-25"],
-    src: "/media/publications/cyqured/cards/action/action-14.png",
+    src: "/media/publications/cyqured/cards/action/action-14.webp",
   },
   {
     id: "action-15",
@@ -212,7 +212,7 @@ This attack can be played on **all devices** when they are exposed to high-volum
 
 This attack can be played on **routers** when they are exposed to unauthorized access. This can be defended using **Strong Password Policy & Manager**, **Use Secure DNS & Disable Rogue DNS Changes**, and **Firewall & Network Segmentation**.`,
     pairIds: ["action-28", "action-31", "action-25"],
-    src: "/media/publications/cyqured/cards/action/action-15.png",
+    src: "/media/publications/cyqured/cards/action/action-15.webp",
   },
   {
     id: "action-16",
@@ -225,7 +225,7 @@ This attack can be played on **routers** when they are exposed to unauthorized a
 
 This attack can be played on **all devices** that rely on ARP for network communication. It can be defended using **VPN & Network Encryption** and **Firewall & Network Segmentation** cards.`,
     pairIds: ["action-29", "action-25"],
-    src: "/media/publications/cyqured/cards/action/action-16.png",
+    src: "/media/publications/cyqured/cards/action/action-16.webp",
   },
   {
     id: "action-17",
@@ -238,7 +238,7 @@ This attack can be played on **all devices** that rely on ARP for network commun
 
 This attack can be played on **all the devices when they rely on wireless connectivity**. This can be defended using **Wired Connections for Critical Devices.**`,
     pairIds: ["action-30"],
-    src: "/media/publications/cyqured/cards/action/action-17.png",
+    src: "/media/publications/cyqured/cards/action/action-17.webp",
   },
   {
     id: "action-18",
@@ -246,7 +246,7 @@ This attack can be played on **all the devices when they rely on wireless connec
     category: "attack",
     title: "Ultimate Attack",
     body: `You can play this card to act like any of the attacks that are listed for this game, and you can play wherever you want, choosing the perfect attack for the asset that you chose.`,
-    src: "/media/publications/cyqured/cards/action/action-18.png",
+    src: "/media/publications/cyqured/cards/action/action-18.webp",
   },
   // ----- Defense cards (action-19 .. action-35) -----
   {
@@ -258,7 +258,7 @@ This attack can be played on **all the devices when they rely on wireless connec
 
 While this card is in play, **Phishing**, **Shoulder Surfing**, and **Credential Stuffing** attacks cannot bypass authentication, and keeps your account secure.`,
     pairIds: ["action-02", "action-05", "action-12"],
-    src: "/media/publications/cyqured/cards/action/action-19.png",
+    src: "/media/publications/cyqured/cards/action/action-19.webp",
   },
   {
     id: "action-20",
@@ -269,7 +269,7 @@ While this card is in play, **Phishing**, **Shoulder Surfing**, and **Credential
 
 While this card is in play, **Caller ID Spoofing** attacks fail to deceive you and protects you from social engineering scams.`,
     pairIds: ["action-03"],
-    src: "/media/publications/cyqured/cards/action/action-20.png",
+    src: "/media/publications/cyqured/cards/action/action-20.webp",
   },
   {
     id: "action-21",
@@ -280,7 +280,7 @@ While this card is in play, **Caller ID Spoofing** attacks fail to deceive you a
 
 This card can defend any type of **Phishing** attacks and keeps your communication secured by preventing the theft of critical information.`,
     pairIds: ["action-02"],
-    src: "/media/publications/cyqured/cards/action/action-21.png",
+    src: "/media/publications/cyqured/cards/action/action-21.webp",
   },
   {
     id: "action-22",
@@ -291,7 +291,7 @@ This card can defend any type of **Phishing** attacks and keeps your communicati
 
 While this card is in play, **Trojan Horses** and **Ransomware Attacks** targeting your assets are blocked before they can execute and save your system from a **Malware Attack**.`,
     pairIds: ["action-04", "action-06"],
-    src: "/media/publications/cyqured/cards/action/action-22.png",
+    src: "/media/publications/cyqured/cards/action/action-22.webp",
   },
   {
     id: "action-23",
@@ -302,7 +302,7 @@ While this card is in play, **Trojan Horses** and **Ransomware Attacks** targeti
 
 If you have this defense on your computer system, **Ransomware Attacks** cannot permanently delete or lock your data, and it can save your data from destruction.`,
     pairIds: ["action-06"],
-    src: "/media/publications/cyqured/cards/action/action-23.png",
+    src: "/media/publications/cyqured/cards/action/action-23.webp",
   },
   {
     id: "action-24",
@@ -313,7 +313,7 @@ If you have this defense on your computer system, **Ransomware Attacks** cannot 
 
 While this card is in play, **Firmware Attacks** and **Zero-Day Exploits** have no effect on your systems.`,
     pairIds: ["action-08", "action-07"],
-    src: "/media/publications/cyqured/cards/action/action-24.png",
+    src: "/media/publications/cyqured/cards/action/action-24.webp",
   },
   {
     id: "action-25",
@@ -324,7 +324,7 @@ While this card is in play, **Firmware Attacks** and **Zero-Day Exploits** have 
 
 While this card is in play, **DDoS Attack with Botnet** and **Router Hijacking** cannot target your network. Additionally, Network Segmentation prevents lateral movement, reducing the impact of malware and unauthorized access attempts.`,
     pairIds: ["action-14", "action-15"],
-    src: "/media/publications/cyqured/cards/action/action-25.png",
+    src: "/media/publications/cyqured/cards/action/action-25.webp",
   },
   {
     id: "action-26",
@@ -335,7 +335,7 @@ While this card is in play, **DDoS Attack with Botnet** and **Router Hijacking**
 
 This card mitigates **Session Hijacking** attack to keep your online accounts and sensitive data secure from interception.`,
     pairIds: ["action-10"],
-    src: "/media/publications/cyqured/cards/action/action-26.png",
+    src: "/media/publications/cyqured/cards/action/action-26.webp",
   },
   {
     id: "action-27",
@@ -350,7 +350,7 @@ While this card is in play, **Brute-Force** and **Credential Stuffing** attacks 
     // Cracking" (repeated password guessing) but the title text does not
     // match, so it is intentionally left unlinked rather than guessed.
     pairIds: ["action-12"],
-    src: "/media/publications/cyqured/cards/action/action-27.png",
+    src: "/media/publications/cyqured/cards/action/action-27.webp",
   },
   {
     id: "action-28",
@@ -363,7 +363,7 @@ While this card is in play, **Brute-Force** and **Credential Stuffing** attacks 
     // TODO: unresolved reference "Brute-Force": same as action-27, no
     // matching card title in the deck; not guessed/linked.
     pairIds: ["action-12"],
-    src: "/media/publications/cyqured/cards/action/action-28.png",
+    src: "/media/publications/cyqured/cards/action/action-28.webp",
   },
   {
     id: "action-29",
@@ -374,7 +374,7 @@ While this card is in play, **Brute-Force** and **Credential Stuffing** attacks 
 
 Select a **Network Card** that you have in play and attach this card to it. That network is now encrypted. While encrypted, it cannot be targeted by **Wireless Sniffing** or **ARP Spoofing** attacks. Remove from play any Wireless Sniffing or ARP Spoofing cards affecting the encrypted network.`,
     pairIds: ["action-13", "action-16"],
-    src: "/media/publications/cyqured/cards/action/action-29.png",
+    src: "/media/publications/cyqured/cards/action/action-29.webp",
   },
   {
     id: "action-30",
@@ -385,7 +385,7 @@ Select a **Network Card** that you have in play and attach this card to it. That
 
 This card prevents your critical devices from any **Wireless Sniffing** and **Network Jammer** attacks to ensure reliable and secure connectivity.`,
     pairIds: ["action-13", "action-17"],
-    src: "/media/publications/cyqured/cards/action/action-30.png",
+    src: "/media/publications/cyqured/cards/action/action-30.webp",
   },
   {
     id: "action-31",
@@ -396,7 +396,7 @@ This card prevents your critical devices from any **Wireless Sniffing** and **Ne
 
 While this card is in play, **Router Hijacking** attacks fail to manipulate your DNS settings, and keeps your network traffic secure.`,
     pairIds: ["action-15"],
-    src: "/media/publications/cyqured/cards/action/action-31.png",
+    src: "/media/publications/cyqured/cards/action/action-31.webp",
   },
   {
     id: "action-32",
@@ -407,7 +407,7 @@ While this card is in play, **Router Hijacking** attacks fail to manipulate your
 
 This defense mitigates **Wireless Sniffing** attacks and prevents attackers from intercepting your wireless communications.`,
     pairIds: ["action-13"],
-    src: "/media/publications/cyqured/cards/action/action-32.png",
+    src: "/media/publications/cyqured/cards/action/action-32.webp",
   },
   {
     id: "action-33",
@@ -418,7 +418,7 @@ This defense mitigates **Wireless Sniffing** attacks and prevents attackers from
 
 While this card is in play, this protects your network from infiltration and disruption by mitigating **Zero-Day Exploit**, **DDoS with Botnet**, **Router Hijacking**, and **ARP Spoofing** attacks.`,
     pairIds: ["action-07", "action-14", "action-15", "action-16"],
-    src: "/media/publications/cyqured/cards/action/action-33.png",
+    src: "/media/publications/cyqured/cards/action/action-33.webp",
   },
   {
     id: "action-34",
@@ -429,7 +429,7 @@ While this card is in play, this protects your network from infiltration and dis
 
 While this card is in play, **Activity Log Manipulation** fails. This makes it harder for attackers to hide their unauthorized actions.`,
     pairIds: ["action-09"],
-    src: "/media/publications/cyqured/cards/action/action-34.png",
+    src: "/media/publications/cyqured/cards/action/action-34.webp",
   },
   {
     id: "action-35",
@@ -437,7 +437,7 @@ While this card is in play, **Activity Log Manipulation** fails. This makes it h
     category: "defense",
     title: "Ultimate Defense",
     body: `With this card in hand, you can choose any defense listed for this game, depending on the asset being attacked and the attack type.`,
-    src: "/media/publications/cyqured/cards/action/action-35.png",
+    src: "/media/publications/cyqured/cards/action/action-35.webp",
   },
 
   // ===================== CHANCE CARDS (30) =====================
@@ -449,7 +449,7 @@ While this card is in play, **Activity Log Manipulation** fails. This makes it h
     body: `You recently acquired a backup generator to keep your systems running during an electrical failure. The moment a power outage occurs, the generator automatically restores power, preventing disruptions.
 
 Play this card during a power outage to immediately regain your turn and keep all your devices operational.`,
-    src: "/media/publications/cyqured/cards/chance/chance-02.png",
+    src: "/media/publications/cyqured/cards/chance/chance-02.webp",
   },
   {
     id: "chance-03",
@@ -459,7 +459,7 @@ Play this card during a power outage to immediately regain your turn and keep al
     body: `Your chosen opponent experiences a sudden loss of electrical power, rendering all equipped devices inactive. With no operational systems, no actions can be taken.
 
 Select an opponent and apply this card. That opponent **loses the next turn**, and **all equipped devices remain inactive** until the turn is regained. Any player landing on the cell does nothing, as no attacks can be made.`,
-    src: "/media/publications/cyqured/cards/chance/chance-03.png",
+    src: "/media/publications/cyqured/cards/chance/chance-03.webp",
   },
   {
     id: "chance-04",
@@ -469,7 +469,7 @@ Select an opponent and apply this card. That opponent **loses the next turn**, a
     body: `This special card allows you to bypass an opponent's cell without engaging in any action. When you land on an opponent's territory where you don't choose to attack, you can use this card to **avoid attacks or penalties**.
 
 Keep this card and play it whenever you choose. When landing on an opponent's cell, you may activate this card to pass through without taking any action.`,
-    src: "/media/publications/cyqured/cards/chance/chance-04.png",
+    src: "/media/publications/cyqured/cards/chance/chance-04.webp",
   },
   {
     id: "chance-05",
@@ -479,7 +479,7 @@ Keep this card and play it whenever you choose. When landing on an opponent's ce
     body: `This special card allows you to skip defending against an attack. The attacker proceeds without taking any action, and the asset remains protected.
 
 Keep this card and play it when an attacker lands, **before any attack cards are played**. This card lets you pass the defense phase without using any defense cards.`,
-    src: "/media/publications/cyqured/cards/chance/chance-05.png",
+    src: "/media/publications/cyqured/cards/chance/chance-05.webp",
   },
   {
     id: "chance-06",
@@ -489,7 +489,7 @@ Keep this card and play it when an attacker lands, **before any attack cards are
     body: `With a new firewall upgrade, your network security just got stronger! A reinforced firewall protects your system from cyber threats, making it harder for attackers to breach.
 
 **Block one incoming attacker** on your cell next turn, and earn points from the blocked attacker.`,
-    src: "/media/publications/cyqured/cards/chance/chance-06.png",
+    src: "/media/publications/cyqured/cards/chance/chance-06.webp",
   },
   {
     id: "chance-07",
@@ -499,7 +499,7 @@ Keep this card and play it when an attacker lands, **before any attack cards are
     body: `You installed important security patches before hackers could exploit a weakness. This prevented potential attacks and kept your system safe from harm. Regular updates help block threats before they happen.
 
 Gain **4 points** and **move forward 2 spaces** for staying ahead with strong security.`,
-    src: "/media/publications/cyqured/cards/chance/chance-07.png",
+    src: "/media/publications/cyqured/cards/chance/chance-07.webp",
   },
   {
     id: "chance-08",
@@ -509,7 +509,7 @@ Gain **4 points** and **move forward 2 spaces** for staying ahead with strong se
     body: `Your zero-trust security model prevented an unauthorized access attempt! By enforcing strict verification and limiting privileges, you ensured no breach could occur. This proactive strategy strengthens your system and keeps attackers at bay.
 
 Gain **3 points** and **take 2 action cards** from the main deck for successfully implementing a zero-trust approach and securing your assets.`,
-    src: "/media/publications/cyqured/cards/chance/chance-08.png",
+    src: "/media/publications/cyqured/cards/chance/chance-08.webp",
   },
   {
     id: "chance-09",
@@ -519,7 +519,7 @@ Gain **3 points** and **take 2 action cards** from the main deck for successfull
     body: `A malicious user tried to alter a transaction and deny responsibility, but your use of digital signatures and cryptographic verification ensured authenticity. Their forgery attempt failed, and your records remained intact.
 
 As a reward for your security foresight and avoiding repudiation, gain **6 points**.`,
-    src: "/media/publications/cyqured/cards/chance/chance-09.png",
+    src: "/media/publications/cyqured/cards/chance/chance-09.webp",
   },
   {
     id: "chance-10",
@@ -529,7 +529,7 @@ As a reward for your security foresight and avoiding repudiation, gain **6 point
     body: `You recognized the dangers of connecting to an unsecured public Wi-Fi network and took the right precautions. By using a VPN, disabling auto-connect, and verifying network security, you protected your data from potential cyber threats.
 
 As a reward for your caution, **gain 3 points** and **go 2 spaces backwards**.`,
-    src: "/media/publications/cyqured/cards/chance/chance-10.png",
+    src: "/media/publications/cyqured/cards/chance/chance-10.webp",
   },
   {
     id: "chance-11",
@@ -539,7 +539,7 @@ As a reward for your caution, **gain 3 points** and **go 2 spaces backwards**.`,
     body: `An attacker attempted to deny their actions on your system, but your tamper-proof logging system kept a clear, verifiable record. With cryptographic logging and centralized log management, you ensured accountability and prevented manipulation.
 
 As a reward for securing your system, **gain 3 points** and **draw 2 cards** from the action card deck.`,
-    src: "/media/publications/cyqured/cards/chance/chance-11.png",
+    src: "/media/publications/cyqured/cards/chance/chance-11.webp",
   },
   {
     id: "chance-12",
@@ -549,7 +549,7 @@ As a reward for securing your system, **gain 3 points** and **draw 2 cards** fro
     body: `Your system has completed a full upgrade cycle. This enhances security and performance. Now you are better prepared for future cyber threats with improved defenses and optimized operations.
 
 Move directly to the **smartphone** cell and **collect 3 cards** from the deck as a reward.`,
-    src: "/media/publications/cyqured/cards/chance/chance-12.png",
+    src: "/media/publications/cyqured/cards/chance/chance-12.webp",
   },
   {
     id: "chance-13",
@@ -559,7 +559,7 @@ Move directly to the **smartphone** cell and **collect 3 cards** from the deck a
     body: `Your Mobile Device Management (MDM) system ensures that lost, stolen, or misused devices can be remotely locked or wiped, preventing unauthorized access and securing sensitive data. By maintaining strict control over your mobile assets, you've strengthened your cybersecurity posture.
 
 **Gain 5 points** and **draw 1 action card** for successfully implementing MDM security.`,
-    src: "/media/publications/cyqured/cards/chance/chance-13.png",
+    src: "/media/publications/cyqured/cards/chance/chance-13.webp",
   },
   {
     id: "chance-14",
@@ -569,7 +569,7 @@ Move directly to the **smartphone** cell and **collect 3 cards** from the deck a
     body: `You strategically set up a honeypot (an intentionally vulnerable system designed to attract cyber attackers). This decoy appears to hold valuable data and the intruders get tricked into interacting with it, while security systems silently monitor their actions. By analyzing attack patterns, you strengthen your defenses and prevent future breaches.
 
 **Gain 6 points** and **get 2 cards** from the action deck.`,
-    src: "/media/publications/cyqured/cards/chance/chance-14.png",
+    src: "/media/publications/cyqured/cards/chance/chance-14.webp",
   },
   {
     id: "chance-15",
@@ -579,7 +579,7 @@ Move directly to the **smartphone** cell and **collect 3 cards** from the deck a
     body: `You implemented geofencing to restrict access based on location. This ensures that only authorized users can interact with your systems. This added layer of security prevented unauthorized access attempts, keeping your assets safe.
 
 **Gain 3 points** and **draw 1 extra action card** for strengthening your security perimeter!`,
-    src: "/media/publications/cyqured/cards/chance/chance-15.png",
+    src: "/media/publications/cyqured/cards/chance/chance-15.webp",
   },
   {
     id: "chance-16",
@@ -589,7 +589,7 @@ Move directly to the **smartphone** cell and **collect 3 cards** from the deck a
     body: `Your home system encountered a critical power failure, shutting down all connected devices. You lose your next turn, and all acquired devices remain inactive until your turn is regained.
 
 While inactive, no player is required to attack when landing on your cell and can pass through without taking any action. **If you have a Backup Generator card, you may play it to restore power and regain your turn immediately**.`,
-    src: "/media/publications/cyqured/cards/chance/chance-16.png",
+    src: "/media/publications/cyqured/cards/chance/chance-16.webp",
   },
   {
     id: "chance-17",
@@ -599,7 +599,7 @@ While inactive, no player is required to attack when landing on your cell and ca
     body: `An attacker tricked you into revealing sensitive login credentials through a deceptive phone call. With this information, they gained unauthorized access to your system and your security got compromised.
 
 **Lose 7 points** and **discard 1 card** from your hand. To prevent this in the future, always verify requests for sensitive information, enable multi-factor authentication, and stay cautious of unsolicited messages or calls.`,
-    src: "/media/publications/cyqured/cards/chance/chance-17.png",
+    src: "/media/publications/cyqured/cards/chance/chance-17.webp",
   },
   {
     id: "chance-18",
@@ -609,7 +609,7 @@ While inactive, no player is required to attack when landing on your cell and ca
     body: `Reusing old passwords cost you! One of your compromised passwords was found in a data breach, putting your accounts at risk. Weak security habits make it easier for attackers to steal sensitive information.
 
 **Lose 2 points** and **put 2 action cards** of your choice into the main action deck. Reset all your passwords to strengthen your security.`,
-    src: "/media/publications/cyqured/cards/chance/chance-18.png",
+    src: "/media/publications/cyqured/cards/chance/chance-18.webp",
   },
   {
     id: "chance-19",
@@ -619,7 +619,7 @@ While inactive, no player is required to attack when landing on your cell and ca
     body: `A hidden keylogger has been silently recording your keystrokes, stealing your passwords, messages, and sensitive data. Without proper protection, your private information is now exposed to an attacker.
 
 **Lose 4 points** immediately. To prevent this in the future, use virtual keyboards to avoid physical keyloggers and install anti-malware to detect keylogger software.`,
-    src: "/media/publications/cyqured/cards/chance/chance-19.png",
+    src: "/media/publications/cyqured/cards/chance/chance-19.webp",
   },
   {
     id: "chance-20",
@@ -630,7 +630,7 @@ While inactive, no player is required to attack when landing on your cell and ca
 
 **Lose 3 points** and **discard 2 action cardd** of your choice from your hand.`,
     // NOTE: card has a printed typo "cardd" (should read "cards"); transcribed verbatim.
-    src: "/media/publications/cyqured/cards/chance/chance-20.png",
+    src: "/media/publications/cyqured/cards/chance/chance-20.webp",
   },
   {
     id: "chance-21",
@@ -640,7 +640,7 @@ While inactive, no player is required to attack when landing on your cell and ca
     body: `A vendor's software update contained a hidden backdoor which eventually allowed the attackers to infiltrate your system. Without proper security checks, your network is now exposed to threats.
 
 **Lose 4 points** and **go to the Gaming Console** cell. Prevent this by verifying software sources, using code-signing certificates, and conducting security audits.`,
-    src: "/media/publications/cyqured/cards/chance/chance-21.png",
+    src: "/media/publications/cyqured/cards/chance/chance-21.webp",
   },
   {
     id: "chance-22",
@@ -650,7 +650,7 @@ While inactive, no player is required to attack when landing on your cell and ca
     body: `Your system's processing power has been hijacked to secretly mine cryptocurrency for an attacker. Without your knowledge, your device is overheating, slowing down, and consuming excessive energy. Poor security practices, outdated software, or visiting compromised websites made this possible.
 
 You **lose 7 points** and **discard 1 action card.** You could prevent this by using anti-malware, blocking malicious scripts, and keeping software updated.`,
-    src: "/media/publications/cyqured/cards/chance/chance-22.png",
+    src: "/media/publications/cyqured/cards/chance/chance-22.webp",
   },
   {
     id: "chance-23",
@@ -660,7 +660,7 @@ You **lose 7 points** and **discard 1 action card.** You could prevent this by u
     body: `A guest, family member, or curious child accidentally or intentionally compromised your security. Whether by tampering with devices, leaking sensitive data, or installing unknown software, the damage is done.
 
 **Lose 5 points** and **move back 2 spaces**. Prevent this by enforcing strict access controls, using guest networks, and monitoring device activity.`,
-    src: "/media/publications/cyqured/cards/chance/chance-23.png",
+    src: "/media/publications/cyqured/cards/chance/chance-23.webp",
   },
   {
     id: "chance-24",
@@ -670,7 +670,7 @@ You **lose 7 points** and **discard 1 action card.** You could prevent this by u
     body: `A stealthy rootkit has embedded itself deep within your system, evading detection and control. Standard antimalware solutions are ineffective, requiring advanced threat hunting and system integrity checks to remove it.
 
 **Lose 8 points** immediately. No standalone defense cards can counter this attack.`,
-    src: "/media/publications/cyqured/cards/chance/chance-24.png",
+    src: "/media/publications/cyqured/cards/chance/chance-24.webp",
   },
   {
     id: "chance-25",
@@ -680,7 +680,7 @@ You **lose 7 points** and **discard 1 action card.** You could prevent this by u
     body: `You had improperly disposed of sensitive information: either by discarding old storage devices without securely wiping them or tossing documents without shredding them. Attackers recovered your deleted data, leading to a serious breach.
 
 **Lose 4 points** immediately. This could have been prevented by physically destroying storage devices, using data-wiping software, or shredding confidential documents before disposal.`,
-    src: "/media/publications/cyqured/cards/chance/chance-25.png",
+    src: "/media/publications/cyqured/cards/chance/chance-25.webp",
   },
   {
     id: "chance-26",
@@ -690,7 +690,7 @@ You **lose 7 points** and **discard 1 action card.** You could prevent this by u
     body: `A hidden spyware has infected your system, secretly tracking your activities and stealing sensitive data. Your private information is being exposed, compromising your security.
 
 **Lose 5 points** immediately. Use anti-spyware tools and regular security checks to prevent future intrusions.`,
-    src: "/media/publications/cyqured/cards/chance/chance-26.png",
+    src: "/media/publications/cyqured/cards/chance/chance-26.webp",
   },
   {
     id: "chance-27",
@@ -700,7 +700,7 @@ You **lose 7 points** and **discard 1 action card.** You could prevent this by u
     body: `Your system has been compromised by the Zeus Trojan, a powerful malware that steals passwords, banking credentials, and other sensitive data. Without strong protective measures, your private information is at risk.
 
 This could be prevented with **multi-factor authentication** or **anti-malware** defense cards. If you can't defend against it, you **lose 3 points** immediately.`,
-    src: "/media/publications/cyqured/cards/chance/chance-27.png",
+    src: "/media/publications/cyqured/cards/chance/chance-27.webp",
   },
   {
     id: "chance-28",
@@ -711,7 +711,7 @@ This could be prevented with **multi-factor authentication** or **anti-malware**
 
 **Lose 5 points** and **discard 1 card** from your hand. To prevent this in the future, use strong encryption protocols like WPA3 and regularly update your network credentials.`,
     // NOTE: card has a printed grammar typo "easily crack" (should read "cracks"); transcribed verbatim.
-    src: "/media/publications/cyqured/cards/chance/chance-28.png",
+    src: "/media/publications/cyqured/cards/chance/chance-28.webp",
   },
   {
     id: "chance-29",
@@ -721,7 +721,7 @@ This could be prevented with **multi-factor authentication** or **anti-malware**
     body: `A critical system issue forced you to perform emergency maintenance and disrupted your operations. Important tasks were delayed, and resources had to be reallocated to address the issue.
 
 **Go to Smart Speaker** and **skip your next turn**. To avoid such disruptions in the future, implement regular system checks and scheduled maintenance plans.`,
-    src: "/media/publications/cyqured/cards/chance/chance-29.png",
+    src: "/media/publications/cyqured/cards/chance/chance-29.webp",
   },
   {
     id: "chance-30",
@@ -731,7 +731,7 @@ This could be prevented with **multi-factor authentication** or **anti-malware**
     body: `You connected to what looked like a legitimate Wi-Fi network, but it was actually a rogue hotspot mimicking a public network. Attackers intercepted your data and injected malware.
 
 You can use the **VPN & Network Encryption** defense card to mitigate this vulnerability; otherwise, you **lose 5 points** and **go 3 spaces backwards**.`,
-    src: "/media/publications/cyqured/cards/chance/chance-30.png",
+    src: "/media/publications/cyqured/cards/chance/chance-30.webp",
   },
   {
     id: "chance-31",
@@ -741,7 +741,7 @@ You can use the **VPN & Network Encryption** defense card to mitigate this vulne
     body: `This special card allows you to trade cards with any chosen opponent, giving you the chance to shift strategies and gain new advantages.
 
 Play this card to exchange **2 cards** with an opponent you chose. Choose 2 cards from your hand and then pick 2 random cards from the opponent's hand, seeing only the back of the cards.`,
-    src: "/media/publications/cyqured/cards/chance/chance-31.png",
+    src: "/media/publications/cyqured/cards/chance/chance-31.webp",
   },
 
   // ===================== SCENARIO CARDS (20) =====================
@@ -762,7 +762,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "That email is not really from your ISP. It just looks like it, with the same logo and colors. This is Spoofing. Someone pretends to be a person or company you trust, so you hand over your card details without thinking twice.",
     difficulty: 1,
     body: `You receive an email pretending to be from your ISP, urging you to click a link to "update your payment details." The email looks official, with the ISP's logo and branding, but the link leads to a suspicious website asking for your credit card information.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-02.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-02.webp",
   },
   {
     id: "scenario-03",
@@ -775,7 +775,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "The caller ID lied to you. The number looked real, but it was faked to look like your bank's number. It is the same trick as the phishing email, just over the phone instead of in your inbox. This is Spoofing.",
     difficulty: 2,
     body: `You receive a call from someone claiming to be from your bank. They say there's suspicious activity on your account and ask for your account details to "verify your identity." The caller ID shows your bank's official number, which makes the call seem legitimate.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-03.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-03.webp",
   },
   {
     id: "scenario-08",
@@ -788,7 +788,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "This is not really about your files being changed. It is about you not being able to use them anymore. That is why it counts as Denial of Service and not Tampering. The whole point was to lock you out, not to edit your files.",
     difficulty: 3,
     body: `You open an email attachment, and suddenly all your files are encrypted. A message pops up demanding payment in cryptocurrency to unlock your files. The message warns that your files will be permanently deleted if you don't pay within 48 hours.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-08.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-08.webp",
   },
   {
     id: "scenario-09",
@@ -801,7 +801,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "Nobody hacked anything here. Someone just watched you type your PIN. That is the whole attack. A secret that should have stayed private was seen by the wrong person. This is Information Disclosure, and no computer was even needed.",
     difficulty: 4,
     body: `While entering your PIN at an ATM, you notice someone standing unusually close to you. Later, you find unauthorized transactions on your account, and the bank confirms that your PIN was used at another ATM.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-09.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-09.webp",
   },
   {
     id: "scenario-10",
@@ -814,7 +814,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "That \"free game\" was a Trojan Horse. It looked harmless, but once it ran, it changed things on your system without asking. That part is Tampering. Then it gave itself more control than it should have had. That part is Elevation of Privilege.",
     difficulty: 5,
     body: `You download a free game from an untrusted website. Soon after, your device starts behaving strangely: pop-ups appear, and you notice unauthorized programs running in the background. Your antivirus software detects malware.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-10.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-10.webp",
   },
   {
     id: "scenario-11",
@@ -827,7 +827,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "A flood of traffic knocked the platform offline. This is a clear case of Denial of Service. Nobody stole any data and nobody broke into an account. The attacker just sent so many requests that the platform could not keep up.",
     difficulty: 6,
     body: `You try to access your favorite online gaming platform, but it's unavailable. Later, you hear that the platform was overwhelmed by a massive surge in traffic, causing it to crash. The platform confirms it was a targeted attack.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-11.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-11.webp",
   },
   {
     id: "scenario-15",
@@ -840,7 +840,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "This is the wireless version of the DDoS attack above. Someone sent out strong radio signals so your devices could not talk to the router. Nothing was stolen and nothing was changed. The attacker just made the connection useless. This is Denial of Service.",
     difficulty: 7,
     body: `Your Wi-Fi suddenly stops working, and none of your devices can connect. When you check, you notice that your router's signal is being disrupted by a nearby device emitting strong radio signals.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-15.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-15.webp",
   },
   {
     id: "scenario-05",
@@ -853,7 +853,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "Your password leaked somewhere else, and now someone is trying it here too. When they log in with your real password, the system just thinks they are you. This is Spoofing. It works because the same password was used on more than one site.",
     difficulty: 8,
     body: `You receive an alert that someone tried logging into your email from an unfamiliar location. You realize you've reused the same password on multiple sites, and one of those sites was recently breached.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-05.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-05.webp",
   },
   {
     id: "scenario-06",
@@ -866,7 +866,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "Somebody got into the router's admin panel and changed settings that were not theirs to change, like the password or the DNS. The router is still yours, but you can no longer trust its settings. This is Tampering.",
     difficulty: 9,
     body: `Your internet slows down, and you notice unfamiliar devices connected to your router. When you check the router settings, you see changes you didn't make, like a new admin password or DNS settings.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-06.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-06.webp",
   },
   {
     id: "scenario-04",
@@ -879,7 +879,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "You typed the right web address, but you still ended up on a fake site. This only happens when the path your traffic takes has been changed, not just the page you see. It has the same cause as a hijacked router: something along the way was tampered with.",
     difficulty: 10,
     body: `You type your bank's official URL into your browser, but instead of the real website, you're redirected to a fake site that looks identical. The fake site asks you to log in with your credentials.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-04.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-04.webp",
   },
   {
     id: "scenario-14",
@@ -892,7 +892,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "The clue here is \"multiple failed login attempts.\" That means someone kept guessing your password instead of using one they already had. Once a guess works, they go from being a stranger to being logged in as you. This is Elevation of Privilege.",
     difficulty: 11,
     body: `You receive multiple failed login attempt notifications for your social media account. Later, you find that your account has been accessed, and spam messages were sent to your contacts.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-14.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-14.webp",
   },
   {
     id: "scenario-12",
@@ -905,7 +905,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "You did not get logged out by accident. Someone took your active login session and used it as if it were their own. They did not guess your password, they just borrowed your login. This is Tampering with the session, done so they can spoof being you.",
     difficulty: 12,
     body: `You're logged into your online banking account when suddenly you're logged out. When you try to log back in, you see unfamiliar transactions. The bank confirms that someone accessed your account using your active session.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-12.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-12.webp",
   },
   {
     id: "scenario-13",
@@ -918,7 +918,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "Your router keeps a list that matches each device to its address, called the ARP table. Someone changed entries in that list so your traffic passes through them first. Changing the list is Tampering. Reading your traffic afterward is Information Disclosure.",
     difficulty: 13,
     body: `You notice that your internet connection is slow, and some websites load strange content. When you check your network, you see unfamiliar devices listed as connected. Your router's ARP table shows incorrect IP-MAC mappings.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-13.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-13.webp",
   },
   {
     id: "scenario-21",
@@ -931,7 +931,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "A weak spot in the console's software let someone do things they should never have been able to do. Going from a normal player to someone who can break the whole system is exactly what Elevation of Privilege means.",
     difficulty: 14,
     body: `You're playing an online game on your gaming console, and suddenly, the system freezes and restarts. Upon reboot, all your saved data is gone. A vulnerability in the console OS was exploited to cause system-wide corruption.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-21.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-21.webp",
   },
   {
     id: "scenario-07",
@@ -944,7 +944,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "A reset should have removed the attacker, but it did not. That means they are not just logged in, they are hiding inside the camera's firmware. That is deeper than a stolen password. Changing the firmware is Tampering, and keeping control this way is Elevation of Privilege.",
     difficulty: 15,
     body: `Your indoor security camera starts moving independently, and you notice unfamiliar logins to the camera's admin panel. Even after resetting the camera, the issue persists, and you can't regain control.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-07.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-07.webp",
   },
   {
     id: "scenario-18",
@@ -957,7 +957,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "This is the same idea as the hijacked camera, just with a fridge. The fridge's firmware was infected, so now it quietly sits between you and the internet, watching your traffic. Changing the firmware is Tampering, and using it this way is Elevation of Privilege.",
     difficulty: 16,
     body: `Your smart refrigerator displays ads and redirects your mobile phone to phishing sites when connected to its app. You find that malware has infected the fridge's firmware, acting as a proxy to intercept traffic.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-18.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-18.webp",
   },
   {
     id: "scenario-16",
@@ -970,7 +970,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "There is no matching attack card for this one, so this is a judgment call. But the scenario gives us the answer directly. The attacker faked the meter's messages to the power company. Faking a device's identity like this is Spoofing.",
     difficulty: 17,
     body: `Your smart utility meter starts sending incorrect usage data to your provider, showing abnormally high consumption. You later discover a nearby attacker spoofed your meter's communication to inflate usage, possibly to trick you into overpaying or causing billing chaos.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-16.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-16.webp",
   },
   {
     id: "scenario-17",
@@ -983,7 +983,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "There is no exact match for this one either. The closest is Zero-Day Exploit. An open port let someone walk in and take control of a device they should never have been able to touch. Gaining that kind of control is Elevation of Privilege.",
     difficulty: 18,
     body: `You notice your smart printer printing strange documents at random times. Investigation reveals a hacker accessed the printer remotely through an exposed port and used it to store and print malicious material.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-17.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-17.webp",
   },
   {
     id: "scenario-19",
@@ -996,7 +996,7 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "This is called a replay attack. The attacker did not break any code. They just recorded a real unlock signal and played it back later. The lock cannot tell it apart from the real thing, so it opens. This is Spoofing, done with a recording instead of a fake ID.",
     difficulty: 19,
     body: `Your smart door lock unlocks automatically without your command while you're away. Reviewing the logs, you see access tokens were reused by an attacker intercepting previous traffic.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-19.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-19.webp",
   },
   {
     id: "scenario-20",
@@ -1009,6 +1009,6 @@ Play this card to exchange **2 cards** with an opponent you chose. Choose 2 card
       "The malware got onto the watch the same way a Trojan Horse would, but that is not the important part here. What matters is where your health and location data ended up: an unknown server that has no right to have it. This is Information Disclosure.",
     difficulty: 20,
     body: `Your smartwatch battery drains rapidly and gets hot. A diagnostic app shows it has been constantly sending location and health data to an unknown IP. Malware was installed through a third-party app.`,
-    src: "/media/publications/cyqured/cards/scenario/scenario-20.png",
+    src: "/media/publications/cyqured/cards/scenario/scenario-20.webp",
   },
 ];

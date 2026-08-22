@@ -30,7 +30,7 @@ export const publicationDetails: Record<string, Block[]> = {
     },
     {
       kind: "figure",
-      src: "/media/publications/primus/architecture-diagram.png",
+      src: "/media/publications/primus/architecture-diagram.webp",
       alt: "General text-to-SQL system architecture: a database's table schema and a natural-language question are combined into a prompt for an LLM, which produces a SQL query that's run against the database to produce a result.",
       caption: "The general shape of a text-to-SQL system: schema and question in, query and result out.",
     },
@@ -141,12 +141,12 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           compact: true,
           items: [
             {
-              src: "/media/publications/arsenic/affected-skin.png",
+              src: "/media/publications/arsenic/affected-skin.webp",
               alt: "A palm showing arsenic-affected skin, with visible keratosis and dark spots",
               caption: "Arsenic-affected",
             },
             {
-              src: "/media/publications/arsenic/not-affected-skin.png",
+              src: "/media/publications/arsenic/not-affected-skin.webp",
               alt: "A palm showing skin that is not affected by arsenic",
               caption: "Not affected",
             },
@@ -247,16 +247,16 @@ export const publicationTabs: Record<string, DetailTab[]> = {
           columns: 2,
           items: [
             {
-              src: "/media/publications/arsenic/confusion-matrix.png",
+              src: "/media/publications/arsenic/confusion-matrix.webp",
               alt: "Confusion Matrix for EfficientNet-B1 showing 1507 True Positives, 1385 True Negatives, 91 False Positives, and 71 False Negatives",
               caption: "Fig. 5: Confusion matrix on test set (1507 TP, 1385 TN, 91 FP, 71 FN).",
-              href: "/media/publications/arsenic/confusion-matrix.png",
+              href: "/media/publications/arsenic/confusion-matrix.webp",
             },
             {
-              src: "/media/publications/arsenic/roc-curve-comparison.png",
+              src: "/media/publications/arsenic/roc-curve-comparison.webp",
               alt: "ROC Curve comparison across EfficientNet-B1, EfficientNet-B0, ResNet-50, MobileNetV2, and VGG-19",
               caption: "Fig. 6: Multi-model ROC comparison (EfficientNet-B1 AUC = 0.98).",
-              href: "/media/publications/arsenic/roc-curve-comparison.png",
+              href: "/media/publications/arsenic/roc-curve-comparison.webp",
             },
           ],
         },
@@ -330,10 +330,10 @@ export const publicationTabs: Record<string, DetailTab[]> = {
         },
         {
           kind: "figure",
-          src: "/papers/iccit-poster.png",
+          src: "/papers/iccit-poster.webp",
           alt: "Academic poster for 'A Deep Learning Approach to Automate Classification of Arsenic-Affected Skin using EfficientNet-B1', presented at SUST",
           caption: "Click the poster to open it at full size.",
-          href: "/papers/iccit-poster.png",
+          href: "/papers/iccit-poster.webp",
         },
       ],
     },

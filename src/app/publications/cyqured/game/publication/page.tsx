@@ -33,7 +33,7 @@ export default function CyQuredPublicationPage() {
         <header className={styles.hero}>
           <h1 className={styles.wordmark}>
             <Image
-              src="/media/publications/cyqured/cyqured-logo.png"
+              src="/media/publications/cyqured/cyqured-logo.webp"
               alt="cyQured"
               width={632}
               height={225}

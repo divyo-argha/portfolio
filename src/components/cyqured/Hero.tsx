@@ -91,7 +91,7 @@ function HeroLogoLockup() {
             source file's real pixel size so it can compute the aspect ratio,
             and let the CSS width override the rendered size. */}
         <Image
-          src="/media/publications/cyqured/cyqured-logo.png"
+          src="/media/publications/cyqured/cyqured-logo.webp"
           alt="cyQured"
           width={632}
           height={225}

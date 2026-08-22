@@ -7,7 +7,6 @@ import { BackToTop } from "@/components/layout/BackToTop";
 import { themeInitScript } from "@/lib/theme";
 import { siteConfig } from "@/lib/site";
 import { personJsonLd } from "@/lib/jsonld";
-import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 // A plain, institutional pairing rather than a trendy grotesk/mono system —
@@ -89,7 +88,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main">{children}</main>
         <Footer />
         <BackToTop />
-        <Analytics />
       </body>
     </html>
   );
