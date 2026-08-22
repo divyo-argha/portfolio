@@ -161,6 +161,10 @@
   min-width: 0;
   position: relative;
   z-index: 2;
+  /* See .summary below — this card is the full grid width, so without a cap the
+     author list sets to ~137 characters a line. Generous because it is scanned
+     rather than read, and because it is monospaced. */
+  max-width: 88ch;
 }
 
 .you {
@@ -212,6 +216,12 @@
   overflow-wrap: break-word;
   word-break: normal;
   min-width: 0;
+  /* The featured card spans the whole bento grid, so this abstract was setting
+     at ~132 characters a line — about double the 62-74 the section lede and the
+     smaller publication cards use, and past the point where the eye reliably
+     finds the next line. Capped to sit in the same band as its siblings; the
+     title deliberately keeps the full width, since it should still dominate. */
+  max-width: 72ch;
 }
 
 @media (min-width: 768px) {
@@ -220,15 +230,42 @@
   }
 }
 
+.summaryRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-top: auto;
   padding-top: var(--space-1);
   min-width: 0;
   position: relative;
   z-index: 2;
+}
+
+@media (min-width: 1024px) {
+  .summaryRow {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+
+  /* The abstract keeps its capped measure and no longer stretches; the tag list
+     takes the column that cap frees up, so the card gets shorter rather than
+     taller. */
+  .summary {
+    flex: 0 1 auto;
+  }
+
+  .tags {
+    flex: 1 1 0%;
+    align-content: flex-start;
+    padding-top: 0;
+  }
 }
 
 /* Legend for the equal-contribution asterisk in the byline above. */

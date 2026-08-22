@@ -71,15 +71,21 @@ export function FeaturedPublication({ publication }: { publication: Publication 
         <p className={styles.equalNote}>* Equal contribution</p>
       ) : null}
 
-      <p className={styles.summary}>{publication.summary}</p>
+      {/* Abstract and tags share a row on wide screens. This card spans the whole
+          bento grid, so capping the abstract to a readable measure leaves a wide
+          empty column beside it; the tags fill it instead of adding two more rows
+          to the bottom of the card. They stack again below 1024px. */}
+      <div className={styles.summaryRow}>
+        <p className={styles.summary}>{publication.summary}</p>
 
-      <ul className={styles.tags}>
-        {publication.tags.map((tag) => (
-          <li key={tag}>
-            <Chip>{tag}</Chip>
-          </li>
-        ))}
-      </ul>
+        <ul className={styles.tags}>
+          {publication.tags.map((tag) => (
+            <li key={tag}>
+              <Chip>{tag}</Chip>
+            </li>
+          ))}
+        </ul>
+      </div>
     </article>
   );
 }
