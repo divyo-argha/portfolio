@@ -239,18 +239,58 @@
 }
 
 @media (max-width: 640px) {
+  .overlay {
+    padding: 0.5rem;
+  }
+
   .panel {
     max-height: 92vh;
+    border-radius: 16px;
+  }
+
+  .panelHeader {
+    padding: 0.85rem 1rem;
+  }
+
+  .tableScroll {
+    -webkit-overflow-scrolling: touch;
   }
 
   .rowLabel {
-    min-width: 108px;
+    min-width: 100px;
     font-size: 0.6rem;
-    padding: 0.7rem 0.6rem;
+    padding: 0.7rem 0.5rem;
   }
 
   .cardCol,
   .cell {
-    min-width: 170px;
+    min-width: 155px;
+    padding: 0.75rem 0.65rem;
+  }
+
+  .cardArt {
+    width: 80px;
+  }
+}
+
+@media (max-width: 420px) {
+  .rowLabel {
+    min-width: 88px;
+    font-size: 0.55rem;
+    padding: 0.6rem 0.4rem;
+  }
+
+  .cardCol,
+  .cell {
+    min-width: 138px;
+    padding: 0.65rem 0.5rem;
+  }
+
+  .cardArt {
+    width: 72px;
+  }
+
+  .cardTitle {
+    font-size: 0.82rem;
   }
 }

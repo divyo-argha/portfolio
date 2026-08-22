@@ -188,3 +188,28 @@
   color: #8fb4bd;
   margin: 0;
 }
+
+@media (max-width: 640px) {
+  .boardContainer {
+    padding: 0.6rem;
+    border-radius: 14px;
+    margin-bottom: 2.5rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .deviceGrid {
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .deviceCard {
+    padding: 0.85rem;
+  }
+
+  .specialCard {
+    padding: 1rem;
+  }
+}

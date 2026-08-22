@@ -237,6 +237,27 @@
   transition: all 0.2s ease;
 }
 
+@media (max-width: 640px) {
+  .inner {
+    padding-inline: 0.85rem;
+  }
+
+  .bridgeCard {
+    padding: 1.25rem 1rem;
+    gap: 1.2rem;
+  }
+
+  .bridgeButton {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .sectionCard {
+    padding: 1.15rem 1rem;
+  }
+}
+
 .bridgeButton:hover {
   background: #84ebf8;
   transform: translateY(-2px);

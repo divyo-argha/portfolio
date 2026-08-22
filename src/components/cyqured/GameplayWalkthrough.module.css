@@ -723,3 +723,42 @@
   font-family: var(--font-cyq-display, sans-serif);
   font-size: 0.72rem;
 }
+
+@media (max-width: 640px) {
+  .stage {
+    padding: 1rem 0.85rem;
+    border-radius: 14px;
+    gap: 1rem;
+  }
+
+  .navBar {
+    gap: 0.5rem;
+  }
+
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .phaseNav {
+    align-self: flex-start;
+  }
+
+  .stepTitle {
+    font-size: 1.15rem;
+  }
+
+  .narrationText {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .cellInfoBox {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .cellInfoName {
+    font-size: 0.88rem;
+  }
+}
