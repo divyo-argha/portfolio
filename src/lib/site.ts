@@ -22,7 +22,8 @@ export const siteConfig = {
    * and cannot half-fail. */
   indexable: false,
   navLinks: [
-    { label: "Research & Publications", href: "#research" },
+    { label: "Publications", href: "#publications" },
+    { label: "Research", href: "#research" },
     { label: "Education", href: "#education" },
     { label: "Experience", href: "#experience" },
     { label: "Programming", href: "#programming" },

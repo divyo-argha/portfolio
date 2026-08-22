@@ -1,20 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <!-- The Q lifted from the cyQured wordmark: a round, even-weight bowl with a
-       heavy swash tail sweeping out past the lower right. Redrawn geometrically
-       rather than traced, because the wordmark's fine outline detail turns to
-       mud at 16px. Cyan (#5ee1f2) and near-black are the game pages' own palette. -->
+  <!-- The Q from the cyQured wordmark. Drawn as filled paths rather than plain
+       strokes so it keeps the letterform's two defining traits at 16px: a bowl
+       with weight contrast (thicker at the sides than at top and bottom, as in
+       the Didone-ish original) and a swash tail that tapers as it leaves the
+       bowl. Palette is the game pages' own cyan on near-black. No filters —
+       favicon renderers treat them inconsistently, so the glow is a gradient. -->
   <defs>
-    <linearGradient id="cyqBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0f2a34"/>
+    <linearGradient id="cyqPlate" x1="0" y1="0" x2="0.75" y2="1">
+      <stop offset="0%" stop-color="#123540"/>
+      <stop offset="55%" stop-color="#08151c"/>
       <stop offset="100%" stop-color="#05070d"/>
+    </linearGradient>
+    <radialGradient id="cyqHalo" cx="47%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#5ee1f2" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#5ee1f2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cyqInk" x1="0.15" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#a7f2fc"/>
+      <stop offset="52%" stop-color="#5ee1f2"/>
+      <stop offset="100%" stop-color="#2ab6d2"/>
     </linearGradient>
   </defs>
 
-  <rect width="32" height="32" rx="7" fill="url(#cyqBg)"/>
-  <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" fill="none" stroke="#1b4e5c" stroke-width="1"/>
+  <rect width="32" height="32" rx="7.5" fill="url(#cyqPlate)"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7" fill="none" stroke="#1d5768" stroke-width="1"/>
+  <circle cx="15" cy="14.4" r="12.5" fill="url(#cyqHalo)"/>
 
-  <g fill="none" stroke="#5ee1f2" stroke-width="3.1" stroke-linecap="round">
-    <circle cx="14.7" cy="13.7" r="6.9"/>
-    <path d="M12.6 17.6 C15.4 21.1 18.9 23.4 23.2 24.7"/>
+  <g fill="url(#cyqInk)">
+    <!-- Bowl: outer circle minus a narrower inner ellipse, so the vertical
+         strokes read heavier than the horizontal ones. -->
+    <path fill-rule="evenodd" d="M14.9 5.2a8.75 8.75 0 1 1 0 17.5 8.75 8.75 0 0 1 0-17.5Zm0 3.2a5.05 5.55 0 1 0 0 11.1 5.05 5.55 0 0 0 0-11.1Z"/>
+    <!-- Swash tail: a ribbon that starts as a point inside the counter, swells as
+         it crosses the bowl, then tapers to a rounded terminal outside it. Drawn
+         as one closed outline (upper edge out, tip, lower edge back) so both ends
+         come to a taper instead of a flat cut. -->
+    <path d="M12.9 14.2C15.2 19.2 18.9 22.4 24.0 23.7C23.8 24.9 23.2 25.7 22.4 25.9C16.6 24.1 12.7 20.0 10.7 14.7Z"/>
   </g>
 </svg>

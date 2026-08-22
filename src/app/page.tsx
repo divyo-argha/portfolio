@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
 import { News } from "@/components/sections/News";
-import { ResearchAndPublications } from "@/components/sections/ResearchAndPublications";
+import { Publications } from "@/components/sections/Publications";
+import { Research } from "@/components/sections/Research";
 import { Experience } from "@/components/sections/Experience";
 import { Education } from "@/components/sections/Education";
 import { Programming } from "@/components/sections/Programming";
@@ -13,7 +14,8 @@ export default function Home() {
       <HashScrollHandler />
       <Hero />
       <News />
-      <ResearchAndPublications />
+      <Publications />
+      <Research />
       <Education />
       <Experience />
       <Programming />

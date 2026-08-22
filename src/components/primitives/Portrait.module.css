@@ -1,42 +1,82 @@
+/**
+ * The portrait file is a cut-out on transparency, so whatever sits behind it in
+ * this frame *is* the photo's background. It used to be a flat `--raised` grey,
+ * which read as an unfinished placeholder; it is now a lit disc built from three
+ * stacked gradients — a key light upper-left, an accent bloom lower-right for
+ * depth, and a base wash — so the figure looks placed rather than pasted.
+ *
+ * Everything is derived from the palette tokens, so light and dark follow the
+ * theme automatically. The one exception is the specular white, which has to be
+ * dialled down on the dark backdrop; that is what --spec is for, declared across
+ * the same three theme paths tokens.css uses.
+ */
 .frame {
-  --cut: clamp(14px, 10%, 24px);
+  --spec: 0.55;
 
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   width: 100%;
-  border-radius: var(--radius-md);
-  clip-path: polygon(
-    0 0,
-    calc(100% - var(--cut)) 0,
-    100% var(--cut),
-    100% 100%,
-    var(--cut) 100%,
-    0 calc(100% - var(--cut))
-  );
-  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--surface) 100%);
-  padding: 3px;
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--line);
-  filter: drop-shadow(var(--shadow-drop));
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
+
+  background:
+    radial-gradient(68% 58% at 30% 16%, rgba(255, 255, 255, var(--spec)), transparent 72%),
+    radial-gradient(
+      85% 75% at 82% 96%,
+      color-mix(in srgb, var(--accent) 64%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(
+      158deg,
+      color-mix(in srgb, var(--accent-soft) 55%, var(--surface)) 0%,
+      var(--accent-soft) 48%,
+      color-mix(in srgb, var(--accent) 34%, var(--accent-soft)) 100%
+    );
+
+  box-shadow:
+    0 20px 44px -20px color-mix(in srgb, var(--accent) 50%, transparent),
+    0 3px 12px rgba(0, 0, 0, 0.07),
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 20%, var(--line));
 }
 
-.frame.mirrored {
-  clip-path: polygon(
-    var(--cut) 0,
-    100% 0,
-    100% calc(100% - var(--cut)),
-    calc(100% - var(--cut)) 100%,
-    0 100%,
-    0 var(--cut)
-  );
+:root[data-theme="dark"] .frame {
+  --spec: 0.14;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .frame {
+    --spec: 0.14;
+  }
 }
 
 .image {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
+  /* 4:5 source in a 1:1 disc: this keeps a little headroom above the hair and
+     lets the circle crop the forearms, rather than centring and clipping both. */
   object-fit: cover;
-  object-position: 50% 8%;
-  background: var(--raised);
-  border-radius: inherit;
+  object-position: 50% 42%;
   display: block;
 }
 
+/* Rim light along the top edge and a soft vignette at the circumference, drawn
+   over the figure so the subject and the disc read as one object. */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, calc(var(--spec) * 0.5)) 0%, transparent 34%),
+    radial-gradient(
+      100% 100% at 50% 50%,
+      transparent 62%,
+      color-mix(in srgb, var(--accent) 18%, transparent) 100%
+    );
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--surface) 45%, transparent);
+}
