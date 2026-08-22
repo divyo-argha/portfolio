@@ -13,7 +13,10 @@ const display = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "CyQured: The Game",
+  // `absolute` because the section layout's title.template does not apply to a
+  // page in the *same* segment — without it this landing page alone would fall
+  // back to the site-wide "· Argha Saha" suffix.
+  title: { absolute: "The Game · CyQured" },
   description: "A tabletop cybersecurity game for the connected home: browse the playable cards and board, walk through the mechanics, or read the SOUPS 2026 research publication.",
 };
 

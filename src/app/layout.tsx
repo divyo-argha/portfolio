@@ -7,6 +7,7 @@ import { BackToTop } from "@/components/layout/BackToTop";
 import { themeInitScript } from "@/lib/theme";
 import { siteConfig } from "@/lib/site";
 import { personJsonLd } from "@/lib/jsonld";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 // A plain, institutional pairing rather than a trendy grotesk/mono system —
@@ -35,9 +36,11 @@ const code = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  // Short form in the tab strip, where horizontal room is scarce; the full
+  // name is kept for Open Graph below, which is where it actually gets read.
   title: {
-    default: "Argha Pratim Saha",
-    template: "%s · Argha Pratim Saha",
+    default: "Argha Saha",
+    template: "%s · Argha Saha",
   },
   description:
     "Argha Pratim Saha. Research in usable security and privacy, security education, and qualitative HCI. Applying for PhD positions.",
@@ -88,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main">{children}</main>
         <Footer />
         <BackToTop />
+        <Analytics />
       </body>
     </html>
   );

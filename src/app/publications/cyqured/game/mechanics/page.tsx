@@ -13,7 +13,7 @@ const display = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "CyQured: Game Mechanics",
+  title: "Game Mechanics",
   description: "Explore the game mechanics: 4-step turn progression, STRIDE threat taxonomy, device compromise battles, and victory rules.",
 };
 

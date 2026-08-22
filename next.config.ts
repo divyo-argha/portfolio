@@ -2,8 +2,13 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
-  // Ships to divyo-argha.github.io as a static export — no Node server on GitHub Pages,
-  // and no basePath needed since it serves from the domain root.
+  // Deployed on Vercel as a fully static export: the site has no server-rendered
+  // or revalidated routes, so a static build is the simplest thing that works and
+  // stays portable to any static host. Trade-off: `export` also switches off
+  // Vercel's on-demand image optimization, so every image in `public/` is served
+  // exactly as committed — which is why they are pre-encoded to WebP at their real
+  // display sizes rather than left as source PNGs. Cache headers for those live in
+  // `vercel.json`, since Vercel serves `public/` with `max-age=0` by default.
   output: "export",
   images: {
     unoptimized: true,

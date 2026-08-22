@@ -13,7 +13,7 @@ const display = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "CyQured: Game Assets",
+  title: "Game Assets",
   description: "Explore all physical CyQured game assets: the 28-cell smart home board, 16 connected devices, and 84 playable action, chance, and scenario cards.",
 };
 

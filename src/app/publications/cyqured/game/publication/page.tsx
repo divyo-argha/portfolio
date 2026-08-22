@@ -14,7 +14,7 @@ const display = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "CyQured: SOUPS 2026 Research Publication",
+  title: "SOUPS 2026 Research Publication",
   description: "Download the scientific manuscript and explore the empirical study on CyQured accepted at USENIX SOUPS 2026.",
 };
 
