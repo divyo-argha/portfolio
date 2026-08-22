@@ -20,7 +20,7 @@ export const publications: Publication[] = [
         name: "Argha Pratim Saha",
         you: true,
         equalContribution: true,
-        avatar: "/media/people/portrait-avatar.webp",
+        avatar: "/media/people/argha.jpeg",
         affiliationMark: 1,
       },
       {
@@ -99,7 +99,7 @@ export const publications: Publication[] = [
       {
         name: "Argha Pratim Saha",
         you: true,
-        avatar: "/media/people/portrait-avatar.webp",
+        avatar: "/media/people/argha.jpeg",
       },
       {
         name: "Utsho Das",
@@ -157,7 +157,7 @@ export const publications: Publication[] = [
       {
         name: "Argha Pratim Saha",
         you: true,
-        avatar: "/media/people/portrait-avatar.webp",
+        avatar: "/media/people/argha.jpeg",
       },
       { name: "Partha Sarothi Bhowmik" },
       {
