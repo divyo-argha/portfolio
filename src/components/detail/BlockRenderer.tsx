@@ -12,6 +12,8 @@ import { Pipeline } from "./Pipeline";
 import { Carousel } from "./Carousel";
 import { RocCurve } from "./RocCurve";
 import { Accordion } from "./Accordion";
+import { QuoteBento } from "./QuoteBento";
+import { SerpentinePipeline } from "./SerpentinePipeline";
 import styles from "./BlockRenderer.module.css";
 
 export function BlockRenderer({ blocks }: { blocks: Block[] }) {
@@ -32,7 +34,7 @@ function renderBlock(block: Block) {
     case "prose":
       return <Prose paragraphs={block.body} />;
     case "figure":
-      return <Figure src={block.src} alt={block.alt} caption={block.caption} href={block.href} />;
+      return <Figure src={block.src} alt={block.alt} caption={block.caption} href={block.href} size={block.size} />;
     case "gallery":
       return <Gallery items={block.items} columns={block.columns} compact={block.compact} />;
     case "cardGrid":
@@ -89,6 +91,10 @@ function renderBlock(block: Block) {
           content={block.content}
         />
       );
+    case "quoteBento":
+      return <QuoteBento />;
+    case "serpentinePipeline":
+      return <SerpentinePipeline />;
     default:
       return null;
   }

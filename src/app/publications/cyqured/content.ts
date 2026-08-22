@@ -137,15 +137,8 @@ export const overviewBlocks: Block[] = [
     ],
   },
   {
-    kind: "pipeline",
-    heading: "Evolution from initial prototype to final game",
-    steps: [
-      { label: "01 Initial Prototype" },
-      { label: "02 Pilot Playtesting" },
-      { label: "03 Friction & Redesign", highlight: true },
-      { label: "04 Empirical Evaluation" },
-      { label: "05 SOUPS 2026 Publication" },
-    ],
+    kind: "serpentinePipeline",
+    heading: "Evolution from undergraduate thesis to USENIX SOUPS 2026",
   },
   {
     kind: "prose",
@@ -166,19 +159,17 @@ export const howToPlayBlocks: Block[] = [
     ],
   },
   {
-    kind: "pipeline",
-    heading: "Structure of a turn",
-    steps: [
-      { label: "01 Roll (Move around the board)" },
-      { label: "02 Land (Resolve cell event)" },
-      { label: "03 Decide (Acquire, attack, or defend)" },
-      { label: "04 Justify (Read and explain aloud)", highlight: true },
-    ],
+    kind: "figure",
+    heading: "Turn structure and gameplay flow",
+    src: "/media/cyqured/turn_flow.png",
+    alt: "CyQured gameplay turn structure and attack-defense resolution flow",
+    caption: "Figure: Complete turn loop: roll-and-move, cell evaluation, adversarial card play, forced verbal justification, and outcome resolution.",
+    size: "lg",
   },
   {
     kind: "prose",
     body: [
-      "Step four is the active learning engine of CyQured. When playing an attack or defense, the player must read the card text aloud and justify their strategic choice to the other players. This embeds active verbal reasoning into every round.",
+      "Phase four is the active learning engine of CyQured. When playing an attack or defense, the player must read the card text aloud and justify their strategic choice to the other players. This embeds active verbal reasoning into every round.",
     ],
   },
   {
@@ -264,15 +255,12 @@ export const studyBlocks: Block[] = [
     ],
   },
   {
-    kind: "pipeline",
-    heading: "Study workflow",
-    steps: [
-      { label: "01 Pre-Test (10-item threat recognition)" },
-      { label: "02 Gameplay Session (60-minute group play)" },
-      { label: "03 Post-Test (10-item defensive reasoning)" },
-      { label: "04 Surveys (SUS, NASA-TLX, TAM)" },
-      { label: "05 Semi-Structured Interviews", highlight: true },
-    ],
+    kind: "figure",
+    heading: "Study design and evaluation workflow",
+    src: "/media/cyqured/study_workflow.png",
+    alt: "Empirical study workflow showing 5 evaluation phases and the supplemental control baseline",
+    caption: "Figure: Mixed-methods study methodology (N = 50) and parallel 60-minute test-retest control baseline (N = 20).",
+    size: "lg",
   },
   {
     kind: "statGrid",
@@ -300,6 +288,7 @@ export const studyBlocks: Block[] = [
     src: "/media/cyqured/knowledge_gain.jpeg",
     alt: "Knowledge gain distributions showing mean score improvements across SC, NC, NC-M, NC-NM, and All Game cohorts",
     caption: "Figure 1: Knowledge score gain (post-test minus pre-test out of 10) across participant cohorts, showing large effect sizes (d > 1.5) across all groups.",
+    size: "md",
   },
   {
     kind: "findings",
@@ -323,6 +312,7 @@ export const studyBlocks: Block[] = [
     src: "/media/cyqured/control_study.jpeg",
     alt: "Comparison of score gains between the Gameplay group (+2.32) and the Control group (-0.20)",
     caption: "Figure 2: Supplemental control study comparison showing significant gains for gameplay participants (n = 50) versus no change for the non-playing control group (n = 20).",
+    size: "sm",
   },
   {
     kind: "prose",
@@ -338,6 +328,7 @@ export const studyBlocks: Block[] = [
     src: "/media/cyqured/sus_scores.jpeg",
     alt: "System Usability Scale scores across participant groups: SC (80.6), NC-M (73.7), All (70.0), NC (66.3), and NC-NM (54.1)",
     caption: "Figure 3: System Usability Scale (SUS) scores across cohorts compared to the 68-point industry benchmark for acceptable usability.",
+    size: "md",
   },
   {
     kind: "prose",
@@ -353,6 +344,7 @@ export const studyBlocks: Block[] = [
     src: "/media/cyqured/TLX.jpeg",
     alt: "NASA-TLX cognitive load radar chart comparing NC-M and NC-NM across six workload dimensions",
     caption: "Figure 4: NASA-TLX workload profiles comparing non-coursework players with Monopoly experience (NC-M) and without Monopoly experience (NC-NM).",
+    size: "sm",
   },
   {
     kind: "prose",
@@ -368,6 +360,7 @@ export const studyBlocks: Block[] = [
     src: "/media/cyqured/TAM.jpeg",
     alt: "Technology Acceptance Model construct scores for SC and NC groups across PEOU, PU, ATT, and ITU",
     caption: "Figure 5: Technology Acceptance Model (TAM) constructs (5-point Likert) comparing Security Coursework (SC) and No Coursework (NC) groups.",
+    size: "md",
   },
   {
     kind: "quote",
@@ -383,16 +376,8 @@ export const studyBlocks: Block[] = [
     ],
   },
   {
-    kind: "findings",
+    kind: "quoteBento",
     heading: "What participants said in post-game interviews",
-    items: [
-      { label: "P27 (NC, Initial Barriers)", value: '"There are just too many rules to remember right at the start."' },
-      { label: "P33 (NC, Terminology)", value: '"At first, concepts like spoofing were really confusing to me."' },
-      { label: "P1 (NC, Gradual Adjustment)", value: '"It was confusing in the beginning, but it got easier as we played."' },
-      { label: "P15 (NC, Productive Struggle)", value: '"It was confusing, sure, but I actually learned a lot of things."' },
-      { label: "P27 (NC, Social Interaction)", value: '"The fun part was everyone sitting together and playing."' },
-      { label: "P9 (SC, Peer Scaffolding)", value: '"It was engaging to have such good discussions with everyone."' },
-    ],
   },
   {
     kind: "cardGrid",

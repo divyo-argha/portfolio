@@ -120,7 +120,7 @@ export type Project = {
  * section title (e.g. "What was the problem?"). */
 type BlockVariant =
   | { kind: "prose"; body: string[] }
-  | { kind: "figure"; src: string; alt: string; caption?: string; href?: string }
+  | { kind: "figure"; src: string; alt: string; caption?: string; href?: string; size?: "sm" | "md" | "lg" }
   | { kind: "gallery"; items: { src: string; alt: string; caption?: string; href?: string }[]; columns?: 2 | 3; compact?: boolean }
   | { kind: "findings"; items: { label: string; value: string }[] }
   | { kind: "quote"; text: string; attribution?: string }
@@ -146,7 +146,9 @@ type BlockVariant =
       modelName?: string;
       models?: { name: string; auc: number; color?: string; points: [number, number][]; highlight?: boolean }[];
     }
-  | { kind: "accordion"; title: string; subtitle?: string; defaultOpen?: boolean; content: string[] };
+  | { kind: "accordion"; title: string; subtitle?: string; defaultOpen?: boolean; content: string[] }
+  | { kind: "quoteBento" }
+  | { kind: "serpentinePipeline" };
 
 export type Block = BlockVariant & { heading?: string };
 

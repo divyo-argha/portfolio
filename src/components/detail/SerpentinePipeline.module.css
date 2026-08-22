@@ -1,0 +1,402 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  margin: var(--space-4) 0;
+}
+
+/* =========================================================
+   DESKTOP / TABLET SERPENTINE GRID (3 Columns: Card | Arrow | Card)
+   ========================================================= */
+.desktopGrid {
+  display: none;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .desktopGrid {
+    display: grid;
+    grid-template-columns: 1fr 64px 1fr;
+    row-gap: 0;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+/* Row 1 */
+.gridCard1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.gridArrow1 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.gridCard2 {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+/* Turn 1 (Between Row 1 & 2 on the right) */
+.gridTurn1 {
+  grid-column: 3;
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+}
+
+/* Row 2 (Right to Left flow) */
+.gridCard4 {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.gridArrow2 {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.gridCard3 {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+/* Turn 2 (Between Row 2 & 3 on the left) */
+.gridTurn2 {
+  grid-column: 1;
+  grid-row: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+}
+
+/* Row 3 (Left to Right flow) */
+.gridCard5 {
+  grid-column: 1;
+  grid-row: 5;
+}
+
+.gridArrow3 {
+  grid-column: 2;
+  grid-row: 5;
+}
+
+.gridCard6 {
+  grid-column: 3;
+  grid-row: 5;
+}
+
+/* Base Card */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+  width: 100%;
+}
+
+.card:hover {
+  border-color: var(--line-strong, var(--ink));
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.finalCard {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-soft, #f8fafc) 100%);
+  border-color: #10b981;
+}
+
+:global([data-theme="dark"]) .finalCard {
+  background: linear-gradient(135deg, #18181b 0%, #064e3b 100%);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.titleArea {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.phaseTag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-bottom: 2px;
+}
+
+.tagSlate {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.tagAmber {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #ffedd5;
+}
+
+.tagSky {
+  background: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #e0f2fe;
+}
+
+.tagPurple {
+  background: #faf5ff;
+  color: #7e22ce;
+  border: 1px solid #f3e8ff;
+}
+
+.tagEmerald {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #dcfce7;
+}
+
+.tagBlue {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #dbeafe;
+}
+
+:global([data-theme="dark"]) .tagSlate {
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+:global([data-theme="dark"]) .tagAmber {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+:global([data-theme="dark"]) .tagSky {
+  background: rgba(2, 132, 199, 0.15);
+  color: #38bdf8;
+  border-color: rgba(2, 132, 199, 0.3);
+}
+
+:global([data-theme="dark"]) .tagPurple {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+:global([data-theme="dark"]) .tagEmerald {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+:global([data-theme="dark"]) .tagBlue {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.cardTitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cardSubtitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.numBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--ground);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+/* Bullet List */
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: var(--text-xs);
+  color: var(--foreground);
+  line-height: 1.45;
+}
+
+.bulletDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* =========================================================
+   EXPLICIT ARROW CONNECTORS (HIGH CONTRAST & VISIBLE)
+   ========================================================= */
+
+.hConnector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 4px;
+}
+
+.arrowTrack {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: var(--accent, #0f5c4a);
+}
+
+:global([data-theme="dark"]) .arrowTrack {
+  color: #34d399;
+}
+
+.arrowLine {
+  flex: 1;
+  height: 3px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.arrowHeadRight {
+  flex-shrink: 0;
+  margin-left: -2px;
+}
+
+.arrowHeadLeft {
+  flex-shrink: 0;
+  margin-right: -2px;
+}
+
+/* Turn Connectors (Snake Bends between rows) */
+.turnTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent, #0f5c4a);
+  padding: 4px 0;
+}
+
+:global([data-theme="dark"]) .turnTrack {
+  color: #34d399;
+}
+
+.turnPill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--ground);
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.turnSvg {
+  display: block;
+}
+
+/* =========================================================
+   MOBILE VERTICAL STACK (< 768px)
+   ========================================================= */
+.mobileStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .mobileStack {
+    display: none;
+  }
+}
+
+.mobileConnector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  color: var(--accent, #0f5c4a);
+}
+
+:global([data-theme="dark"]) .mobileConnector {
+  color: #34d399;
+}
+
+.mobileLineTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobileLine {
+  width: 3px;
+  height: 24px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.mobileArrowSvg {
+  margin-top: -3px;
+}

@@ -1,0 +1,399 @@
+.bentoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  margin: var(--space-2) 0;
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bentoGrid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .heroTile {
+    grid-column: span 12;
+  }
+
+  .dialogueTile {
+    grid-column: span 7;
+  }
+
+  .metricTile {
+    grid-column: span 5;
+  }
+
+  .progressionTile {
+    grid-column: span 7;
+  }
+
+  .jargonTile {
+    grid-column: span 5;
+  }
+}
+
+/* Base Bento Card */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Hero Tile with luxury spotlight gradient */
+.heroTile {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-soft, #f8fafc) 100%);
+  border: 1px solid var(--line);
+  padding: 32px 28px;
+}
+
+:global([data-theme="dark"]) .heroTile {
+  background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.heroTile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+}
+
+.watermarkQuote {
+  position: absolute;
+  right: 20px;
+  bottom: -25px;
+  font-family: var(--font-serif);
+  font-size: 140px;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 700;
+}
+
+/* Card Header Meta */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.badgeGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.themeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 9999px;
+}
+
+.badgeBlue {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #dbeafe;
+}
+
+.badgePurple {
+  background: #faf5ff;
+  color: #7e22ce;
+  border: 1px solid #f3e8ff;
+}
+
+.badgeAmber {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #ffedd5;
+}
+
+.badgeEmerald {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #dcfce7;
+}
+
+:global([data-theme="dark"]) .badgeBlue {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+:global([data-theme="dark"]) .badgePurple {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+:global([data-theme="dark"]) .badgeAmber {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+:global([data-theme="dark"]) .badgeEmerald {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.statPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: var(--ground);
+  color: var(--ink);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+}
+
+.statHighlight {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+:global([data-theme="dark"]) .statHighlight {
+  color: #60a5fa;
+}
+
+/* Quote Typography */
+.heroQuoteText {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+  font-style: italic;
+  margin: 0 0 16px 0;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .heroQuoteText {
+    font-size: 1.55rem;
+  }
+}
+
+.quoteText {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--ink);
+  font-style: italic;
+  margin: 0 0 14px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Dialogue Pair inside Social Tile */
+.dialogueStack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.dialogueItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--ground);
+  border: 1px solid var(--line);
+}
+
+.dialogueQuote {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.dialogueAuthor {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.roleTag {
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.roleSC {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.roleNC {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+:global([data-theme="dark"]) .roleSC {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+:global([data-theme="dark"]) .roleNC {
+  background: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+
+/* Stepper Progression Widget inside Progression Tile */
+.stepperRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0 16px 0;
+  padding: 10px;
+  background: var(--ground);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.stepNode {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.stepLabel {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.stepDesc {
+  font-size: 0.68rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* Participant Profile Footer */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--ground);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+.authorMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.authorName {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.authorDesc {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.takeawayText {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.4;
+  margin: 0;
+  max-width: 48ch;
+}

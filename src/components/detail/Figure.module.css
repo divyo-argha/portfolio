@@ -3,6 +3,20 @@
   flex-direction: column;
   gap: var(--space-2);
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sizeSm {
+  max-width: 420px;
+}
+
+.sizeMd {
+  max-width: 560px;
+}
+
+.sizeLg {
+  max-width: 720px;
 }
 
 .image {
@@ -12,6 +26,7 @@
   background: #ffffff;
   border-radius: var(--radius-md);
   border: var(--border-hairline);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: box-shadow var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out),
     transform var(--duration-base) var(--ease-out);
   display: block;
@@ -33,4 +48,5 @@
   font-size: var(--text-xs);
   color: var(--muted);
   line-height: 1.4;
+  text-align: center;
 }
