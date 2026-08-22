@@ -10,150 +10,148 @@ export const overviewBlocks: Block[] = [
   {
     kind: "prose",
     body: [
-      "CyQured is a tabletop game about the cybersecurity of everyday connected homes. Players move around a home filled with familiar devices, face different threats, choose how to respond, and explain their decisions as they play.",
-      "SOUPS 2026 · Tabletop cybersecurity education · SUST undergraduate thesis",
+      "CyQured is a tabletop card-and-board game designed to teach personal cybersecurity in everyday connected homes. It models a home ecosystem of 16 devices and translates 16 STRIDE-inspired threat-and-defense mechanisms into structured, turn-based tabletop gameplay.",
+      "Accepted at the 22nd USENIX Symposium on Usable Privacy and Security (SOUPS 2026), Hannover, Germany.",
+    ],
+  },
+  {
+    kind: "accordion",
+    title: "Read the full paper abstract",
+    subtitle: "USENIX SOUPS 2026 (Hannover, Germany)",
+    content: [
+      "As reliance on connected home devices grows, human behavior remains a critical vulnerability that is often inadequately addressed by traditional, overly technical educational methods. To bridge this gap, we introduce CyQured, a tabletop board game that models a digital home ecosystem of 16 devices, enabling players to simulate 16 STRIDE-inspired attacks and defenses through structured gameplay. We evaluated CyQured with 50 university students, 13 with prior cybersecurity coursework and 37 without, including 14 with limited tabletop gaming experience. The evaluation was conducted using a mixed-methods approach that included knowledge assessments and user-centered evaluations, including the SUS, TAM, and NASA-TLX scales. While novices without domain or tabletop gaming experience reported higher cognitive load and borderline usability scores, knowledge gains were observed across all cohorts. Thematic analysis revealed that novices encountered initial accessibility barriers and elevated cognitive load due to unfamiliar cybersecurity terminology and gameplay mechanics; however, high engagement and social interaction motivated them to persist. Collectively, these findings suggest that game-based simulations can effectively engage diverse learners in understanding home cybersecurity, while also underscoring the need for accessible game design to support players without prior domain knowledge or tabletop gaming experience.",
     ],
   },
   {
     kind: "prose",
-    heading: "A connected home, turned into a game",
+    heading: "Why personal cybersecurity needs a different approach",
     body: [
-      "Most of us live around connected devices without thinking much about how they fit together as a security system. CyQured turns that everyday setting into a tabletop game.",
-      "Your router, laptop, phone, smart speaker, camera, and other devices become part of the board. Players can acquire them, attack them, defend them, and talk through what they would do when something goes wrong.",
-      "The goal is not just to remember security terms. It is to make players stop and think about what a threat means for a device they actually use.",
+      "Most security training assumes an enterprise environment. It assumes full-time IT administrators, corporate firewalls, and institutional policies. That setup does not exist in a normal home.",
+      "People live with a growing ecosystem of connected hardware: wireless routers, IP cameras, smartphones, smart TVs, and IoT appliances. When something goes wrong, there is no IT support ticket to file. The user has to recognize the risk and make a decision on their own.",
+      "Traditional awareness programs rely heavily on passive compliance modules or slide decks. Advice like 'use strong passwords' or 'be careful on public Wi-Fi' stays abstract and disconnects from real behavior. Existing security games also have clear limits. Many focus on enterprise IT management, require an expert facilitator to run the session, or target narrow single threats like phishing while ignoring how devices connect across a home network.",
+    ],
+  },
+  {
+    kind: "prose",
+    heading: "How CyQured works",
+    body: [
+      "CyQured turns the connected home into an interactive, self-contained tabletop board game. The 28-cell board represents a digital household, where players acquire devices, launch realistic STRIDE attacks, and mount defensive mitigations.",
+      "The game is designed to run entirely without an instructor or game master. Players take turns rolling the die, moving across the track, trading assets, and defending against opponents.",
+      "A core mechanic is forced verbal justification. When a player plays an attack or defense card, they must read the description aloud and explain to the table why their response counters the threat. This turns security into an active social dialogue rather than passive rote memorization.",
     ],
   },
   {
     kind: "gallery",
-    heading: "The game brings the connected home onto the table",
+    heading: "The physical game on the table",
     columns: 2,
     items: [
       {
         src: "/media/publications/cyqured/board.webp",
         alt: "The CyQured physical board layout modeling connected home devices",
-        caption: "Tabletop board representing connected devices in a modern home",
+        caption: "Tabletop board modeling 16 connected devices across a modern home ecosystem",
       },
       {
         src: "/media/publications/cyqured/example-attack.webp",
         alt: "Close-up of a CyQured attack action card",
-        caption: "Attack card turning common threats into playable actions",
+        caption: "Attack card translating STRIDE threats into concrete, playable decisions",
       },
       {
         src: "/media/publications/cyqured/example-defense.webp",
         alt: "Close-up of a CyQured defense action card",
-        caption: "Defense card specifying counters and security mitigations",
+        caption: "Defense card specifying matching mitigations and protected device targets",
       },
       {
         src: "/media/publications/cyqured/example-chance.webp",
         alt: "Close-up of a CyQured chance card",
-        caption: "Chance card introducing uncertainty and real-world incidents",
+        caption: "Chance card introducing real-world unpredictability and security incidents",
       },
     ],
   },
   {
-    kind: "prose",
-    body: [
-      "A board, action cards, chance cards, scenario cards, and asset cards work together to turn common cybersecurity situations into something players can see and discuss.",
-    ],
-  },
-  {
     kind: "cardGrid",
-    heading: "Inside the game",
+    heading: "Inside the game box",
     columns: 3,
     items: [
       {
-        title: "16 connected devices",
-        body: "From laptops and phones to smart speakers, cameras, routers, and a home server.",
+        title: "16 Connected Devices",
+        body: "From laptops and phones to smart speakers, IP cameras, wireless routers, and home servers.",
       },
       {
-        title: "68 action cards",
-        body: "Attack and defense cards that turn threats and mitigations into playable choices.",
+        title: "68 Action Cards",
+        body: "34 attack cards and 34 defense cards mapped to STRIDE threat categories with target suggestions.",
       },
       {
-        title: "30 chance cards",
-        body: "Unexpected events that introduce uncertainty into the game.",
+        title: "30 Chance Cards",
+        body: "Unexpected security events and real-world incidents that introduce uncertainty into play.",
       },
       {
-        title: "20 scenario cards",
-        body: "Short situations where players identify the relevant STRIDE category.",
+        title: "20 Scenario Cards",
+        body: "Short narrative incident prompts where players identify the underlying STRIDE category.",
       },
       {
-        title: "28 board cells",
-        body: "A familiar board structure built around a connected home.",
+        title: "28 Board Cells",
+        body: "A cyclic Monopoly-inspired track optimized with Monte Carlo simulations to balance cell frequency.",
+      },
+      {
+        title: "Facilitator Independent",
+        body: "All rules and card prompts are self-contained so small groups can play without an instructor.",
       },
     ],
   },
   {
     kind: "cardGrid",
-    heading: "What we were trying to explore",
+    heading: "Core contributions of the paper",
     columns: 3,
     items: [
       {
-        title: "Bringing security into the home",
-        body: "CyQured focuses on the devices people encounter in everyday life rather than putting the player in the role of an enterprise security professional.",
+        title: "Home-Context Security Artifact",
+        body: "A tangible tabletop game that operationalizes STRIDE threat modeling for everyday household devices without needing enterprise knowledge.",
       },
       {
-        title: "Learning through decisions",
-        body: "Players do not simply read about a phishing attack, spoofing, or another threat. They have to decide what to do, choose a card, and explain why that response makes sense.",
+        title: "Empirical Learning Evidence",
+        body: "A mixed-methods evaluation with 50 university students demonstrating statistically significant knowledge gains across all participant backgrounds.",
       },
       {
-        title: "What happens when the game is not easy?",
-        body: "We were also interested in the other side of the experience. Does making a game engaging automatically make it easy to learn? The study gave us a more complicated answer.",
+        title: "Design Insights for Usable Security",
+        body: "Practical principles on decoupling interaction complexity from domain learning and scaffolding game mechanics for non-gamers.",
       },
-    ],
-  },
-  {
-    kind: "prose",
-    heading: "Where CyQured fits",
-    body: [
-      "CyQured builds on a broader line of cybersecurity games and learning tools, but focuses on a particular setting: the connected home.",
     ],
   },
   {
     kind: "cardGrid",
-    columns: 2,
+    heading: "Theoretical foundations",
+    columns: 3,
     items: [
       {
-        title: "CyQured",
-        body: "Personal cybersecurity in a connected home setting, designed for self-facilitated small groups.",
+        title: "Constructivist Learning",
+        body: "Players construct mental models by alternating between attacker and defender roles rather than receiving passive instructions.",
       },
       {
-        title: "Riskio",
-        body: "Risk management and cybersecurity decision-making in enterprise environments.",
+        title: "Self-Determination Theory",
+        body: "Fosters autonomy, competence, and relatedness through collaborative decision-making in a shared social setting.",
       },
       {
-        title: "Cyber Threat Defender",
-        body: "Cybersecurity threats and defensive thinking across broader network architectures.",
+        title: "Cognitive Load Theory",
+        body: "Balances challenge and usability by breaking down security concepts into structured card prompts and turn phases.",
       },
-      {
-        title: "Other security games",
-        body: "Specific isolated skills such as phishing or passwords, or requiring expert facilitators to guide the session.",
-      },
-    ],
-  },
-  {
-    kind: "prose",
-    body: [
-      "The point is not that one approach is better than another. CyQured explores what happens when cybersecurity education is placed in a familiar home setting and delivered through a game that players can run themselves.",
     ],
   },
   {
     kind: "pipeline",
-    heading: "From the first prototype to the final game",
+    heading: "Evolution from initial prototype to final game",
     steps: [
-      { label: "Initial prototype" },
-      { label: "Pilot playtesting" },
-      { label: "Observed friction", highlight: true },
-      { label: "Card redesign" },
-      { label: "Empirical evaluation" },
+      { label: "01 Initial Prototype" },
+      { label: "02 Pilot Playtesting" },
+      { label: "03 Friction & Redesign", highlight: true },
+      { label: "04 Empirical Evaluation" },
+      { label: "05 SOUPS 2026 Publication" },
     ],
   },
   {
     kind: "prose",
     body: [
-      "The first version of the cards did not give players enough guidance. During pilot testing, some participants were unsure about the threats they were seeing and depended on the Game Master for help.",
-      "We responded by making the cards clearer: adding explicit titles, shortening descriptions, identifying target devices, and showing possible defenses.",
-      "This iterative cycle turned an expert-dependent prototype into a self-facilitated learning tool ready for controlled study.",
+      "Early prototype testing showed that novice players hesitated when cards were too open-ended. Without guidance on targets or defenses, participants relied heavily on the game master for reassurance.",
+      "We redesigned the cards with explicit attack titles, concise descriptions, target device tags, and suggested mitigations. This reduced extraneous cognitive load and allowed players to run the game independently during our formal study.",
     ],
   },
 ];
@@ -161,109 +159,97 @@ export const overviewBlocks: Block[] = [
 export const howToPlayBlocks: Block[] = [
   {
     kind: "prose",
-    heading: "Everyone starts with a small home to protect",
+    heading: "Setup and starting conditions",
     body: [
-      "Each player begins with 50 credit points, eight cards, and a token on GO. The board represents a connected home, and the devices on it become the assets players can acquire and defend.",
-      "The rest of the action deck, plus 30 chance cards and 20 scenario cards, sit face-down on the board. Play proceeds clockwise around the table until an end condition is reached.",
+      "Each player starts with 50 credit points, 8 action cards, and a token on GO. The board represents a connected home, and the devices on it become the assets players can acquire, trade, and protect.",
+      "The action deck, 30 chance cards, and 20 scenario cards sit in the center of the board. Play moves clockwise around the table until an agreed end condition is reached.",
     ],
   },
   {
     kind: "pipeline",
-    heading: "A turn",
+    heading: "Structure of a turn",
     steps: [
-      { label: "01: Roll (Move around the board)" },
-      { label: "02: Land (Resolve the cell)" },
-      { label: "03: Decide (Acquire, attack, defend, or solve)" },
-      { label: "04: Explain (Justify your choice aloud)", highlight: true },
+      { label: "01 Roll (Move around the board)" },
+      { label: "02 Land (Resolve cell event)" },
+      { label: "03 Decide (Acquire, attack, or defend)" },
+      { label: "04 Justify (Read and explain aloud)", highlight: true },
     ],
   },
   {
     kind: "prose",
     body: [
-      "That last step is important. Players have to read their chosen card aloud and justify the attack or defense they picked. The game therefore turns security decisions into something players have to explain, not just recognize.",
+      "Step four is the active learning engine of CyQured. When playing an attack or defense, the player must read the card text aloud and justify their strategic choice to the other players. This embeds active verbal reasoning into every round.",
     ],
   },
   {
     kind: "cardGrid",
-    heading: "When a device is attacked",
+    heading: "Resolving an attack on a device",
     columns: 2,
     items: [
       {
-        title: "01 Attacker",
-        body: "Choose an attack card that fits the target device.",
+        title: "01 Attacker plays",
+        body: "The attacking player chooses an attack card compatible with the target device.",
       },
       {
-        title: "02 Defender",
-        body: "Choose a defense card that could stop the incoming threat.",
+        title: "02 Defender responds",
+        body: "The defending player selects a defense card from their hand that mitigates the incoming threat.",
       },
       {
-        title: "03 Both players",
-        body: "Read cards aloud and explain why their choices make sense.",
+        title: "03 Verbal explanation",
+        body: "Both players read their cards aloud and explain why the defense works or fails against the attack.",
       },
       {
-        title: "04 Outcome",
-        body: "The defense succeeds or fails, changing what happens to the asset and the players' points.",
+        title: "04 Outcome and points",
+        body: "A successful defense prevents point loss. A failed defense costs points or risks asset ownership.",
       },
     ],
   },
   {
     kind: "prose",
     body: [
-      "The router and home server are treated differently because compromising them can affect the wider home network. A failed defense can therefore change ownership after a single failure.",
+      "Critical network gateways like the Wireless Router and Home Server carry special stakes. Compromising a router allows lateral movement across the network, so a single failed defense can trigger an immediate transfer of device ownership.",
     ],
   },
   {
     kind: "prose",
-    heading: "The threats behind the cards",
+    heading: "STRIDE threat modeling in the deck",
     body: [
-      "The attack and defense cards are grounded in STRIDE, a common way of thinking about different kinds of security threats.",
+      "All attack and defense cards are grounded in the STRIDE framework, making formal threat categories intuitive through direct play.",
     ],
   },
   {
     kind: "cardGrid",
     columns: 3,
     items: [
-      { title: "S: Spoofing", body: "Impersonating a person, device, or service to gain unauthorized access." },
-      { title: "T: Tampering", body: "Modifying data, code, or communication streams maliciously." },
-      { title: "R: Repudiation", body: "Denying an action occurred without proof or audit logs." },
-      { title: "I: Information Disclosure", body: "Exposing confidential data or credentials to unauthorized parties." },
-      { title: "D: Denial of Service", body: "Making a device, network, or service unavailable to legitimate users." },
-      { title: "E: Elevation of Privilege", body: "Gaining unpermitted capabilities or administrator control." },
-    ],
-  },
-  {
-    kind: "prose",
-    body: [
-      "Players encounter these ideas through concrete situations on the board rather than having to learn the framework first.",
+      { title: "S: Spoofing", body: "Impersonating a person, device, or service to gain unauthorized network access." },
+      { title: "T: Tampering", body: "Modifying sensitive files, firmware, or live communication streams maliciously." },
+      { title: "R: Repudiation", body: "Denying an action occurred when systems lack tamper-evident audit logs." },
+      { title: "I: Information Disclosure", body: "Exposing private credentials, personal photos, or device traffic." },
+      { title: "D: Denial of Service", body: "Flooding a router or service with traffic to make it unavailable to users." },
+      { title: "E: Elevation of Privilege", body: "Gaining administrator rights or unauthorized capabilities on a device." },
     ],
   },
   {
     kind: "cardGrid",
-    heading: "The board has a few surprises",
+    heading: "Special board cells",
     columns: 3,
     items: [
-      { title: "GO", body: "Complete a lap and collect points and action cards." },
-      { title: "Chance", body: "Draw an unexpected event and deal with what happens." },
-      { title: "Scenario", body: "Read a situation and identify the relevant type of threat." },
-      { title: "Power Outage", body: "Your devices temporarily go offline." },
-      { title: "STOP", body: "Lose your next turn." },
-      { title: "Card Penalty", body: "Give up cards from your hand." },
-    ],
-  },
-  {
-    kind: "prose",
-    body: [
-      "Some devices matter more than others: the router and home server carry higher values because compromising them can affect much more of the home network.",
+      { title: "GO", body: "Complete a full lap around the home to collect bonus points and new action cards." },
+      { title: "Chance", body: "Draw an event card reflecting real-world uncertainty and security incidents." },
+      { title: "Scenario", body: "Analyze an incident prompt and identify the correct STRIDE category for points." },
+      { title: "Power Outage", body: "Temporarily deactivates all active device defenses for a round." },
+      { title: "STOP", body: "Simulates downtime or mandatory security updates, skipping the player's turn." },
+      { title: "Card Penalty", body: "Forces a player to discard cards, simulating credential or data loss." },
     ],
   },
   {
     kind: "cardGrid",
-    heading: "How does the game end?",
+    heading: "Game completion modes",
     columns: 3,
     items: [
-      { title: "Elimination", body: "Last player with points or assets remaining wins." },
-      { title: "Timed", body: "When time runs out, the player with the highest total score wins." },
-      { title: "Target score", body: "The first player to reach the agreed score wins." },
+      { title: "Elimination", body: "Players who run out of points and assets exit. The last surviving player wins." },
+      { title: "Timed Play", body: "Play runs for a set duration such as 45 or 60 minutes. Highest score wins." },
+      { title: "Target Score", body: "The first player to reach an agreed number of points and assets wins." },
     ],
   },
 ];
@@ -271,127 +257,117 @@ export const howToPlayBlocks: Block[] = [
 export const studyBlocks: Block[] = [
   {
     kind: "prose",
-    heading: "So, did it actually help people learn?",
+    heading: "Empirical evaluation: design and participant cohorts",
     body: [
-      "We wanted to know two things. First, whether playing CyQured could improve cybersecurity knowledge. Second, whether the experience felt different for students who already had some cybersecurity background.",
-      "We evaluated the game with 50 university students. They played in small groups, completed a knowledge test before and after the game, and then reported on usability, cognitive load, and technology acceptance.",
+      "We evaluated CyQured through a mixed-methods empirical study with 50 university students to evaluate knowledge acquisition (RQ1) and user experience across differing technical backgrounds (RQ2).",
+      "Participants were split into two primary cohorts based on prior security background: 13 students with formal cybersecurity coursework (SC) and 37 students without cybersecurity coursework (NC). Within the non-coursework group, we also tracked tabletop gaming literacy: 23 participants had played Monopoly before (NC-M), while 14 had no prior board game experience (NC-NM).",
     ],
   },
   {
     kind: "pipeline",
     heading: "Study workflow",
     steps: [
-      { label: "Before playing (10-item knowledge test)" },
-      { label: "Play (Small-group gameplay)" },
-      { label: "After playing (10-item knowledge test)" },
-      { label: "Experience (SUS, TAM, NASA-TLX)" },
-      { label: "Discussion (Open-ended interviews)", highlight: true },
+      { label: "01 Pre-Test (10-item threat recognition)" },
+      { label: "02 Gameplay Session (60-minute group play)" },
+      { label: "03 Post-Test (10-item defensive reasoning)" },
+      { label: "04 Surveys (SUS, NASA-TLX, TAM)" },
+      { label: "05 Semi-Structured Interviews", highlight: true },
     ],
   },
   {
     kind: "statGrid",
-    heading: "Who took part?",
+    heading: "Participant demographics (N = 50)",
     columns: 5,
     items: [
-      { value: "50", label: "University students in total", highlight: true },
-      { value: "13", label: "Security coursework (SC)" },
-      { value: "37", label: "No security coursework (NC)" },
-      { value: "23", label: "NC, had played Monopoly" },
-      { value: "14", label: "NC, had not played Monopoly" },
+      { value: "50", label: "Total participants", highlight: true },
+      { value: "13", label: "Security Coursework (SC)" },
+      { value: "37", label: "No Coursework (NC)" },
+      { value: "23", label: "NC with Monopoly Exp (NC-M)" },
+      { value: "14", label: "NC no Monopoly Exp (NC-NM)" },
     ],
   },
   {
     kind: "prose",
+    heading: "RQ1: Knowledge acquisition across all groups",
     body: [
-      "We also looked at prior Monopoly experience because the board uses a familiar roll-and-move movement structure.",
+      "Every participant group demonstrated statistically significant knowledge gains between the pre-test and post-test. The 10-item pre-test evaluated threat identification, while the post-test measured corresponding defensive mitigation strategies.",
+      "The security coursework group improved by an average of 3.38 points out of 10 (SD = 1.80, d = 1.88, p < .001). The non-coursework group gained an average of 1.95 points (SD = 1.20, d = 1.62, p < .001). Both effect sizes are large, demonstrating meaningful learning regardless of prior background.",
+      "Prior security coursework gave students a larger gain (Welch's t = 2.87, p = .01), showing that familiarity with domain terms helped accelerate learning. Importantly, prior board game experience did not affect knowledge gain: NC-M gained 1.96 points (d = 1.55) and NC-NM gained 1.93 points (d = 1.69). Both groups learned the security concepts equally well.",
     ],
   },
   {
-    kind: "prose",
-    heading: "Players knew more after playing",
-    body: [
-      "Both groups improved on the knowledge test, although the students with prior cybersecurity coursework showed the larger gain.",
-    ],
-  },
-  {
-    kind: "barChart",
-    heading: "Knowledge score gain (points out of 10, post-test minus pre-test)",
-    unit: " pt",
-    items: [
-      { label: "Security coursework", value: 3.38, highlight: true },
-      { label: "All players", value: 2.32 },
-      { label: "No security coursework", value: 1.95 },
-    ],
+    kind: "figure",
+    src: "/media/cyqured/knowledge_gain.jpeg",
+    alt: "Knowledge gain distributions showing mean score improvements across SC, NC, NC-M, NC-NM, and All Game cohorts",
+    caption: "Figure 1: Knowledge score gain (post-test minus pre-test out of 10) across participant cohorts, showing large effect sizes (d > 1.5) across all groups.",
   },
   {
     kind: "findings",
     items: [
-      { label: "Effect size (Security coursework)", value: "d = 1.88, p < .001 (large effect)" },
-      { label: "Effect size (No security coursework)", value: "d = 1.62, p < .001 (large effect)" },
+      { label: "Security Coursework (SC, n = 13)", value: "ΔM = +3.38, SD = 1.80, d = 1.88, p < .001 (large effect)" },
+      { label: "No Coursework (NC, n = 37)", value: "ΔM = +1.95, SD = 1.20, d = 1.62, p < .001 (large effect)" },
+      { label: "All Gameplay Participants (N = 50)", value: "ΔM = +2.32, SD = 1.46, d = 1.58, p < .001 (LMM β = 2.32, p < .001)" },
     ],
   },
   {
     kind: "prose",
-    heading: "Could the improvement just come from taking the test twice?",
+    heading: "Guarding against test-retest bias: supplemental control study",
     body: [
-      "We ran a separate control study with 20 participants who took the same test twice, 60 minutes apart, without playing the game in between.",
+      "To verify that score improvements reflected genuine learning rather than familiarity from taking the test twice, we conducted a control study with 20 demographically matched participants from the NC cohort.",
+      "Control participants took the pre-test and post-test 60 minutes apart without playing CyQured or receiving any security instruction.",
+      "The control group showed no significant score change (Pre: 4.05 vs Post: 3.85, ΔM = -0.20, SD = 1.61, t = 0.56, p = .58, d = 0.12). This confirms that knowledge gains in the main study were directly caused by gameplay.",
     ],
   },
   {
-    kind: "findings",
-    items: [
-      { label: "Control group score change (N = 20)", value: "Pre 4.05 to Post 3.85 (-0.20 points)" },
-      { label: "Statistical significance", value: "p = .58 (not significant), making a test-practice explanation unlikely" },
-    ],
+    kind: "figure",
+    src: "/media/cyqured/control_study.jpeg",
+    alt: "Comparison of score gains between the Gameplay group (+2.32) and the Control group (-0.20)",
+    caption: "Figure 2: Supplemental control study comparison showing significant gains for gameplay participants (n = 50) versus no change for the non-playing control group (n = 20).",
   },
   {
     kind: "prose",
-    heading: "But learning was not the whole story",
+    heading: "RQ2: The usability divide and gaming literacy",
     body: [
-      "The game was easier for some people than others.",
-      "Students with prior cybersecurity coursework gave the game a System Usability Scale (SUS) score of 80.6. Among students without that background, the score dropped to 66.3.",
+      "While learning was consistent across cohorts, perceived usability told a more nuanced story.",
+      "Participants with cybersecurity coursework rated the game at a mean System Usability Scale (SUS) score of 80.6 (SD = 10.6), placing it in the 'Excellent' category. For students without security coursework, the mean SUS score dropped to 66.3 (SD = 14.9), categorized as 'Borderline' against the standard 68-point usability benchmark.",
+      "Dividing the non-coursework cohort by prior Monopoly experience revealed the source of this gap. Participants familiar with Monopoly rated usability at 73.7 ('Good'), while non-gamers rated it at 54.1 ('Poor'). This difference was statistically significant (t = 6.13, p < .001, d = 1.90), showing that familiarity with board game mechanics heavily buffered usability friction.",
     ],
   },
   {
-    kind: "barChart",
-    heading: "System Usability Scale by group (0 to 100, where 68 is the standard benchmark)",
-    unit: "",
-    items: [
-      { label: "Security coursework", value: 80.6, highlight: true },
-      { label: "All players", value: 70.0 },
-      { label: "No security coursework", value: 66.3 },
-    ],
+    kind: "figure",
+    src: "/media/cyqured/sus_scores.jpeg",
+    alt: "System Usability Scale scores across participant groups: SC (80.6), NC-M (73.7), All (70.0), NC (66.3), and NC-NM (54.1)",
+    caption: "Figure 3: System Usability Scale (SUS) scores across cohorts compared to the 68-point industry benchmark for acceptable usability.",
   },
   {
     kind: "prose",
-    heading: "The board was familiar to some players. Not to everyone.",
+    heading: "Cognitive workload: learning rules vs learning security",
     body: [
-      "The difference became even more striking when we looked at prior Monopoly experience.",
+      "NASA-TLX subscales clarify why non-gamers felt more friction. Participants in the NC-NM subgroup reported elevated Mental Demand, Effort, and Frustration compared to their board-game-literate peers.",
+      "Non-gamers had to handle a double cognitive burden: learning turn mechanics, card types, and movement rules while simultaneously reasoning about unfamiliar cybersecurity threats.",
+      "Crucially, both groups rated their own Performance highly on the NASA-TLX. This indicates that participants experienced the initial difficulty as an active challenge rather than failure.",
     ],
   },
   {
-    kind: "barChart",
-    heading: "SUS within the no-coursework group by prior Monopoly experience",
-    unit: "",
-    items: [
-      { label: "Had played Monopoly", value: 73.7, highlight: true },
-      { label: "Had not played Monopoly", value: 54.1 },
-    ],
-  },
-  {
-    kind: "prose",
-    body: [
-      "Prior board game familiarity did not change how much knowledge players gained. But it changed how easy the game felt to play.",
-    ],
+    kind: "figure",
+    src: "/media/cyqured/TLX.jpeg",
+    alt: "NASA-TLX cognitive load radar chart comparing NC-M and NC-NM across six workload dimensions",
+    caption: "Figure 4: NASA-TLX workload profiles comparing non-coursework players with Monopoly experience (NC-M) and without Monopoly experience (NC-NM).",
   },
   {
     kind: "prose",
-    heading: "Learning the game was part of the learning",
+    heading: "High technology acceptance across all groups",
     body: [
-      "Students without prior cybersecurity coursework reported more mental demand and effort. Among them, those who had never played Monopoly reported the highest workload.",
-      "They were learning two things at once: how to play the game and how to reason about the security concepts inside it.",
-      "Both groups rated their own performance positively, showing that the difficulty was experienced as an active challenge rather than a failure.",
+      "Despite the usability hurdles experienced by novice players, Technology Acceptance Model (TAM) scores remained uniformly high across both cohorts.",
+      "Participants strongly agreed that CyQured improved their ability to identify threats and defenses (Perceived Usefulness > 4.25 out of 5), expressed high intention to use it again (ITU > 4.40), and reported positive attitudes toward the experience (ATT > 4.60).",
+      "Perceived Ease of Use (PEOU) showed the expected divide between SC (4.42) and NC (4.09, p = .005, d = 0.64), aligning with the SUS findings while confirming that usability friction did not diminish the game's perceived educational value.",
     ],
+  },
+  {
+    kind: "figure",
+    src: "/media/cyqured/TAM.jpeg",
+    alt: "Technology Acceptance Model construct scores for SC and NC groups across PEOU, PU, ATT, and ITU",
+    caption: "Figure 5: Technology Acceptance Model (TAM) constructs (5-point Likert) comparing Security Coursework (SC) and No Coursework (NC) groups.",
   },
   {
     kind: "quote",
@@ -402,96 +378,65 @@ export const studyBlocks: Block[] = [
   {
     kind: "prose",
     body: [
-      "The students without cybersecurity coursework and without prior Monopoly experience had the lowest usability score, 54.1. Yet they still showed a substantial gain on the knowledge test.",
-      "We call this tension the CyQured Paradox: the experience could be difficult to navigate while still feeling useful and engaging enough for players to stay with it.",
-      "Participants described the game as confusing at first, but several also said that it became easier as they played and that the social interaction made the experience enjoyable.",
+      "The NC-NM subgroup had the lowest usability score (54.1) and highest reported mental effort, yet achieved a substantial learning gain of 1.93 points (d = 1.69). We call this tension the CyQured Paradox.",
+      "Our findings suggest that high perceived usefulness and the social energy of tabletop play acted as a motivational reserve. Even when players felt overwhelmed by rules during the first round, peer interaction and collaborative discussion kept them engaged through the productive struggle.",
     ],
   },
   {
     kind: "findings",
-    heading: "What did players actually say?",
+    heading: "What participants said in post-game interviews",
     items: [
-      { label: "P1, novice", value: '"It was confusing in the beginning, but it got easier as we played."' },
-      { label: "P15, novice", value: '"It was confusing, sure, but I actually learned a lot of things."' },
-      { label: "P27, novice", value: '"The fun part was everyone sitting together and playing."' },
-      { label: "P9, security coursework", value: '"It was engaging to have such good discussions with everyone."' },
-    ],
-  },
-  {
-    kind: "prose",
-    body: [
-      "The comments point to a pattern we also saw in the quantitative results: the early experience could be difficult, but players often adjusted as they became familiar with the rules and concepts.",
-    ],
-  },
-  {
-    kind: "prose",
-    heading: "People still saw value in the game",
-    body: [
-      "Despite the differences in usability, both groups rated the game's usefulness, attitude, and intention to use positively.",
-    ],
-  },
-  {
-    kind: "barChart",
-    heading: "Technology acceptance comparison (mean score out of 5)",
-    unit: "",
-    items: [
-      { label: "SC: Attitude", value: 4.85, highlight: true },
-      { label: "SC: Intent to use", value: 4.54 },
-      { label: "SC: Ease of use", value: 4.42 },
-      { label: "SC: Usefulness", value: 4.26 },
-      { label: "NC: Attitude", value: 4.61, highlight: true },
-      { label: "NC: Intent to use", value: 4.43 },
-      { label: "NC: Usefulness", value: 4.25 },
-      { label: "NC: Ease of use", value: 4.09 },
+      { label: "P27 (NC, Initial Barriers)", value: '"There are just too many rules to remember right at the start."' },
+      { label: "P33 (NC, Terminology)", value: '"At first, concepts like spoofing were really confusing to me."' },
+      { label: "P1 (NC, Gradual Adjustment)", value: '"It was confusing in the beginning, but it got easier as we played."' },
+      { label: "P15 (NC, Productive Struggle)", value: '"It was confusing, sure, but I actually learned a lot of things."' },
+      { label: "P27 (NC, Social Interaction)", value: '"The fun part was everyone sitting together and playing."' },
+      { label: "P9 (SC, Peer Scaffolding)", value: '"It was engaging to have such good discussions with everyone."' },
     ],
   },
   {
     kind: "cardGrid",
-    heading: "What we still do not know",
-    columns: 2,
-    items: [
-      {
-        title: "Will the learning last?",
-        body: "The study measured knowledge immediately after gameplay. We did not test long-term retention.",
-      },
-      {
-        title: "Would this work outside a study session?",
-        body: "Participants played in a controlled setting with researchers present. We have not yet tested completely unsupervised home or classroom use.",
-      },
-      {
-        title: "Who else would benefit?",
-        body: "The participants were university students. A broader population may respond differently.",
-      },
-      {
-        title: "How reliable are the estimates?",
-        body: "The sample was modest (N = 50), so the large effect sizes should be interpreted cautiously and replicated with larger studies.",
-      },
-    ],
-  },
-  {
-    kind: "cardGrid",
-    heading: "What we learned",
+    heading: "Design implications for usable security games",
     columns: 3,
     items: [
       {
-        title: "Games can make security decisions tangible",
-        body: "Players interacted with threats and defenses directly rather than only reading about them.",
+        title: "Decouple Interaction from Content",
+        body: "Pedagogical success and usability are separate dimensions. Game rules must be scaffolded as carefully as security concepts so mechanics do not consume cognitive capacity needed for learning.",
       },
       {
-        title: "Familiarity matters",
-        body: "Prior experience with cybersecurity and tabletop games affected how easy the game felt.",
+        title: "Design for Asymmetric Literacy",
+        body: "Novices often lack both security domain knowledge and tabletop experience. Games should introduce mechanics progressively across rounds before layering complex threat interactions.",
       },
       {
-        title: "A game can teach and still be difficult",
-        body: "The strongest result was not simply that knowledge improved. It was the tension between learning, usability, and cognitive load.",
+        title: "Ease of Use for Long-Term Adoption",
+        body: "High perceived usefulness sustains attention during structured studies, but high interaction friction can cause security fatigue. Accessible onboarding is vital for voluntary home adoption.",
+      },
+    ],
+  },
+  {
+    kind: "cardGrid",
+    heading: "Limitations and future work",
+    columns: 3,
+    items: [
+      {
+        title: "Population Diversity",
+        body: "The study evaluated university students in Bangladesh. Future research should evaluate CyQured across broader non-academic and older adult demographics.",
+      },
+      {
+        title: "Long-Term Retention",
+        body: "Knowledge assessments were conducted immediately post-gameplay. Longitudinal studies are needed to evaluate retention and transfer to everyday device habits.",
+      },
+      {
+        title: "Unsupervised Deployment",
+        body: "Sessions were conducted in a controlled environment with researchers present. Future trials will test fully self-administered play in living rooms and community centers.",
       },
     ],
   },
   {
     kind: "prose",
-    heading: "From thesis to SOUPS",
+    heading: "Publication and citation",
     body: [
-      "CyQured began as an undergraduate thesis at Shahjalal University of Science and Technology. The project grew into a larger design and evaluation study and was accepted for publication at the USENIX Symposium on Usable Privacy and Security (SOUPS) 2026 in Hannover, Germany.",
+      "CyQured started as our undergraduate thesis at Shahjalal University of Science and Technology (SUST). It evolved into a comprehensive design and empirical study accepted at USENIX SOUPS 2026 in Hannover, Germany.",
       "Authors: Utsho Das*, Argha Pratim Saha*, Md Sadek Ferdous, Md Masum, Farida Chowdhury (*equal contribution).",
     ],
   },

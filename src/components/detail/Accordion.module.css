@@ -1,0 +1,102 @@
+.accordion {
+  border: var(--border-hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+}
+
+.accordion:hover {
+  border-color: var(--accent);
+}
+
+.summaryButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--foreground);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.summaryButton:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.02));
+}
+
+.summaryButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  margin: 0;
+}
+
+.chevron {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface-subtle, rgba(0, 0, 0, 0.04));
+  color: var(--muted);
+  transition: transform var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+
+.open .chevron {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+.contentWrapper {
+  border-top: var(--border-hairline);
+  padding: var(--space-5);
+  background: var(--surface-subtle, rgba(0, 0, 0, 0.015));
+}
+
+.paragraph {
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--foreground);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}

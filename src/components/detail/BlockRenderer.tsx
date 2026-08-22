@@ -11,6 +11,7 @@ import { ConfusionMatrix } from "./ConfusionMatrix";
 import { Pipeline } from "./Pipeline";
 import { Carousel } from "./Carousel";
 import { RocCurve } from "./RocCurve";
+import { Accordion } from "./Accordion";
 import styles from "./BlockRenderer.module.css";
 
 export function BlockRenderer({ blocks }: { blocks: Block[] }) {
@@ -79,6 +80,15 @@ function renderBlock(block: Block) {
       );
     case "code":
       return <CodeBlock body={block.body} language={block.language} />;
+    case "accordion":
+      return (
+        <Accordion
+          title={block.title}
+          subtitle={block.subtitle}
+          defaultOpen={block.defaultOpen}
+          content={block.content}
+        />
+      );
     default:
       return null;
   }

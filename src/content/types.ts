@@ -145,7 +145,8 @@ type BlockVariant =
       auc?: number;
       modelName?: string;
       models?: { name: string; auc: number; color?: string; points: [number, number][]; highlight?: boolean }[];
-    };
+    }
+  | { kind: "accordion"; title: string; subtitle?: string; defaultOpen?: boolean; content: string[] };
 
 export type Block = BlockVariant & { heading?: string };
 
