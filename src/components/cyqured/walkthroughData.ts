@@ -1,5 +1,5 @@
 import { cardFaces, type CardFace } from "@/app/publications/cyqured/cardData";
-import { CONNECTED_DEVICES } from "./GameBoardSection";
+import { CONNECTED_DEVICES } from "./boardData";
 
 /** A single hand-authored example playthrough, grounded in the rules described
  * in the CyQured paper (Sections 3-4): 28-cell board, 16 devices, 50 starting

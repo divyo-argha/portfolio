@@ -15,7 +15,7 @@ import {
   type PlayerId,
 } from "./walkthroughData";
 import type { CardFace } from "@/app/publications/cyqured/cardData";
-import { CONNECTED_DEVICES } from "./GameBoardSection";
+import { CONNECTED_DEVICES } from "./boardData";
 import { GameTable } from "./GameTable";
 import { DiceRoll } from "./DiceRoll";
 import { CombatCard } from "./CombatCard";
