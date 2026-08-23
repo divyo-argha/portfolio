@@ -22,11 +22,9 @@ export const siteConfig = {
    * and cannot half-fail. */
   indexable: false,
   navLinks: [
-    { label: "Research", href: "#research" },
-    { label: "Publications", href: "#publications" },
-    { label: "Education", href: "#education" },
-    { label: "Experience", href: "#experience" },
-    { label: "Programming", href: "#programming" },
+    { label: "Research", href: "/research" },
+    { label: "Publications", href: "/publications" },
+    { label: "Projects", href: "/work" },
     { label: "Contact", href: "#contact" },
   ],
 };

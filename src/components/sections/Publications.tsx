@@ -9,12 +9,11 @@ import { publications } from "@/content/publications";
 import styles from "./ResearchSections.module.css";
 
 /**
- * The peer-reviewed record — the load-bearing credential for a PhD
- * application. Sits after the research thesis and the at-a-glance evidence
- * strip, and ahead of the methods section, matching a reader who now knows
- * what the work is about before seeing the record itself. Also gives
- * `DetailLayout`'s existing `/#publications` back-link a real section to land
- * on instead of the offset anchor span that used to stand in for one.
+ * The full peer-reviewed record. Home only shows the flagship publication
+ * (see `FeaturedPublicationSection.tsx`) with a link through to this
+ * standalone `/publications` page — keeps Home short while still giving the
+ * complete record its own real page, which is also where `DetailLayout`'s
+ * publication back-link now points.
  */
 export function Publications() {
   const [cyqured, iccit, naacl] = publications;

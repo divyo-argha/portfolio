@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/site";
 import { useSectionNav } from "@/hooks/useSectionNav";
 import { Container } from "@/components/primitives/Container";
@@ -14,9 +16,12 @@ export function SiteHeader() {
   const [activeSection, setActiveSection] = useState<string>("");
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const navigateToSection = useSectionNav();
+  const pathname = usePathname();
 
   useEffect(() => {
-    const sectionIds = siteConfig.navLinks.map((l) => l.href.replace(/^#/, ""));
+    const sectionIds = siteConfig.navLinks
+      .filter((l) => l.href.startsWith("#"))
+      .map((l) => l.href.replace(/^#/, ""));
     const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
@@ -64,16 +69,23 @@ export function SiteHeader() {
           <nav className={styles.nav} aria-label="Primary">
             <ul className={styles.list}>
               {siteConfig.navLinks.map((link) => {
-                const isActive = activeSection === link.href;
+                const isHash = link.href.startsWith("#");
+                const isActive = isHash ? activeSection === link.href : pathname === link.href;
                 return (
                   <li key={link.href}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleAnchorClick(e, link.href)}
-                      className={isActive ? styles.active : undefined}
-                    >
-                      {link.label}
-                    </a>
+                    {isHash ? (
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleAnchorClick(e, link.href)}
+                        className={isActive ? styles.active : undefined}
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link href={link.href} className={isActive ? styles.active : undefined}>
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 );
               })}

@@ -1,0 +1,15 @@
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.seeAll:hover {
+  text-decoration: underline;
+}

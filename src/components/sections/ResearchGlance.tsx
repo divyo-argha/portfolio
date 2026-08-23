@@ -29,7 +29,7 @@ export function ResearchGlance() {
     },
     {
       eyebrow: "Research experience",
-      href: "#experience",
+      href: "#background",
       headline: researchRole ? researchRole.org : "Research Assistant",
       detail: researchRole
         ? `${researchRole.title} · ${researchRole.dates}`
@@ -37,13 +37,13 @@ export function ResearchGlance() {
     },
     {
       eyebrow: "Methods",
-      href: "#methods",
+      href: "/research#methods",
       headline: "Mixed methods",
       detail: sampleMethods.length > 0 ? sampleMethods.join(" · ") : "Qualitative & quantitative evaluation.",
     },
     {
       eyebrow: "Research areas",
-      href: "#research",
+      href: "/research",
       headline: "Human-centered security",
       detail: profile.focusLine,
     },

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "@/components/primitives/Container";
 import { Portrait } from "@/components/primitives/Portrait";
 import { IconLink } from "@/components/primitives/IconLink";
@@ -29,9 +30,9 @@ export function Hero() {
 
             <div className={styles.actionRow}>
               <div className={styles.buttonRow}>
-                <a href="#research" className={styles.primaryButton}>
+                <Link href="/research" className={styles.primaryButton}>
                   <span>View Research</span>
-                </a>
+                </Link>
 
                 <a
                   href={profile.cvUrl}

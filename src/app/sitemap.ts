@@ -7,6 +7,9 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     { url: siteConfig.url, priority: 1 },
+    { url: `${siteConfig.url}/research`, priority: 0.9 },
+    { url: `${siteConfig.url}/publications`, priority: 0.9 },
+    { url: `${siteConfig.url}/work`, priority: 0.7 },
     { url: `${siteConfig.url}/publications/cyqured/game`, priority: 0.8 },
     { url: `${siteConfig.url}/publications/cyqured/game/mechanics`, priority: 0.7 },
     { url: `${siteConfig.url}/publications/cyqured/game/publication`, priority: 0.7 },

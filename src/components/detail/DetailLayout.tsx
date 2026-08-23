@@ -11,8 +11,8 @@ import { AuthorAffiliation } from "./AuthorAffiliation";
 import styles from "./DetailLayout.module.css";
 
 export function DetailLayout({ detail, customBody }: { detail: DetailMeta; customBody?: ReactNode }) {
-  const backHref = detail.kind === "publication" ? "/#publications" : "/#engineering";
-  const backLabel = detail.kind === "publication" ? "Back to publications" : "Back to engineering";
+  const backHref = detail.kind === "publication" ? "/publications" : "/work";
+  const backLabel = detail.kind === "publication" ? "Back to publications" : "Back to projects";
   const showHeroMark = detail.heroMark && detail.venueMark;
 
   return (

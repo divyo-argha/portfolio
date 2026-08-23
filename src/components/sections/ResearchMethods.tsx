@@ -3,10 +3,11 @@ import { MethodsStack } from "./MethodsStack";
 import styles from "./ResearchSections.module.css";
 
 /**
- * Standalone home for the methods evidence, promoted out of `Research.tsx`
- * (now `ResearchIntro.tsx`) so it reads as its own piece of proof — how the
- * research actually gets done — rather than a subsection of the thesis.
- * `id="methods"` is unchanged so existing `/#methods` links keep resolving.
+ * Standalone home for the methods evidence, rendered on `/research` (see
+ * `src/app/research/page.tsx`) alongside `ResearchIntro` and
+ * `FutureDirections` — the narrative depth that used to live on the homepage
+ * before it moved to its own page. `id="methods"` gives `ResearchGlance`'s
+ * "Methods" tile a `/research#methods` anchor to land on.
  */
 export function ResearchMethods() {
   return (

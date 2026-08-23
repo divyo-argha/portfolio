@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import { createPortal } from "react-dom";
+import { usePathname } from "next/navigation";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { useSectionNav } from "@/hooks/useSectionNav";
 import { siteConfig } from "@/lib/site";
@@ -31,6 +32,7 @@ export function MobileNav({
 }) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const navigateToSection = useSectionNav();
+  const pathname = usePathname();
   const [rendered, setRendered] = useState(open);
   const [prevOpen, setPrevOpen] = useState(open);
   const [visible, setVisible] = useState(false);
@@ -68,6 +70,11 @@ export function MobileNav({
   }, [open, rendered]);
 
   function handleLinkClick(event: MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!href.startsWith("#")) {
+      // Real route (e.g. /research) — let the anchor navigate normally.
+      onClose();
+      return;
+    }
     event.preventDefault();
     onClose();
     navigateToSection(href);
@@ -156,7 +163,7 @@ export function MobileNav({
         <nav className={styles.navWrap}>
           <ul className={styles.list}>
             {siteConfig.navLinks.map((link, index) => {
-              const isActive = activeSection === link.href;
+              const isActive = link.href.startsWith("#") ? activeSection === link.href : pathname === link.href;
               return (
                 <li
                   key={link.href}

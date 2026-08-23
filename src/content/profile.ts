@@ -10,8 +10,11 @@ export const profile = {
   status: "PhD applicant · Fall 2027 · SUST CSE",
   /** Leads with the general research question, then the concrete work that
    * question has produced so far — not the reverse, so the identity doesn't
-   * read as narrower than it is. */
-  bio: "My research looks at people whose digital lives were never designed around them: how they notice, understand, and respond to security and privacy risks when systems, interfaces, and security mechanisms don't line up with what they know, expect, or have access to. Most of my work so far has followed that question into phishing, smishing, and the kind of social engineering that arrives on a shared phone. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game accepted at USENIX SOUPS 2026.",
+   * read as narrower than it is. Kept to three sentences on purpose: Home is
+   * meant to be read in one breath, not scanned; the fuller version of this
+   * argument — phishing/smishing specifics, the full research statement — is
+   * one click away at `/research`. */
+  bio: "My research looks at people whose digital lives were never designed around them — how they notice, understand, and respond to security and privacy risks when systems don't line up with what they know or have access to. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game accepted at USENIX SOUPS 2026.",
   location: "Dhaka, Bangladesh",
   email: "arghapratimsaha00@gmail.com",
   university: "Shahjalal University of Science and Technology (SUST)",
