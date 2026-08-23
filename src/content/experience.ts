@@ -26,7 +26,6 @@ export const positions: Position[] = [
     dates: "Jan 2026 – Present",
     detail: "BRAC University",
     bullets: [
-      "Helped start the group in January 2026 and handle the operational side of it: scheduling, student recruitment, and getting the first seminars onto the calendar.",
       "Run the reading group on usable privacy and digital accessibility, and pick most of the papers we work through.",
       "Mentor undergraduates on their first research project, mostly on how to frame a question and scope it down to something they can finish.",
     ],

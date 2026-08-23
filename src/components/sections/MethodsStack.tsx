@@ -7,14 +7,6 @@ import styles from "./MethodsStack.module.css";
 export function MethodsStack() {
   return (
     <div className={styles.sectionWrap}>
-      <div className={styles.subheadBlock}>
-        <span className={styles.subheadEyebrow}>02 · Methodologies</span>
-        <h3 className={styles.subheadTitle}>Empirical study methods & evaluation.</h3>
-        <p className={styles.subheadLede}>
-          Every method below is directly attached to the published study or manuscript that employed it, with its sample size and measurement protocols.
-        </p>
-      </div>
-
       <div className={styles.studiesGrid}>
         {methodGroups.map((group, i) => (
           <Reveal key={group.study} delay={Math.min(i, 2) as 0 | 1 | 2}>

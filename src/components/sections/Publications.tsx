@@ -9,15 +9,12 @@ import { publications } from "@/content/publications";
 import styles from "./ResearchSections.module.css";
 
 /**
- * The peer-reviewed record, split out of the old combined
- * "Research & Publications" block and placed ahead of the research statement.
- *
- * Reasoning: the record is the load-bearing credential for an application, and
- * previously it sat below a screen of philosophy prose. The hero already states
- * the research area, so leading with evidence and following with interpretation
- * reads better than the reverse. It also gives `DetailLayout`'s existing
- * `/#publications` back-link a real section to land on instead of the offset
- * anchor span that used to stand in for one.
+ * The peer-reviewed record — the load-bearing credential for a PhD
+ * application. Sits after the research thesis and the at-a-glance evidence
+ * strip, and ahead of the methods section, matching a reader who now knows
+ * what the work is about before seeing the record itself. Also gives
+ * `DetailLayout`'s existing `/#publications` back-link a real section to land
+ * on instead of the offset anchor span that used to stand in for one.
  */
 export function Publications() {
   const [cyqured, iccit, naacl] = publications;

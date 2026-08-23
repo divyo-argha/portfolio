@@ -18,6 +18,7 @@ export function Hero() {
             <div className={styles.nameBlock}>
               <h1 className={styles.name}>{profile.name}</h1>
               <p className={styles.subtitle}>{profile.subtitle}</p>
+              <p className={styles.focusLine}>{profile.focusLine}</p>
               <div className={styles.statusBadge}>
                 <span className={styles.statusDot} />
                 <span className={styles.statusText}>{profile.status}</span>
@@ -27,15 +28,21 @@ export function Hero() {
             <p className={styles.statement}>{profile.bio}</p>
 
             <div className={styles.actionRow}>
-              <a
-                href={profile.cvUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.cvButton}
-              >
-                <IconDownload size={15} />
-                <span>Curriculum Vitae (PDF)</span>
-              </a>
+              <div className={styles.buttonRow}>
+                <a href="#research" className={styles.primaryButton}>
+                  <span>View Research</span>
+                </a>
+
+                <a
+                  href={profile.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.cvButton}
+                >
+                  <IconDownload size={15} />
+                  <span>Download CV</span>
+                </a>
+              </div>
 
               <div className={styles.linkRow}>
                 <IconLink

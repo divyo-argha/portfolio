@@ -1,10 +1,17 @@
-import type { Link, NewsItem } from "./types";
+import type { FutureDirection, Link, NewsItem } from "./types";
 
 export const profile = {
   name: "Argha Pratim Saha",
-  subtitle: "Researcher · Usable Security & Privacy · Human-Computer Interaction · Applied Machine Learning",
-  status: "PhD applicant · Fall 2027 intake",
-  bio: "My research looks at how people who were never taught security recognize and respond to digital threats: phishing, smishing, and the kind of social engineering that arrives on a shared phone. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game accepted at USENIX SOUPS 2026.",
+  subtitle: "Researcher in Human-Centered Security & Privacy",
+  /** The breadth line: kept separate from `subtitle` so the hero states one
+   * coherent identity first, then the adjacent areas it connects to — rather
+   * than opening with a list of topic tags. */
+  focusLine: "Usable security & privacy · Human-computer interaction · Security education · Applied machine learning",
+  status: "PhD applicant · Fall 2027 · SUST CSE",
+  /** Leads with the general research question, then the concrete work that
+   * question has produced so far — not the reverse, so the identity doesn't
+   * read as narrower than it is. */
+  bio: "My research looks at people whose digital lives were never designed around them: how they notice, understand, and respond to security and privacy risks when systems, interfaces, and security mechanisms don't line up with what they know, expect, or have access to. Most of my work so far has followed that question into phishing, smishing, and the kind of social engineering that arrives on a shared phone. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game accepted at USENIX SOUPS 2026.",
   location: "Dhaka, Bangladesh",
   email: "arghapratimsaha00@gmail.com",
   university: "Shahjalal University of Science and Technology (SUST)",
@@ -15,11 +22,40 @@ export const profile = {
     "Most security advice is written for people who already understand the threat and have an institution standing behind them. I start from the other end. The people most exposed to attacks usually have no training, no device of their own, and no vocabulary for what happened to them.",
     "So I build interventions for that group, then evaluate them properly. Pre/post knowledge assessment, NASA-TLX, SUS, interviews, thematic coding. I want to know what people learned and what it cost them to learn it.",
   ],
-
-  openQuestionHeading: "What I want to work on next",
-  openQuestion:
-    "The constant in my work is security and privacy for people the system was never designed around. Shared Android phones, mobile money, first-time internet users well outside the WEIRD sample. The angle is open. I am equally interested in reaching that problem through human factors and study design, through systems and applied security, or through machine learning for detection and risk. What matters to me is that whatever we build survives contact with real users, real devices, and real constraints.",
 } as const;
+
+/** What ties the work together, and where it might go next. Kept apart from
+ * `profile.statement` (what I already do) because a PhD-facing site should be
+ * clear about which is which — see each item's optional `status`. */
+export const futureDirections: {
+  unifyingThread: string;
+  items: FutureDirection[];
+  closingNote: string;
+} = {
+  unifyingThread:
+    "The constant across my work is security and privacy for people the system was never designed around — cases where the assumptions built into a system don't match the people, contexts, or knowledge it's actually used by.",
+  items: [
+    {
+      title: "Human-centered security",
+      body: "How people form expectations about security mechanisms, and where those expectations break down.",
+    },
+    {
+      title: "Security & privacy in everyday contexts",
+      body: "How people make security decisions with limited knowledge, competing priorities, or unfamiliar systems — shared Android phones, mobile money, first-time internet users well outside the WEIRD sample.",
+    },
+    {
+      title: "Security education",
+      body: "How security education moves past one-off awareness into something that actually changes decisions later. CyQured is one attempt at that question, not the last one.",
+    },
+    {
+      title: "Human-AI security",
+      status: "emerging",
+      body: "How people understand, trust, and respond to security decisions that are made or mediated by AI systems. I haven't published in this space yet — it's where I want to extend the human-factors approach I already use.",
+    },
+  ],
+  closingNote:
+    "What matters to me is that whatever we build survives contact with real users, real devices, and real constraints. I'm equally open to reaching these questions through human factors and study design, through systems and applied security, or through machine learning for detection and risk.",
+};
 
 export const socialLinks: Link[] = [
   { label: "CV (PDF)", href: "/cv.pdf" },
