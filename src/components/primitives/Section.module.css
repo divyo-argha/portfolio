@@ -1,8 +1,8 @@
-/* Enough to separate ten sections without the page turning into padding:
-   --space-8 top and bottom put 144px between every section and added ~1300px
-   of empty scroll on its own. */
+/* Enough to separate eleven sections without the page turning into padding —
+   trimmed further from the already-reduced --space-6/7 pairing so a reader
+   can see more of the page per scroll without sections running together. */
 .section {
-  padding-block: var(--space-6) var(--space-7);
+  padding-block: var(--space-5) var(--space-6);
   border-top: var(--border-hairline);
 }
 
@@ -29,7 +29,7 @@
 
 @media (max-width: 640px) {
   .section {
-    padding-block: var(--space-5) var(--space-6);
+    padding-block: var(--space-4) var(--space-5);
   }
 }
 

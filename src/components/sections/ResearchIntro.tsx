@@ -19,21 +19,19 @@ export function ResearchIntro() {
     >
       <div className={styles.container}>
         <div className={styles.subBlock}>
-          <div className={styles.focusGrid}>
-            <div className={styles.focusLeft}>
-              <Reveal>
-                <div className={styles.statementCard}>
-                  <span className={styles.cardEyebrow}>Core Philosophy</span>
-                  {profile.statement.map((paragraph) => (
-                    <p key={paragraph} className={styles.statementText}>
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </Reveal>
-            </div>
+          <div className={styles.focusStack}>
+            <Reveal>
+              <div className={styles.statementCard}>
+                <span className={styles.cardEyebrow}>Core Philosophy</span>
+                {profile.statement.map((paragraph) => (
+                  <p key={paragraph} className={styles.statementText}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
 
-            <div className={styles.focusRight}>
+            <div className={styles.pillarsRow}>
               {pillars.map((pillar, i) => (
                 <Reveal key={pillar.title} delay={Math.min(i + 1, 2) as 1 | 2}>
                   <article className={styles.pillar}>

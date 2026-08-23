@@ -10,32 +10,26 @@
   gap: var(--space-4);
 }
 
-.focusGrid {
+/* Statement card sits full-width above the pillars instead of beside them —
+   a side-by-side split left the statement column (one card) visibly shorter
+   than the pillar column (two cards) whenever the pillar text ran longer,
+   which read as dead space under the statement card. */
+.focusStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pillarsRow {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-3);
   grid-template-columns: 1fr;
-  align-items: stretch;
 }
 
-@media (min-width: 860px) {
-  .focusGrid {
-    grid-template-columns: 1.1fr 1fr;
-    gap: var(--space-5);
+@media (min-width: 640px) {
+  .pillarsRow {
+    grid-template-columns: repeat(2, 1fr);
   }
-}
-
-.focusLeft {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  justify-content: space-between;
-}
-
-.focusRight {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  justify-content: space-between;
 }
 
 .statementCard {

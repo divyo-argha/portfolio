@@ -28,14 +28,17 @@
      and the family is already being downloaded for code blocks either way. */
   --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* ---- Type scale (fluid) ---- */
-  --text-xs: clamp(0.72rem, 0.69rem + 0.15vw, 0.8rem);
-  --text-sm: clamp(0.85rem, 0.82rem + 0.15vw, 0.95rem);
-  --text-base: clamp(1rem, 0.97rem + 0.15vw, 1.1rem);
-  --text-lg: clamp(1.15rem, 1.1rem + 0.25vw, 1.35rem);
-  --text-xl: clamp(1.4rem, 1.3rem + 0.5vw, 1.8rem);
-  --text-2xl: clamp(1.9rem, 1.7rem + 1vw, 2.6rem);
-  --text-3xl: clamp(2.4rem, 2rem + 2vw, 3.8rem);
+  /* ---- Type scale (fluid) ----
+     Body sizes (xs/sm/base) trimmed a little; headline sizes (lg and up)
+     trimmed more — smaller headlines were the specific ask, so they shrink
+     faster than body copy, which stays close to its original size. */
+  --text-xs: clamp(0.7rem, 0.67rem + 0.15vw, 0.78rem);
+  --text-sm: clamp(0.82rem, 0.79rem + 0.15vw, 0.92rem);
+  --text-base: clamp(0.96rem, 0.93rem + 0.15vw, 1.05rem);
+  --text-lg: clamp(1.05rem, 1rem + 0.25vw, 1.22rem);
+  --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.6rem);
+  --text-2xl: clamp(1.6rem, 1.4rem + 1vw, 2.15rem);
+  --text-3xl: clamp(1.95rem, 1.6rem + 1.8vw, 3rem);
 
   /* ---- Spacing scale ---- */
   --space-1: 0.25rem;
