@@ -1,13 +1,14 @@
 import { Hero } from "@/components/sections/Hero";
-import { ResearchIntro } from "@/components/sections/ResearchIntro";
-import { ResearchGlance } from "@/components/sections/ResearchGlance";
-import { Publications } from "@/components/sections/Publications";
-import { ResearchMethods } from "@/components/sections/ResearchMethods";
-import { FutureDirections } from "@/components/sections/FutureDirections";
-import { Programming } from "@/components/sections/Programming";
-import { Education } from "@/components/sections/Education";
-import { Experience } from "@/components/sections/Experience";
 import { News } from "@/components/sections/News";
+import { Publications } from "@/components/sections/Publications";
+import { OngoingWork } from "@/components/sections/OngoingWork";
+import { ResearchInterests } from "@/components/sections/ResearchInterests";
+import { ResearchFocus } from "@/components/sections/ResearchFocus";
+import { Experience } from "@/components/sections/Experience";
+import { Education } from "@/components/sections/Education";
+import { Projects } from "@/components/sections/Projects";
+import { ProblemSolving } from "@/components/sections/ProblemSolving";
+import { Skills } from "@/components/sections/Skills";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { HashScrollHandler } from "@/components/HashScrollHandler";
 
@@ -16,15 +17,16 @@ export default function Home() {
     <>
       <HashScrollHandler />
       <Hero />
-      <ResearchIntro />
-      <ResearchGlance />
-      <Publications />
-      <ResearchMethods />
-      <FutureDirections />
-      <Programming />
-      <Education />
-      <Experience />
       <News />
+      <Publications />
+      <OngoingWork />
+      <ResearchInterests />
+      <ResearchFocus />
+      <Experience />
+      <Education />
+      <Projects />
+      <ProblemSolving />
+      <Skills />
       <ContactBand />
     </>
   );

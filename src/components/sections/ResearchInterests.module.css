@@ -1,0 +1,10 @@
+.tagRow,
+.methodRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.methodRow {
+  margin-top: var(--space-2);
+}

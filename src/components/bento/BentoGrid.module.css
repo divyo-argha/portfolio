@@ -6,7 +6,6 @@
     "feature"
     "iccit"
     "naacl"
-    "inProgress"
     "scholar";
   padding: var(--space-3);
   border-radius: var(--radius-lg);
@@ -26,10 +25,6 @@
   grid-area: naacl;
 }
 
-.inProgress {
-  grid-area: inProgress;
-}
-
 .scholar {
   grid-area: scholar;
 }
@@ -44,7 +39,7 @@
     grid-template-areas:
       "feature feature"
       "iccit naacl"
-      "inProgress scholar";
+      "scholar scholar";
     padding: var(--space-4);
     gap: var(--space-3);
   }

@@ -87,8 +87,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body>
         <SkipLink />
-        <Header />
-        <main id="main">{children}</main>
+        <Header>
+          <main id="main">{children}</main>
+        </Header>
         <Footer />
         <BackToTop />
         <Analytics />

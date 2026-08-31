@@ -34,12 +34,17 @@ body {
   background: var(--ink);
 }
 
-/* Anchor targets land below the sticky header instead of underneath it.
-   Read by scrollIntoView() in lib/scroll.ts — deliberately not paired with
-   CSS `scroll-behavior: smooth`, which raced post-hydration layout shifts
-   and landed short of the target. */
+/* Anchor targets land with a little breathing room above the viewport edge,
+   rather than flush against it. There is no sticky top bar to clear on the
+   main site any more — the profile island/floating nav don't overlay content
+   — but the CyQured game microsite still has its own top navbar, which sets
+   a taller, more specific override on its own section ids (see
+   cyqured/GameExperience.module.css). Read by scrollIntoView() in
+   useSectionNav.ts — deliberately not paired with CSS `scroll-behavior:
+   smooth`, which raced post-hydration layout shifts and landed short of the
+   target. */
 [id] {
-  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+  scroll-margin-top: var(--space-5);
 }
 
 body {

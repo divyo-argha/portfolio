@@ -7,7 +7,7 @@ export const profile = {
    * coherent identity first, then the adjacent areas it connects to — rather
    * than opening with a list of topic tags. */
   focusLine: "Usable security & privacy · Human-computer interaction · Security education · Applied machine learning",
-  status: "PhD applicant · Fall 2027 · SUST CSE",
+  status: "PhD applicant · Fall 2027",
   /** Leads with the general research question, then the concrete work that
    * question has produced so far — not the reverse, so the identity doesn't
    * read as narrower than it is. */

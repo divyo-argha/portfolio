@@ -1,8 +1,17 @@
 "use client";
 
+import { useState } from "react";
+import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { SiteHeader } from "./SiteHeader";
+import { MouseGlow } from "./MouseGlow";
+import { ProfileIsland } from "./ProfileIsland";
+import { ThemeToggle } from "./ThemeToggle";
+import { FloatingNavTrigger } from "./FloatingNavTrigger";
+import { MobileNav } from "./MobileNav";
+import { useActiveSection } from "@/hooks/useActiveSection";
+import { siteConfig } from "@/lib/site";
+import styles from "./Header.module.css";
 
 // Both headers render on every route's client graph if imported statically, so
 // the homepage paid for the game navbar's JS *and* its CSS module. Lazy imports
@@ -14,13 +23,43 @@ const CyquredNavbar = dynamic(() =>
   import("@/components/cyqured/CyquredNavbar").then((m) => m.CyquredNavbar),
 );
 
-export function Header() {
+const NAV_HASHES = siteConfig.navLinks.map((link) => link.href);
+
+export function Header({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isCyquredGame = pathname?.startsWith("/publications/cyqured/game");
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const activeSection = useActiveSection(NAV_HASHES);
 
   if (isCyquredGame) {
-    return <CyquredNavbar />;
+    return (
+      <>
+        <CyquredNavbar />
+        {children}
+      </>
+    );
   }
 
-  return <SiteHeader />;
+  const activeLabel = siteConfig.navLinks.find((link) => link.href === activeSection)?.label;
+
+  return (
+    <div className={styles.shell}>
+      <MouseGlow />
+      <div className={styles.themeToggleFixed}>
+        <ThemeToggle />
+      </div>
+
+      <div className={styles.row}>
+        <ProfileIsland />
+        <div className={styles.content}>{children}</div>
+      </div>
+
+      <FloatingNavTrigger activeLabel={activeLabel} onOpen={() => setMobileNavOpen(true)} />
+      <MobileNav
+        open={mobileNavOpen}
+        onClose={() => setMobileNavOpen(false)}
+        activeSection={activeSection}
+      />
+    </div>
+  );
 }

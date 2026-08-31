@@ -3,90 +3,27 @@
   padding-bottom: var(--space-5);
 }
 
-.grid {
-  display: grid;
-  gap: var(--space-4);
-  align-items: center;
-}
-
-.portraitCol {
-  max-width: 135px;
-}
-
-.identity {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.nameBlock {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.name {
-  font-size: var(--text-3xl);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
 .subtitle {
   font-family: var(--font-sans);
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 500;
   color: var(--ink);
   letter-spacing: -0.01em;
+  margin-bottom: var(--space-3);
 }
 
-.focusLine {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--muted);
-  letter-spacing: 0.01em;
-}
-
-.statusBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 12px;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  width: fit-content;
-  margin-top: 2px;
-}
-
-.statusDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  display: inline-block;
-  box-shadow: 0 0 0 2px var(--accent-soft);
-}
-
-.statusText {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--accent);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.actionRow {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-3);
-  margin-top: var(--space-1);
+.statement {
+  max-width: var(--measure);
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--ink);
 }
 
 .buttonRow {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
+  margin-top: var(--space-5);
 }
 
 .primaryButton {
@@ -141,81 +78,9 @@
   color: var(--accent);
 }
 
-.linkRow {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: var(--space-5);
-  row-gap: var(--space-2);
-  align-items: center;
-}
-
-@media (min-width: 640px) {
-  .portraitCol {
-    max-width: 155px;
-  }
-
-  .actionRow {
-    gap: var(--space-4);
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton,
+  .cvButton {
+    transition: none;
   }
 }
-
-/**
- * Small screens: the portrait used to occupy a row of its own with the entire
- * right-hand side left empty. Pair it with the name block instead.
- *
- * Only the name block moves up beside the photo — the bio and the action row
- * still run the full width underneath, because the column left over next to a
- * ~110px portrait is around 230px, which is far too narrow to set a four-line
- * paragraph or a row of four icon links in.
- *
- * `display: contents` drops the .identity wrapper out of the box tree so its
- * three children become items of this grid directly, which avoids adding a
- * wrapper element purely for layout.
- */
-@media (max-width: 859px) {
-  .grid {
-    grid-template-columns: clamp(104px, 33vw, 155px) 1fr;
-    column-gap: var(--space-4);
-    row-gap: var(--space-4);
-    align-items: center;
-  }
-
-  .identity {
-    display: contents;
-  }
-
-  .portraitCol {
-    grid-column: 1;
-    grid-row: 1;
-    max-width: none;
-  }
-
-  .nameBlock {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  /* `.statement` is declared here and nowhere else: Hero.tsx already asked for
-     it, but the rule was never written, so the bio was rendering unclassed. */
-  .statement,
-  .actionRow {
-    grid-column: 1 / -1;
-  }
-
-  .name {
-    /* Steps down from the full-width scale now that it shares a row with the photo. */
-    font-size: clamp(1.55rem, 1.05rem + 2.4vw, 2.3rem);
-  }
-}
-
-@media (min-width: 860px) {
-  .grid {
-    grid-template-columns: 170px 1fr;
-    gap: var(--space-6);
-  }
-
-  .portraitCol {
-    max-width: 170px;
-  }
-}
-
