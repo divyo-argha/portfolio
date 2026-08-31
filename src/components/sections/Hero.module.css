@@ -1,3 +1,14 @@
+.mobilePortrait {
+  width: 96px;
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 1040px) {
+  .mobilePortrait {
+    display: none;
+  }
+}
+
 .subtitle {
   font-family: var(--font-sans);
   font-size: var(--text-lg);

@@ -5,6 +5,7 @@ import { useLockScroll } from "@/hooks/useLockScroll";
 import { useSectionNav } from "@/hooks/useSectionNav";
 import { siteConfig } from "@/lib/site";
 import { profile, socialLinks } from "@/content/profile";
+import { Portrait } from "@/components/primitives/Portrait";
 import { IconClose, IconMail, IconGithub, IconLinkedin, IconScholar, IconDownload } from "@/components/primitives/Icons";
 import styles from "./MobileNav.module.css";
 
@@ -122,6 +123,9 @@ export function MobileNav({
       <div className={styles.panel} ref={panelRef}>
         <div className={styles.panelHeader}>
           <div className={styles.profile}>
+            <div className={styles.avatarWrap}>
+              <Portrait src="/media/people/portrait.webp" alt="Argha Pratim Saha" />
+            </div>
             <div className={styles.profileInfo}>
               <span className={styles.name}>{profile.name}</span>
               <span className={styles.location}>

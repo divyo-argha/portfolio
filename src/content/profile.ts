@@ -1,4 +1,4 @@
-import type { FutureDirection, Link, NewsItem } from "./types";
+import type { Link, NewsItem } from "./types";
 
 export const profile = {
   name: "Argha Pratim Saha",
@@ -11,50 +11,26 @@ export const profile = {
   /** Leads with the general research question, then the concrete work that
    * question has produced so far — not the reverse, so the identity doesn't
    * read as narrower than it is. */
-  bio: "My research looks at people whose digital lives were never designed around them: how they notice, understand, and respond to security and privacy risks when systems, interfaces, and security mechanisms don't line up with what they know, expect, or have access to. Most of my work so far has followed that question into phishing, smishing, and the kind of social engineering that arrives on a shared phone. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game published at USENIX SOUPS 2026.",
+  bio: "My research looks at people whose digital lives were never designed around them, and how they notice and respond to security risks when systems don't match what they know or have access to. Most of my work follows that question into phishing, smishing, and social engineering on shared phones, building interventions and then testing whether they actually hold up. The most recent is CyQured, a tabletop security game published at USENIX SOUPS 2026.",
   location: "Dhaka, Bangladesh",
   email: "arghapratimsaha00@gmail.com",
   university: "Shahjalal University of Science and Technology (SUST)",
   cvUrl: "/cv.pdf",
-
-  /** The core research philosophy and direction. */
-  statement: [
-    "Most security advice is written for people who already understand the threat and have an institution standing behind them. I start from the other end. The people most exposed to attacks usually have no training, no device of their own, and no vocabulary for what happened to them.",
-    "So I build interventions for that group, then evaluate them properly. Pre/post knowledge assessment, NASA-TLX, SUS, interviews, thematic coding. I want to know what people learned and what it cost them to learn it.",
-  ],
 } as const;
 
-/** What ties the work together, and where it might go next. Kept apart from
- * `profile.statement` (what I already do) because a PhD-facing site should be
- * clear about which is which — see each item's optional `status`. */
-export const futureDirections: {
-  unifyingThread: string;
-  items: FutureDirection[];
-  closingNote: string;
-} = {
-  unifyingThread:
-    "The constant across my work is security and privacy for people the system was never designed around — cases where the assumptions built into a system don't match the people, contexts, or knowledge it's actually used by.",
-  items: [
-    {
-      title: "Human-centered security",
-      body: "How people form expectations about security mechanisms, and where those expectations break down.",
-    },
-    {
-      title: "Security & privacy in everyday contexts",
-      body: "How people make security decisions with limited knowledge, competing priorities, or unfamiliar systems — shared Android phones, mobile money, first-time internet users well outside the WEIRD sample.",
-    },
-    {
-      title: "Security education",
-      body: "How security education moves past one-off awareness into something that actually changes decisions later. CyQured is one attempt at that question, not the last one.",
-    },
-    {
-      title: "Human-AI security",
-      status: "emerging",
-      body: "How people understand, trust, and respond to security decisions that are made or mediated by AI systems. I haven't published in this space yet — it's where I want to extend the human-factors approach I already use.",
-    },
+/** What ties the work together and where it's headed next, as one short
+ * paragraph rather than a philosophy statement plus a list of future-work
+ * bullets — `ResearchFocus.tsx` used to split those apart into two full
+ * sections; merged back into one on request, kept deliberately brief. */
+export const researchFocus = {
+  note: "The thread through my work is security and privacy for people systems were never really built around: no training, no device of their own, no vocabulary for what happened to them. I build interventions for that group, then test whether they actually hold up. What I want to work on next is human-AI security, how people trust or get fooled by decisions an AI makes for them, a question CyQured pointed me toward but I haven't published on yet.",
+  tags: [
+    "Human-centered security",
+    "Security & privacy in everyday contexts",
+    "Security education",
+    "Human-AI security",
+    "Applied machine learning",
   ],
-  closingNote:
-    "What matters to me is that whatever we build survives contact with real users, real devices, and real constraints. I'm equally open to reaching these questions through human factors and study design, through systems and applied security, or through machine learning for detection and risk.",
 };
 
 export const socialLinks: Link[] = [
@@ -118,16 +94,3 @@ export const news: NewsItem[] = [
     secondaryLink: { label: "ACL Anthology", href: "https://aclanthology.org/2024.clinicalnlp-1.46/" },
   },
 ];
-
-/** Two, not three. The old first and third pillars described the same work
- * twice; the ML pillar is framed as grounding rather than a parallel track. */
-export const pillars = [
-  {
-    title: "Usable security & empirical HCI",
-    body: "I design security interventions and then evaluate them properly. Mixed-methods study design, pre/post knowledge assessment, cognitive load and usability instrumentation, thematic analysis of what participants actually said. CyQured is the worked example: fifty participants, and a set of findings that included the places where the design fell short.",
-  },
-  {
-    title: "Applied machine learning",
-    body: "Two published papers, one in medical imaging and one in clinical NLP. I still build and read in this space. For me it sits underneath the human-centered work rather than beside it, though the two keep meeting around detection, risk scoring, and anything that has to explain itself to a non-expert user.",
-  },
-] as const;

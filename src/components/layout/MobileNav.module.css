@@ -49,10 +49,8 @@
   min-width: 0;
 }
 
-.avatar {
-  border-radius: 50%;
-  border: 1.5px solid var(--line);
-  object-fit: cover;
+.avatarWrap {
+  width: 44px;
   flex-shrink: 0;
 }
 

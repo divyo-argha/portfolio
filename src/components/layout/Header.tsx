@@ -43,8 +43,9 @@ export function Header({ children }: { children: ReactNode }) {
   return (
     <div className={styles.shell}>
       <MouseGlow />
-      <div className={styles.themeToggleFixed}>
+      <div className={styles.topRightCluster}>
         <ThemeToggle />
+        <FloatingNavTrigger open={mobileNavOpen} onToggle={() => setMobileNavOpen((v) => !v)} />
       </div>
 
       <div className={styles.row}>
@@ -52,7 +53,6 @@ export function Header({ children }: { children: ReactNode }) {
         <div className={styles.content}>{children}</div>
       </div>
 
-      <FloatingNavTrigger open={mobileNavOpen} onToggle={() => setMobileNavOpen((v) => !v)} />
       <MobileNav
         open={mobileNavOpen}
         onClose={() => setMobileNavOpen(false)}

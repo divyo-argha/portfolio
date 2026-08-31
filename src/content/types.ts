@@ -5,27 +5,6 @@ export type Link = {
   href: string;
 };
 
-/** One entry in the hero's credential strip — the published record, stated
- * before the reader has to scroll for it. */
-/** A study grouped with the methods it actually used, so the methods section
- * reads as experience rather than as a vocabulary list. */
-export type MethodGroup = {
-  study: string;
-  context: string;
-  href?: string;
-  methods: string[];
-};
-
-/** One labeled research direction in the "what I want to investigate next"
- * section. `status: "emerging"` marks a direction the person is interested in
- * but has not yet published in — kept visually distinct from established work
- * so the site doesn't overclaim expertise it doesn't have. */
-export type FutureDirection = {
-  title: string;
-  body: string;
-  status?: "emerging";
-};
-
 export type NewsItem = {
   date: string;
   badge?: string;

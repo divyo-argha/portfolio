@@ -2,23 +2,28 @@
   position: relative;
 }
 
-.themeToggleFixed {
+/* Theme toggle and (below 1040px) the hamburger button, grouped as one
+   cluster in the top-right corner instead of opposite corners. */
+.topRightCluster {
   position: fixed;
   top: var(--space-5);
   right: var(--space-5);
   z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 @media print {
-  .themeToggleFixed {
+  .topRightCluster {
     display: none;
   }
 }
 
 /* Below 1040px there's no top bar reserving space above the content, but
-   there is a fixed hamburger button sitting at top-left (see
+   there is a fixed cluster (theme toggle + hamburger) sitting top-right (see
    FloatingNavTrigger.module.css) — without this, the page's first heading
-   sits directly underneath it. Clearance = the button's own top offset +
+   sits directly underneath it. Clearance = the cluster's own top offset +
    height + a little breathing room. */
 .row {
   width: 100%;

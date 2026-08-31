@@ -1,8 +1,7 @@
+/* Positioned by its parent cluster (see Header.module.css's
+   .topRightCluster) rather than fixed on its own — this and ThemeToggle
+   move as one unit in the top-right corner. */
 .trigger {
-  position: fixed;
-  left: var(--space-5);
-  top: var(--space-5);
-  z-index: var(--z-header);
   display: inline-flex;
   align-items: center;
   justify-content: center;
