@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Section } from "@/components/primitives/Section";
 import { Reveal } from "@/components/primitives/Reveal";
 import { Chip } from "@/components/primitives/Chip";
@@ -22,6 +23,7 @@ export function Experience() {
         {positions.map((position, i) => (
           <Reveal key={position.title + position.org} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>
             <AccordionRow
+              icon={position.logo ? <Image src={position.logo.src} alt="" width={56} height={56} /> : null}
               eyebrow={position.dates}
               title={position.title}
               subtitle={position.org}

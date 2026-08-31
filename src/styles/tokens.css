@@ -71,7 +71,7 @@
   /* The sticky left profile island (desktop only, see ProfileIsland.module.css
      and Header.module.css's .shell). Unrelated to --header-height, which the
      CyQured game microsite's own navbar still uses. */
-  --island-width: 272px;
+  --island-width: 340px;
   --shell-gap: var(--space-7);
 
   /* ---- Elevation ---- */

@@ -6,7 +6,7 @@ export const publications: Publication[] = [
     venue: "USENIX Symposium on Usable Privacy and Security",
     venueShort: "SOUPS 2026",
     year: 2026,
-    status: "accepted",
+    status: "published",
     title:
       "CyQured: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education",
     authors: [
@@ -59,7 +59,10 @@ export const publications: Publication[] = [
       "N=50",
       "Mixed-effects models",
     ],
-    links: [{ label: "Read the paper", href: "/papers/cyqured.pdf" }],
+    links: [
+      { label: "Read the paper", href: "https://www.usenix.org/system/files/soups2026-das.pdf" },
+      { label: "USENIX presentation", href: "https://www.usenix.org/conference/soups2026/presentation/das" },
+    ],
     bentoSpan: "feature",
     cover: {
       src: "/media/publications/cyqured/board-card.webp",

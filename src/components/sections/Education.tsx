@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Section } from "@/components/primitives/Section";
 import { Reveal } from "@/components/primitives/Reveal";
@@ -15,15 +16,16 @@ export function Education() {
       <div className={styles.list}>
         <Reveal>
           <AccordionRow
+            icon={<Image src={university.logo.src} alt="" width={56} height={56} />}
             eyebrow={university.dates}
             title={university.degree}
             subtitle={`${university.institution} · ${university.location}`}
-            meta={<Chip>{university.result}</Chip>}
-            defaultOpen
+            meta={<span className={styles.resultBadge}>{university.result}</span>}
+            expandable={false}
           >
             <div className={styles.thesisHeader}>
               <span className={styles.thesisPill}>Undergraduate Thesis</span>
-              <span className={styles.thesisAcceptedBadge}>Accepted at USENIX SOUPS 2026</span>
+              <span className={styles.thesisAcceptedBadge}>Published at USENIX SOUPS 2026</span>
             </div>
 
             <h4 className={styles.thesisTitle}>
@@ -62,6 +64,7 @@ export function Education() {
 
         <Reveal delay={1}>
           <AccordionRow
+            icon={<Image src={secondary.logo.src} alt="" width={56} height={56} />}
             title={secondary.institution}
             subtitle={secondary.location}
             meta={<Chip>Secondary education</Chip>}

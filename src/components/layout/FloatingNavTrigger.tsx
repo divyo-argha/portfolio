@@ -1,49 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import styles from "./FloatingNavTrigger.module.css";
 
 /**
  * Mobile/tablet stand-in for the desktop `ProfileIsland` (hidden at
- * >=1040px, see the module CSS). Stays out of the way near the top of the
- * page, then fades in once the reader has scrolled past the hero, showing
- * the section currently in view. Opens the existing `MobileNav` overlay.
+ * >=1040px, see the module CSS): a conventional hamburger button, fixed
+ * top-left and visible from the first paint rather than fading in after a
+ * scroll threshold — a reader landing on the page needs a way to reach the
+ * nav immediately, not just once they've scrolled past the hero. Opens the
+ * existing `MobileNav` overlay; the icon morphs into a close (X) mark while
+ * that overlay is open.
  */
-export function FloatingNavTrigger({
-  activeLabel,
-  onOpen,
-}: {
-  activeLabel?: string;
-  onOpen: () => void;
-}) {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    let ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setVisible(window.scrollY > 320);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+export function FloatingNavTrigger({ open, onToggle }: { open: boolean; onToggle: () => void }) {
   return (
     <button
       type="button"
-      onClick={onOpen}
-      className={visible ? `${styles.trigger} ${styles.visible}` : styles.trigger}
+      onClick={onToggle}
+      className={open ? `${styles.trigger} ${styles.open}` : styles.trigger}
       aria-haspopup="dialog"
-      aria-label="Open navigation"
+      aria-expanded={open}
+      aria-label={open ? "Close navigation" : "Open navigation"}
     >
-      <span className={styles.dot} aria-hidden="true" />
-      <span className={styles.label}>{activeLabel || "Menu"}</span>
+      <span className={styles.icon} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </span>
     </button>
   );
 }

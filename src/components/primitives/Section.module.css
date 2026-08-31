@@ -11,7 +11,20 @@
 }
 
 .head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
   margin-bottom: var(--space-4);
+}
+
+.headMain {
+  min-width: 0;
+}
+
+.headAction {
+  flex-shrink: 0;
 }
 
 .title {

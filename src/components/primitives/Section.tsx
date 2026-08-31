@@ -12,9 +12,14 @@ type SectionProps = {
   children: ReactNode;
   bleed?: boolean;
   tone?: "default" | "raised";
+  /** Rendered to the right of the eyebrow/title/lede stack, on the same row
+   * — a link or pill button that belongs with the heading rather than the
+   * section body (e.g. a "Google Scholar" pill beside Publications). Wraps
+   * below the heading on narrow screens. */
+  action?: ReactNode;
 };
 
-export function Section({ id, label, title, lede, children, bleed, tone = "default" }: SectionProps) {
+export function Section({ id, label, title, lede, children, bleed, tone = "default", action }: SectionProps) {
   // The <h2> always renders, because `aria-labelledby` below always points at
   // it. When a section has no visible title it falls back to its eyebrow label
   // and is hidden visually only — that keeps the accessible name intact and
@@ -30,14 +35,17 @@ export function Section({ id, label, title, lede, children, bleed, tone = "defau
       <Container>
         <Reveal>
           <div className={styles.head}>
-            <Eyebrow>{label}</Eyebrow>
-            <h2
-              id={`${id}-heading`}
-              className={hasVisibleTitle ? styles.title : "visually-hidden"}
-            >
-              {hasVisibleTitle ? title : label}
-            </h2>
-            {lede ? <p className={styles.lede}>{lede}</p> : null}
+            <div className={styles.headMain}>
+              <Eyebrow>{label}</Eyebrow>
+              <h2
+                id={`${id}-heading`}
+                className={hasVisibleTitle ? styles.title : "visually-hidden"}
+              >
+                {hasVisibleTitle ? title : label}
+              </h2>
+              {lede ? <p className={styles.lede}>{lede}</p> : null}
+            </div>
+            {action ? <div className={styles.headAction}>{action}</div> : null}
           </div>
         </Reveal>
       </Container>

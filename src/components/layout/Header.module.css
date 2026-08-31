@@ -15,9 +15,14 @@
   }
 }
 
+/* Below 1040px there's no top bar reserving space above the content, but
+   there is a fixed hamburger button sitting at top-left (see
+   FloatingNavTrigger.module.css) — without this, the page's first heading
+   sits directly underneath it. Clearance = the button's own top offset +
+   height + a little breathing room. */
 .row {
   width: 100%;
-  padding-top: var(--space-6);
+  padding-top: calc(2.5rem + var(--space-5) + var(--space-4));
 }
 
 .content {
@@ -25,10 +30,11 @@
 }
 
 /* Below this, the island hides itself (ProfileIsland.module.css) and the
-   floating pill + MobileNav take over — matches the breakpoint the old
+   floating hamburger + MobileNav take over — matches the breakpoint the old
    top navbar used for its own desktop/mobile split. */
 @media (min-width: 1040px) {
   .row {
+    padding-top: var(--space-6);
     /* No align-items override here — the default `stretch` is what matters:
        it makes .island as tall as .content, so the sticky card inside it has
        room to stay pinned while scrolling instead of unsticking as soon as

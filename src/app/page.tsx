@@ -9,7 +9,6 @@ import { Education } from "@/components/sections/Education";
 import { Projects } from "@/components/sections/Projects";
 import { ProblemSolving } from "@/components/sections/ProblemSolving";
 import { Skills } from "@/components/sections/Skills";
-import { ContactBand } from "@/components/sections/ContactBand";
 import { HashScrollHandler } from "@/components/HashScrollHandler";
 
 export default function Home() {
@@ -27,7 +26,6 @@ export default function Home() {
       <Projects />
       <ProblemSolving />
       <Skills />
-      <ContactBand />
     </>
   );
 }

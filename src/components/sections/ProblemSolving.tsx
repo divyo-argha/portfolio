@@ -23,9 +23,9 @@ export function ProblemSolving() {
       <div className={styles.list}>
         <Reveal delay={1}>
           <AccordionRow
-            eyebrow={codeforces.badge}
             title={codeforces.handle}
             subtitle={`${codeforces.platform} · Primary handle`}
+            meta={<span className={styles.ratingBadge}>{codeforces.badge}</span>}
           >
             <a href={codeforces.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
               <span>View profile</span>
@@ -51,9 +51,9 @@ export function ProblemSolving() {
 
         <Reveal delay={2}>
           <AccordionRow
-            eyebrow={leetcode.badge}
             title={leetcode.handle}
             subtitle={`${leetcode.platform} · ${leetcode.problemsSolved} problems solved`}
+            meta={<span className={styles.ratingBadge}>{leetcode.badge}</span>}
           >
             <a href={leetcode.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
               <span>View profile</span>

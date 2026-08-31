@@ -113,7 +113,7 @@ export default function CyQuredPublicationPage() {
           {/* Action CTAs */}
           <div className={pubStyles.actionRow}>
             <a
-              href="/papers/cyqured.pdf"
+              href="https://www.usenix.org/system/files/soups2026-das.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className={pubStyles.downloadButton}

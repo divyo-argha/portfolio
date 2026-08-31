@@ -40,8 +40,6 @@ export function Header({ children }: { children: ReactNode }) {
     );
   }
 
-  const activeLabel = siteConfig.navLinks.find((link) => link.href === activeSection)?.label;
-
   return (
     <div className={styles.shell}>
       <MouseGlow />
@@ -54,7 +52,7 @@ export function Header({ children }: { children: ReactNode }) {
         <div className={styles.content}>{children}</div>
       </div>
 
-      <FloatingNavTrigger activeLabel={activeLabel} onOpen={() => setMobileNavOpen(true)} />
+      <FloatingNavTrigger open={mobileNavOpen} onToggle={() => setMobileNavOpen((v) => !v)} />
       <MobileNav
         open={mobileNavOpen}
         onClose={() => setMobileNavOpen(false)}

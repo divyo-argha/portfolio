@@ -2,7 +2,6 @@
 
 import type { MouseEvent } from "react";
 import { Portrait } from "@/components/primitives/Portrait";
-import { Chip } from "@/components/primitives/Chip";
 import { IconMail, IconScholar, IconGithub, IconLinkedin, IconDownload } from "@/components/primitives/Icons";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useSectionNav } from "@/hooks/useSectionNav";
@@ -15,11 +14,12 @@ const NAV_HASHES = siteConfig.navLinks.map((link) => link.href);
 // The three keywords a reader should walk away with — the first three of the
 // four in profile.focusLine. "Applied machine learning" (the fourth) is left
 // off: profile.ts's own `pillars` already frame it as grounding rather than a
-// headline identity, and the island only has room for three.
-const IDENTITY_KEYWORDS = profile.focusLine.split(" · ").slice(0, 3);
+// headline identity, and the island only has room for three. Rendered as one
+// mono-set line (the same treatment the old Hero gave focusLine) rather than
+// pill chips — chips read as generic dashboard UI; this reads as this site.
+const IDENTITY_LINE = profile.focusLine.split(" · ").slice(0, 3).join(" · ");
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  "CV (PDF)": IconDownload,
   Email: IconMail,
   "Google Scholar": IconScholar,
   GitHub: IconGithub,
@@ -59,13 +59,7 @@ export function ProfileIsland() {
           <span>{profile.status}</span>
         </div>
 
-        <ul className={styles.keywords}>
-          {IDENTITY_KEYWORDS.map((keyword) => (
-            <li key={keyword}>
-              <Chip>{keyword}</Chip>
-            </li>
-          ))}
-        </ul>
+        <p className={styles.identityLine}>{IDENTITY_LINE}</p>
 
         <nav className={styles.nav} aria-label="Primary">
           <ul className={styles.navList}>
@@ -87,24 +81,31 @@ export function ProfileIsland() {
         </nav>
 
         <ul className={styles.socials}>
-          {socialLinks.map((link) => {
-            const Icon = iconMap[link.label];
-            return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  target={link.href.startsWith("http") || link.href.endsWith(".pdf") ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                  aria-label={link.label}
-                  title={link.label}
-                >
-                  {Icon ? <Icon size={16} /> : null}
-                </a>
-              </li>
-            );
-          })}
+          {socialLinks
+            .filter((link) => link.label !== "CV (PDF)")
+            .map((link) => {
+              const Icon = iconMap[link.label];
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    className={styles.socialLink}
+                    aria-label={link.label}
+                    title={link.label}
+                  >
+                    {Icon ? <Icon size={16} /> : null}
+                  </a>
+                </li>
+              );
+            })}
         </ul>
+
+        <a href={profile.cvUrl} target="_blank" rel="noopener noreferrer" className={styles.cvButton}>
+          <IconDownload size={17} />
+          <span>Download CV</span>
+        </a>
       </div>
     </aside>
   );

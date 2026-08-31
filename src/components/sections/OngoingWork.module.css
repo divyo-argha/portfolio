@@ -1,0 +1,25 @@
+.wrap {
+  padding-block: var(--space-5) var(--space-6);
+  border-top: var(--border-hairline);
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    padding-block: var(--space-4) var(--space-5);
+  }
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--space-3);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

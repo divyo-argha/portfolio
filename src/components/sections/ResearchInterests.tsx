@@ -22,7 +22,7 @@ const METHOD_TAGS = Array.from(new Set(methodGroups.flatMap((group) => group.met
  */
 export function ResearchInterests() {
   return (
-    <Section id="interests" label="Research interests" title="What ties the work together.">
+    <Section id="interests" label="Research interests" title="What I'm interested in.">
       <span id="methods" aria-hidden="true" style={{ position: "relative", top: "-5rem", display: "block" }} />
       <div className={sharedStyles.subBlock}>
         <Reveal>

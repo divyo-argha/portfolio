@@ -11,7 +11,7 @@ export const profile = {
   /** Leads with the general research question, then the concrete work that
    * question has produced so far — not the reverse, so the identity doesn't
    * read as narrower than it is. */
-  bio: "My research looks at people whose digital lives were never designed around them: how they notice, understand, and respond to security and privacy risks when systems, interfaces, and security mechanisms don't line up with what they know, expect, or have access to. Most of my work so far has followed that question into phishing, smishing, and the kind of social engineering that arrives on a shared phone. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game accepted at USENIX SOUPS 2026.",
+  bio: "My research looks at people whose digital lives were never designed around them: how they notice, understand, and respond to security and privacy risks when systems, interfaces, and security mechanisms don't line up with what they know, expect, or have access to. Most of my work so far has followed that question into phishing, smishing, and the kind of social engineering that arrives on a shared phone. I build interventions for that gap, then run studies to find out whether they hold up. The most recent is CyQured, a tabletop security game published at USENIX SOUPS 2026.",
   location: "Dhaka, Bangladesh",
   email: "arghapratimsaha00@gmail.com",
   university: "Shahjalal University of Science and Technology (SUST)",
@@ -69,11 +69,11 @@ export const news: NewsItem[] = [
   {
     date: "Jul 2026",
     badge: "USENIX SOUPS 2026",
-    title: "Paper Accepted at USENIX SOUPS 2026",
+    title: "Paper Published at USENIX SOUPS 2026",
     description:
-      "Our paper 'CyQured: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education' was accepted at the 22nd USENIX Symposium on Usable Privacy and Security in Hanover, Germany.",
+      "Our paper 'CyQured: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education' was published at the 22nd USENIX Symposium on Usable Privacy and Security in Hanover, Germany.",
     link: { label: "CyQured Write-up", href: "/publications/cyqured" },
-    secondaryLink: { label: "Paper (PDF)", href: "/papers/cyqured.pdf" },
+    secondaryLink: { label: "Paper (PDF)", href: "https://www.usenix.org/system/files/soups2026-das.pdf" },
   },
   {
     date: "Jan 2026",
@@ -82,6 +82,22 @@ export const news: NewsItem[] = [
     description:
       "Joined Dr. Farida Chowdhury's group part-time to study how young adults in Bangladesh read phishing and smishing attempts. I am also a founding member of the new Human-Centered Computing and Society (HCCS) research group.",
     link: { label: "Experience", href: "#experience" },
+  },
+  {
+    date: "Oct 2025",
+    badge: "ShellBeeHaken",
+    title: "Joined ShellBeeHaken Ltd. as an Associate Software Engineer",
+    description:
+      "Joined the team building KriyaKarak, working on front-end modules and a Bengali-English code-switching framework for a real-time conversational voice agent, plus the WebSocket layer carrying its audio.",
+    link: { label: "Experience", href: "#experience" },
+  },
+  {
+    date: "Jul 2025",
+    badge: "SUST",
+    title: "Graduated with B.Sc. in Computer Science & Engineering",
+    description:
+      "Completed B.Sc. (Engg.) in CSE at Shahjalal University of Science and Technology with a CGPA of 3.71 / 4.00. My undergraduate thesis grew into CyQured.",
+    link: { label: "Education Details", href: "#education" },
   },
   {
     date: "Nov 2024",
@@ -100,14 +116,6 @@ export const news: NewsItem[] = [
       "Presented 'Project PRIMUS at EHRSQL 2024: Text-to-SQL Generation using Large Language Models for EHR Analysis' online at the 6th Clinical NLP Workshop (NAACL 2024).",
     link: { label: "PRIMUS Write-up", href: "/publications/ehrsql-primus-text-to-sql" },
     secondaryLink: { label: "ACL Anthology", href: "https://aclanthology.org/2024.clinicalnlp-1.46/" },
-  },
-  {
-    date: "2024",
-    badge: "SUST",
-    title: "Graduated with B.Sc. in Computer Science & Engineering",
-    description:
-      "Completed B.Sc. (Engg.) in CSE at Shahjalal University of Science and Technology with a CGPA of 3.71 / 4.00. My undergraduate thesis grew into CyQured.",
-    link: { label: "Education Details", href: "#education" },
   },
 ];
 

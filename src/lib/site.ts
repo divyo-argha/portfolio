@@ -28,6 +28,5 @@ export const siteConfig = {
     { label: "Education", href: "#education" },
     { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
-    { label: "Contact", href: "#contact" },
   ],
 };
