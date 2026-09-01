@@ -1,13 +1,30 @@
-/* Enough to separate eleven sections without the page turning into padding —
-   trimmed further from the already-reduced --space-6/7 pairing so a reader
-   can see more of the page per scroll without sections running together. */
 .section {
-  padding-block: var(--space-5) var(--space-6);
+  position: relative;
+  padding-top: 0;
+  padding-bottom: var(--space-6);
   border-top: var(--border-hairline);
 }
 
 .section.raised {
   background: var(--surface);
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 15;
+  background: color-mix(in srgb, var(--ground) 85%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 40%, transparent);
+  transition: background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.section.raised .stickyHeader {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
 }
 
 .head {
@@ -16,7 +33,6 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
 }
 
 .headMain {
@@ -40,9 +56,23 @@
   max-width: var(--measure);
 }
 
+.body {
+  padding-top: var(--space-4);
+}
+
+@media (max-width: 1039px) {
+  .stickyHeader {
+    padding-right: 5.25rem;
+  }
+}
+
 @media (max-width: 640px) {
   .section {
-    padding-block: var(--space-4) var(--space-5);
+    padding-bottom: var(--space-5);
+  }
+
+  .body {
+    padding-top: var(--space-3);
   }
 }
 

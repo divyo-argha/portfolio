@@ -13,19 +13,28 @@ import styles from "./ResearchFocus.module.css";
 export function ResearchFocus() {
   return (
     <Section id="research-focus" label="Looking ahead" title="What I want to work on next.">
-      <Reveal>
-        <p className={styles.note}>{researchFocus.note}</p>
-      </Reveal>
+      <div className={styles.layout}>
+        <div className={styles.leftCol}>
+          <Reveal>
+            <p className={styles.note}>{researchFocus.note}</p>
+          </Reveal>
+        </div>
 
-      <Reveal delay={1}>
-        <ul className={styles.tags}>
-          {researchFocus.tags.map((tag) => (
-            <li key={tag}>
-              <Chip>{tag}</Chip>
-            </li>
-          ))}
-        </ul>
-      </Reveal>
+        <div className={styles.rightCol}>
+          <Reveal delay={1}>
+            <div className={styles.interestsBox}>
+              <p className={styles.interestsLabel}>Research Interests</p>
+              <ul className={styles.tags}>
+                {researchFocus.tags.map((tag) => (
+                  <li key={tag}>
+                    <Chip>{tag}</Chip>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
+      </div>
     </Section>
   );
 }

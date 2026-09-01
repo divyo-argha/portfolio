@@ -10,8 +10,8 @@ export function Projects() {
   return (
     <Section id="projects" label="Projects" title="Selected software projects.">
       {/* Anchors for backward compatibility with the old combined "Programming" section. */}
-      <span id="engineering" aria-hidden="true" style={{ position: "relative", top: "-5rem", display: "block" }} />
-      <span id="programming" aria-hidden="true" style={{ position: "relative", top: "-5rem", display: "block" }} />
+      <span id="engineering" aria-hidden="true" style={{ position: "absolute", top: 0, left: 0 }} />
+      <span id="programming" aria-hidden="true" style={{ position: "absolute", top: 0, left: 0 }} />
 
       <div className={styles.list}>
         {projects.map((project, i) => (

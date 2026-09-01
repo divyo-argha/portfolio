@@ -18,7 +18,7 @@ const KIND_LABEL: Record<(typeof positions)[number]["kind"], string> = {
 export function Experience() {
   return (
     <Section id="experience" label="Experience" title="Professional experience & roles.">
-      <span id="positions" aria-hidden="true" style={{ position: "relative", top: "-5rem", display: "block" }} />
+      <span id="positions" aria-hidden="true" style={{ position: "absolute", top: 0, left: 0 }} />
       <div className={styles.list}>
         {positions.map((position, i) => (
           <Reveal key={position.title + position.org} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>

@@ -126,22 +126,27 @@
   display: block;
   padding: 7px var(--space-3);
   border-left: 2px solid transparent;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--muted);
-  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out),
-    padding-left var(--duration-fast) var(--ease-out);
+  transition: color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    background-color 0.25s var(--ease-out),
+    padding-left 0.25s var(--ease-out);
 }
 
 .navLink:hover {
   color: var(--ink);
+  background: color-mix(in srgb, var(--accent-soft) 40%, transparent);
   padding-left: calc(var(--space-3) + 3px);
 }
 
 .navLinkActive {
   color: var(--accent);
   border-left-color: var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 60%, transparent);
   font-weight: 600;
 }
 

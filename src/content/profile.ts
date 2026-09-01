@@ -8,10 +8,13 @@ export const profile = {
    * than opening with a list of topic tags. */
   focusLine: "Usable security & privacy · Human-computer interaction · Security education · Applied machine learning",
   status: "PhD applicant · Fall 2027",
-  /** Leads with the general research question, then the concrete work that
-   * question has produced so far — not the reverse, so the identity doesn't
-   * read as narrower than it is. */
-  bio: "My research looks at people whose digital lives were never designed around them, and how they notice and respond to security risks when systems don't match what they know or have access to. Most of my work follows that question into phishing, smishing, and social engineering on shared phones, building interventions and then testing whether they actually hold up. The most recent is CyQured, a tabletop security game published at USENIX SOUPS 2026.",
+  /** The three structured paragraphs for the About Me narrative. */
+  bioParagraphs: [
+    "I am a human-centered security and privacy researcher investigating how everyday people perceive, encounter, and defend against deceptive digital threats. My work focuses on non-traditional and vulnerable user populations whose digital lives were never designed around them—particularly those navigating shared devices, varying literacy levels, or constrained institutional protections.",
+    "Bridging usable security, human-computer interaction, and applied machine learning, I design tangible educational interventions and evaluate them through rigorous empirical and qualitative field methods. Most recently, I led the creation and empirical evaluation of CyQured, a physical tabletop security game published at USENIX SOUPS 2026, demonstrating how collaborative gameplay can demystify defensive decision-making. My broader background also includes published research in clinical natural language processing at NAACL 2024 and diagnostic deep learning at IEEE ICCIT 2024.",
+    "Currently, I conduct research as an RA at BRAC University's Human-Centered Computing and Society (HCCS) group and engineer conversational agent systems at ShellBeeHaken. Looking ahead, I am actively preparing for PhD applications (Fall 2027), where I aim to investigate human-AI security, privacy-preserving interfaces, and algorithmic trust in high-stakes environments.",
+  ],
+  bio: "I am a human-centered security and privacy researcher investigating how everyday people perceive, encounter, and defend against deceptive digital threats. My work focuses on non-traditional and vulnerable user populations whose digital lives were never designed around them—particularly those navigating shared devices, varying literacy levels, or constrained institutional protections. Bridging usable security, human-computer interaction, and applied machine learning, I design tangible educational interventions and evaluate them through rigorous empirical and qualitative field methods. Most recently, I led the creation and empirical evaluation of CyQured, a physical tabletop security game published at USENIX SOUPS 2026.",
   location: "Dhaka, Bangladesh",
   email: "arghapratimsaha00@gmail.com",
   university: "Shahjalal University of Science and Technology (SUST)",

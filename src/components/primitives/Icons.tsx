@@ -129,6 +129,14 @@ export function IconChevronDown({ size = 16, className }: IconProps) {
   );
 }
 
+export function IconChevronUp({ size = 16, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path d="M18 15l-6-6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 /** CyQured card-catalogue category marks — deliberately plain line icons,
  * not emoji, echoing the game's own shield/die/document badge iconography. */
 

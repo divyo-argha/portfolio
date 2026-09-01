@@ -26,7 +26,7 @@ const scholarUrl = socialLinks.find((link) => link.label === "Google Scholar")!.
 export function Publications() {
   return (
     <Section
-      id="publications"
+      id="research"
       label="Publications"
       title="Publications and research works."
       action={
@@ -37,7 +37,7 @@ export function Publications() {
         </a>
       }
     >
-      <span id="research" aria-hidden="true" style={{ position: "relative", top: "-5rem", display: "block" }} />
+      <span id="publications" aria-hidden="true" style={{ position: "absolute", top: 0, left: 0 }} />
 
       <div className={styles.list}>
         {publications.map((pub, i) => (

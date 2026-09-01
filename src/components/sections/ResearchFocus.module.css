@@ -1,14 +1,58 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.leftCol {
+  flex: 1;
+  min-width: 0;
+}
+
 .note {
-  max-width: var(--measure);
   font-family: var(--font-serif);
   font-size: var(--text-base);
   line-height: 1.75;
   color: var(--ink);
 }
 
+.rightCol {
+  flex: 0 0 auto;
+}
+
+.interestsBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.interestsLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-top: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--space-6);
+    align-items: start;
+  }
+}
+
+@media (min-width: 1040px) {
+  .layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-7);
+  }
 }

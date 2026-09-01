@@ -332,7 +332,7 @@
   }
 }
 
-@media (min-width: 860px) {
+@media (min-width: 1040px) {
   .overlay {
     display: none;
   }

@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Container } from "./Container";
 import { Eyebrow } from "./Eyebrow";
-import { Reveal } from "./Reveal";
 import styles from "./Section.module.css";
 
 type SectionProps = {
@@ -32,8 +31,8 @@ export function Section({ id, label, title, lede, children, bleed, tone = "defau
       className={[styles.section, tone === "raised" ? styles.raised : ""].join(" ")}
       aria-labelledby={`${id}-heading`}
     >
-      <Container>
-        <Reveal>
+      <div className={styles.stickyHeader}>
+        <Container>
           <div className={styles.head}>
             <div className={styles.headMain}>
               <Eyebrow>{label}</Eyebrow>
@@ -47,9 +46,11 @@ export function Section({ id, label, title, lede, children, bleed, tone = "defau
             </div>
             {action ? <div className={styles.headAction}>{action}</div> : null}
           </div>
-        </Reveal>
-      </Container>
-      {bleed ? children : <Container>{children}</Container>}
+        </Container>
+      </div>
+      <div className={styles.body}>
+        {bleed ? children : <Container>{children}</Container>}
+      </div>
     </section>
   );
 }
