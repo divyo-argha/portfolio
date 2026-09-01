@@ -9,6 +9,11 @@ html {
   scrollbar-gutter: stable;
 }
 
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
 /* Thin scrollbars in the site's own accent, scoped to avoid universal evaluation. */
 html,
 body {

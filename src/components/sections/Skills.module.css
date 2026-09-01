@@ -1,34 +1,136 @@
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
+.divisions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: var(--content-max);
 }
 
-@media (min-width: 640px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+.divisionRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-hairline);
+}
+
+.divisionRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (min-width: 720px) {
+  .divisionRow {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: var(--space-5);
+    align-items: center;
+    padding-bottom: var(--space-4);
   }
 }
 
-.card {
-  padding: var(--space-4) var(--space-5);
-  border: var(--border-hairline);
-  border-radius: var(--radius-md);
-  background: var(--surface);
+.divisionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.label {
+.divisionLabel {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: var(--space-3);
 }
 
-.chips {
+.divisionCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.pillsList {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+  align-items: center;
+}
+
+/* Base Pill Styling */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: var(--pill-bg, var(--surface));
+  border: 1px solid var(--pill-border, var(--line));
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--pill-text, var(--ink));
+  cursor: default;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+  background: var(--pill-hover-bg);
+  border-color: var(--pill-accent);
+  color: var(--pill-hover-text, var(--ink));
+  box-shadow: 0 6px 18px var(--pill-glow);
+}
+
+/* Division Color Themes */
+
+/* 1. Languages (Cyan / Blue Accent) */
+.divisionRow[data-theme="languages"] {
+  --pill-accent: #0284c7;
+  --pill-bg: color-mix(in srgb, #0284c7 6%, var(--surface));
+  --pill-border: color-mix(in srgb, #0284c7 20%, var(--line));
+  --pill-text: var(--ink);
+  --pill-hover-bg: color-mix(in srgb, #0284c7 12%, var(--surface));
+  --pill-hover-text: #0284c7;
+  --pill-glow: color-mix(in srgb, #0284c7 22%, transparent);
+}
+
+/* 2. Web & Systems (Emerald / Green Accent) */
+.divisionRow[data-theme="web"] {
+  --pill-accent: #059669;
+  --pill-bg: color-mix(in srgb, #059669 6%, var(--surface));
+  --pill-border: color-mix(in srgb, #059669 20%, var(--line));
+  --pill-text: var(--ink);
+  --pill-hover-bg: color-mix(in srgb, #059669 12%, var(--surface));
+  --pill-hover-text: #059669;
+  --pill-glow: color-mix(in srgb, #059669 22%, transparent);
+}
+
+/* 3. Analysis & Writing (Indigo / Violet Accent) */
+.divisionRow[data-theme="analysis"] {
+  --pill-accent: #7c3aed;
+  --pill-bg: color-mix(in srgb, #7c3aed 6%, var(--surface));
+  --pill-border: color-mix(in srgb, #7c3aed 20%, var(--line));
+  --pill-text: var(--ink);
+  --pill-hover-bg: color-mix(in srgb, #7c3aed 12%, var(--surface));
+  --pill-hover-text: #7c3aed;
+  --pill-glow: color-mix(in srgb, #7c3aed 22%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill {
+    transition: none !important;
+    transform: none !important;
+  }
 }

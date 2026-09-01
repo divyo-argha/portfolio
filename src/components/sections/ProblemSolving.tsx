@@ -11,14 +11,11 @@ export function ProblemSolving() {
 
   return (
     <Section id="problem-solving" label="Problem Solving" title="Algorithmic problem solving & contests.">
-      <div className={styles.overview}>
-        <Reveal>
-          <div className={styles.overviewMain}>
-            <span className={styles.overviewNumber}>{totalSolved}</span>
-            <p className={styles.overviewBody}>{description}</p>
-          </div>
-        </Reveal>
-      </div>
+      <Reveal>
+        <p className={styles.description}>
+          <span className={styles.totalSolved}>{totalSolved}</span> {description}
+        </p>
+      </Reveal>
 
       <div className={styles.list}>
         <Reveal delay={1}>

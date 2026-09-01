@@ -1,23 +1,27 @@
 import { Section } from "@/components/primitives/Section";
 import { Reveal } from "@/components/primitives/Reveal";
-import { Chip } from "@/components/primitives/Chip";
 import { skillGroups } from "@/content/skills";
 import styles from "./Skills.module.css";
 
 export function Skills() {
   return (
     <Section id="skills" label="Skills" title="Programming languages, systems & tools.">
-      <div className={styles.grid}>
+      <div className={styles.divisions}>
         {skillGroups.map((group, i) => (
           <Reveal key={group.label} delay={Math.min(i, 2) as 0 | 1 | 2}>
-            <article className={styles.card}>
-              <h4 className={styles.label}>{group.label}</h4>
-              <div className={styles.chips}>
+            <div className={styles.divisionRow} data-theme={group.theme}>
+              <div className={styles.divisionHeader}>
+                <h4 className={styles.divisionLabel}>{group.label}</h4>
+                <span className={styles.divisionCount}>{group.items.length}</span>
+              </div>
+              <div className={styles.pillsList}>
                 {group.items.map((item) => (
-                  <Chip key={item}>{item}</Chip>
+                  <span key={item} className={styles.pill}>
+                    {item}
+                  </span>
                 ))}
               </div>
-            </article>
+            </div>
           </Reveal>
         ))}
       </div>

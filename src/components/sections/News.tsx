@@ -74,7 +74,7 @@ export function News() {
   if (!news || news.length === 0) return null;
 
   return (
-    <Section id="news" label="Recent Updates" title="Latest milestones & research activity.">
+    <Section id="news" label="Recent Updates" title="What I've been up to lately.">
       <div className={[styles.newsListWrap, !expanded ? styles.collapsed : styles.expanded].join(" ")}>
         <div className={styles.newsList}>
           {news.map((item, index) => {

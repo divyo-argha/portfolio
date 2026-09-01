@@ -1,8 +1,8 @@
 .footer {
   border-top: var(--border-hairline);
-  padding-block: var(--space-3);
+  padding-block: var(--space-5);
   background: var(--ground);
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
 }
 
 @media print {
@@ -47,7 +47,7 @@
   flex-wrap: wrap;
 }
 
-.copyright {
+.lastUpdated {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--muted);

@@ -16,17 +16,17 @@
      space or fighting its own internal scrollbar. */
   .card {
     position: sticky;
-    top: clamp(1.25rem, 4vh, 2.75rem);
+    top: var(--space-4);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: clamp(var(--space-2), 1.6vh, var(--space-4));
-    padding: clamp(var(--space-4), 3vh, var(--space-6)) var(--space-5) var(--space-4);
+    padding: clamp(var(--space-4), 2.5vh, var(--space-5)) var(--space-5) var(--space-4);
     border: var(--border-hairline);
     border-radius: var(--radius-lg);
     background: linear-gradient(175deg, var(--surface) 0%, var(--raised) 130%);
     box-shadow: var(--shadow-md);
-    max-height: calc(100dvh - clamp(2.5rem, 8vh, 5.5rem));
+    max-height: calc(100dvh - var(--space-6));
     overflow-y: auto;
     scrollbar-width: none;
   }
@@ -61,10 +61,18 @@
 }
 
 .portraitWrap {
-  width: clamp(132px, 16vh, 196px);
-  padding: 4px;
+  width: clamp(156px, 20vh, 220px);
+  padding: 5px;
   border-radius: 50%;
-  background: linear-gradient(155deg, var(--accent), transparent 60%);
+  background: linear-gradient(145deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 30%, transparent) 60%, transparent 100%);
+  box-shadow: 0 8px 32px -4px color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.portraitWrap:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 42px color-mix(in srgb, var(--accent) 50%, transparent);
 }
 
 .name {

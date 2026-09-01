@@ -5,6 +5,11 @@
   border-top: var(--border-hairline);
 }
 
+.section:first-of-type,
+.section:first-child {
+  border-top: none;
+}
+
 .section.raised {
   background: var(--surface);
 }
@@ -13,18 +18,31 @@
   position: sticky;
   top: 0;
   z-index: 15;
-  background: color-mix(in srgb, var(--ground) 85%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: linear-gradient(
+    to bottom,
+    var(--ground) 0%,
+    var(--ground) 70%,
+    color-mix(in srgb, var(--ground) 85%, transparent) 88%,
+    transparent 100%
+  );
   padding-top: var(--space-3);
-  padding-bottom: var(--space-3);
-  border-bottom: 1px solid color-mix(in srgb, var(--line) 40%, transparent);
-  transition: background-color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+  padding-bottom: var(--space-4);
+  transition: background var(--duration-fast) var(--ease-out);
+  pointer-events: none;
+}
+
+.stickyHeader > * {
+  pointer-events: auto;
 }
 
 .section.raised .stickyHeader {
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  background: linear-gradient(
+    to bottom,
+    var(--surface) 0%,
+    var(--surface) 70%,
+    color-mix(in srgb, var(--surface) 85%, transparent) 88%,
+    transparent 100%
+  );
 }
 
 .head {

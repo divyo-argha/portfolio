@@ -34,15 +34,22 @@
       color-mix(in srgb, var(--accent) 34%, var(--accent-soft)) 100%
     );
 
-  /* Follows border-radius, so this reads as a soft circular drop shadow rather
-     than a rectangle. Two layers do the work in different themes: the neutral
-     pair grounds the disc against a light page, and the accent halo is what
-     stays visible once the page behind it goes near-black. */
   box-shadow:
-    0 12px 26px -10px rgba(0, 0, 0, 0.22),
-    0 4px 10px -5px rgba(0, 0, 0, 0.14),
-    0 16px 38px -18px color-mix(in srgb, var(--accent) 60%, transparent),
-    inset 0 0 0 1px color-mix(in srgb, var(--accent) 20%, var(--line));
+    0 14px 34px -8px rgba(0, 0, 0, 0.28),
+    0 6px 14px -4px rgba(0, 0, 0, 0.16),
+    0 0 45px -5px color-mix(in srgb, var(--accent) 45%, transparent),
+    inset 0 0 0 1.5px color-mix(in srgb, var(--accent) 35%, var(--line));
+  transition: transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.frame:hover {
+  transform: scale(1.025);
+  box-shadow:
+    0 18px 42px -6px rgba(0, 0, 0, 0.32),
+    0 8px 18px -4px rgba(0, 0, 0, 0.2),
+    0 0 60px 0px color-mix(in srgb, var(--accent) 60%, transparent),
+    inset 0 0 0 2px var(--accent);
 }
 
 :root[data-theme="dark"] .frame {
@@ -58,23 +65,17 @@
 .image {
   width: 100%;
   height: 100%;
-  /* 4:5 source in a 1:1 disc: this keeps a little headroom above the hair and
-     lets the circle crop the forearms, rather than centring and clipping both. */
   object-fit: cover;
   object-position: 50% 42%;
   display: block;
-  /* Clip the photo to the circle on the element itself, rather than relying only
-     on the frame's `overflow: hidden`. Chrome and Firefox honour the rounded
-     ancestor, but WebKit intermittently fails to clip one when the child forms
-     its own stacking context — which renders the cut-out as a square sitting on
-     top of the disc. (The `position`/`z-index` that created that stacking
-     context is gone too; ::after is absolutely positioned, so it still paints
-     above the photo without needing one.) */
   clip-path: circle(50% at 50% 50%);
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
-/* Rim light along the top edge and a soft vignette at the circumference, drawn
-   over the figure so the subject and the disc read as one object. */
+.frame:hover .image {
+  transform: scale(1.04);
+}
+
 .frame::after {
   content: "";
   position: absolute;
@@ -90,4 +91,12 @@
       color-mix(in srgb, var(--accent) 18%, transparent) 100%
     );
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--surface) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame,
+  .image {
+    transition: none !important;
+    transform: none !important;
+  }
 }
