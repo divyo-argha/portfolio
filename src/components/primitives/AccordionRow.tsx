@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import type { ReactNode } from "react";
+import type { KeyboardEvent, ReactNode } from "react";
 import { IconChevronDown } from "./Icons";
 import styles from "./AccordionRow.module.css";
 
@@ -63,18 +63,36 @@ export function AccordionRow({
     </>
   );
 
+  function toggle() {
+    setIsOpen((prev) => !prev);
+  }
+
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggle();
+    }
+  }
+
   return (
     <div className={`${styles.row} ${open ? styles.open : ""}`}>
       {expandable ? (
-        <button
-          type="button"
+        // A <div role="button"> rather than a real <button> — `meta` can
+        // carry its own link (e.g. a "Visit" button on a publication), and a
+        // real <button> can't contain an <a> without breaking HTML nesting
+        // rules. That link stops its own click from bubbling here (see
+        // Publications.tsx) so it navigates instead of just toggling.
+        <div
+          role="button"
+          tabIndex={0}
           className={styles.summary}
-          onClick={() => setIsOpen((prev) => !prev)}
+          onClick={toggle}
+          onKeyDown={handleKeyDown}
           aria-expanded={isOpen}
           aria-controls={contentId}
         >
           {summaryContent}
-        </button>
+        </div>
       ) : (
         <div className={styles.summary}>{summaryContent}</div>
       )}

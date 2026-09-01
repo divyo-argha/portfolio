@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Section } from "@/components/primitives/Section";
 import { Reveal } from "@/components/primitives/Reveal";
@@ -45,7 +47,19 @@ export function Publications() {
               eyebrow={pub.venueShort}
               title={pub.title}
               subtitle={pub.venue}
-              meta={<Badge status={pub.status} />}
+              meta={
+                <>
+                  <Badge status={pub.status} />
+                  <Link
+                    href={`/publications/${pub.slug}`}
+                    className={styles.visitButton}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span>Visit</span>
+                    <IconArrowUpRight size={11} />
+                  </Link>
+                </>
+              }
             >
               <p>{pub.summary}</p>
 
@@ -74,10 +88,6 @@ export function Publications() {
               </div>
 
               <div className={styles.links}>
-                <Link href={`/publications/${pub.slug}`} className={styles.link}>
-                  <span>Read full write-up</span>
-                  <IconArrowUpRight size={12} />
-                </Link>
                 {pub.links?.map((link) => (
                   <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
                     <span>{link.label}</span>
