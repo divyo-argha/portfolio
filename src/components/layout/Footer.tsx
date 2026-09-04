@@ -10,7 +10,7 @@ import styles from "./Footer.module.css";
 
 export function Footer() {
   const pathname = usePathname();
-  const isCyquredGame = pathname?.startsWith("/publications/cyqured/game");
+  const isCyquredGame = pathname === "/cyqured" || pathname?.startsWith("/cyqured/");
   const navigateToSection = useSectionNav();
 
   if (isCyquredGame) {

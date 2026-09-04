@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { CardFace } from "@/app/publications/cyqured/cardData";
+import type { CardFace } from "@/app/cyqured/cardData";
 import {
   CONNECTED_DEVICES,
   SPECIAL_CELLS,
@@ -14,7 +14,7 @@ import {
 import { IconChevronDown } from "@/components/primitives/Icons";
 import styles from "./GameBoardSection.module.css";
 
-const CARDS_HREF = "/publications/cyqured/game/assets";
+const CARDS_HREF = "/cyqured/assets";
 
 function cardHref(id: string): string {
   return `${CARDS_HREF}?tab=cards&category=attack&card=${id}`;

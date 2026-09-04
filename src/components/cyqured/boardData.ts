@@ -1,4 +1,4 @@
-import { cardFaces, type CardFace } from "@/app/publications/cyqured/cardData";
+import { cardFaces, type CardFace } from "@/app/cyqured/cardData";
 
 export type ConnectedDevice = {
   name: string;

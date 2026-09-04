@@ -1,6 +1,6 @@
 "use client";
 
-import type { CardFace } from "@/app/publications/cyqured/cardData";
+import type { CardFace } from "@/app/cyqured/cardData";
 import { FlipCard, CATEGORY_COLOR } from "./GameExperience";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { PLAYERS, type CombatInfo, type PlayerId } from "./walkthroughData";

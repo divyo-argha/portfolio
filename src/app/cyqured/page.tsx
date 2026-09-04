@@ -22,17 +22,17 @@ export const metadata: Metadata = {
 
 const SECTIONS = [
   {
-    href: "/publications/cyqured/game/assets",
+    href: "/cyqured/assets",
     title: "Game Assets",
     body: "The 28-cell smart home board, 16 connected devices, and 84 playable action, chance, and scenario cards.",
   },
   {
-    href: "/publications/cyqured/game/mechanics",
+    href: "/cyqured/mechanics",
     title: "Game Mechanics",
     body: "The 4-step turn progression, STRIDE threat taxonomy, device compromise battles, and victory rules.",
   },
   {
-    href: "/publications/cyqured/game/publication",
+    href: "/cyqured/publication",
     title: "Research Publication",
     body: "Download the SOUPS 2026 manuscript and read the empirical evaluation with 50 participants.",
   },

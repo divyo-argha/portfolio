@@ -29,7 +29,7 @@ const NAV_HASHES = siteConfig.navLinks.map((link) => link.href);
 
 export function Header({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isCyquredGame = pathname?.startsWith("/publications/cyqured/game");
+  const isCyquredGame = pathname === "/cyqured" || pathname?.startsWith("/cyqured/");
   const isHomePage = pathname === "/";
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const activeSection = useActiveSection(NAV_HASHES);

@@ -45,7 +45,7 @@ export default function CyQuredPage() {
           <div className={`${display.variable} ${styles.brandScope}`}>
             <div className={styles.heroBand}>
               <Link
-                href="/publications/cyqured/game"
+                href="/cyqured"
                 className={styles.cornerGameButton}
                 title="Explore all 84 cards and interactive game mechanics"
               >

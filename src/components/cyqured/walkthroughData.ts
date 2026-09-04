@@ -1,4 +1,4 @@
-import { cardFaces, type CardFace } from "@/app/publications/cyqured/cardData";
+import { cardFaces, type CardFace } from "@/app/cyqured/cardData";
 import { CONNECTED_DEVICES } from "./boardData";
 
 /** A single hand-authored example playthrough, grounded in the rules described

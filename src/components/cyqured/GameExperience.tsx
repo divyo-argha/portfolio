@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback, type ReactNode } from "react";
 import Image from "next/image";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { cardFaces, type CardCategory, type CardDeck, type CardFace } from "@/app/publications/cyqured/cardData";
+import { cardFaces, type CardCategory, type CardDeck, type CardFace } from "@/app/cyqured/cardData";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import {
   IconAttack,

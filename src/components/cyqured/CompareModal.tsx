@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { cardFaces, type CardFace } from "@/app/publications/cyqured/cardData";
+import { cardFaces, type CardFace } from "@/app/cyqured/cardData";
 import { IconClose } from "@/components/primitives/Icons";
 import { CATEGORY_COLOR, LazyImg, renderInline, compareGroupOf, displayTitle, type CompareGroup } from "./GameExperience";
 import styles from "./CompareModal.module.css";

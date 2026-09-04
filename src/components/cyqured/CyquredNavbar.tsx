@@ -9,10 +9,10 @@ import { useLockScroll } from "@/hooks/useLockScroll";
 import styles from "./CyquredNavbar.module.css";
 
 export const GAME_NAV_LINKS = [
-  { label: "Home", href: "/publications/cyqured/game" },
-  { label: "Assets", href: "/publications/cyqured/game/assets" },
-  { label: "Mechanics", href: "/publications/cyqured/game/mechanics" },
-  { label: "Publication", href: "/publications/cyqured/game/publication" },
+  { label: "Home", href: "/cyqured" },
+  { label: "Assets", href: "/cyqured/assets" },
+  { label: "Mechanics", href: "/cyqured/mechanics" },
+  { label: "Publication", href: "/cyqured/publication" },
 ];
 
 export function CyquredNavbar() {
@@ -76,7 +76,7 @@ export function CyquredNavbar() {
         <div className={styles.islandContainer} ref={containerRef}>
           {/* Brand Logo Link */}
           <Link
-            href="/publications/cyqured/game"
+            href="/cyqured"
             className={styles.brandLink}
             aria-label="CyQured Game Home"
           >
