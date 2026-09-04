@@ -64,7 +64,15 @@ export default function CyQuredPublicationPage() {
 
           <div className={pubStyles.authorList}>
             <span className={pubStyles.authorHighlight}>Utsho Das*</span>,{" "}
-            <span className={pubStyles.authorHighlight}>Argha Pratim Saha*</span>,{" "}
+            <Link
+              href="/"
+              className={pubStyles.authorSelfLink}
+              title="Argha Pratim Saha — Return to Main Portfolio"
+            >
+              <strong className={pubStyles.authorHighlight}>
+                <u>Argha Pratim Saha*</u>
+              </strong>
+            </Link>,{" "}
             <span>Md Sadek Ferdous</span>,{" "}
             <span>Md Masum</span>,{" "}
             <span>Farida Chowdhury</span>

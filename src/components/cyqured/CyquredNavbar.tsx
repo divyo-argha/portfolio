@@ -112,10 +112,10 @@ export function CyquredNavbar() {
             </ul>
           </nav>
 
-          {/* Desktop Direct Bridge to Overview */}
+          {/* Desktop Direct Bridge to Paper Overview */}
           <div className={styles.actionGroup}>
-            <Link href="/publications/cyqured" className={styles.paperLink}>
-              <span>Overview</span>
+            <Link href="/publications/cyqured" className={styles.paperLink} title="Academic Research Overview">
+              <span>Paper Overview</span>
               <IconArrowUpRight size={13} />
             </Link>
           </div>
@@ -181,7 +181,7 @@ export function CyquredNavbar() {
                 className={styles.mobilePaperCta}
                 onClick={() => setIsExpanded(false)}
               >
-                <span>Academic Study & Overview</span>
+                <span>Academic Study &amp; Overview</span>
                 <IconArrowUpRight size={15} />
               </Link>
             </div>

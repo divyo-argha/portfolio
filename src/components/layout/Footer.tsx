@@ -3,10 +3,15 @@
 import type { MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
 import { Container } from "@/components/primitives/Container";
 import { useSectionNav } from "@/hooks/useSectionNav";
 import { profile } from "@/content/profile";
 import styles from "./Footer.module.css";
+
+const CyquredFooter = dynamic(() =>
+  import("@/components/cyqured/CyquredFooter").then((m) => m.CyquredFooter),
+);
 
 export function Footer() {
   const pathname = usePathname();
@@ -14,7 +19,7 @@ export function Footer() {
   const navigateToSection = useSectionNav();
 
   if (isCyquredGame) {
-    return null;
+    return <CyquredFooter />;
   }
 
   function handleBackToTop(e: MouseEvent<HTMLAnchorElement>) {

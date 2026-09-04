@@ -51,6 +51,17 @@
   font-style: italic;
 }
 
+.authorSelfLink {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.authorSelfLink:hover strong {
+  color: #5ee1f2;
+  text-shadow: 0 0 10px rgba(94, 225, 242, 0.5);
+}
+
 .abstractBlock {
   background: rgba(5, 9, 16, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.08);
