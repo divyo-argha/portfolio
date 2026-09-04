@@ -1,0 +1,42 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #05070d;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Cyber ambient cursor glow for CyQured game */
+.ambientGlow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+  background: radial-gradient(
+    480px circle at var(--mx, 50%) var(--my, 33%),
+    rgba(94, 225, 242, 0.12),
+    transparent 70%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambientGlow {
+    display: none;
+  }
+}
+
+@media print {
+  .wrapper {
+    display: none;
+  }
+}

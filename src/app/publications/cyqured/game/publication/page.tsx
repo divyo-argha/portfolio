@@ -18,8 +18,17 @@ export const metadata: Metadata = {
   description: "Download the scientific manuscript and explore the empirical study on CyQured accepted at USENIX SOUPS 2026.",
 };
 
-const BIBTEX = `% BibTeX citation will be available upon official publication in the USENIX SOUPS 2026 Proceedings.
-% Paper accepted at USENIX SOUPS 2026 (Hannover, Germany).`;
+const BIBTEX = `@inproceedings {325790,
+author = {Utsho Das and Argha Pratim Saha and Md Sadek Ferdous and Md Masum and Farida Chowdhury},
+title = {{CyQured}: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education},
+booktitle = {Twenty-Second Symposium on Usable Privacy and Security (SOUPS 2026)},
+year = {2026},
+isbn = {978-1-939133-59-5},
+pages = {705--724},
+url = {https://www.usenix.org/conference/soups2026/presentation/das},
+publisher = {USENIX Association},
+month = aug
+};`;
 
 export default function CyQuredPublicationPage() {
   return (
@@ -153,7 +162,7 @@ export default function CyQuredPublicationPage() {
 
         {/* BibTeX Citation Box */}
         <section className={pubStyles.citationSection}>
-          <h3 className={pubStyles.citationHeading}>Citation (Coming Soon)</h3>
+          <h3 className={pubStyles.citationHeading}>BibTeX Citation</h3>
           <div className={pubStyles.codeWrapper}>
             <pre className={pubStyles.codeBlock}>
               <code>{BIBTEX}</code>

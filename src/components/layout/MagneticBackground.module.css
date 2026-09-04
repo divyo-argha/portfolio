@@ -1,0 +1,42 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: transparent;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Subtle magnetic ambient glow beneath the lattice */
+.ambientGlow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+  background: radial-gradient(
+    440px circle at var(--mx, 50%) var(--my, 33%),
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent 70%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambientGlow {
+    display: none;
+  }
+}
+
+@media print {
+  .wrapper {
+    display: none;
+  }
+}

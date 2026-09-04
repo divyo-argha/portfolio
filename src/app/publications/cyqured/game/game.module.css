@@ -4,21 +4,28 @@
   --cyq-scenario: #b48fe0;
   --cyq-chance: #a3d94f;
 
+  /* Explicit dark cyberpunk design tokens */
+  --ground: #05070d;
+  --surface: #0a0f1d;
+  --raised: #0f172a;
+  --ink: #eaf7fb;
+  --muted: #8fb4bd;
+  --line: rgba(94, 225, 242, 0.2);
+  --accent: #5ee1f2;
+  --accent-ink: #05070d;
+  --accent-soft: rgba(94, 225, 242, 0.15);
+
+  color-scheme: dark;
+  color: #eaf7fb;
   position: relative;
   min-height: 100vh;
-  background: #05070d;
+  background: transparent;
   overflow: hidden;
   padding-bottom: 6rem;
 }
 
 .grain {
-  position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(60deg, rgba(94, 225, 242, 0.04) 0px, rgba(94, 225, 242, 0.04) 1px, transparent 1px, transparent 40px),
-    repeating-linear-gradient(-60deg, rgba(94, 225, 242, 0.04) 0px, rgba(94, 225, 242, 0.04) 1px, transparent 1px, transparent 40px);
-  pointer-events: none;
-  transform: translateZ(0);
+  display: none;
 }
 
 .glowA,
@@ -60,6 +67,7 @@
 
 .inner {
   position: relative;
+  z-index: 1;
   max-width: 1180px;
   margin-inline: auto;
   padding: calc(var(--header-height, 4.25rem) + clamp(2rem, 4vw, 3.5rem)) 1.25rem 0;

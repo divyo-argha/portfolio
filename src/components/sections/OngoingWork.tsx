@@ -14,7 +14,7 @@ export function OngoingWork() {
   return (
     <section id="ongoing-work" className={styles.wrap} aria-label="Ongoing work">
       <Container>
-        <p className={styles.label}>Current</p>
+        <p className={styles.label}>Ongoing</p>
         <div className={styles.list}>
           {ongoingWork.map((item, i) => (
             <Reveal key={item.title} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>

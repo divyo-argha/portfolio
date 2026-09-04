@@ -408,9 +408,18 @@ export const studyBlocks: Block[] = [
   },
   {
     kind: "code",
-    heading: "Citation (Coming Soon)",
+    heading: "BibTeX Citation",
     language: "bibtex",
-    body: `% BibTeX citation will be available upon official publication in the USENIX SOUPS 2026 Proceedings.
-% Paper accepted at USENIX SOUPS 2026 (Hannover, Germany).`,
+    body: `@inproceedings {325790,
+author = {Utsho Das and Argha Pratim Saha and Md Sadek Ferdous and Md Masum and Farida Chowdhury},
+title = {{CyQured}: Design, Development, and Empirical Evaluation of a Tabletop Game for Personal Cybersecurity Education},
+booktitle = {Twenty-Second Symposium on Usable Privacy and Security (SOUPS 2026)},
+year = {2026},
+isbn = {978-1-939133-59-5},
+pages = {705--724},
+url = {https://www.usenix.org/conference/soups2026/presentation/das},
+publisher = {USENIX Association},
+month = aug
+}`,
   },
 ];

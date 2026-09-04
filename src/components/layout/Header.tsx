@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { MouseGlow } from "./MouseGlow";
+import { MagneticBackground } from "./MagneticBackground";
 import { ProfileIsland } from "./ProfileIsland";
 import { ThemeToggle } from "./ThemeToggle";
 import { FloatingNavTrigger } from "./FloatingNavTrigger";
@@ -42,7 +42,7 @@ export function Header({ children }: { children: ReactNode }) {
 
   return (
     <div className={styles.shell}>
-      <MouseGlow />
+      <MagneticBackground />
       <div className={styles.topRightCluster}>
         <ThemeToggle />
         <FloatingNavTrigger open={mobileNavOpen} onToggle={() => setMobileNavOpen((v) => !v)} />
