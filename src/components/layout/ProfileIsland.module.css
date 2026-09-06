@@ -28,8 +28,8 @@
     align-items: flex-start;
     width: 100%;
     margin-block: auto;
-    gap: clamp(0.4rem, 0.9vh, 0.65rem);
-    padding: clamp(0.85rem, 1.8vh, 1.15rem) clamp(0.8rem, 1vw, 0.95rem);
+    gap: clamp(0.45rem, 1vh, 0.8rem);
+    padding: clamp(0.9rem, 2vh, 1.4rem) clamp(0.95rem, 1.2vw, 1.25rem);
     border: var(--border-hairline);
     border-radius: var(--radius-lg);
     background: linear-gradient(175deg, var(--surface) 0%, var(--raised) 130%);
@@ -71,7 +71,7 @@
 
 .portraitWrap {
   align-self: center;
-  width: clamp(100px, 13.5vh, 126px);
+  width: clamp(105px, 14.5vh, 140px);
   aspect-ratio: 1 / 1;
   padding: 4px;
   border-radius: 50%;
@@ -89,7 +89,7 @@
 .name {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: clamp(1.24rem, 1.4vh + 0.25rem, 1.42rem);
+  font-size: clamp(1.32rem, 1.6vh + 0.25rem, 1.56rem);
   text-align: center;
   align-self: center;
   width: 100%;
@@ -102,12 +102,12 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: clamp(3px, 0.4vh, 4px) clamp(9px, 1vw, 11px);
+  padding: clamp(3px, 0.45vh, 5px) clamp(10px, 1.1vw, 12px);
   background: var(--accent-soft);
   border: 1px solid var(--accent);
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: clamp(0.66rem, 0.85vh, 0.7rem);
+  font-size: clamp(0.68rem, 0.95vh, 0.76rem);
   color: var(--accent);
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -124,7 +124,7 @@
 
 .identityLine {
   font-family: var(--font-mono);
-  font-size: clamp(0.68rem, 0.85vh, 0.72rem);
+  font-size: clamp(0.7rem, 0.95vh, 0.78rem);
   line-height: 1.45;
   color: var(--muted);
   text-align: center;
@@ -135,24 +135,24 @@
 
 .nav {
   width: 100%;
-  padding-top: clamp(5px, 0.7vh, var(--space-2));
+  padding-top: clamp(6px, 0.8vh, var(--space-3));
   border-top: var(--border-hairline);
 }
 
 .navList {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 
 .navLink,
 .navLinkActive {
   display: block;
-  padding: clamp(4px, 0.55vh, 5.5px) var(--space-3);
+  padding: clamp(5px, 0.7vh, 8px) var(--space-3);
   border-left: 2px solid transparent;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-family: var(--font-sans);
-  font-size: clamp(0.84rem, 1vh, 0.88rem);
+  font-size: clamp(0.92rem, 1.4vh, 1.05rem);
   font-weight: 500;
   color: var(--muted);
   transition: color 0.25s var(--ease-out),
@@ -180,7 +180,7 @@
   align-self: center;
   gap: clamp(var(--space-2), 1.2vw, var(--space-3));
   width: 100%;
-  padding-top: clamp(5px, 0.7vh, var(--space-2));
+  padding-top: clamp(6px, 0.8vh, var(--space-3));
   border-top: var(--border-hairline);
 }
 
@@ -188,8 +188,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(31px, 3.8vh, 33px);
-  height: clamp(31px, 3.8vh, 33px);
+  width: clamp(32px, 4vh, 36px);
+  height: clamp(32px, 4vh, 36px);
   border-radius: var(--radius-sm);
   border: var(--border-hairline);
   background: var(--raised);
@@ -210,13 +210,13 @@
   justify-content: center;
   gap: var(--space-2);
   width: 100%;
-  padding: clamp(8px, 1vh, 9.5px) var(--space-4);
+  padding: clamp(8.5px, 1.15vh, 11px) var(--space-4);
   margin-top: 0;
   border-radius: var(--radius-sm);
   background: var(--ink);
   color: var(--ground);
   font-family: var(--font-mono);
-  font-size: clamp(0.84rem, 1vh, 0.88rem);
+  font-size: clamp(0.86rem, 1.15vh, 0.96rem);
   font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;

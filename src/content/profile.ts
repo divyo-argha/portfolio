@@ -6,7 +6,7 @@ export const profile = {
   /** The breadth line: kept separate from `subtitle` so the hero states one
    * coherent identity first, then the adjacent areas it connects to — rather
    * than opening with a list of topic tags. */
-  focusLine: "Usable security & privacy · Human-computer interaction · Security education · Applied machine learning",
+  focusLine: "Usable security & privacy · Human-computer interaction · AI & IoT Security",
   status: "PhD applicant · Fall 2027",
   /** The three structured paragraphs for the About Me narrative. */
   bioParagraphs: [

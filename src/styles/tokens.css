@@ -69,9 +69,9 @@
   --z-header: 40;
   --z-overlay: 50;
   /* The sticky left profile island (desktop only, see ProfileIsland.module.css
-     and Header.module.css's .shell). Slim, sleek width keeping the sidebar
-     compact while centering portrait and identity. */
-  --island-width: clamp(268px, min(33vh, 19vw), 292px);
+     and Header.module.css's .shell). Scaled directly based on screen height
+     (35vh), giving a bigger presence while staying well proportioned. */
+  --island-width: clamp(285px, 35vh, 325px);
   --shell-gap: clamp(var(--space-4), 3vw, var(--space-7));
 
   /* ---- Elevation ---- */
