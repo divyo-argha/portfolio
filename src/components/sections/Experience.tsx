@@ -23,11 +23,12 @@ export function Experience() {
         {positions.map((position, i) => (
           <Reveal key={position.title + position.org} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>
             <AccordionRow
-              icon={position.logo ? <Image src={position.logo.src} alt="" width={56} height={56} /> : null}
+              icon={position.logo ? <Image src={position.logo.src} alt="" width={56} height={56} className={styles.logo} /> : null}
               eyebrow={position.dates}
               title={position.title}
               subtitle={position.org}
               meta={<Chip>{KIND_LABEL[position.kind]}</Chip>}
+              showViewMore
             >
               {position.detail ? <p className={styles.detailLine}>{position.detail}</p> : null}
               <ul>

@@ -121,3 +121,12 @@
 .examResult {
   color: var(--muted);
 }
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 4px;
+  box-sizing: border-box;
+}

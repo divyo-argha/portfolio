@@ -29,10 +29,11 @@ export const projects: Project[] = [
       "A specialized transcription pipeline built for qualitative HCI researchers working with Bengali interviews. Handles audio preprocessing, silence trimming, speaker diarization, and word-level sync, exporting to six formats through both local open-source models and cloud APIs. Two live deployments: a landing page and a full transcription studio.",
     stack: ["Next.js 16", "TypeScript", "Prisma", "Gemini 2.5 Flash", "Bun"],
     links: [
-      { label: "GitHub", href: "https://github.com/divyo-argha/AutoScriber" },
-      { label: "Landing page", href: "https://autoscriber.vercel.app/" },
+      { label: "Website", href: "https://autoscriber.vercel.app/" },
       { label: "Studio", href: "https://autoscriber-studio.vercel.app/" },
+      { label: "GitHub", href: "https://github.com/divyo-argha/AutoScriber" },
     ],
+    logo: { src: "/media/autoscriber_logo.png", alt: "AutoScriber logo", width: 120, height: 120 },
   },
   {
     slug: "polaris-vpn",

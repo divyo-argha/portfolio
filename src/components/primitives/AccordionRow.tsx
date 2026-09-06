@@ -20,6 +20,7 @@ export function AccordionRow({
   meta,
   defaultOpen = false,
   expandable = true,
+  showViewMore = false,
   children,
 }: {
   /** A conference/institution logo shown to the left of the title. Omit for
@@ -34,6 +35,9 @@ export function AccordionRow({
    * no toggle, no chevron, nothing to click. The summary line renders as a
    * plain header instead of a button. */
   expandable?: boolean;
+  /** When true, renders an explicit "View more" / "View less" action button
+   * instead of just the bare chevron circle. */
+  showViewMore?: boolean;
   children: ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -55,9 +59,16 @@ export function AccordionRow({
       <div className={styles.summarySide}>
         {meta ? <div className={styles.meta}>{meta}</div> : null}
         {expandable ? (
-          <span className={styles.chevron} aria-hidden="true">
-            <IconChevronDown size={16} />
-          </span>
+          showViewMore ? (
+            <span className={styles.viewMoreBtn}>
+              <span>{open ? "View less" : "View more"}</span>
+              <IconChevronDown size={13} className={styles.viewMoreChevron} />
+            </span>
+          ) : (
+            <span className={styles.chevron} aria-hidden="true">
+              <IconChevronDown size={16} />
+            </span>
+          )
         ) : null}
       </div>
     </>

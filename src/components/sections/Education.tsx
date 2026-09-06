@@ -16,7 +16,7 @@ export function Education() {
       <div className={styles.list}>
         <Reveal>
           <AccordionRow
-            icon={<Image src={university.logo.src} alt="" width={56} height={56} />}
+            icon={<Image src={university.logo.src} alt="" width={56} height={56} className={styles.logo} />}
             eyebrow={university.dates}
             title={university.degree}
             subtitle={`${university.institution} · ${university.location}`}
@@ -64,7 +64,7 @@ export function Education() {
 
         <Reveal delay={1}>
           <AccordionRow
-            icon={<Image src={secondary.logo.src} alt="" width={56} height={56} />}
+            icon={<Image src={secondary.logo.src} alt="" width={56} height={56} className={styles.logo} />}
             title={secondary.institution}
             subtitle={secondary.location}
             meta={<Chip>Secondary education</Chip>}
